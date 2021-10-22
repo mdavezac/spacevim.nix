@@ -48,7 +48,7 @@ in
   config.nvim.init.lua =
     builtins.concatStringsSep "\n\n"
       (lib.mapAttrsToList
-        (k: v: "# layer ${k}\n${v}")
+        (k: v: "-- layer ${k}\n${v}")
         (builtins.mapAttrs (k: v: v.init.lua) enabled_layers));
 }
 
