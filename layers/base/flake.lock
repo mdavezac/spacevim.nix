@@ -1,0 +1,77 @@
+{
+  "nodes": {
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1631561581,
+        "narHash": "sha256-3VQMV5zvxaVLvqqUrNz3iJelLw30mIVSfZmAaauM3dA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "7e5bf3925f6fbdfaf50a2a7ca0be2879c4261d19",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "plenary": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1634799895,
+        "narHash": "sha256-RwsxUM2J6uPAVCmn0Z3pK3cc6A3lPHxzXHU6W60VErw=",
+        "owner": "nvim-lua",
+        "repo": "plenary.nvim",
+        "rev": "de5acdcb595f0a97bec874693008c94f94b57060",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-lua",
+        "repo": "plenary.nvim",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "plenary": "plenary",
+        "telescope": "telescope",
+        "which-key": "which-key"
+      }
+    },
+    "telescope": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1634809592,
+        "narHash": "sha256-b8V1HZrXG5PbU3WblWvr0OK88HBqJL2B4lmbYcK1+Wo=",
+        "owner": "nvim-telescope",
+        "repo": "telescope.nvim",
+        "rev": "f56222738b719f5ae94ed85fdf080690371da0b9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-telescope",
+        "repo": "telescope.nvim",
+        "type": "github"
+      }
+    },
+    "which-key": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1628160854,
+        "narHash": "sha256-eoaBx7PzctB0rwmBW/ba9O9rcbyRCNvBafWXHUToZAI=",
+        "owner": "folke",
+        "repo": "which-key.nvim",
+        "rev": "b582c9d78f0d105041ed29ec3a8ee11d98ddfd50",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "which-key.nvim",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
