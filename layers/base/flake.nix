@@ -2,13 +2,14 @@
   inputs = {
     which-key = { url = "github:folke/which-key.nvim"; flake = false; };
     plenary = { url = "github:nvim-lua/plenary.nvim"; flake = false; };
-    telescope = { url = "github:/nvim-telescope/telescope.nvim"; flake = false; };
+    telescope = { url = "github:nvim-telescope/telescope.nvim"; flake = false; };
+    colorschemes = { url = "github:rafi/awesome-vim-colorschemes"; flake = false; };
   };
   outputs = inputs @ { self, ... }:
     let
       vim-plugin-from-key-value-pair = nixpkgs: k: v: nixpkgs.vimUtils.buildVimPluginFrom2Nix {
         pname = k;
-        version = "master";
+        version = v.shortRev;
         src = v;
       };
       plugins = nixpkgs: builtins.attrValues (
@@ -66,6 +67,15 @@
               default = 88;
               description = ''Maximum line length before a break is introduced'';
             };
+            # options.textwidth = lib.mkOption {
+            #   type =
+            #     let
+            #       colorfiles = lib.sourceFilesBySuffix "${inputs.colorscheme}/colors/*.vim";
+            #     in
+            #     lib.types.enum (builtins.map (lib.removeSuffix ".vim") colorfiles);
+            #   default = "onehalfdark";
+            #   description = ''Colorschemes'';
+            # };
           };
         };
         config.nvim.init.lua =

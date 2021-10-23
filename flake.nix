@@ -53,6 +53,8 @@
           };
         configuration.nvim = {
           layers.base.enable = true;
+          layers.tree-sitter.enable = true;
+          tree-sitter-languages = [ "nix" ];
         };
       in
       rec {

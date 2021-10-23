@@ -2,18 +2,35 @@
   "nodes": {
     "base-layer": {
       "inputs": {
+        "colorschemes": "colorschemes",
         "plenary": "plenary",
         "telescope": "telescope",
         "which-key": "which-key"
       },
       "locked": {
-        "narHash": "sha256-au2/sENlcfjSX45lONiWQEVg8gnMLkjw32YTx7HyjLU=",
-        "path": "/nix/store/jpv6dnw1h6dzinswzkb3fldn45wj953l-source/layers/base",
+        "narHash": "sha256-jJKYOu6Upb4dYyydPbcherFKrxls+wnIo6A0eRwtmWM=",
+        "path": "/nix/store/l40dyk5cgnyda3jp3hrpasvrp5bxfr4b-source/layers/base",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/jpv6dnw1h6dzinswzkb3fldn45wj953l-source/layers/base",
+        "path": "/nix/store/l40dyk5cgnyda3jp3hrpasvrp5bxfr4b-source/layers/base",
         "type": "path"
+      }
+    },
+    "colorschemes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1629054014,
+        "narHash": "sha256-jlLsKaf+vAxW6Av570ZrYlD6jmeHCcqxNiV7nHT7bYU=",
+        "owner": "rafi",
+        "repo": "awesome-vim-colorschemes",
+        "rev": "facbd7269201b1766369be9abc8bfc183938a9ae",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rafi",
+        "repo": "awesome-vim-colorschemes",
+        "type": "github"
       }
     },
     "devshell": {
@@ -150,12 +167,12 @@
         "nvim-treesitter": "nvim-treesitter"
       },
       "locked": {
-        "narHash": "sha256-ofMy4zHM6jkLfAwlicLcA2JGfx+u9icm7JaROd2c9Fc=",
-        "path": "/nix/store/jpv6dnw1h6dzinswzkb3fldn45wj953l-source/layers/tree-sitter",
+        "narHash": "sha256-Zgx7eR1+raXQyGzboLC0qBIVXAky2yS1uxgvFzssDGg=",
+        "path": "/nix/store/l40dyk5cgnyda3jp3hrpasvrp5bxfr4b-source/layers/tree-sitter",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/jpv6dnw1h6dzinswzkb3fldn45wj953l-source/layers/tree-sitter",
+        "path": "/nix/store/l40dyk5cgnyda3jp3hrpasvrp5bxfr4b-source/layers/tree-sitter",
         "type": "path"
       }
     },
