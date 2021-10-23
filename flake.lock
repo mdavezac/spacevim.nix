@@ -2,18 +2,17 @@
   "nodes": {
     "base-layer": {
       "inputs": {
-        "flake-utils": "flake-utils",
         "plenary": "plenary",
         "telescope": "telescope",
         "which-key": "which-key"
       },
       "locked": {
-        "narHash": "sha256-52X8JngZjmfcZ6DvHUp9KUILviR1UutHI2cgRTkHw0U=",
-        "path": "/nix/store/m2982cfjn7cj75sj8x7ap05fsvqjypkz-source/layers/base",
+        "narHash": "sha256-au2/sENlcfjSX45lONiWQEVg8gnMLkjw32YTx7HyjLU=",
+        "path": "/nix/store/jpv6dnw1h6dzinswzkb3fldn45wj953l-source/layers/base",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/m2982cfjn7cj75sj8x7ap05fsvqjypkz-source/layers/base",
+        "path": "/nix/store/jpv6dnw1h6dzinswzkb3fldn45wj953l-source/layers/base",
         "type": "path"
       }
     },
@@ -33,21 +32,6 @@
       }
     },
     "flake-utils": {
-      "locked": {
-        "lastModified": 1631561581,
-        "narHash": "sha256-3VQMV5zvxaVLvqqUrNz3iJelLw30mIVSfZmAaauM3dA=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "7e5bf3925f6fbdfaf50a2a7ca0be2879c4261d19",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_2": {
       "locked": {
         "lastModified": 1631561581,
         "narHash": "sha256-3VQMV5zvxaVLvqqUrNz3iJelLw30mIVSfZmAaauM3dA=",
@@ -103,6 +87,22 @@
         "type": "github"
       }
     },
+    "nvim-treesitter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1634940169,
+        "narHash": "sha256-pYcZTqiDsltzeKZEwzdxAB7TQetDYdGB6DloMr3cLCg=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "rev": "0bbc6e3d164ab771c78c0f8905166d43939c7c12",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter",
+        "type": "github"
+      }
+    },
     "plenary": {
       "flake": false,
       "locked": {
@@ -123,9 +123,10 @@
       "inputs": {
         "base-layer": "base-layer",
         "devshell": "devshell",
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils",
         "neovim": "neovim",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "tree-sitter-layer": "tree-sitter-layer"
       }
     },
     "telescope": {
@@ -142,6 +143,20 @@
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
         "type": "github"
+      }
+    },
+    "tree-sitter-layer": {
+      "inputs": {
+        "nvim-treesitter": "nvim-treesitter"
+      },
+      "locked": {
+        "narHash": "sha256-ofMy4zHM6jkLfAwlicLcA2JGfx+u9icm7JaROd2c9Fc=",
+        "path": "/nix/store/jpv6dnw1h6dzinswzkb3fldn45wj953l-source/layers/tree-sitter",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/jpv6dnw1h6dzinswzkb3fldn45wj953l-source/layers/tree-sitter",
+        "type": "path"
       }
     },
     "which-key": {

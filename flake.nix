@@ -13,16 +13,16 @@
     };
 
     base-layer.url = "./layers/base";
+    tree-sitter-layer.url = "./layers/tree-sitter";
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
     let
-      layers = builtins.removeAttrs inputs [ "self" "nixpkgs" "flake-utils" "devshell" ];
+      layers = builtins.removeAttrs inputs [ "self" "nixpkgs" "flake-utils" "devshell" "neovim" ];
     in
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        get_from_layers = name: builtins.catAttrs name (builtins.attrValues layers);
         pkgs = import nixpkgs {
           inherit system;
           config = { allowUnfree = true; };
@@ -32,24 +32,34 @@
             (final: prev: {
               python = prev.python3;
             })
-          ] ++ (get_from_layers "overlay");
+          ];
         };
-        module = pkgs.lib.evalModules {
-          modules = [ ./layers/module.nix { _module.args.pkgs = pkgs; } ] ++ (get_from_layers "module");
-        };
-      in
-      rec {
-        defaultPackage = pkgs.wrapNeovim pkgs.neovim
-          {
+        customNeovim = pkgs: configuration:
+          let
+            module = pkgs.lib.evalModules {
+              modules = [ ./layers/module.nix { _module.args.pkgs = pkgs; } ]
+                ++ (builtins.catAttrs "module" (builtins.attrValues layers))
+                ++ [ configuration ];
+            };
+          in
+          pkgs.wrapNeovim pkgs.neovim {
             configure = {
               customRC = "lua <<EOF\n" + module.config.nvim.init.lua + "\nEOF";
-              packages.myVimPackage = {
+              packages.spacevimnix = {
                 start = module.config.nvim.plugins.start;
                 opt = [ ];
               };
             };
           };
-
+        configuration.nvim = {
+          layers.base.enable = true;
+        };
+      in
+      rec {
+        overlay = super: self: {
+          spacevim-nix-wrapper = customNeovim super;
+        };
+        defaultPackage = customNeovim pkgs configuration;
         apps = {
           nvim = flake-utils.lib.mkApp {
             drv = defaultPackage;
@@ -61,7 +71,7 @@
 
         devShell = pkgs.devshell.mkShell {
           name = "neovim";
-          packages = [ pkgs.neovim pkgs.tree-sitter pkgs.devshell.cli ];
+          packages = [ pkgs.neovim pkgs.devshell.cli ];
 
           commands = [
             {

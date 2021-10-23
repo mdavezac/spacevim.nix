@@ -18,9 +18,6 @@
       );
     in
     rec {
-      overlay = final: prev: {
-        layers.base.plugins.start = plugins final;
-      };
       module = { config, lib, pkgs, ... }: {
         options.nvim = lib.mkOption {
           type = lib.types.submodule {
@@ -97,8 +94,7 @@
             vim.wo.relativenumber = ${linenumbers.relative}
             vim.bo.textwidth = ${builtins.toString config.nvim.textwidth}
           '';
-        config.nvim.layers.base.enable = true;
-        config.nvim.layers.base.plugins.start = pkgs.layers.base.plugins.start;
+        config.nvim.layers.base.plugins.start = plugins pkgs;
         config.nvim.layers.base.init.lua = builtins.readFile ./init.lua;
       };
     };
