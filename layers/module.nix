@@ -28,10 +28,10 @@ let
     };
     default = { };
   };
-  aggregate_init = name: layers:
+  aggregate_init = name: comment: layers:
     builtins.concatStringsSep "\n\n"
       (lib.mapAttrsToList
-        (k: v: "-- layer ${k}\n${v}")
+        (k: v: "${comment} layer ${k}\n${v}")
         (builtins.mapAttrs (k: v: (lib.getAttrFromPath (lib.splitString "." name) v)) layers));
 in
 {
@@ -57,9 +57,9 @@ in
   config.nvim.plugins.start = lib.flatten (
     builtins.attrValues (builtins.mapAttrs (k: x: x.plugins.start) enabled_layers)
   );
-  config.nvim.init.vim = aggregate_init "init.vim" enabled_layers;
-  config.nvim.init.lua = aggregate_init "init.lua" enabled_layers;
-  config.nvim.post.vim = aggregate_init "post.lua" enabled_layers;
-  config.nvim.post.lua = aggregate_init "post.lua" enabled_layers;
+  config.nvim.init.vim = aggregate_init "init.vim" "\" " enabled_layers;
+  config.nvim.init.lua = aggregate_init "init.lua" "--" enabled_layers;
+  config.nvim.post.vim = aggregate_init "post.lua" "\" " enabled_layers;
+  config.nvim.post.lua = aggregate_init "post.lua" "--" enabled_layers;
 }
 
