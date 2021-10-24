@@ -15,6 +15,11 @@ let
 
   init_opt = lib.mkOption {
     type = lib.types.submodule {
+      options.vim = lib.mkOption {
+        type = lib.types.lines;
+        default = "";
+        description = "Vimscript settings for this layer";
+      };
       options.lua = lib.mkOption {
         type = lib.types.lines;
         default = "";
@@ -23,18 +28,25 @@ let
     };
     default = { };
   };
+  aggregate_init = name: layers:
+    builtins.concatStringsSep "\n\n"
+      (lib.mapAttrsToList
+        (k: v: "-- layer ${k}\n${v}")
+        (builtins.mapAttrs (k: v: (lib.getAttrFromPath (lib.splitString "." name) v)) layers));
 in
 {
   options.nvim = lib.mkOption {
     type = lib.types.submodule {
       options.plugins = plugins_opt;
       options.init = init_opt;
+      options.post = init_opt;
       options.layers = lib.mkOption {
         type = lib.types.attrsOf (
           lib.types.submodule {
             options.enable = lib.mkEnableOption "Whether to use this particular layer";
             options.plugins = plugins_opt;
             options.init = init_opt;
+            options.post = init_opt;
           }
         );
         default = { };
@@ -45,10 +57,9 @@ in
   config.nvim.plugins.start = lib.flatten (
     builtins.attrValues (builtins.mapAttrs (k: x: x.plugins.start) enabled_layers)
   );
-  config.nvim.init.lua =
-    builtins.concatStringsSep "\n\n"
-      (lib.mapAttrsToList
-        (k: v: "-- layer ${k}\n${v}")
-        (builtins.mapAttrs (k: v: v.init.lua) enabled_layers));
+  config.nvim.init.vim = aggregate_init "init.vim" enabled_layers;
+  config.nvim.init.lua = aggregate_init "init.lua" enabled_layers;
+  config.nvim.post.vim = aggregate_init "post.lua" enabled_layers;
+  config.nvim.post.lua = aggregate_init "post.lua" enabled_layers;
 }
 

@@ -14,6 +14,7 @@
 
     base-layer.url = "./layers/base";
     tree-sitter-layer.url = "./layers/tree-sitter";
+    pimplayer.url = "./layers/pimp";
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
@@ -44,7 +45,11 @@
           in
           pkgs.wrapNeovim pkgs.neovim {
             configure = {
-              customRC = "lua <<EOF\n" + module.config.nvim.init.lua + "\nEOF";
+              customRC =
+                module.config.nvim.init.vim
+                + ("lua <<EOF\n" + module.config.nvim.init.lua + "\nEOF")
+                + module.config.nvim.post.vim
+                + ("lua <<EOF\n" + module.config.nvim.post.lua + "\nEOF");
               packages.spacevimnix = {
                 start = module.config.nvim.plugins.start;
                 opt = [ ];
@@ -54,7 +59,8 @@
         configuration.nvim = {
           layers.base.enable = true;
           layers.tree-sitter.enable = true;
-          tree-sitter-languages = [ "nix" ];
+          layers.pimp.enable = true;
+          tree-sitter-languages = [ "nix" "python" "c" "cpp" "toml" "lua" ];
         };
       in
       rec {
@@ -73,7 +79,7 @@
 
         devShell = pkgs.devshell.mkShell {
           name = "neovim";
-          packages = [ pkgs.neovim pkgs.devshell.cli ];
+          packages = [ defaultPackage ];
 
           commands = [
             {

@@ -2,19 +2,17 @@
   "nodes": {
     "base-layer": {
       "inputs": {
-        "colorschemes": "colorschemes",
         "plenary": "plenary",
-        "rainglow": "rainglow",
         "telescope": "telescope",
         "which-key": "which-key"
       },
       "locked": {
-        "narHash": "sha256-/7BHIce0jbWeC/p+SBU5fagpRqWswbqbuBo1uTYltek=",
-        "path": "/nix/store/krj22fkrv7l100106dksigv9ydiy0c3y-source/layers/base",
+        "narHash": "sha256-XwMSz8exH3Jgff8DPb4XDAFYReagoybcNWPvHGen3zU=",
+        "path": "/nix/store/zahhgqvlj4cy440d1pwycsqmvpwwv3hh-source/layers/base",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/krj22fkrv7l100106dksigv9ydiy0c3y-source/layers/base",
+        "path": "/nix/store/zahhgqvlj4cy440d1pwycsqmvpwwv3hh-source/layers/base",
         "type": "path"
       }
     },
@@ -121,14 +119,29 @@
         "type": "github"
       }
     },
+    "pimplayer": {
+      "inputs": {
+        "colorschemes": "colorschemes",
+        "rainglow": "rainglow"
+      },
+      "locked": {
+        "narHash": "sha256-1hjwsM/5GGtCb+stN1xzxwOHjLltbbXCNujF4MsZigg=",
+        "path": "/nix/store/zahhgqvlj4cy440d1pwycsqmvpwwv3hh-source/layers/pimp",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/zahhgqvlj4cy440d1pwycsqmvpwwv3hh-source/layers/pimp",
+        "type": "path"
+      }
+    },
     "plenary": {
       "flake": false,
       "locked": {
-        "lastModified": 1634549078,
-        "narHash": "sha256-G/KVZW4lAI6e2bPg23sjWhBK7Wt6JK+x4iOI1Im805I=",
+        "lastModified": 1634799895,
+        "narHash": "sha256-RwsxUM2J6uPAVCmn0Z3pK3cc6A3lPHxzXHU6W60VErw=",
         "owner": "nvim-lua",
         "repo": "plenary.nvim",
-        "rev": "901b96d37a30be0504c97cc2c05d3a99b4cca842",
+        "rev": "de5acdcb595f0a97bec874693008c94f94b57060",
         "type": "github"
       },
       "original": {
@@ -160,17 +173,18 @@
         "flake-utils": "flake-utils",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
+        "pimplayer": "pimplayer",
         "tree-sitter-layer": "tree-sitter-layer"
       }
     },
     "telescope": {
       "flake": false,
       "locked": {
-        "lastModified": 1634659194,
-        "narHash": "sha256-N5TRW+d9aTBdUK1hnLkH4V3zb12Y7QzdU2Kp2oy+5v0=",
+        "lastModified": 1634809592,
+        "narHash": "sha256-b8V1HZrXG5PbU3WblWvr0OK88HBqJL2B4lmbYcK1+Wo=",
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
-        "rev": "9cad3a4a5d0e36b07b25c4be1db1c1306fcec945",
+        "rev": "f56222738b719f5ae94ed85fdf080690371da0b9",
         "type": "github"
       },
       "original": {
@@ -185,11 +199,11 @@
       },
       "locked": {
         "narHash": "sha256-Zgx7eR1+raXQyGzboLC0qBIVXAky2yS1uxgvFzssDGg=",
-        "path": "/nix/store/krj22fkrv7l100106dksigv9ydiy0c3y-source/layers/tree-sitter",
+        "path": "/nix/store/zahhgqvlj4cy440d1pwycsqmvpwwv3hh-source/layers/tree-sitter",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/krj22fkrv7l100106dksigv9ydiy0c3y-source/layers/tree-sitter",
+        "path": "/nix/store/zahhgqvlj4cy440d1pwycsqmvpwwv3hh-source/layers/tree-sitter",
         "type": "path"
       }
     },
