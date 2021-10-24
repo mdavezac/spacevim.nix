@@ -4,16 +4,17 @@
       "inputs": {
         "colorschemes": "colorschemes",
         "plenary": "plenary",
+        "rainglow": "rainglow",
         "telescope": "telescope",
         "which-key": "which-key"
       },
       "locked": {
-        "narHash": "sha256-jJKYOu6Upb4dYyydPbcherFKrxls+wnIo6A0eRwtmWM=",
-        "path": "/nix/store/l40dyk5cgnyda3jp3hrpasvrp5bxfr4b-source/layers/base",
+        "narHash": "sha256-/7BHIce0jbWeC/p+SBU5fagpRqWswbqbuBo1uTYltek=",
+        "path": "/nix/store/98pv2rhlqxzgxxn8p53bl9iznpp9hzhw-source/layers/base",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/l40dyk5cgnyda3jp3hrpasvrp5bxfr4b-source/layers/base",
+        "path": "/nix/store/98pv2rhlqxzgxxn8p53bl9iznpp9hzhw-source/layers/base",
         "type": "path"
       }
     },
@@ -136,6 +137,22 @@
         "type": "github"
       }
     },
+    "rainglow": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1515875106,
+        "narHash": "sha256-3m94sIGiF7RUNnLtZ8SIAzjXS2BGGGpC1lvw5QrmPDM=",
+        "owner": "rainglow",
+        "repo": "vim",
+        "rev": "837fd7292274e0ee2f3b5aee4519c3f74d7dc3d1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rainglow",
+        "repo": "vim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "base-layer": "base-layer",
@@ -168,11 +185,11 @@
       },
       "locked": {
         "narHash": "sha256-Zgx7eR1+raXQyGzboLC0qBIVXAky2yS1uxgvFzssDGg=",
-        "path": "/nix/store/l40dyk5cgnyda3jp3hrpasvrp5bxfr4b-source/layers/tree-sitter",
+        "path": "/nix/store/98pv2rhlqxzgxxn8p53bl9iznpp9hzhw-source/layers/tree-sitter",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/l40dyk5cgnyda3jp3hrpasvrp5bxfr4b-source/layers/tree-sitter",
+        "path": "/nix/store/98pv2rhlqxzgxxn8p53bl9iznpp9hzhw-source/layers/tree-sitter",
         "type": "path"
       }
     },

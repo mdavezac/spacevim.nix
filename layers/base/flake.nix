@@ -4,6 +4,7 @@
     plenary = { url = "github:nvim-lua/plenary.nvim"; flake = false; };
     telescope = { url = "github:nvim-telescope/telescope.nvim"; flake = false; };
     colorschemes = { url = "github:rafi/awesome-vim-colorschemes"; flake = false; };
+    rainglow = { url = "github:rainglow/vim"; flake = false; };
   };
   outputs = inputs @ { self, ... }:
     let
@@ -67,15 +68,11 @@
               default = 88;
               description = ''Maximum line length before a break is introduced'';
             };
-            # options.textwidth = lib.mkOption {
-            #   type =
-            #     let
-            #       colorfiles = lib.sourceFilesBySuffix "${inputs.colorscheme}/colors/*.vim";
-            #     in
-            #     lib.types.enum (builtins.map (lib.removeSuffix ".vim") colorfiles);
-            #   default = "onehalfdark";
-            #   description = ''Colorschemes'';
-            # };
+            options.colorscheme = lib.mkOption {
+              type = lib.types.str;
+              default = "onehalfdark";
+              description = ''Colorschemes'';
+            };
           };
         };
         config.nvim.init.lua =
@@ -103,6 +100,7 @@
             vim.wo.number = ${linenumbers.number}
             vim.wo.relativenumber = ${linenumbers.relative}
             vim.bo.textwidth = ${builtins.toString config.nvim.textwidth}
+            vim.cmd('colorscheme ${config.nvim.colorscheme}')
           '';
         config.nvim.layers.base.plugins.start = plugins pkgs;
         config.nvim.layers.base.init.lua = builtins.readFile ./init.lua;
