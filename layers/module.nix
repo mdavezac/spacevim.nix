@@ -32,7 +32,9 @@ let
     builtins.concatStringsSep "\n\n"
       (lib.mapAttrsToList
         (k: v: "${comment} layer ${k}\n${v}")
-        (builtins.mapAttrs (k: v: (lib.getAttrFromPath (lib.splitString "." name) v)) layers));
+        (lib.filterAttrs
+          (k: v: v != "")
+          (builtins.mapAttrs (k: v: (lib.getAttrFromPath (lib.splitString "." name) v)) layers)));
 in
 {
   options.nvim = lib.mkOption {
