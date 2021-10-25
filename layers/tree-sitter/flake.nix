@@ -37,6 +37,11 @@
           )
           ((pkgs.flake2vim inputs [ ]) ++ [ (tree-sitter config.nvim.tree-sitter-languages) ]);
         config.nvim.layers.tree-sitter.init.lua = builtins.readFile ./init.lua;
+        config.nvim.layers.tree-sitter.post.vim = ''
+          set foldmethod=expr
+          set foldlevel=10
+          set foldexpr=nvim_treesitter#foldexpr()
+        '';
       };
   };
 }

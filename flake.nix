@@ -11,10 +11,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
+    rnix-lsp = {
+      url = "github:nix-community/rnix-lsp";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
+    };
 
     base-layer.url = "./layers/base";
     tree-sitter-layer.url = "./layers/tree-sitter";
     pimplayer.url = "./layers/pimp";
+    lsp = {
+      url = "./layers/lsp";
+      inputs.rnix-lsp.follows = "rnix-lsp";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
@@ -47,9 +57,12 @@
                 vim-plugin-from-key-value-pair
                 (builtins.removeAttrs inputs ([ "self" "nixpkgs" ] ++ exclude))
             );
+            layer_modules = builtins.map
+              (x: if (builtins.isAttrs x) then (builtins.getAttr system x) else x)
+              (builtins.catAttrs "module" (builtins.attrValues layers));
             module = pkgs.lib.evalModules {
               modules = [ ./layers/module.nix { _module.args.pkgs = pkgs // { flake2vim = plugins; }; } ]
-                ++ (builtins.catAttrs "module" (builtins.attrValues layers))
+                ++ layer_modules
                 ++ [ configuration ];
             };
           in
@@ -70,6 +83,7 @@
           layers.base.enable = true;
           layers.tree-sitter.enable = true;
           layers.pimp.enable = true;
+          layers.lsp.enable = true;
           languages = [ "nix" "python" "c" "cpp" "toml" "lua" ];
         };
       in
