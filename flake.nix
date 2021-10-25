@@ -70,7 +70,7 @@
           layers.base.enable = true;
           layers.tree-sitter.enable = true;
           layers.pimp.enable = true;
-          tree-sitter-languages = [ "nix" "python" "c" "cpp" "toml" "lua" ];
+          languages = [ "nix" "python" "c" "cpp" "toml" "lua" ];
         };
       in
       rec {
