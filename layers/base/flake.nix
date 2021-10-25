@@ -5,12 +5,9 @@
     telescope = { url = "github:nvim-telescope/telescope.nvim"; flake = false; };
   };
   outputs = inputs @ { self, ... }:
-    let
-      plugin_defs = (import ./plugin_defs.nix) inputs;
-    in
     rec {
       module = { config, lib, pkgs, ... }: {
-        imports = [ ./module_defs.nix plugin_defs ];
+        imports = [ ./which_key.nix ((import ./plugin_defs.nix) inputs) ./general_options.nix ];
         config.nvim.layers.base.which-key = {
           "<leader>f" = {
             name = "+file";
