@@ -37,8 +37,18 @@
         };
         customNeovim = pkgs: configuration:
           let
+            vim-plugin-from-key-value-pair = k: v: pkgs.vimUtils.buildVimPluginFrom2Nix {
+              pname = k;
+              version = "master";
+              src = v;
+            };
+            plugins = inputs: exclude: builtins.attrValues (
+              builtins.mapAttrs
+                vim-plugin-from-key-value-pair
+                (builtins.removeAttrs inputs ([ "self" "nixpkgs" ] ++ exclude))
+            );
             module = pkgs.lib.evalModules {
-              modules = [ ./layers/module.nix { _module.args.pkgs = pkgs; } ]
+              modules = [ ./layers/module.nix { _module.args.pkgs = pkgs // { flake2vim = plugins; }; } ]
                 ++ (builtins.catAttrs "module" (builtins.attrValues layers))
                 ++ [ configuration ];
             };

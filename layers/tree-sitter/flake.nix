@@ -4,16 +4,6 @@
   };
   outputs = inputs @ { self, ... }:
     let
-      vim-plugin-from-key-value-pair = nixpkgs: k: v: nixpkgs.vimUtils.buildVimPluginFrom2Nix {
-        pname = k;
-        version = "master";
-        src = v;
-      };
-      plugins = nixpkgs: builtins.attrValues (
-        builtins.mapAttrs
-          (vim-plugin-from-key-value-pair nixpkgs)
-          (builtins.removeAttrs inputs [ "self" "nixpkgs" ])
-      );
       tree-sitter = nixpkgs: languages: (import ./tree-sitter.nix) {
         inherit (nixpkgs) stdenv lib writeTextFile curl git cacert neovim;
         languages = languages;
@@ -46,7 +36,7 @@
               config.nvim.layers.tree-sitter.enable
               && (builtins.length config.nvim.tree-sitter-languages) > 0
             )
-            ((plugins pkgs) ++ [ base-tree-sitter ]);
+            ((pkgs.flake2vim inputs [ ]) ++ [ base-tree-sitter ]);
         config.nvim.layers.tree-sitter.init.lua = builtins.readFile ./init.lua;
       };
     };
