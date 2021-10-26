@@ -1,6 +1,7 @@
 { nvim-treesitter-src, languages, stdenv, lib, writeTextFile, curl, git, cacert, neovim }:
 let
-  languages-str = builtins.concatStringsSep ", " (builtins.map (x: "\"${x}\"") languages);
+  languages-set = lib.sort (a: b: a < b) (lib.unique languages);
+  languages-str = builtins.concatStringsSep ", " (builtins.map (x: "\"${x}\"") languages-set);
   installParsers = writeTextFile {
     name = "install-parsers.lua";
     text = ''
@@ -15,7 +16,7 @@ let
   };
 in
 stdenv.mkDerivation rec {
-  pname = "nvim-treesitter-parsers-" + (builtins.concatStringsSep "-" languages);
+  pname = "nvim-treesitter-parsers-" + (builtins.concatStringsSep "-" languages-set);
   version = nvim-treesitter-src.shortRev;
   src = nvim-treesitter-src;
 
@@ -35,7 +36,7 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    description = "nvim-treesitter with parsers ${languages}";
+    description = "nvim-treesitter with parsers ${languages-set}";
     homepage = "https://github.com/nvim-treesitter/nvim-treesitter";
     platforms = [ "x86_64-darwin" "x86_64-linux" ];
     license = with licenses; [ asl20 ];

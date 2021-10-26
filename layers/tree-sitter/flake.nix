@@ -12,36 +12,49 @@
           languages = lib.sort (a: b: a < b) languages;
           nvim-treesitter-src = inputs.nvim-treesitter;
         };
+        treesitter-option = lib.mkOption {
+          type = lib.types.listOf (lib.types.enum languages);
+          description = ''
+            List of languages for which to build treesitter parsers.
+
+            Only the set of "maintained" languages are supported here.
+          '';
+          example = [ "nix" "python" "C" ];
+          default = [ ];
+        };
+        enabled = config.nvim.layers.treesitter.enable && ((builtins.length config.nvim.treesitter-languages) > 0);
       in
       {
         options.nvim = lib.mkOption {
           type = lib.types.submodule {
-            options.tree-sitter-languages = lib.mkOption {
-              type = lib.types.listOf (lib.types.enum languages);
-              description = ''
-                List of languages for which to build parsers.
-
-                Only the set of "maintained" languages are supported here.
-              '';
-              example = [ "nix" "python" "C" ];
-              default = [ ];
+            options.treesitter-languages = treesitter-option;
+            options.layers = lib.mkOption {
+              type = lib.types.attrsOf (lib.types.submodule {
+                options.treesitter-languages = treesitter-option;
+              });
             };
           };
         };
 
-        config.nvim.tree-sitter-languages = lib.intersectLists config.nvim.languages languages;
-        config.nvim.layers.tree-sitter.plugins.start = lib.mkIf
-          (
-            config.nvim.layers.tree-sitter.enable
-            && (builtins.length config.nvim.tree-sitter-languages) > 0
+        config.nvim.treesitter-languages = lib.flatten (
+          builtins.attrValues (
+            builtins.mapAttrs
+              (k: x: x.treesitter-languages)
+              (lib.filterAttrs (k: v: v.enable) config.nvim.layers)
           )
-          ((pkgs.flake2vim inputs [ ]) ++ [ (tree-sitter config.nvim.tree-sitter-languages) ]);
-        config.nvim.layers.tree-sitter.init.lua = builtins.readFile ./init.lua;
-        config.nvim.layers.tree-sitter.post.vim = ''
-          set foldmethod=expr
-          set foldlevel=10
-          set foldexpr=nvim_treesitter#foldexpr()
-        '';
+        );
+        config.nvim.layers.treesitter.plugins.start =
+          if enabled then
+            ((pkgs.flake2vim inputs [ ]) ++ [ (tree-sitter config.nvim.treesitter-languages) ])
+          else [ ];
+        config.nvim.layers.treesitter.init.lua =
+          if enabled then (builtins.readFile ./init.lua) else "";
+        config.nvim.layers.treesitter.post.vim =
+          if enabled then ''
+            set foldmethod=expr
+            set foldlevel=10
+            set foldexpr=nvim_treesitter#foldexpr()
+          '' else "";
       };
   };
 }

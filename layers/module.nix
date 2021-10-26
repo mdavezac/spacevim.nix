@@ -53,11 +53,6 @@ in
         );
         default = { };
       };
-      options.languages = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        description = "Enabled languages for tree-sitter and lsp.";
-        default = [ ];
-      };
     };
   };
 

@@ -11,20 +11,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
-    rnix-lsp = {
-      url = "github:nix-community/rnix-lsp";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "flake-utils";
-    };
 
     base-layer.url = "./layers/base";
     tree-sitter-layer.url = "./layers/tree-sitter";
     pimplayer.url = "./layers/pimp";
-    lsp = {
-      url = "./layers/lsp";
-      inputs.rnix-lsp.follows = "rnix-lsp";
-      inputs.flake-utils.follows = "flake-utils";
-    };
+    lsp.url = "./layers/lsp";
+    languages.url = "./layers/languages";
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
@@ -81,10 +73,11 @@
           };
         configuration.nvim = {
           layers.base.enable = true;
-          layers.tree-sitter.enable = true;
+          layers.treesitter.enable = true;
           layers.pimp.enable = true;
           layers.lsp.enable = true;
-          languages = [ "nix" "python" "c" "cpp" "toml" "lua" ];
+          layers.python.enable = true;
+          layers.nix.enable = true;
         };
       in
       rec {
