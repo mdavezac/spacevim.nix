@@ -2,6 +2,7 @@
 let
   languages-set = lib.sort (a: b: a < b) (lib.unique languages);
   languages-str = builtins.concatStringsSep ", " (builtins.map (x: "\"${x}\"") languages-set);
+  languages-vim = builtins.concatStringsSep " " (builtins.map (x: "${x}") languages-set);
   installParsers = writeTextFile {
     name = "install-parsers.lua";
     text = ''
@@ -10,15 +11,15 @@ let
       require'nvim-treesitter.configs'.setup({
         ensure_installed = {${languages-str}}
       })
-      vim.cmd("TSInstallSync maintained")
+      vim.cmd("TSInstallSync ${languages-vim}")
       vim.cmd("q")
     '';
   };
 in
 stdenv.mkDerivation rec {
   pname = "nvim-treesitter-parsers-" + (builtins.concatStringsSep "-" languages-set);
-  version = nvim-treesitter-src.shortRev;
-  src = nvim-treesitter-src;
+  version = nvim-treesitter-src.version;
+  src = nvim-treesitter-src.src;
 
   buildInputs = [ neovim curl cacert git ];
 

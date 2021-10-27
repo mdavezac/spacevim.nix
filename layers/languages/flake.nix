@@ -1,6 +1,6 @@
 {
   inputs = { };
-  outputs = inputs @ { self, ... }: {
+  outputs = { self, ... }: {
     module = { config, lib, pkgs, ... }:
       {
         config.nvim.layers.python.lsp-instances = [ "pyright" ];

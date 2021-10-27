@@ -1,16 +1,14 @@
 {
-  inputs = {
-    nvim-treesitter = { url = "github:nvim-treesitter/nvim-treesitter"; flake = false; };
-  };
+  inputs = { };
   outputs = inputs @ { self, ... }: rec {
     module = { config, lib, pkgs, ... }:
       let
         languages =
-          builtins.attrNames (lib.importJSON "${inputs.nvim-treesitter}/lockfile.json");
+          builtins.attrNames (lib.importJSON "${pkgs.vimPlugins.nvim-treesitter.src}/lockfile.json");
         tree-sitter = languages: (import ./tree-sitter.nix) {
           inherit (pkgs) stdenv lib writeTextFile curl git cacert neovim;
           languages = lib.sort (a: b: a < b) languages;
-          nvim-treesitter-src = inputs.nvim-treesitter;
+          nvim-treesitter-src = pkgs.vimPlugins.nvim-treesitter;
         };
         treesitter-option = lib.mkOption {
           type = lib.types.listOf (lib.types.enum languages);
@@ -45,7 +43,7 @@
         );
         config.nvim.layers.treesitter.plugins.start =
           if enabled then
-            ((pkgs.flake2vim inputs [ ]) ++ [ (tree-sitter config.nvim.treesitter-languages) ])
+            [ pkgs.vimPlugins.nvim-treesitter (tree-sitter config.nvim.treesitter-languages) ]
           else [ ];
         config.nvim.layers.treesitter.init.lua =
           if enabled then (builtins.readFile ./init.lua) else "";

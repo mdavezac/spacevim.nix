@@ -1,8 +1,6 @@
 {
-  inputs = {
-    nvim-lsp-config = { url = "github:neovim/nvim-lspconfig"; flake = false; };
-  };
-  outputs = inputs @ { self, ... }: {
+  inputs = { };
+  outputs = { self, ... }: {
     module = { config, lib, pkgs, ... }:
       let
         instances = [ "rnix" "pyright" ];
@@ -32,7 +30,7 @@
               (lib.filterAttrs (k: v: v.enable) config.nvim.layers)
           )
         );
-        config.nvim.layers.lsp.plugins.start = pkgs.flake2vim inputs [ ];
+        config.nvim.layers.lsp.plugins.start = [ pkgs.vimPlugins.nvim-lspconfig ];
         config.nvim.layers.lsp.init.lua =
           let
             instances = lib.sort (a: b: a < b) config.nvim.lsp-instances;

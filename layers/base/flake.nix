@@ -1,13 +1,10 @@
 {
-  inputs = {
-    which-key = { url = "github:folke/which-key.nvim"; flake = false; };
-    plenary = { url = "github:nvim-lua/plenary.nvim"; flake = false; };
-    telescope = { url = "github:nvim-telescope/telescope.nvim"; flake = false; };
-  };
-  outputs = inputs @ { self, ... }: rec {
+  inputs = { };
+  outputs = { self, ... }: rec {
     module = { config, lib, pkgs, ... }: {
       imports = [ ./which_key.nix ./general_options.nix ];
-      config.nvim.layers.base.plugins.start = pkgs.flake2vim inputs [ ];
+      config.nvim.layers.base.plugins.start =
+        [ pkgs.vimPlugins.telescope-nvim pkgs.vimPlugins.which-key-nvim ];
       config.nvim.layers.base.which-key = {
         "<leader>f" = {
           name = "+file";
