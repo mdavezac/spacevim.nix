@@ -17,6 +17,7 @@
     pimplayer.url = "./layers/pimp";
     lsp.url = "./layers/lsp";
     languages.url = "./layers/languages";
+    formatter.url = "./layers/formatter";
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
@@ -76,8 +77,10 @@
           layers.treesitter.enable = true;
           layers.pimp.enable = true;
           layers.lsp.enable = true;
+          layers.formatter.enable = true;
           layers.python.enable = true;
           layers.nix.enable = true;
+          # init.lua = "Asafgaed";
         };
       in
       rec {
