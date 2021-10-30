@@ -14,7 +14,13 @@
         };
       };
       config.nvim.plugins.start = lib.mkIf config.nvim.layers.pimp
-        ((pkgs.flake2vim inputs [ ]) ++ [ pkgs.vimPlugins.awesome-vim-colorschemes ]);
+        ((pkgs.flake2vim inputs [ ]) ++ [ pkgs.vimPlugins.awesome-vim-colorschemes pkgs.vimPlugins.nvim-web-devicons ]);
+      config.nvim.post.lua = lib.mkIf config.nvim.layers.pimp
+        ''
+          require'nvim-web-devicons'.setup {
+           default = true;
+          }
+        '';
       config.nvim.init.vim = lib.mkIf config.nvim.layers.pimp
         ''
           " Pimp layer
