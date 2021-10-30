@@ -59,8 +59,9 @@ in
       description = ''Maximum line length before a break is introduced'';
     };
   };
-  config.nvim.layers.base.init.lua =
+  config.nvim.init.lua = lib.mkIf config.nvim.layers.base
     ''
+      -- General options defined in base layer
       vim.g.mapleader = "${config.nvim.leader}"
       vim.g.maplocalleader = "${config.nvim.localleader}"
       vim.o.ignorecase = ${case.ignore}
@@ -71,5 +72,6 @@ in
       vim.wo.number = ${linenumbers.number}
       vim.wo.relativenumber = ${linenumbers.relative}
       vim.bo.textwidth = ${builtins.toString config.nvim.textwidth}
+      -- End of general options defined in base layer
     '';
 }

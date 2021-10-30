@@ -43,25 +43,11 @@ in
       options.init = init_opt;
       options.post = init_opt;
       options.layers = lib.mkOption {
-        type = lib.types.attrsOf (
-          lib.types.submodule {
-            options.enable = lib.mkEnableOption "Whether to use this particular layer";
-            options.plugins = plugins_opt;
-            options.init = init_opt;
-            options.post = init_opt;
-          }
-        );
-        default = { };
+        type = lib.types.attrsOf lib.types.bool;
+        description = "Whether to use this particular layer";
+        default = false;
       };
     };
   };
-
-  config.nvim.plugins.start = lib.flatten (
-    builtins.attrValues (builtins.mapAttrs (k: x: x.plugins.start) enabled_layers)
-  );
-  config.nvim.init.vim = aggregate_init "init.vim" "\" " enabled_layers;
-  config.nvim.init.lua = aggregate_init "init.lua" "--" enabled_layers;
-  config.nvim.post.vim = aggregate_init "post.lua" "\" " enabled_layers;
-  config.nvim.post.lua = aggregate_init "post.lua" "--" enabled_layers;
 }
 

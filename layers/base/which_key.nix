@@ -39,20 +39,9 @@ in
   options.nvim = lib.mkOption {
     type = lib.types.submodule {
       options.which-key = which_group_mod;
-      options.layers = lib.mkOption {
-        type = lib.types.attrsOf (
-          lib.types.submodule {
-            options.which-key = which_group_mod;
-          }
-        );
-      };
     };
   };
-  config.nvim.which-key =
-    builtins.foldl' (a: b: a // b) { } (
-      builtins.attrValues (layer-mappings config.nvim.layers)
-    );
-  config.nvim.layers.base.init.lua =
+  config.nvim.init.lua =
     let
       single_mapping = k: v:
         if v.description == ""
@@ -78,11 +67,14 @@ in
         + ''
               }
           }, {mode = "${get_mode v.mode}"})'';
+      text = (builtins.readFile ./init.lua)
+        + builtins.concatStringsSep "\n" (
+        builtins.attrValues (
+          lib.mapAttrs grouping config.nvim.which-key
+        )
+      );
     in
-    (builtins.readFile ./init.lua)
-    + builtins.concatStringsSep "\n" (
-      builtins.attrValues (
-        lib.mapAttrs grouping config.nvim.which-key
-      )
+    lib.mkIf config.nvim.layers.base (
+      "-- Which-key from base layer\n" + text + "\n-- End of which-key from base layer"
     );
 }

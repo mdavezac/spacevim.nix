@@ -21,15 +21,9 @@ let
       default = true;
     };
   });
-  formatters-options = lib.mkOption {
-    type = lib.types.attrsOf formatter-option;
-    description = ''Dictionary of formatter configurations.'';
-    default = { };
-  };
-  enabled =
-    config.nvim.layers.formatter.enable && (
-      builtins.any (builtins.attrValues (lib.mapAttrs (k: v: v.enable) config.nvim.formatters))
-    );
+  enabled_formatters = lib.filterAttrs (k: v: v.enable) config.nvim.formatters;
+  enabled = config.nvim.layers.formatter
+    && ((builtins.length (builtins.attrNames enabled_formatters)) > 0);
 in
 {
   options.nvim = lib.mkOption {
@@ -39,26 +33,16 @@ in
         description = "Whether to format buffer when saving";
         default = true;
       };
-      options.formatters = formatters-options;
-      options.layers = lib.mkOption {
-        type = lib.types.attrsOf (lib.types.submodule {
-          options.formatters = formatters-options;
-        });
+      options.formatters = lib.mkOption {
+        type = lib.types.attrsOf formatter-option;
+        description = ''Dictionary of formatter configurations.'';
+        default = { };
       };
     };
   };
 
-  config.nvim.formatters =
-    let
-      enabled_layers = lib.filterAttrs
-        (k: v: v.enable && (builtins.hasAttr "formatters" v))
-        config.nvim.layers;
-      known_formatters = builtins.mapAttrs (k: v: v.formatters) enabled_layers;
-      formatter_set = builtins.foldl' (a: b: a // b) { } (builtins.attrValues known_formatters);
-    in
-    formatter_set;
-  config.nvim.layers.formatter.plugins.start = [ pkgs.vimPlugins.formatter-nvim ];
-  config.nvim.layers.formatter.init.lua =
+  config.nvim.plugins.start = lib.mkIf enabled [ pkgs.vimPlugins.formatter-nvim ];
+  config.nvim.init.lua =
     let
       buildFormatter = { exe, args ? [ ], stdin ? true, ... }:
         ''
@@ -70,8 +54,6 @@ in
             }
           end
         '';
-      enabled_formatters = lib.filterAttrs (k: v: v.enable) config.nvim.formatters;
-      enable = (builtins.length (builtins.attrNames enabled_formatters)) > 0;
       filetypes = builtins.attrValues (builtins.mapAttrs (k: v: v.filetype) enabled_formatters);
       buildFiletype = filetype:
         let
@@ -86,9 +68,11 @@ in
           + "    }\n"
         );
     in
-    lib.mkIf enable (lib.concatStrings [
+    lib.mkIf enabled (lib.concatStrings [
+      "-- Formatter layer\n"
       "require(\"formatter\").setup({\n  filetype={\n"
       (builtins.concatStringsSep ",\n" (builtins.map buildFiletype filetypes))
       "\n  }\n})"
+      "-- End of formatter layer\n"
     ]);
 }

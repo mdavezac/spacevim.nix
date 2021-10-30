@@ -13,9 +13,14 @@
           };
         };
       };
-      config.nvim.layers.pimp.plugins.start =
-        (pkgs.flake2vim inputs [ ]) ++ [ pkgs.vimPlugins.awesome-vim-colorschemes ];
-      config.nvim.layers.pimp.init.vim = ''colorscheme ${config.nvim.colorscheme}'';
+      config.nvim.plugins.start = lib.mkIf config.nvim.layers.pimp
+        ((pkgs.flake2vim inputs [ ]) ++ [ pkgs.vimPlugins.awesome-vim-colorschemes ]);
+      config.nvim.init.vim = lib.mkIf config.nvim.layers.pimp
+        ''
+          " Pimp layer
+          colorscheme ${config.nvim.colorscheme}
+          " End of pimp layer
+        '';
     };
   };
 }

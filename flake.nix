@@ -73,13 +73,13 @@
             };
           };
         configuration.nvim = {
-          layers.base.enable = true;
-          layers.treesitter.enable = true;
-          layers.pimp.enable = true;
-          layers.lsp.enable = true;
-          layers.formatter.enable = true;
-          layers.python.enable = true;
-          layers.nix.enable = true;
+          layers.base = true;
+          layers.treesitter = true;
+          layers.pimp = true;
+          layers.lsp = true;
+          layers.formatter = true;
+          layers.python = true;
+          layers.nix = true;
           # init.lua = "Asafgaed";
         };
       in

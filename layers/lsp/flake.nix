@@ -9,29 +9,17 @@
           description = ''List of LSP instances to setup.'';
           default = [ ];
         };
-        enabled = config.nvim.layers.lsp.enable && ((builtins.length config.nvim.lsp-instances) > 0);
+        enabled = config.nvim.layers.lsp && ((builtins.length config.nvim.lsp-instances) > 0);
       in
       {
         options.nvim = lib.mkOption {
           type = lib.types.submodule {
             options.lsp-instances = lsp-option;
-            options.layers = lib.mkOption {
-              type = lib.types.attrsOf (lib.types.submodule {
-                options.lsp-instances = lsp-option;
-              });
-            };
           };
         };
 
-        config.nvim.lsp-instances = lib.flatten (
-          builtins.attrValues (
-            builtins.mapAttrs
-              (k: x: x.lsp-instances)
-              (lib.filterAttrs (k: v: v.enable) config.nvim.layers)
-          )
-        );
-        config.nvim.layers.lsp.plugins.start = [ pkgs.vimPlugins.nvim-lspconfig ];
-        config.nvim.layers.lsp.init.lua =
+        config.nvim.plugins.start = lib.mkIf enabled [ pkgs.vimPlugins.nvim-lspconfig ];
+        config.nvim.init.lua =
           let
             instances = lib.sort (a: b: a < b) config.nvim.lsp-instances;
             if_has_instance = instance: text:
@@ -46,8 +34,8 @@
                 '' + "\n\n"))
             ];
           in
-          lib.mkIf (text != "") ("local lsp = require('lspconfig')\n\n" + text);
-        config.nvim.layers.lsp.which-key = {
+          lib.mkIf (enabled && (text != "")) ("local lsp = require('lspconfig')\n\n" + text);
+        config.nvim.which-key = lib.mkIf enabled {
           "<localleader>d" = {
             name = "+document";
             mode = "normal";

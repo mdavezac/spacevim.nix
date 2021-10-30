@@ -20,39 +20,26 @@
           example = [ "nix" "python" "C" ];
           default = [ ];
         };
-        enabled = config.nvim.layers.treesitter.enable && ((builtins.length config.nvim.treesitter-languages) > 0);
+        enabled = config.nvim.layers.treesitter && ((builtins.length config.nvim.treesitter-languages) > 0);
       in
       {
         options.nvim = lib.mkOption {
           type = lib.types.submodule {
             options.treesitter-languages = treesitter-option;
-            options.layers = lib.mkOption {
-              type = lib.types.attrsOf (lib.types.submodule {
-                options.treesitter-languages = treesitter-option;
-              });
-            };
           };
         };
 
-        config.nvim.treesitter-languages = lib.flatten (
-          builtins.attrValues (
-            builtins.mapAttrs
-              (k: x: x.treesitter-languages)
-              (lib.filterAttrs (k: v: v.enable) config.nvim.layers)
-          )
-        );
-        config.nvim.layers.treesitter.plugins.start =
-          if enabled then
-            [ pkgs.vimPlugins.nvim-treesitter (tree-sitter config.nvim.treesitter-languages) ]
-          else [ ];
-        config.nvim.layers.treesitter.init.lua =
-          if enabled then (builtins.readFile ./init.lua) else "";
-        config.nvim.layers.treesitter.post.vim =
-          if enabled then ''
+        config.nvim.plugins.start = lib.mkIf enabled
+          [ pkgs.vimPlugins.nvim-treesitter (tree-sitter config.nvim.treesitter-languages) ];
+        config.nvim.init.lua = lib.mkIf enabled (builtins.readFile ./init.lua);
+        config.nvim.post.vim = lib.mkIf enabled
+          ''
+            " Tree-sitter layer
             set foldmethod=expr
             set foldlevel=10
             set foldexpr=nvim_treesitter#foldexpr()
-          '' else "";
+            " End of tree-sitter layer
+          '';
       };
   };
 }

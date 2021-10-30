@@ -3,9 +3,9 @@
   outputs = { self, ... }: rec {
     module = { config, lib, pkgs, ... }: {
       imports = [ ./which_key.nix ./general_options.nix ];
-      config.nvim.layers.base.plugins.start =
+      config.nvim.plugins.start = lib.mkIf config.nvim.layers.base
         [ pkgs.vimPlugins.telescope-nvim pkgs.vimPlugins.which-key-nvim ];
-      config.nvim.layers.base.which-key = {
+      config.nvim.which-key = lib.mkIf config.nvim.layers.base {
         "<leader>f" = {
           name = "+file";
           mode = "normal";
