@@ -28,11 +28,6 @@ in
 {
   options.nvim = lib.mkOption {
     type = lib.types.submodule {
-      options.format-on-save = lib.mkOption {
-        type = lib.types.bool;
-        description = "Whether to format buffer when saving";
-        default = true;
-      };
       options.formatters = lib.mkOption {
         type = lib.types.attrsOf formatter-option;
         description = ''Dictionary of formatter configurations.'';
