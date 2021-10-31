@@ -28,11 +28,22 @@ in
     in
     lib.mkIf (enabled) (
       builtins.concatStringsSep "\n" [
-        "local lsp = require('lspconfig')"
-        (if_has_instance "rnix" "lsp.rnix.setup{cmd = {'${pkgs.rnix-lsp}/bin/rnix-lsp'}}")
+        ''
+          local capabilities = vim.lsp.protocol.make_client_capabilities()
+          capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+        
+          local lsp = require('lspconfig')
+        ''
+        (if_has_instance "rnix" ''
+          lsp.rnix.setup{
+              cmd = {'${pkgs.rnix-lsp}/bin/rnix-lsp'},
+              capabilities=capabilities
+          }
+        '')
         (if_has_instance "pyright" ''
           lsp.pyright.setup{
-             cmd = {'${pkgs.nodePackages.pyright}/bin/pyright-langserver', '--stdio'}
+             cmd = {'${pkgs.nodePackages.pyright}/bin/pyright-langserver', '--stdio'},
+             capabilities=capabilities
           }
         '')
       ]
