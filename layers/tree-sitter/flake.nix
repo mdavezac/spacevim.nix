@@ -42,7 +42,15 @@
 
         config.nvim.plugins.start = lib.mkIf enabled
           [ pkgs.vimPlugins.nvim-treesitter (tree-sitter config.nvim.treesitter-languages) ];
-        config.nvim.init.lua = lib.mkIf enabled (builtins.readFile ./init.lua);
+        config.nvim.init.lua = lib.mkIf enabled
+          ''
+            require'nvim-treesitter.configs'.setup {
+                highlight = {
+                  enable = true,
+                  additional_vim_regex_highlighting = false,
+                },
+            }
+          '';
         config.nvim.post.vim = lib.mkIf enabled
           ''
             " Tree-sitter layer
