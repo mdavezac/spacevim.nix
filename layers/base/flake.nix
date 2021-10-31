@@ -25,6 +25,10 @@
             command = "<cmd>enew<cr>";
             description = "New File";
           };
+          keys.i = {
+            command = "<cmd>view ${placeholder "out"}<cr>";
+            description = "View spacevim.nix's init.vim";
+          };
         };
         "<leader>b" = {
           name = "+buffers";

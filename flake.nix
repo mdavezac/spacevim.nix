@@ -77,10 +77,10 @@
           layers.treesitter = true;
           layers.pimp = true;
           layers.lsp = true;
-          layers.formatter = true;
+          layers.formatter = false;
           layers.python = true;
           layers.nix = true;
-          # init.lua = "Asafgaed";
+          # init.lua = "${placeholder "out"}";
         };
       in
       rec {
