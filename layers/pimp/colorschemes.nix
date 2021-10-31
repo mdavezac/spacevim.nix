@@ -38,7 +38,7 @@
         let g:neon_style = "dark"
         let g:neon_italic_keyword = 1
         let g:neon_italic_function = 1
-        let g:neon_transparent = 1
+        let g:neon_transparent = 0
       ''
       else ""
       )

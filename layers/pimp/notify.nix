@@ -1,9 +1,7 @@
 { config, lib, pkgs, ... }: {
   config.nvim.plugins.start = lib.mkIf config.nvim.layers.pimp [ pkgs.vimPlugins.nvim-notify ];
   config.nvim.post.lua = lib.mkIf config.nvim.layers.pimp ''
-    require('notify').setup({
-        background_colour = "#0f0f11",
-    })
+    require('notify').setup()
     vim.notify = require("notify")
     require("telescope").load_extension("notify")
   '';
