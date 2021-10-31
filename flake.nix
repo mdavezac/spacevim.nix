@@ -36,7 +36,7 @@
             (final: prev: {
               python = prev.python3;
             })
-          ];
+          ] ++ (builtins.catAttrs "overlay" (builtins.attrValues layers));
         };
         customNeovim = pkgs: configuration:
           let

@@ -18,7 +18,7 @@ in
     lib.mkIf enabled ''
       vim.o.completeopt = 'menuone,noselect'
 
-      local cmp = require 'cmp'
+      local cmp = require('cmp')
       cmp.setup {
         mapping = {
           ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -34,8 +34,6 @@ in
           ['<Tab>'] = function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
             else
               fallback()
             end

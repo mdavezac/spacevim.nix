@@ -1,6 +1,17 @@
 {
-  inputs = { };
-  outputs = { self, ... }: rec {
+  inputs = {
+    nvim-telescope = { url = "github:nvim-telescope/telescope.nvim"; flake = false; };
+  };
+  outputs = inputs @ { self, ... }: rec {
+    overlay = (super: self: {
+      vimPlugins = self.vimPlugins // {
+        telescope-nvim = self.vimUtils.buildVimPluginFrom2Nix {
+          pname = "nvim-telescope";
+          version = inputs.nvim-telescope.shortRev;
+          src = inputs.nvim-telescope;
+        };
+      };
+    });
     module = { config, lib, pkgs, ... }: {
       imports = [ ./which_key.nix ./general_options.nix ];
       config.nvim.plugins.start = lib.mkIf config.nvim.layers.base
