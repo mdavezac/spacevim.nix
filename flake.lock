@@ -6,11 +6,11 @@
       },
       "locked": {
         "narHash": "sha256-2eZgTtw6kSICD9OjzbfUdladdPHPjhsk986l0/dQqMQ=",
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/base",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/base",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/base",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/base",
         "type": "path"
       }
     },
@@ -47,33 +47,33 @@
     "formatter": {
       "locked": {
         "narHash": "sha256-Nz6OQhKjvvLDn+ZqtCcRej9Mp32p/IUHbKvof51a+xk=",
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/formatter",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/formatter",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/formatter",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/formatter",
         "type": "path"
       }
     },
     "git": {
       "locked": {
-        "narHash": "sha256-wUVNi5qgnxRM+0jswrzSMHKsF9La6ReROe7+OlNYXKY=",
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/git",
+        "narHash": "sha256-BbvBCvA//0DPT4UFifRue2ez7PNtbT8LWnp9OSwgdnA=",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/git",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/git",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/git",
         "type": "path"
       }
     },
     "languages": {
       "locked": {
         "narHash": "sha256-vPVVB9o6hGIr2ppdDKgkc4SLrnKkeObO/rWjhfYO5DI=",
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/languages",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/languages",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/languages",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/languages",
         "type": "path"
       }
     },
@@ -84,11 +84,11 @@
       },
       "locked": {
         "narHash": "sha256-bJWLylZnbZYcMmUsJOv7ERiulPgi5NUJJXVVKAngd2A=",
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/lsp",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/lsp",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/lsp",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/lsp",
         "type": "path"
       }
     },
@@ -221,11 +221,11 @@
       },
       "locked": {
         "narHash": "sha256-JbgNhzimldgOIJeXGE1qaTFmLON/nTP6snpk2cQ/nag=",
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/pimp",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/pimp",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/pimp",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/pimp",
         "type": "path"
       }
     },
@@ -266,11 +266,11 @@
       },
       "locked": {
         "narHash": "sha256-3reis3C4NdAff7d87Wj75RBEuH0QAQaZsxaie8OCtNM=",
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/tree-sitter",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/tree-sitter",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/4a1k687p5w0wd4d04qxqq88vdfs2z7fp-source/layers/tree-sitter",
+        "path": "/nix/store/0z3vh0rxiahlx0n2sqbgjpj2gbixf4ws-source/layers/tree-sitter",
         "type": "path"
       }
     }

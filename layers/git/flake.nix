@@ -1,7 +1,7 @@
 {
   inputs = { };
-  outputs = { self, ... }: rec {
-    module = { config, lib, pkgs, ... }: {
+  outputs = { self, ... }: {
+    module = inputs @ { config, lib, pkgs, ... }: {
       config.nvim.plugins.start = lib.mkIf config.nvim.layers.git [
         pkgs.vimPlugins.neogit
         pkgs.vimPlugins.gitsigns-nvim
@@ -9,8 +9,15 @@
       config.nvim.init.lua = lib.mkIf config.nvim.layers.git ''
         require('neogit').setup {}
         require('gitsigns').setup {
-          keymaps = {}
+          keymaps = {
+            -- Text objects
+            ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+            ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+          }
         }
+      '';
+      config.nvim.post.lua = lib.mkIf config.nvim.layers.git ''
+        require('which-key').register({["ih"] = [[Select hunk]]})
       '';
       config.nvim.which-key = lib.mkIf config.nvim.layers.git {
         "<leader>g" = {
