@@ -19,6 +19,7 @@
     languages.url = "./layers/languages";
     formatter.url = "./layers/formatter";
     git.url = "./layers/git";
+    motion.url = "./layers/motion";
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
@@ -82,7 +83,7 @@
           layers.python = true;
           layers.nix = true;
           layers.git = true;
-          colorscheme = "neon";
+          colorscheme = "dark_catppuccino";
           # init.lua = "${placeholder "out"}";
         };
       in

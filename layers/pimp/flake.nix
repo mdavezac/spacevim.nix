@@ -2,6 +2,8 @@
   inputs = {
     rainglow = { url = "github:rainglow/vim"; flake = false; };
     neon = { url = "github:rafamadriz/neon"; flake = false; };
+    catpuccino = { url = "github:Pocco81/Catppuccino.nvim"; flake = false; };
+    nvim-notify = { url = "github:rcarriga/nvim-notify"; flake = false; };
   };
   outputs = inputs @ { self, ... }: rec {
     overlay = (super: self: {
@@ -15,6 +17,16 @@
           pname = "neon";
           version = inputs.neon.shortRev;
           src = inputs.neon;
+        };
+        catpuccino = self.vimUtils.buildVimPluginFrom2Nix {
+          pname = "catpuccino";
+          version = inputs.catpuccino.shortRev;
+          src = inputs.catpuccino;
+        };
+        nvim-notify = self.vimUtils.buildVimPluginFrom2Nix {
+          pname = "nvim-notify";
+          version = inputs.nvim-notify.shortRev;
+          src = inputs.nvim-notify;
         };
       };
     });
