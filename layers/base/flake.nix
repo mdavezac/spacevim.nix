@@ -48,9 +48,17 @@
             command = "<cmd>Telescope buffers<cr>";
             description = "Find buffer";
           };
-          keys.n = {
+          keys.c = {
             command = "<cmd>bnew<cr>";
-            description = "New buffer";
+            description = "Create new buffer";
+          };
+          keys.d = {
+            command = "<cmd>bdel<cr>";
+            description = "Delete current buffer";
+          };
+          keys.D = {
+            command = "<cmd>bdel!<cr>";
+            description = "Delete current buffer forcibly";
           };
         };
         "<leader>w" = {

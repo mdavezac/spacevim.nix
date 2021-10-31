@@ -1,32 +1,25 @@
 {
   inputs = {
     rainglow = { url = "github:rainglow/vim"; flake = false; };
+    neon = { url = "github:rafamadriz/neon"; flake = false; };
   };
   outputs = inputs @ { self, ... }: rec {
-    module = { config, lib, pkgs, ... }: {
-      options.nvim = lib.mkOption {
-        type = lib.types.submodule {
-          options.colorscheme = lib.mkOption {
-            type = lib.types.str;
-            default = "onehalfdark";
-            description = ''Colorschemes'';
-          };
+    overlay = (super: self: {
+      vimPlugins = self.vimPlugins // {
+        rainglow = self.vimUtils.buildVimPluginFrom2Nix {
+          pname = "rainglow";
+          version = inputs.rainglow.shortRev;
+          src = inputs.rainglow;
+        };
+        neon = self.vimUtils.buildVimPluginFrom2Nix {
+          pname = "neon";
+          version = inputs.neon.shortRev;
+          src = inputs.neon;
         };
       };
-      config.nvim.plugins.start = lib.mkIf config.nvim.layers.pimp
-        ((pkgs.flake2vim inputs [ ]) ++ [ pkgs.vimPlugins.awesome-vim-colorschemes pkgs.vimPlugins.nvim-web-devicons ]);
-      config.nvim.post.lua = lib.mkIf config.nvim.layers.pimp
-        ''
-          require'nvim-web-devicons'.setup {
-           default = true;
-          }
-        '';
-      config.nvim.init.vim = lib.mkIf config.nvim.layers.pimp
-        ''
-          " Pimp layer
-          colorscheme ${config.nvim.colorscheme}
-          " End of pimp layer
-        '';
+    });
+    module = { config, lib, pkgs, ... }: {
+      imports = [ ./colorschemes.nix ./tabline.nix ./statusline.nix ];
     };
   };
 }

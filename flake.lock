@@ -5,12 +5,12 @@
         "nvim-telescope": "nvim-telescope"
       },
       "locked": {
-        "narHash": "sha256-6jl0Ccp0P1fmX4Js15syBOaa6lFOfSwYO1qGxfkFV+M=",
-        "path": "/nix/store/bb5db2vx683hlq41ysiv62g23p0hhb7n-source/layers/base",
+        "narHash": "sha256-oKz+x5CDenm4uAH5g9/mT3Md4JDGireXb+gFh/G9dTc=",
+        "path": "/nix/store/b93ajkznf8j1cw9iapfqdzbwm4q9ip56-source/layers/base",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/bb5db2vx683hlq41ysiv62g23p0hhb7n-source/layers/base",
+        "path": "/nix/store/b93ajkznf8j1cw9iapfqdzbwm4q9ip56-source/layers/base",
         "type": "path"
       }
     },
@@ -47,22 +47,22 @@
     "formatter": {
       "locked": {
         "narHash": "sha256-Nz6OQhKjvvLDn+ZqtCcRej9Mp32p/IUHbKvof51a+xk=",
-        "path": "/nix/store/bb5db2vx683hlq41ysiv62g23p0hhb7n-source/layers/formatter",
+        "path": "/nix/store/b93ajkznf8j1cw9iapfqdzbwm4q9ip56-source/layers/formatter",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/bb5db2vx683hlq41ysiv62g23p0hhb7n-source/layers/formatter",
+        "path": "/nix/store/b93ajkznf8j1cw9iapfqdzbwm4q9ip56-source/layers/formatter",
         "type": "path"
       }
     },
     "languages": {
       "locked": {
         "narHash": "sha256-vPVVB9o6hGIr2ppdDKgkc4SLrnKkeObO/rWjhfYO5DI=",
-        "path": "/nix/store/bb5db2vx683hlq41ysiv62g23p0hhb7n-source/layers/languages",
+        "path": "/nix/store/b93ajkznf8j1cw9iapfqdzbwm4q9ip56-source/layers/languages",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/bb5db2vx683hlq41ysiv62g23p0hhb7n-source/layers/languages",
+        "path": "/nix/store/b93ajkznf8j1cw9iapfqdzbwm4q9ip56-source/layers/languages",
         "type": "path"
       }
     },
@@ -73,12 +73,28 @@
       },
       "locked": {
         "narHash": "sha256-bJWLylZnbZYcMmUsJOv7ERiulPgi5NUJJXVVKAngd2A=",
-        "path": "/nix/store/bb5db2vx683hlq41ysiv62g23p0hhb7n-source/layers/lsp",
+        "path": "/nix/store/b93ajkznf8j1cw9iapfqdzbwm4q9ip56-source/layers/lsp",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/bb5db2vx683hlq41ysiv62g23p0hhb7n-source/layers/lsp",
+        "path": "/nix/store/b93ajkznf8j1cw9iapfqdzbwm4q9ip56-source/layers/lsp",
         "type": "path"
+      }
+    },
+    "neon": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1627614626,
+        "narHash": "sha256-Y5uGMyH/fXLt3dF5vZAHsJNcBIG77VItFkVKSIAY79w=",
+        "owner": "rafamadriz",
+        "repo": "neon",
+        "rev": "5c6d24504e2177a709ad16ae9e89ab5732327ad8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rafamadriz",
+        "repo": "neon",
+        "type": "github"
       }
     },
     "neovim": {
@@ -189,15 +205,16 @@
     },
     "pimplayer": {
       "inputs": {
+        "neon": "neon",
         "rainglow": "rainglow"
       },
       "locked": {
-        "narHash": "sha256-JALRLTRM+khlnDqOheo+WdSxiU2Tvx4gTE68/HhbSiw=",
-        "path": "/nix/store/bb5db2vx683hlq41ysiv62g23p0hhb7n-source/layers/pimp",
+        "narHash": "sha256-LHvOgT+wCU7FXUe2tl50ktOqOAnlLExOxtTh8EsFsIw=",
+        "path": "/nix/store/b93ajkznf8j1cw9iapfqdzbwm4q9ip56-source/layers/pimp",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/bb5db2vx683hlq41ysiv62g23p0hhb7n-source/layers/pimp",
+        "path": "/nix/store/b93ajkznf8j1cw9iapfqdzbwm4q9ip56-source/layers/pimp",
         "type": "path"
       }
     },
@@ -237,11 +254,11 @@
       },
       "locked": {
         "narHash": "sha256-Wn1huteFp8ELZ5cByLSSd9mmTulxqOItE9XCdfcbK4g=",
-        "path": "/nix/store/bb5db2vx683hlq41ysiv62g23p0hhb7n-source/layers/tree-sitter",
+        "path": "/nix/store/b93ajkznf8j1cw9iapfqdzbwm4q9ip56-source/layers/tree-sitter",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/bb5db2vx683hlq41ysiv62g23p0hhb7n-source/layers/tree-sitter",
+        "path": "/nix/store/b93ajkznf8j1cw9iapfqdzbwm4q9ip56-source/layers/tree-sitter",
         "type": "path"
       }
     }

@@ -80,6 +80,7 @@
           layers.formatter = false;
           layers.python = true;
           layers.nix = true;
+          colorscheme = "neon";
           # init.lua = "${placeholder "out"}";
         };
       in
