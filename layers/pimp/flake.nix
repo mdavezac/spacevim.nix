@@ -19,7 +19,7 @@
       };
     });
     module = { config, lib, pkgs, ... }: {
-      imports = [ ./colorschemes.nix ./tabline.nix ./statusline.nix ];
+      imports = [ ./colorschemes.nix ./tabline.nix ./statusline.nix ./notify.nix ];
     };
   };
 }

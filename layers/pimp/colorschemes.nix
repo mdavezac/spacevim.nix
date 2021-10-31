@@ -14,24 +14,13 @@
     pkgs.vimPlugins.awesome-vim-colorschemes
     pkgs.vimPlugins.nvim-web-devicons
   ];
-  config.nvim.post.lua = lib.mkIf config.nvim.layers.pimp (builtins.concatStringsSep "\n" [
-    ''
-      -- Pimp layer
-      require'nvim-web-devicons'.setup {
-       default = true;
-      }
-    ''
-    # (lib.mkIf config.nvim.colorscheme != "neon"
-    #   ''
-    #     require('lualine').setup {
-    #       options = {
-    #         theme = 'neon'
-    #       }
-    #     }
-    #   ''
-    # )
-    ''-- End of pimp layer''
-  ]);
+  config.nvim.post.lua = lib.mkIf config.nvim.layers.pimp ''
+    -- Pimp layer
+    require'nvim-web-devicons'.setup {
+     default = true;
+    }
+    -- End of pimp layer
+  '';
   config.nvim.init.vim = lib.mkIf config.nvim.layers.pimp (
     builtins.concatStringsSep "\n" [
       ''" Pimp layer''
