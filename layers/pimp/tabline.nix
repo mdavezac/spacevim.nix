@@ -14,15 +14,15 @@
         tabpages = true,
 
         -- Enable/disable close button
-        closable = true,
+        closable = false,
 
         -- Enables/disable clickable tabs
         --  - left-click: go to buffer
         --  - middle-click: delete buffer
-        clickable = true,
+        clickable = false,
 
         -- Excludes buffers from the tabline
-        exclude_ft = {},
+        exclude_ft = {"NeoGitStatus"},
         exclude_name = {},
 
         -- Enable/disable icons
@@ -91,6 +91,10 @@
       keys."[\",\"]" = {
         command = "<cmd>BufferPick<cr>";
         description = "Pick buffer via letter";
+      };
+      keys.t = {
+        command = "<cmd>BufferPin<cr>";
+        description = "Pin/Unpin buffer";
       };
     };
   };

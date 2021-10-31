@@ -58,6 +58,11 @@ in
       default = 88;
       description = ''Maximum line length before a break is introduced'';
     };
+    options.tabwidth = lib.mkOption {
+      type = lib.types.ints.between 0 1000;
+      default = 4;
+      description = ''Tab width'';
+    };
   };
   config.nvim.init.lua = lib.mkIf config.nvim.layers.base
     ''
@@ -68,10 +73,12 @@ in
       vim.o.smartcase = ${case.smart}
       vim.o.hlsearch = ${if config.nvim.highlight-search then "true" else "false"}
       vim.o.incsearch = ${if config.nvim.incsearch then "true" else "false"}
-      vim.bo.expandtab = ${if config.nvim.expandtab then "true" else "false"}
+      vim.o.expandtab = ${if config.nvim.expandtab then "true" else "false"}
       vim.wo.number = ${linenumbers.number}
       vim.wo.relativenumber = ${linenumbers.relative}
-      vim.bo.textwidth = ${builtins.toString config.nvim.textwidth}
+      vim.o.textwidth = ${builtins.toString config.nvim.textwidth}
+      vim.o.shiftwidth = ${builtins.toString config.nvim.tabwidth}
+      vim.o.tabstop = ${builtins.toString config.nvim.tabwidth}
       -- End of general options defined in base layer
     '';
 }

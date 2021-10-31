@@ -18,6 +18,7 @@
     lsp.url = "./layers/lsp";
     languages.url = "./layers/languages";
     formatter.url = "./layers/formatter";
+    git.url = "./layers/git";
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
@@ -77,9 +78,10 @@
           layers.treesitter = true;
           layers.pimp = true;
           layers.lsp = true;
-          layers.formatter = false;
+          layers.formatter = true;
           layers.python = true;
           layers.nix = true;
+          layers.git = true;
           colorscheme = "neon";
           # init.lua = "${placeholder "out"}";
         };
