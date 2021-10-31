@@ -11,17 +11,26 @@
   config.nvim.plugins.start = lib.mkIf config.nvim.layers.pimp [
     pkgs.vimPlugins.rainglow
     pkgs.vimPlugins.neon
+    pkgs.vimPlugins.catpuccino
     pkgs.vimPlugins.awesome-vim-colorschemes
     pkgs.vimPlugins.nvim-web-devicons
   ];
-  config.nvim.post.lua = lib.mkIf config.nvim.layers.pimp ''
-    -- Pimp layer
-    require'nvim-web-devicons'.setup {
-     default = true;
-    }
-    -- End of pimp layer
-  '';
-  config.nvim.init.vim = lib.mkIf config.nvim.layers.pimp (
+  config.nvim.init.lua = lib.mkIf config.nvim.layers.pimp (
+    builtins.concatStringsSep "\n" [
+      ''
+        -- Pimp layer
+        require'nvim-web-devicons'.setup {
+         default = true;
+        }
+        -- End of pimp layer
+      ''
+      (
+        if (config.nvim.colorscheme == "catppuccino")
+        then (builtins.readFile ./catpuccino.lua) else ""
+      )
+    ]
+  );
+  config.nvim.post.vim = lib.mkIf config.nvim.layers.pimp (
     builtins.concatStringsSep "\n" [
       ''" Pimp layer''
       (if (!(builtins.isNull config.nvim.colorscheme) && config.nvim.colorscheme == "neon")
