@@ -28,7 +28,7 @@
             description = "Git commits";
           };
           keys.s = {
-            command = ''<cmd>Neogit kind=split<cr>'';
+            command = ''<cmd>Neogit kind=vsplit<cr>'';
             description = "Git status";
           };
           keys.b = {
