@@ -83,7 +83,7 @@
           layers.python = true;
           layers.nix = true;
           layers.git = true;
-          colorscheme = "catppuccino";
+          colorscheme = "neon";
           # init.lua = "${placeholder "out"}";
         };
       in
