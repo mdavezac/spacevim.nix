@@ -20,6 +20,7 @@
     formatter.url = "./layers/formatter";
     git.url = "./layers/git";
     motion.url = "./layers/motion";
+    terminal.url = "./layers/terminal";
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
@@ -83,6 +84,8 @@
           layers.python = true;
           layers.nix = true;
           layers.git = true;
+          layers.motion = true;
+          layers.terminal = true;
           colorscheme = "neon";
           # init.lua = "${placeholder "out"}";
         };

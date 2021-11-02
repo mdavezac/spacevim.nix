@@ -64,6 +64,21 @@ in
       description = ''Tab width'';
     };
   };
+  config.nvim.init.vim = lib.mkIf config.nvim.layers.base
+  ''
+      " General options defined in base layer
+      if !isdirectory("$HOME/.local/share/spacevim/backup")
+          silent !mkdir "$HOME/.local/share/spacevim/backup" > /dev/null 2>&1
+      endif
+      set undodir=$HOME/.local/share/spacevim/backup
+      set undofile
+
+      nnoremap <C-h> <C-[><C-w>h
+      nnoremap <C-j> <C-[><C-w>j
+      nnoremap <C-k> <C-[><C-w>k
+      nnoremap <C-l> <C-[><C-w>l
+      " End of general options defined in base layer
+  '';
   config.nvim.init.lua = lib.mkIf config.nvim.layers.base
     ''
       -- General options defined in base layer

@@ -2,7 +2,7 @@
   config.nvim.plugins.start = lib.mkIf config.nvim.layers.pimp [ pkgs.vimPlugins.barbar-nvim ];
   config.nvim.post.lua = lib.mkIf config.nvim.layers.pimp
     ''
-          -- Set barbar's options
+      -- Set barbar's options
       vim.g.bufferline = {
         -- Enable/disable animations
         animation = true,
@@ -22,8 +22,8 @@
         clickable = false,
 
         -- Excludes buffers from the tabline
-        exclude_ft = {"NeoGitStatus"},
-        exclude_name = {},
+        exclude_ft = {},
+        exclude_name = {"NeoGitStatus"},
 
         -- Enable/disable icons
         -- if set to 'numbers', will show buffer index in the tabline
@@ -97,6 +97,11 @@
         description = "Pin/Unpin buffer";
       };
     };
+    "g" = {
+      keys.b = {
+        command = "<cmd>BufferPick<cr>";
+        description = "Pick buffer via letter";
+      };
+    };
   };
 }
-    

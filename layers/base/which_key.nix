@@ -41,7 +41,7 @@ in
       options.which-key = which_group_mod;
     };
   };
-  config.nvim.init.lua =
+  config.nvim.post.lua =
     let
       single_mapping = k: v:
         if v.description == ""

@@ -13,7 +13,7 @@
       };
     });
     module = { config, lib, pkgs, ... }: {
-      imports = [ ./which_key.nix ./general_options.nix ];
+      imports = [ ./which_key.nix ./general_options.nix ./keys.nix ];
       config.nvim.plugins.start = lib.mkIf config.nvim.layers.base
         [ pkgs.vimPlugins.telescope-nvim pkgs.vimPlugins.which-key-nvim ];
       config.nvim.which-key = lib.mkIf config.nvim.layers.base {
