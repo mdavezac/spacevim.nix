@@ -1,13 +1,27 @@
 { config, lib, pkgs, ... }:
 let
   linters-enabled = builtins.any (v: v.enable) (builtins.attrValues config.nvim.linters);
-  enabled = config.nvim.layers.lsp && (
+  enabled = config.nvim.layers.lsp.enable && (
     ((builtins.length config.nvim.lsp-instances) > 0) || linters-enabled
   );
 in
 {
   options.nvim = lib.mkOption {
     type = lib.types.submodule {
+      options.layers = lib.mkOption {
+        type = lib.types.submodule {
+          options.lsp = lib.mkOption {
+            type = lib.types.submodule {
+              options.enable = lib.mkOption {
+                type = lib.types.bool;
+                default = true;
+                description = "Whether to enable the lsp layer";
+              };
+            };
+            default = { };
+          };
+        };
+      };
       options.lsp-instances = lib.mkOption {
         type = lib.types.listOf (lib.types.enum [ "rnix" "pyright" ]);
         description = ''List of LSP instances to setup.'';
@@ -31,7 +45,7 @@ in
         ''
           local capabilities = vim.lsp.protocol.make_client_capabilities()
           capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-        
+
           local lsp = require('lspconfig')
         ''
         (if_has_instance "rnix" ''
@@ -49,4 +63,3 @@ in
       ]
     );
 }
-    

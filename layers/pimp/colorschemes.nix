@@ -6,26 +6,17 @@ let
   isnt_colorscheme = color:
     (!(builtins.isNull config.nvim.colorscheme))
     && config.nvim.colorscheme != color;
+  enabled = config.nvim.layers.pimp.enable;
 in
-
 {
-  options.nvim = lib.mkOption {
-    type = lib.types.submodule {
-      options.colorscheme = lib.mkOption {
-        type = lib.types.nullOr lib.types.str;
-        default = null;
-        description = ''Colorschemes'';
-      };
-    };
-  };
-  config.nvim.plugins.start = lib.mkIf config.nvim.layers.pimp [
+  config.nvim.plugins.start = lib.mkIf enabled [
     pkgs.vimPlugins.rainglow
     pkgs.vimPlugins.neon
     pkgs.vimPlugins.catpuccino
     pkgs.vimPlugins.awesome-vim-colorschemes
     pkgs.vimPlugins.nvim-web-devicons
   ];
-  config.nvim.init.lua = lib.mkIf config.nvim.layers.pimp (
+  config.nvim.init.lua = lib.mkIf enabled (
     builtins.concatStringsSep "\n" [
       ''
         -- Pimp layer
@@ -40,7 +31,7 @@ in
       )
     ]
   );
-  config.nvim.post.vim = lib.mkIf config.nvim.layers.pimp (
+  config.nvim.post.vim = lib.mkIf enabled (
     builtins.concatStringsSep "\n" [
       ''" Pimp layer''
       (
@@ -69,4 +60,3 @@ in
     ]
   );
 }
-    

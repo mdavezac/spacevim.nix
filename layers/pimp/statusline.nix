@@ -1,12 +1,17 @@
-{ config, lib, pkgs, ... }: {
-  config.nvim.plugins.start = lib.mkIf config.nvim.layers.pimp [ pkgs.vimPlugins.lualine-nvim ];
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.nvim.layers.pimp;
+  lualine = cfg.enable && cfg.statusline == "lualine";
+in
+{
+  config.nvim.plugins.start = lib.mkIf lualine [ pkgs.vimPlugins.lualine-nvim ];
   config.nvim.post.lua =
     let
       colorscheme =
         if (builtins.isNull config.nvim.colorscheme)
         then "gruvbox" else config.nvim.colorscheme;
     in
-    lib.mkIf config.nvim.layers.pimp
+    lib.mkIf lualine
       ''
         require'lualine'.setup {
           options = {
@@ -39,4 +44,3 @@
         }
       '';
 }
-    

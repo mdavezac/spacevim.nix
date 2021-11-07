@@ -1,14 +1,14 @@
 { config, lib, pkgs, ... }:
 let
   linters-enabled = builtins.any (v: v.enable) (builtins.attrValues config.nvim.linters);
-  enabled = config.nvim.layers.lsp && (
+  enabled = config.nvim.layers.lsp.enable && (
     ((builtins.length config.nvim.lsp-instances) > 0) || linters-enabled
   );
 in
 {
   config.nvim.plugins.start = lib.mkIf enabled [
     pkgs.vimPlugins.nvim-cmp
-    (lib.mkIf config.nvim.layers.treesitter pkgs.vimPlugins.cmp-treesitter)
+    (lib.mkIf config.nvim.layers.treesitter.enable pkgs.vimPlugins.cmp-treesitter)
     pkgs.vimPlugins.cmp-nvim-lsp
     pkgs.vimPlugins.cmp-buffer
     pkgs.vimPlugins.cmp-emoji
@@ -55,4 +55,3 @@ in
       }
     '';
 }
-    

@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   linters-enabled = builtins.any (v: v.enable) (builtins.attrValues config.nvim.linters);
-  enabled = config.nvim.layers.lsp && (
+  enabled = config.nvim.layers.lsp.enable && (
     ((builtins.length config.nvim.lsp-instances) > 0) || linters-enabled
   );
 in
@@ -40,4 +40,3 @@ in
     };
   };
 }
-    

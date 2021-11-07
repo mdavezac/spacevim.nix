@@ -10,62 +10,11 @@ let
     off = { number = "false"; relative = "false"; };
     relative = { number = "true"; relative = "true"; };
   };
+  enabled = config.nvim.layers.base.enable;
 in
 {
-  options.nvim = lib.mkOption {
-    options.leader = lib.mkOption {
-      type = lib.types.str;
-      default = " ";
-      description = "The leader key is the main entry-point into the which-key menu";
-    };
-    options.localleader = lib.mkOption {
-      type = lib.types.str;
-      default = ",";
-      description = "The `local` leader key is a main entry point for filetype specific actions";
-    };
-    options.case = lib.mkOption {
-      type = lib.types.enum [ "nomatch" "match" "smart" ];
-      default = "smart";
-      description = ''
-        One of
-         - nomatch: ignores case
-         - match: does not ignore case
-         - smart: ignores case unless a search pattern contains capital letters
-      '';
-    };
-    options.highlight-search = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = ''Whether to highlight the current search term'';
-    };
-    options.incsearch = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = ''Whether to start matching while the search pattern is being written'';
-    };
-    options.expandtab = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = ''No tabs, just spaces'';
-    };
-    options.line-numbers = lib.mkOption {
-      type = lib.types.enum [ "on" "off" "relative" ];
-      default = "relative";
-      description = ''Whether and how to display line numbers'';
-    };
-    options.textwidth = lib.mkOption {
-      type = lib.types.ints.between 0 1000;
-      default = 88;
-      description = ''Maximum line length before a break is introduced'';
-    };
-    options.tabwidth = lib.mkOption {
-      type = lib.types.ints.between 0 1000;
-      default = 4;
-      description = ''Tab width'';
-    };
-  };
-  config.nvim.init.vim = lib.mkIf config.nvim.layers.base
-  ''
+  config.nvim.init = lib.mkIf enabled {
+    vim = ''
       " General options defined in base layer
       if !isdirectory("$HOME/.local/share/spacevim/backup")
           silent !mkdir "$HOME/.local/share/spacevim/backup" > /dev/null 2>&1
@@ -78,9 +27,8 @@ in
       nnoremap <C-k> <C-[><C-w>k
       nnoremap <C-l> <C-[><C-w>l
       " End of general options defined in base layer
-  '';
-  config.nvim.init.lua = lib.mkIf config.nvim.layers.base
-    ''
+    '';
+    lua = ''
       -- General options defined in base layer
       vim.g.mapleader = "${config.nvim.leader}"
       vim.g.maplocalleader = "${config.nvim.localleader}"
@@ -96,4 +44,5 @@ in
       vim.o.tabstop = ${builtins.toString config.nvim.tabwidth}
       -- End of general options defined in base layer
     '';
+  };
 }

@@ -4,8 +4,8 @@
     nvim-lspconfig = { url = "github:neovim/nvim-lspconfig"; flake = false; };
   };
   outputs = inputs @ { self, ... }: {
-    overlay = (super: self: {
-      vimPlugins = self.vimPlugins // {
+    overlay = (self: super: {
+      vimPlugins = super.vimPlugins // {
         nvim-cmp = self.vimUtils.buildVimPluginFrom2Nix {
           pname = "nvim-cmp";
           version = inputs.nvim-cmp.shortRev;

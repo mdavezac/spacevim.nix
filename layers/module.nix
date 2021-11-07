@@ -43,9 +43,8 @@ in
       options.init = init_opt;
       options.post = init_opt;
       options.layers = lib.mkOption {
-        type = lib.types.attrsOf lib.types.bool;
-        description = "Whether to use this particular layer";
-        default = false;
+        type = lib.types.submodule { };
+        default = { };
       };
     };
   };

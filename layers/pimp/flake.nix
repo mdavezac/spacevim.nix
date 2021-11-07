@@ -6,8 +6,8 @@
     nvim-notify = { url = "github:rcarriga/nvim-notify"; flake = false; };
   };
   outputs = inputs @ { self, ... }: rec {
-    overlay = (super: self: {
-      vimPlugins = self.vimPlugins // {
+    overlay = (self: super: {
+      vimPlugins = super.vimPlugins // {
         rainglow = self.vimUtils.buildVimPluginFrom2Nix {
           pname = "rainglow";
           version = inputs.rainglow.shortRev;
@@ -31,8 +31,7 @@
       };
     });
     module = { config, lib, pkgs, ... }: {
-      imports = [ ./colorschemes.nix ./tabline.nix ./statusline.nix ./notify.nix ];
+      imports = [ ./options.nix ./colorschemes.nix ./tabline.nix ./statusline.nix ./notify.nix ];
     };
   };
 }
-    

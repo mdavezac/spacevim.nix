@@ -1,6 +1,11 @@
-{ config, lib, pkgs, ... }: {
-  config.nvim.plugins.start = lib.mkIf config.nvim.layers.pimp [ pkgs.vimPlugins.barbar-nvim ];
-  config.nvim.post.lua = lib.mkIf config.nvim.layers.pimp
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.nvim.layers.pimp;
+  barbar = cfg.enable && cfg.tabline == "barbar";
+in
+{
+  config.nvim.plugins.start = lib.mkIf barbar [ pkgs.vimPlugins.barbar-nvim ];
+  config.nvim.post.lua = lib.mkIf barbar
     ''
       -- Set barbar's options
       vim.g.bufferline = {
@@ -70,7 +75,7 @@
         no_name_title = nil,
       }
     '';
-  config.nvim.which-key = lib.mkIf config.nvim.layers.pimp {
+  config.nvim.which-key = lib.mkIf barbar {
     "<leader>b" = {
       keys.n = {
         command = "<cmd>BufferNext<cr>";

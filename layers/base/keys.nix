@@ -1,5 +1,5 @@
-{ config, lib, ... }: {
-  config.nvim.which-key = lib.mkIf config.nvim.layers.base {
+{ config, lib, tools, ... }: {
+  config.nvim.which-key = lib.mkIf config.nvim.layers.base.enable {
     "<leader>f" = {
       name = "+file";
       mode = "normal";
@@ -67,10 +67,6 @@
         command = "<cmd>Telescope current_buffer_fuzzy_find<cr>";
         description = "Search current buffer";
       };
-      keys.o = {
-        command = "<cmd>Telescopt treesitter<cr>";
-        description = "Search syntax nodes of current buffer";
-      };
       keys.h = {
         command = "<cmd>Telescope command_history<cr>";
         description = "Search command history";
@@ -104,7 +100,7 @@
     };
     "" = {
       mode = "normal";
-      keys."[\"C-q\"]" = {
+      keys."[\"<C-q>\"]" = {
         command = "<cmd>q<cr>";
         description = "Quit current window";
       };
