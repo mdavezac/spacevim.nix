@@ -67,6 +67,14 @@
         command = "<cmd>Telescope current_buffer_fuzzy_find<cr>";
         description = "Search current buffer";
       };
+      keys.p = {
+        command = "<cmd>Telescope live_grep<cr>";
+        description = "Search current project";
+      };
+      keys.g = {
+        command = "<cmd>Telescope grep_string<cr>";
+        description = "Search current project for string under cursor";
+      };
       keys.h = {
         command = "<cmd>Telescope command_history<cr>";
         description = "Search command history";
