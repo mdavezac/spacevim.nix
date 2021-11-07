@@ -6,11 +6,11 @@
       },
       "locked": {
         "narHash": "sha256-Ry3PVNwmUPrb9EOS5d1kA46VB6/8dOkY5sjkNMEBDlM=",
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/base",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/base",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/base",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/base",
         "type": "path"
       }
     },
@@ -63,33 +63,33 @@
     "formatter": {
       "locked": {
         "narHash": "sha256-3n6pQZ1iG0aGIcNQ5phaPo4VlOA/JerF77+XD9oYMrY=",
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/formatter",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/formatter",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/formatter",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/formatter",
         "type": "path"
       }
     },
     "git": {
       "locked": {
-        "narHash": "sha256-HW3NCBt0al1A1LEBPc0ufii5ozUtNF5aqSpWvk4bxTQ=",
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/git",
+        "narHash": "sha256-f/JvDSuZwSQ5DF4YgCARD0K0AdFiIbFsEsGl4TJzd+4=",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/git",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/git",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/git",
         "type": "path"
       }
     },
     "languages": {
       "locked": {
-        "narHash": "sha256-N3jxjwZvGDRoww1eYpOt7RbqfPjWzo5+6e6ppQOPrms=",
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/languages",
+        "narHash": "sha256-P+H+t7XR+TVCAT5dBNKZvCXkaiPGH/nrVFJuBlYNZNQ=",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/languages",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/languages",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/languages",
         "type": "path"
       }
     },
@@ -100,22 +100,22 @@
       },
       "locked": {
         "narHash": "sha256-+qJhSAs0yQNfcFwK2tYdsqK6i7biscWBQW6f5ua810w=",
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/lsp",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/lsp",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/lsp",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/lsp",
         "type": "path"
       }
     },
     "motion": {
       "locked": {
         "narHash": "sha256-wBNYeYsGZVn3lLLFL/Il4rue/nn846ngbJlwp59nFyk=",
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/motion",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/motion",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/motion",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/motion",
         "type": "path"
       }
     },
@@ -266,11 +266,11 @@
       },
       "locked": {
         "narHash": "sha256-R6PFB4FmXdG9lRZt7ArTX05n4LDVa64iARHPzxeEiBg=",
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/pimp",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/pimp",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/pimp",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/pimp",
         "type": "path"
       }
     },
@@ -310,11 +310,11 @@
     "terminal": {
       "locked": {
         "narHash": "sha256-Cfl6OuQJmBFeAqj8onC7GXuGKnoHO8PyAz3UhjkU8Cw=",
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/terminal",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/terminal",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/terminal",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/terminal",
         "type": "path"
       }
     },
@@ -323,12 +323,12 @@
         "nvim-treesitter": "nvim-treesitter"
       },
       "locked": {
-        "narHash": "sha256-JBeqgsSNjoVYYfPgBX4/fbfhek2ZTm3qz4F/hrW+Iyo=",
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/tree-sitter",
+        "narHash": "sha256-VfMu+i1EJdg3wEy48fBuEBzrVRg/pugXnNhA4M18V34=",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/tree-sitter",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/wp726nynxvmbinxr3yncwmd4nknrrav8-source/layers/tree-sitter",
+        "path": "/nix/store/6igfwicqpdif3z7vzk2s8l7sw93krc1q-source/layers/tree-sitter",
         "type": "path"
       }
     }

@@ -17,7 +17,10 @@ in
       }
     }
   '';
-  config.nvim.post.lua = lib.mkIf enable ''
-    require('which-key').register({["ih"] = [[Select hunk]]})
+  config.nvim.post.lua = lib.mkIf (enable && config.nvim.layers.base.enable) ''
+    require('which-key').register({
+        ["ih"] = [[Select hunk]],
+        ["ah"] = [[Select hunk]],
+    }, {mode="o", prefix=""})
   '';
 }

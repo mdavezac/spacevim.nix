@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }: {
   config.nvim.treesitter-languages = lib.mkIf config.nvim.languages.python [ "python" ];
+  config.nvim.plugins.start = lib.mkIf (config.nvim.languages.python && config.nvim.layers.treesitter.enable) [
+    pkgs.vimPlugins.nvim-treesitter-pyfold
+  ];
   config.nvim.lsp-instances = lib.mkIf config.nvim.languages.python [ "pyright" ];
   config.nvim.formatters = lib.mkIf config.nvim.languages.python {
     black = {
