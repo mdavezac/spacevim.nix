@@ -26,6 +26,8 @@ in
       nnoremap <C-j> <C-[><C-w>j
       nnoremap <C-k> <C-[><C-w>k
       nnoremap <C-l> <C-[><C-w>l
+
+      set mouse+=a
       " End of general options defined in base layer
     '';
     lua = ''
