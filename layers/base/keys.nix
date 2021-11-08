@@ -43,6 +43,10 @@
         command = "<cmd>bdel!<cr>";
         description = "Delete current buffer forcibly";
       };
+      keys."[\"<TAB>\"]" = {
+        command = "<cmd>b#<cr>";
+        description = "Switch back to last buffer";
+      };
     };
     "<leader>w" = {
       name = "+windows";
@@ -118,6 +122,10 @@
       keys.q = {
         command = "<cmd>q<cr>";
         description = "Quit current window";
+      };
+      keys."[\"<TAB>\"]" = {
+        command = "<cmd>b#<cr>";
+        description = "Switch back to last buffer";
       };
     };
   };
