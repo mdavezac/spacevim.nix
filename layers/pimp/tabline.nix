@@ -25,11 +25,11 @@ in
           -- Enables/disable clickable tabs
           --  - left-click: go to buffer
           --  - middle-click: delete buffer
-          clickable = false,
+          clickable = true,
 
           -- Excludes buffers from the tabline
           exclude_ft = {},
-          exclude_name = {"NeoGitStatus"},
+          exclude_name = {},
 
           -- Enable/disable icons
           -- if set to 'numbers', will show buffer index in the tabline
