@@ -9,7 +9,7 @@
       };
       keys.g = {
         command = "<cmd>Telescope git_files<cr>";
-        description = "Open Recent File";
+        description = "Open files from git repo";
       };
       keys.r = {
         command = "<cmd>Telescope oldfiles<cr>";
