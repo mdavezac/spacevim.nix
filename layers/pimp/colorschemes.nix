@@ -62,6 +62,8 @@ in
           highlight HopNextKey1 gui=bold,underline guifg=blue
           highlight HopNextKey2 gui=bold,underline guifg=green
           highlight HopUnmatched guifg=#335566
+        '' else if (is_colorscheme "monochrome") then ''
+          highlight HopUnmatched guifg=#444455
         '' else ""
       )
       ''" End of pimp layer''
