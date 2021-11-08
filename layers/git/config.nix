@@ -10,6 +10,14 @@ in
   config.nvim.init.lua = lib.mkIf enable ''
     require('neogit').setup {}
     require('gitsigns').setup {
+      current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+        delay = 1000,
+      },
+      current_line_blame_formatter_opts = {
+        relative_time = true
+      },
       keymaps = {
         -- Text objects
         ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',

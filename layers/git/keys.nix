@@ -35,6 +35,10 @@
         command = "<cmd>lua require('gitsigns').blame_line(true) <cr>";
         description = "Blame line";
       };
+      keys.t = {
+        command = "<cmd>Gitsigns toggle_current_line_blame<cr>";
+        description = "Toggle blame in codelens";
+      };
     };
     "]" = {
       keys.c = {
