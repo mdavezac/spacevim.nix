@@ -21,6 +21,7 @@
     git.url = "./layers/git";
     motion.url = "./layers/motion";
     terminal.url = "./layers/terminal";
+    tmux.url = "./layers/tmux";
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:

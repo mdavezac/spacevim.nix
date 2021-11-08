@@ -1,18 +1,6 @@
 {
-  inputs = {
-    navigator = { url = "github:numToStr/Navigator.nvim"; flake = false; };
-  };
-  outputs = { self, ... }: {
-    overlay = (self: super: {
-      vimPlugins = super.vimPlugins // {
-        navigator = self.vimUtils.buildVimPluginFrom2Nix {
-          pname = "navigator";
-          version = inputs.navigator.shortRev;
-          src = inputs.navigator;
-        };
-      };
-    });
-
+  inputs = { };
+  outputs = inputs @ { self, ... }: {
     module = { config, lib, pkgs, ... }: {
       imports = [ ./keys.nix ];
 
@@ -35,9 +23,11 @@
         };
       };
 
-      config.nvim.plugins.start = lib.mkIf [ pkgs.vimPlugins.navigator ];
-      config.nvim.init.lua = lib.mkIf config.nvim.layers.tmux.enable ''
-        require('Navigator').setup({disable_on_zoom=true})
+      config.nvim.plugins.start = lib.mkIf config.nvim.layers.tmux.enable [
+        pkgs.vimPlugins.vim-tmux-navigator
+      ];
+      config.nvim.init.vim = lib.mkIf config.nvim.layers.tmux.enable ''
+        let g:tmux_navigator_disable_when_zoomed = 1
       '';
     };
   };

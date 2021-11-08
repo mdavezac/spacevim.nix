@@ -10,19 +10,19 @@ in
     "" = {
       mode = "normal";
       keys."[\"<C-h>\"]" = {
-        command = "<cmd>lua require('Navigator').left()<cr>";
+        command = "<cmd>TmuxNavigateLeft<cr>";
         description = "Go to one pane left";
       };
       keys."[\"<C-j>\"]" = {
-        command = "<cmd>lua require('Navigator').bottom()<cr>";
+        command = "<cmd>TmuxNavigateDown<cr>";
         description = "Go to one pane down";
       };
       keys."[\"<C-k>\"]" = {
-        command = "<cmd>lua require('Navigator').up()<cr>";
+        command = "<cmd>TmuxNavigateUp<cr>";
         description = "Go to one pane up";
       };
       keys."[\"<C-l>\"]" = {
-        command = "<cmd>lua require('Navigator').right()<cr>";
+        command = "<cmd>TmuxNavigateRight<cr>";
         description = "Go to one pane right";
       };
     };
