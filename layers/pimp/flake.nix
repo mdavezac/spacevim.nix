@@ -4,6 +4,9 @@
     neon = { url = "github:rafamadriz/neon"; flake = false; };
     catpuccino = { url = "github:Pocco81/Catppuccino.nvim"; flake = false; };
     nvim-notify = { url = "github:rcarriga/nvim-notify"; flake = false; };
+    lush = { url = "github:rktjmp/lush.nvim"; flake = false; };
+    zenbones = { url = "github:mcchrish/zenbones.nvim"; flake = false; };
+    monochrome = { url = "github:kdheepak/monochrome.nvim"; flake=false; };
   };
   outputs = inputs @ { self, ... }: rec {
     overlay = (self: super: {
@@ -27,6 +30,21 @@
           pname = "nvim-notify";
           version = inputs.nvim-notify.shortRev;
           src = inputs.nvim-notify;
+        };
+        lush = self.vimUtils.buildVimPluginFrom2Nix {
+          pname = "lush";
+          version = inputs.lush.shortRev;
+          src = inputs.lush;
+        };
+        zenbones = self.vimUtils.buildVimPluginFrom2Nix {
+          pname = "zenbones";
+          version = inputs.zenbones.shortRev;
+          src = inputs.zenbones;
+        };
+        monochrome = self.vimUtils.buildVimPluginFrom2Nix {
+          pname = "monochrome";
+          version = inputs.monochrome.shortRev;
+          src = inputs.monochrome;
         };
       };
     });

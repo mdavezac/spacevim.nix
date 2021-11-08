@@ -6,6 +6,11 @@
         default = null;
         description = ''Colorschemes'';
       };
+      options.background = lib.mkOption {
+        type = lib.types.enum ["dark" "light"];
+        default = "dark";
+        description = ''Background'';
+      };
       options.layers = lib.mkOption {
         type = lib.types.submodule {
           options.pimp = lib.mkOption {

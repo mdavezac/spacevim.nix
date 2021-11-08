@@ -10,12 +10,18 @@ let
 in
 {
   config.nvim.plugins.start = lib.mkIf enabled [
+    pkgs.vimPlugins.monochrome
     pkgs.vimPlugins.rainglow
     pkgs.vimPlugins.neon
+    pkgs.vimPlugins.lush
+    pkgs.vimPlugins.zenbones
     pkgs.vimPlugins.catpuccino
     pkgs.vimPlugins.awesome-vim-colorschemes
     pkgs.vimPlugins.nvim-web-devicons
   ];
+  config.nvim.init.vim = lib.mkIf enabled ''
+    set background=${config.nvim.background}
+  '';
   config.nvim.init.lua = lib.mkIf enabled (
     builtins.concatStringsSep "\n" [
       ''
@@ -33,11 +39,13 @@ in
   );
   config.nvim.post.vim = lib.mkIf enabled (
     builtins.concatStringsSep "\n" [
-      ''" Pimp layer''
+      ''" Pimp layer
+        set termguicolors
+      ''
       (
         if (is_colorscheme "neon")
         then ''
-          let g:neon_style = "dark"
+          let g:neon_style = "${config.nvim.background}"
           let g:neon_italic_keyword = 1
           let g:neon_italic_function = 1
           let g:neon_transparent = 0
@@ -49,7 +57,7 @@ in
         else "colorscheme ${config.nvim.colorscheme}"
       )
       (
-        if (isnt_colorscheme "catppuccino") then ''
+        if (is_colorscheme "neon") then ''
           highlight HopNextKey gui=bold,underline guifg=red
           highlight HopNextKey1 gui=bold,underline guifg=blue
           highlight HopNextKey2 gui=bold,underline guifg=green
