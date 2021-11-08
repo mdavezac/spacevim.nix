@@ -10,6 +10,10 @@ in
       colorscheme =
         if (builtins.isNull config.nvim.colorscheme)
         then "gruvbox" else config.nvim.colorscheme;
+      with_session =
+        if config.nvim.layers.projects.enable then
+          "require('auto-session-library').current_session_name, "
+        else "";
     in
     lib.mkIf lualine
       ''
@@ -26,7 +30,7 @@ in
               lualine_a = {'mode'},
               lualine_b = {'branch', 'diff',
                           {'diagnostics', sources={'nvim_lsp'}}},
-              lualine_c = {'filename'},
+              lualine_c = { ${with_session} 'filename' },
               lualine_x = {'encoding', 'fileformat', 'filetype'},
               lualine_y = {'progress'},
               lualine_z = {'location'}

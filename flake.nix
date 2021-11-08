@@ -22,6 +22,7 @@
     motion.url = "./layers/motion";
     terminal.url = "./layers/terminal";
     tmux.url = "./layers/tmux";
+    projects.url = "./layers/projects";
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
