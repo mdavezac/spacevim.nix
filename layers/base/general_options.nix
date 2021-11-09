@@ -21,6 +21,7 @@ in
       endif
       set undodir=$HOME/.local/share/spacevim/backup
       set undofile
+      noswapfile
 
       nnoremap <C-h> <C-[><C-w>h
       nnoremap <C-j> <C-[><C-w>j
