@@ -63,6 +63,10 @@
         command = "<cmd>close<cr>";
         description = "Close current split";
       };
+      keys."[\"=\"]" = {
+        command = "<C-w>=";
+        description = "Equalize window sizes";
+      };
     };
     "<leader>s" = {
       name = "+search";
