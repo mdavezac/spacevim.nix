@@ -32,7 +32,7 @@
         ];
         config.nvim.init.lua = lib.mkIf enable ''
           require'nterm.main'.init({
-            maps = fales,  -- load defaut mappings
+            maps = false,  -- load defaut mappings
             shell = "${pkgs.fish}/bin/fish",
             size = 80,
             direction = "vertical", -- horizontal or vertical
