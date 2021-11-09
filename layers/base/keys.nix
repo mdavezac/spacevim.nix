@@ -93,7 +93,7 @@
       };
     };
     "<leader>t" = {
-      name = "+themes and pimping";
+      name = "+themes and toggles";
       mode = "normal";
       keys.c = {
         command = "<cmd>Telescope colorscheme<cr>";
