@@ -15,7 +15,7 @@
         command = "<cmd>lua require('gitsigns').stage_buffer() <cr>";
         description = "Stage whole buffer";
       };
-      keys.B = {
+      keys.X = {
         command = "<cmd>lua require('gitsigns').reset_buffer() <cr>";
         description = "Reset whole buffer";
       };
@@ -28,6 +28,10 @@
         description = "Stage hunk";
       };
       keys.H = {
+        command = "<cmd>lua require('gitsigns').undo_stage_hunk() <cr>";
+        description = "Undo stage hunk";
+      };
+      keys.x = {
         command = "<cmd>lua require('gitsigns').reset_hunk() <cr>";
         description = "Reset hunk";
       };
