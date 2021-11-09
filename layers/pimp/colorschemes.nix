@@ -64,6 +64,7 @@ in
           highlight HopUnmatched guifg=#335566
         '' else if (is_colorscheme "monochrome") then ''
           highlight HopUnmatched guifg=#444455
+          highlight link GitSignsCurrentLineBlame Comment
         '' else ""
       )
       ''" End of pimp layer''
