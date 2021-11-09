@@ -31,7 +31,7 @@ stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
-    installDir=$out/share/nvim/parser
+    installDir=$out/parser
     mkdir -p $installDir
     cp -a parser/*.so $installDir
   '';
