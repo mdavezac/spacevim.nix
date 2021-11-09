@@ -13,7 +13,11 @@
     };
 
     base-layer.url = "./layers/base";
-    tree-sitter-layer.url = "./layers/tree-sitter";
+    tree-sitter-layer = {
+      url = "./layers/tree-sitter";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
     pimplayer.url = "./layers/pimp";
     lsp.url = "./layers/lsp";
     languages.url = "./layers/languages";
@@ -39,7 +43,7 @@
       ] ++ (builtins.catAttrs "overlay" (builtins.attrValues layers));
     in
     {
-      overlays = overlays_;
+      overlay_list = overlays_;
     } //
     flake-utils.lib.eachDefaultSystem (
       system:

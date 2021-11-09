@@ -25,9 +25,7 @@ stdenv.mkDerivation rec {
 
   # Should not be setting HOME
   buildPhase = ''
-    pushd lua
-    HOME=./ nvim -u NONE --headless -c "luafile ${installParsers}" +q
-    popd
+    HOME=./ CC=$CXX nvim -u NONE --headless -c "set runtimepath+=$PWD" -c "luafile ${installParsers}" +q
   '';
 
   installPhase = ''
@@ -37,7 +35,9 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    description = "nvim-treesitter with parsers ${languages-set}";
+    description = let
+      langs = builtins.concatStringsSep ", " languages-set;
+    in "nvim-treesitter with parsers ${langs}";
     homepage = "https://github.com/nvim-treesitter/nvim-treesitter";
     platforms = [ "x86_64-darwin" "x86_64-linux" ];
     license = with licenses; [ asl20 ];
