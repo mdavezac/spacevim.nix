@@ -1,9 +1,10 @@
 { config, lib, pkgs, ... }:
 let
-  linters-enabled = builtins.any (v: v.enable) (builtins.attrValues config.nvim.linters);
-  enabled = config.nvim.layers.lsp.enable && (
-    ((builtins.length config.nvim.lsp-instances) > 0) || linters-enabled
-  );
+  with-linters = builtins.any (v: v.enable) (builtins.attrValues config.nvim.linters);
+  with-lsps = builtins.any
+    (v: v.enable)
+    (builtins.attrValues config.nvim.lsp-instances);
+  enabled = config.nvim.layers.lsp.enable && (with-lsps || with-linters);
 in
 {
   options.nvim = lib.mkOption {

@@ -115,6 +115,14 @@ in
         command = "<cmd>BufferCloseAllButPinned<cr>";
         description = "Close all but pinned buffer";
       };
+      keys.d = {
+        command = "<cmd>BufferClose<cr>";
+        description = "Delete current buffer";
+      };
+      keys.D = {
+        command = "<cmd>BufferClose!<cr>";
+        description = "Delete current buffer forcibly";
+      };
     };
     "g" = {
       keys.b = {

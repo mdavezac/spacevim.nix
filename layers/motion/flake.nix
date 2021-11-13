@@ -35,7 +35,7 @@
             command = "<cmd>HopChar2<cr>";
             description = "Jump to a two-character pattern";
           };
-          keys.r = {
+          keys.s = {
             command = "<cmd>HopPattern<cr>";
             description = "Jump to a regex pattern";
           };

@@ -34,7 +34,7 @@
           require'nterm.main'.init({
             maps = false,  -- load defaut mappings
             shell = "${pkgs.fish}/bin/fish",
-            size = 80,
+            size = 102,
             direction = "vertical", -- horizontal or vertical
             popup = 2000,     -- Number of miliseconds to show the info about the commmand. 0 to dissable
             popup_pos = "SE", --  one of "NE" "SE" "SW" "NW"

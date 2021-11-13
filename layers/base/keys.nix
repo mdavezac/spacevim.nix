@@ -1,4 +1,9 @@
-{ config, lib, tools, ... }: {
+{ config, lib, tools, ... }:
+let
+  cfg = config.nvim.layers;
+  barbar = cfg.pimp.enable && cfg.pimp.tabline == "barbar";
+in
+{
   config.nvim.which-key = lib.mkIf config.nvim.layers.base.enable {
     "<leader>f" = {
       name = "+file";
@@ -35,6 +40,11 @@
         command = "<cmd>bnew<cr>";
         description = "Create new buffer";
       };
+      keys."[\"<TAB>\"]" = {
+        command = "<cmd>b#<cr>";
+        description = "Switch back to last buffer";
+      };
+    } // (if barbar then { } else {
       keys.d = {
         command = "<cmd>bdel<cr>";
         description = "Delete current buffer";
@@ -43,11 +53,7 @@
         command = "<cmd>bdel!<cr>";
         description = "Delete current buffer forcibly";
       };
-      keys."[\"<TAB>\"]" = {
-        command = "<cmd>b#<cr>";
-        description = "Switch back to last buffer";
-      };
-    };
+    });
     "<leader>w" = {
       name = "+windows";
       mode = "normal";
