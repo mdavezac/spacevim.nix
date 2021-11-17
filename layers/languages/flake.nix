@@ -22,6 +22,7 @@
         };
       };
       imports = [ ./python.nix ./nix.nix ];
+      config.nvim.plugins.start = [ pkgs.vimPlugins.vim-commentary ];
     };
   };
 }

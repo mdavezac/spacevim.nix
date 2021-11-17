@@ -8,6 +8,13 @@ let
 in
 {
   config.nvim.which-key = lib.mkIf enabled {
+    "g" = {
+      mode = "normal";
+      keys.r = {
+        command = "<cmd>Telescope lsp_references<cr>";
+        description = "Go to reference";
+      };
+    };
     "<localleader>d" = {
       name = "+document";
       mode = "normal";
@@ -26,17 +33,6 @@ in
       keys.d = {
         command = "<cmd>Telescope lsp_workspace_diagnostics<cr>";
         description = "LSP diagnostics";
-      };
-      keys.s = {
-        command = "<cmd>Telescope lsp_workspace_symbols<cr>";
-        description = "Symbols found by LSP";
-      };
-    };
-    "<localleader>" = {
-      mode = "normal";
-      keys."[\",\"]" = {
-        command = "<cmd>Telescope lsp_code_actions<cr>";
-        description = "LSP code-actions";
       };
     };
   };

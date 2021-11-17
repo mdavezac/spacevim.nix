@@ -26,6 +26,11 @@ in
                 default = true;
                 description = "Whether to enable the lsp layer";
               };
+              options.saga = lib.mkOption {
+                type = lib.types.bool;
+                default = true;
+                description = "Whether to enable lsp-saga";
+              };
             };
             default = { };
           };

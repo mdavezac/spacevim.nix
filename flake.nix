@@ -27,6 +27,7 @@
     terminal.url = "./layers/terminal";
     tmux.url = "./layers/tmux";
     projects.url = "./layers/projects";
+    dash.url = "./layers/dash";
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
@@ -76,12 +77,12 @@
             {
               name = "vim";
               command = "${defaultPackage}/bin/nvim";
-              help = "alias for neovim with neovitality config";
+              help = "alias for neovim with spacenix config";
             }
             {
               name = "vi";
               command = "${defaultPackage}/bin/nvim";
-              help = "alias for neovim with neovitality config";
+              help = "alias for neovim with spacenix config";
             }
           ];
         };

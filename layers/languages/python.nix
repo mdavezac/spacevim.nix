@@ -21,4 +21,5 @@
       enable = false;
     };
   };
+  config.nvim.dash.python = ["python3"];
 }

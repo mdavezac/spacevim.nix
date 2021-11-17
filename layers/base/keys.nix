@@ -126,6 +126,23 @@ in
         command = "<cmd>q<cr>";
         description = "Quit current window";
       };
+    } // lib.mkIf (!config.nvim.layers.tmux.enable) {
+      keys."[\"<C-h>\"]" = {
+        command = "<C-[><C-w>h";
+        description = "Go to one pane left";
+      };
+      keys."[\"<C-j>\"]" = {
+        command = "<C-[><C-w>j";
+        description = "Go to one pane down";
+      };
+      keys."[\"<C-k>\"]" = {
+        command = "<C-[><C-w>k";
+        description = "Go to one pane up";
+      };
+      keys."[\"<C-l>\"]" = {
+        command = "<C-[><C-w>l";
+        description = "Go to one pane right";
+      };
     };
     "<SPACE>" = {
       mode = "normal";

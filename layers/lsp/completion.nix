@@ -15,7 +15,7 @@ in
     pkgs.vimPlugins.cmp-emoji
     pkgs.vimPlugins.cmp-path
   ];
-  config.nvim.post.lua =
+  config.nvim.init.lua =
     lib.mkIf enabled ''
       vim.o.completeopt = 'menuone,noselect'
 

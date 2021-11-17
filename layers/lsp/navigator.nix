@@ -6,7 +6,7 @@ let
   navigator-lsp = lib.filterAttrs
     (k: v: v.enable && (v.setup_location == "navigator"))
     config.nvim.lsp-instances;
-  enabled = config.nvim.layers.lsp.enable && (with-navigator-lsp || with-linters);
+  enabled = config.nvim.layers.lsp.enable && with-navigator-lsp;
 in
 {
   config.nvim.plugins.start = lib.mkIf enabled [ pkgs.vimPlugins.guihua pkgs.vimPlugins.lsp-navigator ];

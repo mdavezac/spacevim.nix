@@ -27,6 +27,7 @@
         pkgs.vimPlugins.vim-tmux-navigator
       ];
       config.nvim.init.vim = lib.mkIf config.nvim.layers.tmux.enable ''
+        let g:tmux_navigator_no_mappings = 1
         let g:tmux_navigator_disable_when_zoomed = 1
       '';
     };

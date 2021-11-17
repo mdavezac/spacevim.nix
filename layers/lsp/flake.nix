@@ -4,6 +4,7 @@
     nvim-lspconfig = { url = "github:neovim/nvim-lspconfig"; flake = false; };
     guihua = { url = "github:ray-x/guihua.lua"; flake = false; };
     lsp-navigator = { url = "github:ray-x/navigator.lua"; flake = false; };
+    lspsaga-nvim = { url = "github:tami5/lspsaga.nvim"; flake = false; };
   };
   outputs = inputs @ { self, ... }: {
     overlay = (self: super: {
@@ -29,10 +30,22 @@
           version = inputs.lsp-navigator.shortRev;
           src = inputs.lsp-navigator;
         };
+        lspsaga-nvim = self.vimUtils.buildVimPluginFrom2Nix {
+          pname = "lspsaga-nvim";
+          version = inputs.lspsaga-nvim.shortRev;
+          src = inputs.lspsaga-nvim;
+        };
       };
     });
     module = inputs @ { config, lib, pkgs, ... }: {
-      imports = [ ./lsp.nix ./linters.nix ./completion.nix ./keys.nix ./navigator.nix ];
+      imports = [
+        ./lsp.nix
+        ./linters.nix
+        ./completion.nix
+        ./keys.nix
+        ./navigator.nix
+        ./lspsaga.nix
+      ];
     };
   };
 }
