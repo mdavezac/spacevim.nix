@@ -21,5 +21,14 @@
       enable = false;
     };
   };
-  config.nvim.dash.python = ["python3"];
+  config.nvim.dash.python = [ "python3" ];
+  config.nvim.post.lua = ''
+    require('nvim-treesitter.configs').setup {
+        pyfold = {
+            enable = true,
+            -- Sets provided foldtext on window where module is active
+            custom_foldtext = true
+        }
+    }
+  '';
 }
