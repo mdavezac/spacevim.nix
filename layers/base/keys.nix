@@ -144,7 +144,7 @@ in
         description = "Go to one pane right";
       };
     };
-    "<SPACE>" = {
+    "<leader>" = {
       mode = "normal";
       keys.q = {
         command = "<cmd>q<cr>";

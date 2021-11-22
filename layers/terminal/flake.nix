@@ -61,11 +61,17 @@
           tnoremap <C-q> <C-\><C-N><CMD>q<CR>
         '';
         config.nvim.which-key = lib.mkIf enable {
-          "<space>" = {
+          "<leader>" = {
             mode = "normal";
             keys."[\";\"]" = {
               command = "<cmd>lua term_toggle()<cr>";
-              description = "Toggle terminal";
+              description = "Toggle terminal and focus";
+            };
+          };
+          "<leader>t" = {
+            keys.t = {
+              command = "<cmd>lua require'nterm.main'.term_toggle()<cr>";
+              description = "Toggle terminal without focussing";
             };
           };
         };
