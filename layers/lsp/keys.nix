@@ -14,6 +14,10 @@ in
         command = "<cmd>Telescope lsp_references<cr>";
         description = "Go to reference";
       };
+      keys.d = {
+        command = "<cmd>Telescope lsp_definitions<cr>";
+        description = "Go to definitions";
+      };
     };
     "<localleader>d" = {
       name = "+document";

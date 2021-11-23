@@ -45,13 +45,13 @@
       };
     };
     "]" = {
-      keys.c = {
+      keys.h = {
         command = "<cmd>lua require('gitsigns.actions').next_hunk()<cr>";
         description = "Go to next hunk";
       };
     };
     "[" = {
-      keys.c = {
+      keys.h = {
         command = "<cmd>lua require('gitsigns.actions').prev_hunk()<cr>";
         description = "Go to next hunk";
       };

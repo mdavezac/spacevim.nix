@@ -19,5 +19,23 @@
         description = "Go to one pane right";
       };
     };
+    "w" = {
+      keys.h = {
+        command = "<cmd>TmuxNavigateLeft<cr>";
+        description = "Go to one pane left";
+      };
+      keys.j = {
+        command = "<cmd>TmuxNavigateDown<cr>";
+        description = "Go to one pane down";
+      };
+      keys.k = {
+        command = "<cmd>TmuxNavigateUp<cr>";
+        description = "Go to one pane up";
+      };
+      keys.l = {
+        command = "<cmd>TmuxNavigateRight<cr>";
+        description = "Go to one pane right";
+      };
+    };
   };
 }
