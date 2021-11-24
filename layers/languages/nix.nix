@@ -6,4 +6,5 @@
     filetype = "nix";
     enable = true;
   };
+  config.nvim.format-on-save = ["*.nix"];
 }

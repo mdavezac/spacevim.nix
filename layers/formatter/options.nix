@@ -44,6 +44,12 @@ in
         description = ''Dictionary of formatter configurations.'';
         default = { };
       };
+      options.format-on-save = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        description = ''List of filetypes for which to run format-on-save'';
+        default = [ ];
+        example = ''["*.py"]'';
+      };
     };
   };
 }

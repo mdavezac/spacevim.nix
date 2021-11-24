@@ -31,4 +31,5 @@
         }
     }
   '';
+  config.nvim.format-on-save = ["*.py"];
 }

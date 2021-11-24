@@ -42,4 +42,17 @@ in
         "-- End of formatter layer\n"
       ]);
     };
+  config.nvim.post =
+    let
+      with-format-on-save = enabled && ((builtins.length config.nvim.format-on-save) > 0);
+      filetypes = builtins.concatStringsSep "," config.nvim.format-on-save;
+    in
+    lib.mkIf with-format-on-save {
+      vim = ''
+        augroup FormatAutogroup
+          autocmd!
+          autocmd BufWritePost ${filetypes} FormatWrite
+        augroup END
+      '';
+    };
 }
