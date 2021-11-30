@@ -36,10 +36,6 @@ in
         command = "<cmd>Telescope buffers<cr>";
         description = "Find buffer";
       };
-      keys.c = {
-        command = "<cmd>bnew<cr>";
-        description = "Create new buffer";
-      };
       keys."[\"<TAB>\"]" = {
         command = "<cmd>b#<cr>";
         description = "Switch back to last buffer";
