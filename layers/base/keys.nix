@@ -101,6 +101,30 @@ in
         command = "<cmd>Telescope colorscheme<cr>";
         description = "Search and apply colorscheme";
       };
+      keys.L =
+        let
+          command = builtins.concatStringsSep "; " [
+            "local is_on = vim.o.relativenumber and vim.o.number"
+            "vim.o.number = not is_on"
+            "vim.o.relativenumber = not is_on"
+          ];
+        in
+        {
+          command = "<cmd>lua ${command}<CR>";
+          description = "Toggle relative line numbers";
+        };
+      keys.l =
+        let
+          command = builtins.concatStringsSep "; " [
+            "local is_on = vim.o.number and not vim.o.relativenumber"
+            "vim.o.number = not is_on"
+            "vim.o.relativenumber = false;"
+          ];
+        in
+        {
+          command = "<cmd>lua ${command}<CR>";
+          description = "Toggle absolute line numbers";
+        };
     };
     "]" = {
       mode = "normal";
