@@ -10,6 +10,11 @@
                 default = true;
                 description = "Whether to enable the git layer";
               };
+              options.github = lib.mkOption {
+                type = lib.types.bool;
+                default = true;
+                description = "Whether to enable github integration";
+              };
             };
             default = { };
           };
