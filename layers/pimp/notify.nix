@@ -17,7 +17,7 @@ in
       else ""
     );
   };
-  config.nvim.which-key = lib.mkIf with_telescope {
+  config.nvim.which-key.normal = lib.mkIf with_telescope {
     "<leader>s" = {
       keys.n = {
         command = "<cmd>Telescope notify<cr>";

@@ -1,8 +1,7 @@
 { config, lib, pkgs, ... }: {
-  config.nvim.which-key = lib.mkIf config.nvim.layers.git.enable {
+  config.nvim.which-key.normal = lib.mkIf config.nvim.layers.git.enable {
     "<leader>g" = {
       name = "+git";
-      mode = "normal";
       keys.c = {
         command = "<cmd>Telescope git_commit<cr>";
         description = "Git commits";

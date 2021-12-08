@@ -17,7 +17,7 @@
           insert = "i";
           visual = "v";
         };
-        grouping = k: v:
+        grouping = mode: k: v:
           ''wk.register({
                     ["${k}"] = {
                       name="${v.name}",
@@ -25,12 +25,13 @@
           + "    " + (mappings v)
           + ''
                 }
-            }, {mode = "${get_mode v.mode}"})'';
+            }, {mode = "${get_mode mode}"})'';
+        moding = mode: keys: builtins.concatStringsSep "\n" (
+          builtins.attrValues (lib.mapAttrs (grouping mode) keys)
+        );
         text = (builtins.readFile ./init.lua)
           + builtins.concatStringsSep "\n" (
-          builtins.attrValues (
-            lib.mapAttrs grouping config.nvim.which-key
-          )
+          builtins.attrValues (lib.mapAttrs moding config.nvim.which-key)
         );
       in
       "-- Which-key from base layer\n" + text + "\n-- End of which-key from base layer";

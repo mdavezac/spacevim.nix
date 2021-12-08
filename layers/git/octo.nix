@@ -24,4 +24,12 @@ in
       })
     '';
   };
+
+  config.nvim.which-key.normal."<leader>o" = lib.mkIf enable {
+    name = "+github";
+    keys.p = {
+      command = "<cmd> Octo pr list <cr>";
+      description = "List all prs";
+    };
+  };
 }

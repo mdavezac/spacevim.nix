@@ -4,10 +4,9 @@ let
   barbar = cfg.pimp.enable && cfg.pimp.tabline == "barbar";
 in
 {
-  config.nvim.which-key = lib.mkIf config.nvim.layers.base.enable {
+  config.nvim.which-key.normal = lib.mkIf config.nvim.layers.base.enable {
     "<leader>f" = {
       name = "+file";
-      mode = "normal";
       keys.f = {
         command = "<cmd>Telescope find_files<cr>";
         description = "Find File";
@@ -31,7 +30,6 @@ in
     };
     "<leader>b" = {
       name = "+buffers";
-      mode = "normal";
       keys.b = {
         command = "<cmd>Telescope buffers<cr>";
         description = "Find buffer";
@@ -52,7 +50,6 @@ in
     });
     "<leader>w" = {
       name = "+windows";
-      mode = "normal";
       keys.s = {
         command = "<cmd>split<cr>";
         description = "Split horizontally";
@@ -72,7 +69,6 @@ in
     };
     "<leader>s" = {
       name = "+search";
-      mode = "normal";
       keys.s = {
         command = "<cmd>Telescope current_buffer_fuzzy_find<cr>";
         description = "Search current buffer";
@@ -96,7 +92,6 @@ in
     };
     "<leader>t" = {
       name = "+themes and toggles";
-      mode = "normal";
       keys.c = {
         command = "<cmd>Telescope colorscheme<cr>";
         description = "Search and apply colorscheme";
@@ -127,21 +122,26 @@ in
         };
     };
     "]" = {
-      mode = "normal";
       keys.b = {
         command = "<cmd>bnext<cr>";
-        description = "Go to next buffer";
+        description = "Next buffer";
+      };
+      keys.t = {
+        command = "<cmd>tabNext<cr>";
+        description = "Next tab";
       };
     };
     "[" = {
-      mode = "normal";
       keys.b = {
         command = "<cmd>bprevious<cr>";
-        description = "Go to previous buffer";
+        description = "Previous buffer";
+      };
+      keys.t = {
+        command = "<cmd>tabprevious<cr>";
+        description = "Previous tab";
       };
     };
     "" = {
-      mode = "normal";
       keys."[\"<C-q>\"]" = {
         command = "<cmd>q<cr>";
         description = "Quit current window";
@@ -165,7 +165,6 @@ in
       };
     };
     "<leader>" = {
-      mode = "normal";
       keys.q = {
         command = "<cmd>q<cr>";
         description = "Quit current window";

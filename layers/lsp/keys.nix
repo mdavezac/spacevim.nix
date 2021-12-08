@@ -7,9 +7,8 @@ let
   enabled = config.nvim.layers.lsp.enable && (with-lsps || with-linters);
 in
 {
-  config.nvim.which-key = lib.mkIf enabled {
+  config.nvim.which-key.normal = lib.mkIf enabled {
     "g" = {
-      mode = "normal";
       keys.r = {
         command = "<cmd>Telescope lsp_references<cr>";
         description = "Go to reference";
@@ -21,7 +20,6 @@ in
     };
     "<localleader>d" = {
       name = "+document";
-      mode = "normal";
       keys.d = {
         command = "<cmd>Telescope lsp_document_diagnostics<cr>";
         description = "LSP diagnostics";
@@ -33,7 +31,6 @@ in
     };
     "<localleader>w" = {
       name = "+workspace";
-      mode = "normal";
       keys.d = {
         command = "<cmd>Telescope lsp_workspace_diagnostics<cr>";
         description = "LSP diagnostics";

@@ -28,9 +28,8 @@ in
       '' + "\n" + lines
     );
 
-  config.nvim.which-key = lib.mkIf enable {
+  config.nvim.which-key.normal = lib.mkIf enable {
     "s" = {
-      mode = "normal";
       keys.k = {
         command = "<cmd>DashWord<cr>";
         description = "Search dash for word under cursor";

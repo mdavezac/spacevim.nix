@@ -40,7 +40,7 @@ in
           -- highlight group. By default, the Buffer*Icon group is linked to the
           -- Buffer* group (see Highlighting below). Otherwise, it will take its
           -- default value as defined by devicons.
-          icon_custom_colors = false,
+          icon_custom_colors = true,
 
           -- Configure icons on the bufferline.
           icon_separator_active = '▎',
@@ -51,7 +51,7 @@ in
 
           -- If true, new buffers will be inserted at the start/end of the list.
           -- Default is to insert after current buffer.
-          insert_at_end = false,
+          insert_at_end = true,
           insert_at_start = false,
 
           -- Sets the maximum padding width with which to surround each tab
@@ -77,7 +77,7 @@ in
         }
       '';
   };
-  config.nvim.which-key = lib.mkIf barbar {
+  config.nvim.which-key.normal = lib.mkIf barbar {
     "<leader>b" = {
       keys.n = {
         command = "<cmd>BufferNext<cr>";

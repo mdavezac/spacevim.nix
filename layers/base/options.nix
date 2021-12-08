@@ -22,12 +22,18 @@ let
         default = "";
       };
       options.keys = which_key_mod;
-      options.mode = lib.mkOption {
-        type = lib.types.enum [ "normal" "visual" "replace" "command" "insert" ];
-        description = "Mode for which the key is valid";
-        default = "normal";
-      };
     });
+    default = { };
+  };
+  which_mode_mod = lib.mkOption {
+    type = lib.types.submodule {
+      options.normal = which_group_mod;
+      options.visual = which_group_mod;
+      options.replace = which_group_mod;
+      options.command = which_group_mod;
+      options.insert = which_group_mod;
+    };
+    description = "Mode for which the key is valid";
     default = { };
   };
 in
@@ -48,7 +54,7 @@ in
           };
         };
       };
-      options.which-key = which_group_mod;
+      options.which-key = which_mode_mod;
       options.leader = lib.mkOption {
         type = lib.types.str;
         default = " ";

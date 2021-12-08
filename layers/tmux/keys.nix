@@ -1,7 +1,6 @@
 { config, lib, ... }: {
-  config.nvim.which-key = lib.mkIf config.nvim.layers.tmux.enable {
+  config.nvim.which-key.normal = lib.mkIf config.nvim.layers.tmux.enable {
     "" = {
-      mode = "normal";
       keys."[\"<C-h>\"]" = {
         command = "<cmd>TmuxNavigateLeft<cr>";
         description = "Go to one pane left";

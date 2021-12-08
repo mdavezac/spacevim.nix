@@ -24,9 +24,8 @@
       config.nvim.plugins.start = lib.mkIf config.nvim.layers.motion.enable [
         pkgs.vimPlugins.hop-nvim
       ];
-      config.nvim.which-key = lib.mkIf config.nvim.layers.motion.enable {
+      config.nvim.which-key.normal = lib.mkIf config.nvim.layers.motion.enable {
         "g" = {
-          mode = "normal";
           keys.j = {
             command = "<cmd>HopChar1<cr>";
             description = "Jump to a character";

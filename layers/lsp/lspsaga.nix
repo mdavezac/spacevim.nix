@@ -13,9 +13,8 @@ in
   config.nvim.post.lua = lib.mkIf enabled ''
     require('lspsaga').init_lsp_saga({code_action_prompt={enable=false}})
   '';
-  config.nvim.which-key = lib.mkIf enabled {
+  config.nvim.which-key.normal = lib.mkIf enabled {
     "," = {
-      mode = "normal";
       keys.r = {
         command = "<cmd>lua require'lspsaga.provider'.lsp_finder()<cr>";
         description = "Show references and definition";
@@ -36,12 +35,27 @@ in
         command = "<cmd>lua require'lspsaga.provider'.preview_definition()<cr>";
         description = "Preview definition";
       };
+      keys.d = {
+        command = "<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<cr>";
+        description = "Show diagnostic";
+      };
     };
     "g" = {
-      mode = "normal";
       keys.T = {
         command = "<cmd>lua require('lspsaga.floaterm').open_float_terminal('${pkgs.gitui}/bin/gitui')<cr>";
         description = "gitui";
+      };
+    };
+    "]" = {
+      keys.e = {
+        command = "<cmd>Lspsaga diagnostic_jump_next<CR>";
+        description = "Next diagnostic";
+      };
+    };
+    "[" = {
+      keys.e = {
+        command = "<cmd>Lspsaga diagnostic_jump_prev<CR>";
+        description = "Previous diagnostic";
       };
     };
   };

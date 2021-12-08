@@ -5,7 +5,7 @@ let
     && ((builtins.length config.nvim.treesitter-languages) > 0);
 in
 {
-  config.nvim.which-key = lib.mkIf enabled {
+  config.nvim.which-key.normal = lib.mkIf enabled {
     "<leader>s" = {
       keys.o = {
         command = "<cmd>Telescope treesitter<cr>";
