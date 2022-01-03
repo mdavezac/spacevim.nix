@@ -28,6 +28,7 @@
     tmux.url = "./layers/tmux";
     projects.url = "./layers/projects";
     dash.url = "./layers/dash";
+    testing.url = "./layers/testing";
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:

@@ -35,7 +35,7 @@ in
         command = "<cmd>lua require'lspsaga.provider'.preview_definition()<cr>";
         description = "Preview definition";
       };
-      keys.d = {
+      keys."[\",\"]" = {
         command = "<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<cr>";
         description = "Show diagnostic";
       };

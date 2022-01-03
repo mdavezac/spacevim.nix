@@ -2,6 +2,24 @@
 let
   cfg = config.nvim.layers;
   barbar = cfg.pimp.enable && cfg.pimp.tabline == "barbar";
+  switch_pane = {
+    keys."[\"<C-h>\"]" = {
+      command = "<C-[><C-w>h";
+      description = "Go to one pane left";
+    };
+    keys."[\"<C-j>\"]" = {
+      command = "<C-[><C-w>j";
+      description = "Go to one pane down";
+    };
+    keys."[\"<C-k>\"]" = {
+      command = "<C-[><C-w>k";
+      description = "Go to one pane up";
+    };
+    keys."[\"<C-l>\"]" = {
+      command = "<C-[><C-w>l";
+      description = "Go to one pane right";
+    };
+  };
 in
 {
   config.nvim.which-key.normal = lib.mkIf config.nvim.layers.base.enable {
@@ -89,6 +107,10 @@ in
         command = "<cmd>Telescope search_history<cr>";
         description = "Search search history";
       };
+      keys."[\" \"]" = {
+        command = "<cmd>nohlsearch<cr>";
+        description = "Turn off current search highlight";
+      };
     };
     "<leader>t" = {
       name = "+themes and toggles";
@@ -146,24 +168,7 @@ in
         command = "<cmd>q<cr>";
         description = "Quit current window";
       };
-    } // lib.mkIf (!config.nvim.layers.tmux.enable) {
-      keys."[\"<C-h>\"]" = {
-        command = "<C-[><C-w>h";
-        description = "Go to one pane left";
-      };
-      keys."[\"<C-j>\"]" = {
-        command = "<C-[><C-w>j";
-        description = "Go to one pane down";
-      };
-      keys."[\"<C-k>\"]" = {
-        command = "<C-[><C-w>k";
-        description = "Go to one pane up";
-      };
-      keys."[\"<C-l>\"]" = {
-        command = "<C-[><C-w>l";
-        description = "Go to one pane right";
-      };
-    };
+    } // lib.mkIf (!config.nvim.layers.tmux.enable) switch_pane;
     "<leader>" = {
       keys.q = {
         command = "<cmd>q<cr>";
@@ -175,4 +180,12 @@ in
       };
     };
   };
+  config.nvim.which-key.visual = lib.mkIf
+    (config.nvim.layers.base.enable &&
+      (!config.nvim.layers.tmux.enable))
+    switch_pane;
+  config.nvim.which-key.insert = lib.mkIf
+    (config.nvim.layers.base.enable &&
+      (!config.nvim.layers.tmux.enable))
+    switch_pane;
 }

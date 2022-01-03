@@ -7,16 +7,14 @@
   config.nvim.plugins.start = lib.mkIf (config.nvim.languages.python && config.nvim.layers.treesitter.enable) [
     pkgs.vimPlugins.nvim-treesitter-pyfold
   ];
-  config.nvim.formatters = lib.mkIf config.nvim.languages.python (
-    lib.mkDefault {
-      black = {
-        exe = "${pkgs.black}/bin/black";
-        args = [ "-q" "-" ];
-        filetype = "python";
-        enable = true;
-      };
-    }
-  );
+  config.nvim.formatters = lib.mkIf config.nvim.languages.python {
+    black = {
+      exe = "${pkgs.black}/bin/black";
+      args = [ "-q" "-" ];
+      filetype = "python";
+      enable = true;
+    };
+  };
   config.nvim.linters = lib.mkIf config.nvim.languages.python (
     lib.mkDefault {
       "diagnostics.flake8" = {

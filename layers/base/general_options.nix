@@ -21,7 +21,7 @@ in
       endif
       set undodir=$HOME/.local/share/spacevim/backup
       set undofile
-      noswapfile
+      set noswapfile
 
       set mouse+=a
       " End of general options defined in base layer
