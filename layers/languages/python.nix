@@ -1,13 +1,14 @@
-{ config, lib, pkgs, ... }: {
-  config.nvim.lsp-instances.pyright.cmd = [
-    "${pkgs.nodePackages.pyright}/bin/pyright-langserver"
-    "--stdio"
-  ];
-  config.nvim.treesitter-languages = lib.mkIf config.nvim.languages.python [ "python" ];
+{ config, lib, pkgs, ... }:
+let
+  enableIf = lib.mkIf config.nvim.languages.python;
+in
+{
+  config.nvim.lsp-instances.pyright.cmd = [ "${pkgs.nodePackages.pyright}/bin/pyright-langserver" "--stdio" ];
+  config.nvim.treesitter-languages = enableIf [ "python" ];
   config.nvim.plugins.start = lib.mkIf (config.nvim.languages.python && config.nvim.layers.treesitter.enable) [
     pkgs.vimPlugins.nvim-treesitter-pyfold
   ];
-  config.nvim.formatters = lib.mkIf config.nvim.languages.python {
+  config.nvim.formatters = enableIf {
     black = {
       exe = "${pkgs.black}/bin/black";
       args = [ "-q" "-" ];
@@ -15,16 +16,14 @@
       enable = true;
     };
   };
-  config.nvim.linters = lib.mkIf config.nvim.languages.python (
-    lib.mkDefault {
-      "diagnostics.flake8" = {
-        exe = "${pkgs.python38Packages.flake8}/bin/flake8";
-        enable = false;
-      };
-    }
-  );
-  config.nvim.dash.python = [ "python3" ];
-  config.nvim.post.lua = ''
+  config.nvim.linters = enableIf {
+    "diagnostics.flake8" = {
+      exe = "${pkgs.python38Packages.flake8}/bin/flake8";
+      enable = false;
+    };
+  };
+  config.nvim.dash.python = enableIf [ "python3" ];
+  config.nvim.post.lua = enableIf ''
     require('nvim-treesitter.configs').setup {
         pyfold = {
             enable = true,
@@ -33,5 +32,5 @@
         }
     }
   '';
-  config.nvim.format-on-save = [ "*.py" ];
+  config.nvim.format-on-save = enableIf [ "*.py" ];
 }

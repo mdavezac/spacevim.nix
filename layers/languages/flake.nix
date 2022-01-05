@@ -1,7 +1,5 @@
 {
-  inputs = {
-    omnisharp-vim = { url = "github:OmniSharp/omnisharp-vim"; flake = false; };
-  };
+  inputs = { };
   outputs = { self, ... }: {
     module = { config, lib, pkgs, ... }: {
       options.nvim = lib.mkOption {

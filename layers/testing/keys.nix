@@ -3,11 +3,11 @@
     ",t" = {
       name = "+testing";
       keys.t = {
-        command = "<cmd>TestNearest<cr>";
+        command = "<cmd>UltestNearest<cr>";
         description = "Nearest test";
       };
       keys.f = {
-        command = ''<cmd>TestFile<cr>'';
+        command = ''<cmd>Ultest<cr>'';
         description = "Test file";
       };
       keys.s = {
@@ -21,6 +21,14 @@
       keys.v = {
         command = "<cmd>TestVisit<cr>";
         description = "Open last test file";
+      };
+      keys.o = {
+        command = "<cmd>UltestOutput<cr>";
+        description = "Show lastest output for nearest test";
+      };
+      keys."[\",\"]" = {
+        command = "<cmd>UltestSummary<cr>";
+        description = "Toggle summary window";
       };
     };
   };
