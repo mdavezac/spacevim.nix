@@ -4,7 +4,7 @@ let
   with-lsps = builtins.any
     (v: v.enable)
     (builtins.attrValues config.nvim.lsp-instances);
-  enabled = config.nvim.layers.lsp.enable && (with-lsps || with-linters);
+  enabled = config.nvim.layers.lsp.enable && (with-lsps && with-linters);
 in
 {
   options.nvim = lib.mkOption {
@@ -24,6 +24,7 @@ in
   };
 
   config.nvim.plugins.start = lib.mkIf enabled [ pkgs.vimPlugins.null-ls-nvim ];
+  config.nvim.include-lspconfig = !enabled;
   config.nvim.init.lua =
     let
       null-text = builtins.concatStringsSep "," (
@@ -34,11 +35,8 @@ in
     in
     lib.mkIf enabled ''
       local nulls = require("null-ls")
-      nulls.config({
+      nulls.setup({
           sources={${null-text}}
       })
     '';
-  config.nvim.post.lua = lib.mkIf enabled ''
-    require("lspconfig")["null-ls"].setup({})
-  '';
 }

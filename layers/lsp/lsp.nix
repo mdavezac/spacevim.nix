@@ -56,10 +56,16 @@ in
         description = ''LSP instances'';
         default = { };
       };
+      options.include-lspconfig = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Whether to include lsp-config in plugins";
+      };
     };
   };
 
-  config.nvim.plugins.start = lib.mkIf enabled [ pkgs.vimPlugins.nvim-lspconfig ];
+  config.nvim.plugins.start =
+    lib.mkIf (enabled && config.nvim.include-lspconfig) [ pkgs.vimPlugins.nvim-lspconfig ];
   config.nvim.init.lua =
     let
       instances = lib.sort (a: b: a < b) config.nvim.lsp-instances;

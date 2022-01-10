@@ -21,7 +21,7 @@ in
     "<localleader>d" = {
       name = "+document";
       keys.d = {
-        command = "<cmd>Telescope lsp_document_diagnostics<cr>";
+        command = "<cmd>Telescope diagnostics bufnr=0<cr>";
         description = "LSP diagnostics";
       };
       keys.s = {

@@ -60,7 +60,7 @@ let
           + module.config.nvim.post.vim
           + ("\n\nlua <<EOF\n" + module.config.nvim.post.lua + "\nEOF");
         packages.spacevimnix = {
-          start = module.config.nvim.plugins.start;
+          start = pkgs.lib.unique module.config.nvim.plugins.start;
           opt = [ ];
         };
       };

@@ -19,7 +19,9 @@ in
             }
           end
         '';
-      filetypes = builtins.attrValues (builtins.mapAttrs (k: v: v.filetype) enabled_formatters);
+      filetypes = lib.unique (
+        builtins.attrValues (builtins.mapAttrs (k: v: v.filetype) enabled_formatters)
+      );
       buildFiletype = filetype:
         let
           ft_formatters = lib.filterAttrs (k: v: v.filetype == filetype) enabled_formatters;

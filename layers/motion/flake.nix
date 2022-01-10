@@ -24,6 +24,9 @@
       config.nvim.plugins.start = lib.mkIf config.nvim.layers.motion.enable [
         pkgs.vimPlugins.hop-nvim
       ];
+      config.nvim.init.lua = lib.mkIf config.nvim.layers.motion.enable ''
+        require('hop').setup()
+      '';
       config.nvim.which-key.normal = lib.mkIf config.nvim.layers.motion.enable {
         "g" = {
           keys.j = {

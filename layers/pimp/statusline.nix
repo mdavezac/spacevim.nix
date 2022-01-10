@@ -29,7 +29,7 @@ in
           sections = {
               lualine_a = {'mode'},
               lualine_b = {'branch', 'diff',
-                          {'diagnostics', sources={'nvim_lsp'}}},
+                          {'diagnostics', sources={'nvim_diagnostic'}}},
               lualine_c = { ${with_session} 'filename' },
               lualine_x = {'encoding', 'fileformat', 'filetype'},
               lualine_y = {'progress'},
