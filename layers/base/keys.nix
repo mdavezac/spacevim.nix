@@ -152,6 +152,10 @@ in
         command = "<cmd>tabNext<cr>";
         description = "Next tab";
       };
+      keys.q = {
+        command = "<cmd>cnext<cr>";
+        description = "Next quickfix";
+      };
     };
     "[" = {
       keys.b = {
@@ -161,6 +165,10 @@ in
       keys.t = {
         command = "<cmd>tabprevious<cr>";
         description = "Previous tab";
+      };
+      keys.q = {
+        command = "<cmd>cprev<cr>";
+        description = "Previous quickfix";
       };
     };
     "" = {

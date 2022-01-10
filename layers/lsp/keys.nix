@@ -32,7 +32,7 @@ in
     "<localleader>w" = {
       name = "+workspace";
       keys.d = {
-        command = "<cmd>Telescope lsp_workspace_diagnostics<cr>";
+        command = "<cmd>Telescope diagnostics<cr>";
         description = "LSP diagnostics";
       };
     };
