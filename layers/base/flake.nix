@@ -12,7 +12,7 @@
         };
       };
     });
-    module = { config, lib, pkgs, tools, ... }:
+    module = { config, lib, pkgs, ... }:
       let
         enabled = config.nvim.layers.base.enable;
       in

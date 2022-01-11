@@ -1,4 +1,4 @@
-{ lib, pkgs, config, tools, ... }:
+{ lib, pkgs, config, ... }:
 let
   which_key_mod = lib.mkOption {
     type = lib.types.attrsOf (lib.types.submodule {

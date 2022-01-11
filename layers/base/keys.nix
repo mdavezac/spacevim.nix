@@ -1,4 +1,4 @@
-{ config, lib, tools, ... }:
+{ config, lib, ... }:
 let
   cfg = config.nvim.layers;
   barbar = cfg.pimp.enable && cfg.pimp.tabline == "barbar";
