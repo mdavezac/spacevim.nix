@@ -9,6 +9,11 @@ let
         default = [ ];
         description = "Neovim plugins that are automatically started";
       };
+      options.opt = lib.mkOption {
+        type = lib.types.listOf lib.types.path;
+        default = [ ];
+        description = "Neovim plugins that are NOT automatically started";
+      };
     };
     default = { };
   };
@@ -49,4 +54,3 @@ in
     };
   };
 }
-
