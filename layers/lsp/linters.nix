@@ -16,6 +16,16 @@ in
           options.exe = lib.mkOption {
             type = lib.types.str;
           };
+          options.extra_args = lib.mkOption {
+            type = lib.types.str;
+            default = "";
+            description = "Additional arguments for the builtin tool";
+          };
+          options.timeout = lib.mkOption {
+            type = lib.types.int;
+            default = 5000;
+            description = "Timeout (ms) for the source";
+          };
         });
         description = ''Attribute sets of commands for builtins null-ls linters.'';
         default = { };
@@ -27,16 +37,18 @@ in
   config.nvim.include-lspconfig = !enabled;
   config.nvim.init.lua =
     let
-      null-text = builtins.concatStringsSep "," (
-        lib.mapAttrsToList
-          (k: v: "nulls.builtins.${k}.with({command=\"${v.exe}\"})")
-          (lib.filterAttrs (k: v: v.enable) config.nvim.linters)
-      );
+      null-text = builtins.concatStringsSep ","
+        (
+          lib.mapAttrsToList
+            (k: v: "nulls.builtins.${k}.with({command=\"${v.exe}\", extra_args={${v.extra_args}}, timeout=${builtins.toString v.timeout}})")
+            (lib.filterAttrs (k: v: v.enable) config.nvim.linters)
+        );
     in
     lib.mkIf enabled ''
       local nulls = require("null-ls")
       nulls.setup({
-          sources={${null-text}}
+          debug=true,
+          sources={${null-text}},
       })
     '';
 }
