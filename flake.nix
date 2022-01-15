@@ -37,8 +37,6 @@
     # testing
     ultest = { url = "github:rcarriga/vim-ultest"; flake = false; };
     vim-test = { url = "github:vim-test/vim-test"; flake = false; };
-    # project
-    auto-session = { url = "github:rmagatti/auto-session"; flake = false; };
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
@@ -56,7 +54,6 @@
         ./layers/tmux
         ./layers/dash
         ./layers/testing
-        ./layers/projects
       ];
       default = (import ./.) modules_paths;
       make-overlay = self: k: v: self.vimUtils.buildVimPluginFrom2Nix {

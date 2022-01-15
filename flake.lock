@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "auto-session": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1642240982,
-        "narHash": "sha256-DTDs1DCmNxhomVERiGes4mgj7NgfwY4qY/QnMfJLr+s=",
-        "owner": "rmagatti",
-        "repo": "auto-session",
-        "rev": "486e23f024a21c952758726497244e27aa3b9f0e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rmagatti",
-        "repo": "auto-session",
-        "type": "github"
-      }
-    },
     "catpuccino": {
       "flake": false,
       "locked": {
@@ -331,7 +315,6 @@
     },
     "root": {
       "inputs": {
-        "auto-session": "auto-session",
         "catpuccino": "catpuccino",
         "dash-nvim": "dash-nvim",
         "devshell": "devshell",
