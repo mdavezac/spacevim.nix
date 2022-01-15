@@ -116,12 +116,12 @@
           commands = [
             {
               name = "vim";
-              command = "${defaultPackage}/bin/nvim";
+              command = "${defaultPackage}/bin/nvim \"$@\"";
               help = "alias for neovim with spacenix config";
             }
             {
               name = "vi";
-              command = "${defaultPackage}/bin/nvim";
+              command = "${defaultPackage}/bin/nvim \"$@\"";
               help = "alias for neovim with spacenix config";
             }
           ];
