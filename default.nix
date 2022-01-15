@@ -29,6 +29,6 @@ in
   default_config.nvim = {
     languages.python = true;
     languages.nix = true;
-    colorscheme = "neon";
+    colorscheme = "monochrome";
   };
 }
