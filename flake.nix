@@ -32,8 +32,12 @@
     lspsaga-nvim = { url = "github:tami5/lspsaga.nvim"; flake = false; };
     # git
     octo = { url = "github:pwntester/octo.nvim"; flake = false; };
+    vim-diffview = { url = "github:sindrets/diffview.nvim"; flake = false; };
     # dash
-    dash-nvim = { url = "github:mrjones2014/dash.nvim"; flake = false; };
+    dash-nvim = {
+      url = "github:mrjones2014/dash.nvim";
+      flake = false;
+    };
     # testing
     ultest = { url = "github:rcarriga/vim-ultest"; flake = false; };
     vim-test = { url = "github:vim-test/vim-test"; flake = false; };

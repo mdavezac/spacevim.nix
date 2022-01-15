@@ -335,6 +335,7 @@
         "octo": "octo",
         "rainglow": "rainglow",
         "ultest": "ultest",
+        "vim-diffview": "vim-diffview",
         "vim-test": "vim-test",
         "zenbones": "zenbones"
       }
@@ -352,6 +353,22 @@
       "original": {
         "owner": "rcarriga",
         "repo": "vim-ultest",
+        "type": "github"
+      }
+    },
+    "vim-diffview": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1639757443,
+        "narHash": "sha256-MASAPn5EioAw5Q/gf6bqsPepWIEnBJS4OJ0MgGPXP8w=",
+        "owner": "sindrets",
+        "repo": "diffview.nvim",
+        "rev": "eef47458679a922ef101c1e4c07fb7b36d701385",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sindrets",
+        "repo": "diffview.nvim",
         "type": "github"
       }
     },

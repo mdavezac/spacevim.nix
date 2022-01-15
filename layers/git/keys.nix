@@ -42,6 +42,10 @@
         command = "<cmd>Gitsigns toggle_current_line_blame<cr>";
         description = "Toggle blame in codelens";
       };
+      keys.f = {
+        command = "<cmd>DiffviewFileHistory<cr>";
+        description = "File history";
+      };
     };
     "]" = {
       keys.h = {

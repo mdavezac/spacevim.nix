@@ -6,9 +6,12 @@ in
   config.nvim.plugins.start = lib.mkIf enable [
     pkgs.vimPlugins.neogit
     pkgs.vimPlugins.gitsigns-nvim
+    pkgs.vimPlugins.vim-diffview
   ];
   config.nvim.init.lua = lib.mkIf enable ''
-    require('neogit').setup {}
+    require('neogit').setup {
+      integrations = { diffview = true },
+    }
     require('gitsigns').setup {
       current_line_blame_opts = {
         virt_text = true,
@@ -22,7 +25,7 @@ in
         -- Text objects
         ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
         ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
-      }
+      },
     }
   '';
   config.nvim.post.lua = lib.mkIf (enable && config.nvim.layers.base.enable) ''
