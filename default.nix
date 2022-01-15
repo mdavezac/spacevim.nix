@@ -1,11 +1,8 @@
-layers: { system ? builtins.currentSystem, pkgs ? (import (import <nixpkgs>) { inherit system; }) }:
+module_paths: { system ? builtins.currentSystem, pkgs ? (import (import <nixpkgs>) { inherit system; }) }:
 let
-  layer_modules = builtins.map
-    (x: if (builtins.isAttrs x) then (builtins.getAttr system x) else x)
-    (builtins.catAttrs "module" (builtins.attrValues layers));
   evalModules_ = configuration: pkgs.lib.evalModules {
     modules = [ ./layers/module.nix { _module.args.pkgs = pkgs; } ]
-      ++ layer_modules
+      ++ module_paths
       ++ [ configuration ];
   };
   customNeovim_ = configuration:

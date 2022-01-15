@@ -10,8 +10,9 @@ in
       colorscheme =
         if (builtins.isNull config.nvim.colorscheme)
         then "gruvbox" else config.nvim.colorscheme;
+      enable-project = config.nvim.layers.projects.enable;
       with_session =
-        if config.nvim.layers.projects.enable then
+        if enable-project then
           "require('auto-session-library').current_session_name, "
         else "";
     in

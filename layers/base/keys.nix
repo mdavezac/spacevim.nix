@@ -20,6 +20,7 @@ let
       description = "Go to one pane right";
     };
   };
+  enable-tmux = config.nvim.layers.tmux.enable;
 in
 {
   config.nvim.which-key.normal = lib.mkIf config.nvim.layers.base.enable {
@@ -176,7 +177,7 @@ in
         command = "<cmd>q<cr>";
         description = "Quit current window";
       };
-    } // lib.mkIf (!config.nvim.layers.tmux.enable) switch_pane;
+    } // lib.mkIf (!enable-tmux) switch_pane;
     "<leader>" = {
       keys.q = {
         command = "<cmd>q<cr>";
@@ -189,11 +190,9 @@ in
     };
   };
   config.nvim.which-key.visual = lib.mkIf
-    (config.nvim.layers.base.enable &&
-      (!config.nvim.layers.tmux.enable))
-    switch_pane;
+    (config.nvim.layers.base.enable && (!enable-tmux))
+    { "" = switch_pane; };
   config.nvim.which-key.insert = lib.mkIf
-    (config.nvim.layers.base.enable &&
-      (!config.nvim.layers.tmux.enable))
-    switch_pane;
+    (config.nvim.layers.base.enable && (!enable-tmux))
+    { "" = switch_pane; };
 }
