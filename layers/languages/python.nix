@@ -15,6 +15,12 @@ in
       filetype = "python";
       enable = true;
     };
+    isort = {
+      exe = "${pkgs.python39Packages.isort}/bin/isort";
+      args = [ "-" ];
+      filetype = "python";
+      enable = true;
+    };
   };
   config.nvim.linters = enableIf {
     "diagnostics.flake8" = {
