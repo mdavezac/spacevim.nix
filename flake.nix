@@ -41,6 +41,8 @@
     # testing
     ultest = { url = "github:rcarriga/vim-ultest"; flake = false; };
     vim-test = { url = "github:vim-test/vim-test"; flake = false; };
+    # terminal
+    iron-nvim = { url = "github:hkupty/iron.nvim"; flake = false; };
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:

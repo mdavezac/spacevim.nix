@@ -39,4 +39,5 @@ in
     }
   '';
   config.nvim.format-on-save = enableIf [ "*.py" ];
+  config.nvim.layers.terminal.repl.favored.python = "python";
 }

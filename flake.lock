@@ -78,6 +78,22 @@
         "type": "github"
       }
     },
+    "iron-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1639942906,
+        "narHash": "sha256-8+if0eqGgVQ+G+7tylbNMvZB466TUgqf9ii5x8SdFH8=",
+        "owner": "hkupty",
+        "repo": "iron.nvim",
+        "rev": "3641cf02b05c41ab8492dd9c7640bc794c1e0985",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hkupty",
+        "repo": "iron.nvim",
+        "type": "github"
+      }
+    },
     "lsp-navigator": {
       "flake": false,
       "locked": {
@@ -320,6 +336,7 @@
         "devshell": "devshell",
         "flake-utils": "flake-utils",
         "guihua": "guihua",
+        "iron-nvim": "iron-nvim",
         "lsp-navigator": "lsp-navigator",
         "lspsaga-nvim": "lspsaga-nvim",
         "lush": "lush",
