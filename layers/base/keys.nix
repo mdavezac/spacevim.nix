@@ -1,198 +1,130 @@
 { config, lib, ... }:
 let
   cfg = config.nvim.layers;
-  barbar = cfg.pimp.enable && cfg.pimp.tabline == "barbar";
-  switch_pane = {
-    keys."[\"<C-h>\"]" = {
-      command = "<C-[><C-w>h";
-      description = "Go to one pane left";
-    };
-    keys."[\"<C-j>\"]" = {
-      command = "<C-[><C-w>j";
-      description = "Go to one pane down";
-    };
-    keys."[\"<C-k>\"]" = {
-      command = "<C-[><C-w>k";
-      description = "Go to one pane up";
-    };
-    keys."[\"<C-l>\"]" = {
-      command = "<C-[><C-w>l";
-      description = "Go to one pane right";
-    };
-  };
-  enable-tmux = config.nvim.layers.tmux.enable;
+  barbar = false; # cfg.pimp.enable && cfg.pimp.tabline == "barbar";
+  enable-tmux = false; # config.nvim.layers.tmux.enable;
 in
 {
-  config.nvim.which-key.normal = lib.mkIf config.nvim.layers.base.enable {
-    "<leader>f" = {
-      name = "+file";
-      keys.f = {
-        command = "<cmd>Telescope find_files<cr>";
-        description = "Find File";
-      };
-      keys.g = {
+  config.nvim.which-key = lib.mkIf config.nvim.layers.base.enable {
+    groups = [
+      { prefix = "<leader>f"; name = "+File"; }
+      { prefix = "<leader>b"; name = "+Buffer"; }
+      { prefix = "<leader>w"; name = "+Window"; }
+      { prefix = "<leader>s"; name = "+Search"; }
+      { prefix = "<leader>t"; name = "+Toggles"; }
+    ];
+    bindings = [
+      { key = "<leader>ff"; command = "<cmd>Telescope find_files<cr>"; description = "Find"; }
+      {
+        key = "<leader>fg";
         command = "<cmd>Telescope git_files<cr>";
-        description = "Open files from git repo";
-      };
-      keys.r = {
-        command = "<cmd>Telescope oldfiles<cr>";
-        description = "Open Recent File";
-      };
-      keys.n = {
-        command = "<cmd>enew<cr>";
-        description = "New File";
-      };
-      keys.i = {
+        description = "Repo only";
+      }
+      { key = "<leader>fr"; command = "<cmd>Telescope oldfiles<cr>"; description = "Recent"; }
+      { key = "<leader>fn"; command = "<cmd>enew<cr>"; description = "New"; }
+      {
+        key = "<leader>fi";
         command = "<cmd>view ${placeholder "out"}<cr>";
-        description = "View spacevim.nix's init.vim";
-      };
-    };
-    "<leader>b" = {
-      name = "+buffers";
-      keys.b = {
-        command = "<cmd>Telescope buffers<cr>";
-        description = "Find buffer";
-      };
-      keys."[\"<TAB>\"]" = {
+        description = "Open vim.init";
+      }
+      { key = "<leader>bb"; command = "<cmd>Telescope buffers<cr>"; description = "Find"; }
+      { key = "<leader>b<TAB>"; command = "<cmd>b#<cr>"; description = "Switch to last"; }
+      {
+        key = "<leader><TAB>";
         command = "<cmd>b#<cr>";
-        description = "Switch back to last buffer";
-      };
-    } // (if barbar then { } else {
-      keys.d = {
-        command = "<cmd>bdel<cr>";
-        description = "Delete current buffer";
-      };
-      keys.D = {
-        command = "<cmd>bdel!<cr>";
-        description = "Delete current buffer forcibly";
-      };
-    });
-    "<leader>w" = {
-      name = "+windows";
-      keys.s = {
-        command = "<cmd>split<cr>";
-        description = "Split horizontally";
-      };
-      keys.v = {
-        command = "<cmd>vsplit<cr>";
-        description = "Split vertically";
-      };
-      keys.c = {
-        command = "<cmd>close<cr>";
-        description = "Close current split";
-      };
-      keys."[\"=\"]" = {
-        command = "<C-w>=";
-        description = "Equalize window sizes";
-      };
-    };
-    "<leader>s" = {
-      name = "+search";
-      keys.s = {
+        description = "Switch to last buffer";
+      }
+      (lib.mkIf (!barbar)
+        { key = "<leader>bd"; command = "<cmd>bdel<cr>"; description = "Delete"; })
+      (lib.mkIf (!barbar)
+        { key = "<leader>bD"; command = "<cmd>bdel!<cr>"; description = "Force delete"; })
+      { key = "<leader>wh"; command = "<cmd>split<cr>"; description = "Horizontal split"; }
+      { key = "<leader>wv"; command = "<cmd>vsplit<cr>"; description = "Vertical split"; }
+      { key = "<leader>w="; command = "<C-w>="; description = "Equalize size"; }
+      { key = "<leader>wz"; command = "<C-w>|"; description = "Zoom"; }
+      {
+        key = "<leader>ss";
         command = "<cmd>Telescope current_buffer_fuzzy_find<cr>";
-        description = "Search current buffer";
-      };
-      keys.p = {
-        command = "<cmd>Telescope live_grep<cr>";
-        description = "Search current project";
-      };
-      keys.g = {
+        description = "Buffer";
+      }
+      { key = "<leader>sp"; command = "<cmd>Telescope live_grep<cr>"; description = "Project"; }
+      {
+        key = "<leader>sg";
         command = "<cmd>Telescope grep_string<cr>";
-        description = "Search current project for string under cursor";
-      };
-      keys.h = {
-        command = "<cmd>Telescope command_history<cr>";
-        description = "Search command history";
-      };
-      keys."[\"/\"]" = {
+        description = "Project with word under cursor";
+      }
+      {
+        key = "<leader>s/";
         command = "<cmd>Telescope search_history<cr>";
-        description = "Search search history";
-      };
-      keys."[\" \"]" = {
+        description = "Search-history";
+      }
+      {
+        key = "<leader>sq";
+        command = "<cmd>Telescope command_history<cr>";
+        description = "Command-history";
+      }
+      {
+        key = "<leader>sh";
         command = "<cmd>nohlsearch<cr>";
-        description = "Turn off current search highlight";
-      };
-    };
-    "<leader>t" = {
-      name = "+themes and toggles";
-      keys.c = {
+        description = "Turn-off search highlight";
+      }
+      {
+        key = "<leader>sc";
         command = "<cmd>Telescope colorscheme<cr>";
-        description = "Search and apply colorscheme";
-      };
-      keys.L =
-        let
-          command = builtins.concatStringsSep "; " [
-            "local is_on = vim.o.relativenumber and vim.o.number"
-            "vim.o.number = not is_on"
-            "vim.o.relativenumber = not is_on"
-          ];
-        in
+        description = "colorschemes";
+      }
+      {
+        key = "<leader>tl";
+        command = "<CMD>" + (builtins.concatStringsSep ";" [
+          "local is_on = vim.o.number and not vim.o.relativenumber"
+          "vim.o.number = not is_on"
+          "vim.o.relativenumber = false;"
+        ]) + "<CR>";
+        description = "Absolute line numbers";
+      }
+      {
+        key = "<leader>tL";
+        command = "<CMD>" + (builtins.concatStringsSep ";" [
+          "local is_on = vim.o.number and not vim.o.relativenumber"
+          "vim.o.number = not is_on"
+          "vim.o.relativenumber = false;"
+        ]) + "<CR>";
+        description = "Relative line numbers";
+      }
+      { key = "]b"; command = "<CMD>bnext<CR>"; description = "Next buffer"; }
+      { key = "[b"; command = "<CMD>bprevious<CR>"; description = "Previous buffer"; }
+      { key = "]t"; command = "<CMD>tnext<CR>"; description = "Next tab"; }
+      { key = "[t"; command = "<CMD>tprevious<CR>"; description = "Previous tab"; }
+      { key = "]q"; command = "<CMD>cnext<CR>"; description = "Next quickfix"; }
+      { key = "[q"; command = "<CMD>cprevious<CR>"; description = "Previous quickfix"; }
+      (lib.mkIf (!enable-tmux)
         {
-          command = "<cmd>lua ${command}<CR>";
-          description = "Toggle relative line numbers";
-        };
-      keys.l =
-        let
-          command = builtins.concatStringsSep "; " [
-            "local is_on = vim.o.number and not vim.o.relativenumber"
-            "vim.o.number = not is_on"
-            "vim.o.relativenumber = false;"
-          ];
-        in
+          key = "<C-h>";
+          command = "<ESC><C-w>h";
+          description = "Go to one pane left";
+          modes = [ "normal" "visual" "insert" ];
+        })
+      (lib.mkIf (!enable-tmux)
         {
-          command = "<cmd>lua ${command}<CR>";
-          description = "Toggle absolute line numbers";
-        };
-    };
-    "]" = {
-      keys.b = {
-        command = "<cmd>bnext<cr>";
-        description = "Next buffer";
-      };
-      keys.t = {
-        command = "<cmd>tabNext<cr>";
-        description = "Next tab";
-      };
-      keys.q = {
-        command = "<cmd>cnext<cr>";
-        description = "Next quickfix";
-      };
-    };
-    "[" = {
-      keys.b = {
-        command = "<cmd>bprevious<cr>";
-        description = "Previous buffer";
-      };
-      keys.t = {
-        command = "<cmd>tabprevious<cr>";
-        description = "Previous tab";
-      };
-      keys.q = {
-        command = "<cmd>cprev<cr>";
-        description = "Previous quickfix";
-      };
-    };
-    "" = {
-      keys."[\"<C-q>\"]" = {
-        command = "<cmd>q<cr>";
-        description = "Quit current window";
-      };
-    } // lib.mkIf (!enable-tmux) switch_pane;
-    "<leader>" = {
-      keys.q = {
-        command = "<cmd>q<cr>";
-        description = "Quit current window";
-      };
-      keys."[\"<TAB>\"]" = {
-        command = "<cmd>b#<cr>";
-        description = "Switch back to last buffer";
-      };
-    };
+          key = "<C-j>";
+          command = "<ESC><C-w>j";
+          description = "Go to one pane down";
+          modes = [ "normal" "visual" "insert" ];
+        })
+      (lib.mkIf (!enable-tmux)
+        {
+          key = "<C-k>";
+          command = "<ESC><C-w>k";
+          description = "Go to one pane up";
+          modes = [ "normal" "visual" "insert" ];
+        })
+      (lib.mkIf (!enable-tmux)
+        {
+          key = "<C-l>";
+          command = "<ESC><C-w>l";
+          description = "Go to one pane right";
+          modes = [ "normal" "visual" "insert" ];
+        })
+    ];
   };
-  config.nvim.which-key.visual = lib.mkIf
-    (config.nvim.layers.base.enable && (!enable-tmux))
-    { "" = switch_pane; };
-  config.nvim.which-key.insert = lib.mkIf
-    (config.nvim.layers.base.enable && (!enable-tmux))
-    { "" = switch_pane; };
 }

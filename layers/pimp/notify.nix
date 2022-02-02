@@ -17,12 +17,13 @@ in
       else ""
     );
   };
-  config.nvim.which-key.normal = lib.mkIf with_telescope {
-    "<leader>s" = {
-      keys.n = {
+  config.nvim.which-key = lib.mkIf with_telescope {
+    bindings = [
+      {
+        key = "<leader>sn";
         command = "<cmd>Telescope notify<cr>";
-        description = "Search notifications";
-      };
-    };
+        description = "Notifications";
+      }
+    ];
   };
 }

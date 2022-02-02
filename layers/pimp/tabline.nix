@@ -77,58 +77,60 @@ in
         }
       '';
   };
-  config.nvim.which-key.normal = lib.mkIf barbar {
-    "<leader>b" = {
-      keys.n = {
-        command = "<cmd>BufferNext<cr>";
-        description = "Next buffer";
-      };
-      keys.N = {
+  config.nvim.which-key = lib.mkIf barbar {
+    bindings = [
+      { key = "<leader>bn"; command = "<cmd>BufferNext<cr>"; description = "Next"; }
+      {
+        key = "<leader>bN";
         command = "<cmd>BufferMoveNext<cr>";
-        description = "Reorder buffer forward";
-      };
-      keys.p = {
-        command = "<cmd>BufferPrevious<cr>";
-        description = "Previous buffer";
-      };
-      keys.P = {
+        description = "Reorder forward";
+      }
+      { key = "<leader>bp"; command = "<cmd>BufferPrevious<cr>"; description = "Previous"; }
+      {
+        key = "<leader>bP";
         command = "<cmd>BufferMovePrevious<cr>";
-        description = "Reorder buffer backward";
-      };
-      keys."[\",\"]" = {
+        description = "Reorder backward";
+      }
+      {
+        key = "<leader>b,";
         command = "<cmd>BufferPick<cr>";
-        description = "Pick buffer via letter";
-      };
-      keys.t = {
+        description = "Pick via letter";
+      }
+      {
+        key = "<leader>bt";
         command = "<cmd>BufferPin<cr>";
         description = "Pin/Unpin buffer";
-      };
-      keys.o = {
+      }
+      {
+        key = "<leader>bo";
         command = "<cmd>BufferOrderByBufferNumber<cr>";
-        description = "Order by buffer number";
-      };
-      keys.O = {
+        description = "Order by number";
+      }
+      {
+        key = "<leader>bO";
         command = "<cmd>BufferOrderByDirectory<cr>";
         description = "Order by directory";
-      };
-      keys.C = {
+      }
+      {
+        key = "<leader>bC";
         command = "<cmd>BufferCloseAllButPinned<cr>";
-        description = "Close all but pinned buffer";
-      };
-      keys.d = {
+        description = "Close all but pinned";
+      }
+      {
+        key = "<leader>bd";
         command = "<cmd>BufferClose<cr>";
-        description = "Delete current buffer";
-      };
-      keys.D = {
+        description = "Delete";
+      }
+      {
+        key = "<leader>bD";
         command = "<cmd>BufferClose!<cr>";
-        description = "Delete current buffer forcibly";
-      };
-    };
-    "g" = {
-      keys.b = {
+        description = "Delete forcibly";
+      }
+      {
+        key = "gb";
         command = "<cmd>BufferPick<cr>";
         description = "Pick buffer via letter";
-      };
-    };
+      }
+    ];
   };
 }

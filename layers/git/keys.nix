@@ -1,63 +1,64 @@
 { config, lib, pkgs, ... }: {
-  config.nvim.which-key.normal = lib.mkIf config.nvim.layers.git.enable {
-    "<leader>g" = {
-      name = "+git";
-      keys.c = {
-        command = "<cmd>Telescope git_commit<cr>";
-        description = "Git commits";
-      };
-      keys.s = {
-        command = ''<cmd>Neogit kind=vsplit<cr>'';
-        description = "Git status";
-      };
-      keys.b = {
+  config.nvim.which-key = lib.mkIf config.nvim.layers.git.enable {
+    groups = [{ prefix = "<leader>g"; name = "+git"; }];
+    bindings = [
+      { key = "<leader>gc"; command = "<cmd>Telescope git_commit<cr>"; description = "Commits"; }
+      { key = "<leader>gs"; command = ''<cmd>Neogit kind=vsplit<cr>''; description = "Status"; }
+      {
+        key = "<leader>gb";
         command = "<cmd>lua require('gitsigns').stage_buffer() <cr>";
         description = "Stage whole buffer";
-      };
-      keys.X = {
+      }
+      {
+        key = "<leader>gX";
         command = "<cmd>lua require('gitsigns').reset_buffer() <cr>";
         description = "Reset whole buffer";
-      };
-      keys.p = {
+      }
+      {
+        key = "<leader>gp";
         command = "<cmd>lua require('gitsigns').preview_hunk() <cr>";
         description = "Preview hunk";
-      };
-      keys.h = {
+      }
+      {
+        key = "<leader>gh";
         command = "<cmd>lua require('gitsigns').stage_hunk() <cr>";
         description = "Stage hunk";
-      };
-      keys.H = {
+      }
+      {
+        key = "<leader>gH";
         command = "<cmd>lua require('gitsigns').undo_stage_hunk() <cr>";
         description = "Undo stage hunk";
-      };
-      keys.x = {
+      }
+      {
+        key = "<leader>gx";
         command = "<cmd>lua require('gitsigns').reset_hunk() <cr>";
         description = "Reset hunk";
-      };
-      keys.l = {
+      }
+      {
+        key = "<leader>gl";
         command = "<cmd>lua require('gitsigns').blame_line(true) <cr>";
         description = "Blame line";
-      };
-      keys.t = {
+      }
+      {
+        key = "<leader>gt";
         command = "<cmd>Gitsigns toggle_current_line_blame<cr>";
         description = "Toggle blame in codelens";
-      };
-      keys.f = {
+      }
+      {
+        key = "<leader>gf";
         command = "<cmd>DiffviewFileHistory<cr>";
         description = "File history";
-      };
-    };
-    "]" = {
-      keys.h = {
+      }
+      {
+        key = "]h";
         command = "<cmd>lua require('gitsigns.actions').next_hunk()<cr>";
-        description = "Go to next hunk";
-      };
-    };
-    "[" = {
-      keys.h = {
+        description = "Hunk";
+      }
+      {
+        key = "[h";
         command = "<cmd>lua require('gitsigns.actions').prev_hunk()<cr>";
-        description = "Go to next hunk";
-      };
-    };
+        description = "Hunk";
+      }
+    ];
   };
 }

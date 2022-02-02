@@ -24,20 +24,23 @@
   config.nvim.init.lua = lib.mkIf config.nvim.layers.motion.enable ''
     require('hop').setup()
   '';
-  config.nvim.which-key.normal = lib.mkIf config.nvim.layers.motion.enable {
-    "g" = {
-      keys.j = {
+  config.nvim.which-key = lib.mkIf config.nvim.layers.motion.enable {
+    bindings = [
+      {
+        key = "gj";
         command = "<cmd>HopChar1<cr>";
-        description = "Jump to a character";
-      };
-      keys.J = {
+        description = "Jump to character";
+      }
+      {
+        key = "gJ";
         command = "<cmd>HopChar2<cr>";
-        description = "Jump to a two-character pattern";
-      };
-      keys.s = {
+        description = "Jump to two-character pattern";
+      }
+      {
+        key = "gs";
         command = "<cmd>HopPattern<cr>";
-        description = "Jump to a regex pattern";
-      };
-    };
+        description = "Jump to regex pattern";
+      }
+    ];
   };
 }

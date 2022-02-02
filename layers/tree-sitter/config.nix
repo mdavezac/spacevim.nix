@@ -75,12 +75,4 @@ in
       set foldexpr=nvim_treesitter#foldexpr()
       " End of tree-sitter layer
     '';
-  config.nvim.post.lua = lib.mkIf (enabled && config.nvim.layers.base.enable) ''
-    require('which-key').register({
-      ["if"] = [[function body]],
-      ["af"] = [[function]],
-      ["ic"] = [[class body]],
-      ["ac"] = [[class]],
-    }, {mode="o", prefix=""})
-  '';
 }

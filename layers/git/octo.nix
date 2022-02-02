@@ -25,74 +25,92 @@ in
     '';
   };
 
-  config.nvim.which-key.normal."<leader>o" = lib.mkIf enable {
-    name = "+github";
-    keys.o = {
-      command = "<cmd> Octo pr list <cr>";
-      description = "List all prs";
-    };
-    keys.O = {
-      command = "<cmd> Octo pr checkout <cr>";
-      description = "Checkout current PR";
-    };
-    keys.b = {
-      command = "<cmd> Octo pr browser <cr>";
-      description = "Open pr in browser";
-    };
-    keys.v = {
-      command = "<cmd> Octo pr checks <cr>";
-      description = "Check checks";
-    };
-    keys.d = {
-      command = "<cmd> Octo pr changes <cr>";
-      description = "List changes per file";
-    };
-    keys.c = {
-      command = "<cmd> Octo comment add <cr>";
-      description = "Add comment";
-    };
-    keys.C = {
-      command = "<cmd> Octo comment delete <cr>";
-      description = "Delete comment";
-    };
-    keys.r = {
-      command = "<cmd> Octo review resume <cr>";
-      description = "Resume review";
-    };
-    keys.R = {
-      command = "<cmd> Octo review close <cr>";
-      description = "Stop review";
-    };
-    keys.s = {
-      command = "<cmd> Octo review start <cr>";
-      description = "Start review";
-    };
-    keys.S = {
-      command = "<cmd> Octo review submit <cr>";
-      description = "Submit review";
-    };
-  };
-  config.nvim.which-key.normal."<leader>oe" = lib.mkIf enable {
-    name = "+emote";
-    keys.u = {
-      command = "<cmd> Octo reaction thumbs_up<cr>";
-      description = "👍";
-    };
-    keys.d = {
-      command = "<cmd> Octo reaction thumbs_down<cr>";
-      description = "👎";
-    };
-    keys.e = {
-      command = "<cmd> Octo reaction eyes<cr>";
-      description = "👀";
-    };
-    keys.h = {
-      command = "<cmd> Octo reaction hooray<cr>";
-      description = "🙌";
-    };
-    keys.p = {
-      command = "<cmd> Octo reaction party<cr>";
-      description = "🎉";
-    };
+  config.nvim.which-key = lib.mkIf enable {
+    groups = [
+      { prefix = "<leader>o"; name = "+github"; }
+      { prefix = "<leader>oe"; name = "+emote"; }
+    ];
+    bindings = [
+      {
+        key = "<leader>oo";
+        command = "<cmd> Octo pr list <cr>";
+        description = "List PRs";
+      }
+      {
+        key = "<leader>oO";
+        command = "<cmd> Octo pr checkout <cr>";
+        description = "Checkout current PR";
+      }
+      {
+        key = "<leader>ob";
+        command = "<cmd> Octo pr browser <cr>";
+        description = "Open pr in browser";
+      }
+      {
+        key = "<leader>ov";
+        command = "<cmd> Octo pr checks <cr>";
+        description = "Check checks";
+      }
+      {
+        key = "<leader>od";
+        command = "<cmd> Octo pr changes <cr>";
+        description = "List changes per file";
+      }
+      {
+        key = "<leader>oc";
+        command = "<cmd> Octo comment add <cr>";
+        description = "Add comment";
+      }
+      {
+        key = "<leader>oC";
+        command = "<cmd> Octo comment delete <cr>";
+        description = "Delete comment";
+      }
+      {
+        key = "<leader>or";
+        command = "<cmd> Octo review resume <cr>";
+        description = "Resume review";
+      }
+      {
+        key = "<leader>oR";
+        command = "<cmd> Octo review close <cr>";
+        description = "Stop review";
+      }
+      {
+        key = "<leader>os";
+        command = "<cmd> Octo review start <cr>";
+        description = "Start review";
+      }
+      {
+        key = "<leader>oS";
+        command = "<cmd> Octo review submit <cr>";
+        description = "Submit review";
+      }
+      {
+        key = "<leader>oeu";
+        command = "<cmd> Octo reaction thumbs_up<cr>";
+        description = "👍";
+      }
+      {
+        key = "<leader>oed";
+        command = "<cmd> Octo reaction thumbs_down<cr>";
+        description = "👎";
+      }
+      {
+        key = "<leader>oee";
+        command = "<cmd> Octo reaction eyes<cr>";
+        description = "👀";
+      }
+      {
+        key = "<leader>oeh";
+        command = "<cmd> Octo reaction hooray<cr>";
+        description = "🙌";
+      }
+      {
+        key = "<leader>oep";
+        command = "<cmd> Octo reaction party<cr>";
+        description = "🎉";
+      }
+    ];
   };
 }

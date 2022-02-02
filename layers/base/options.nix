@@ -1,40 +1,64 @@
 { lib, pkgs, config, ... }:
 let
-  which_key_mod = lib.mkOption {
-    type = lib.types.attrsOf (lib.types.submodule {
-      options.command = lib.mkOption {
+  common_options = {
+    modes = lib.mkOption {
+      type = lib.types.listOf (lib.types.enum [
+        "normal"
+        "visual"
+        "replace"
+        "command"
+        "insert"
+        "operator"
+      ]);
+      default = [ "normal" ];
+      description = "Modes for which this is a binding";
+    };
+    filetypes = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ "any" ];
+      description = "Filetypes for which this is a binding";
+    };
+  };
+  prefix_mod = lib.types.submodule ({
+    options = {
+      prefix = lib.mkOption {
+        type = lib.types.str;
+        description = "Prefix for the binding";
+        default = "<leader>";
+      };
+      name = lib.mkOption {
+        type = lib.types.str;
+        description = "Name for a group of keys";
+      };
+    } // common_options;
+  });
+  key_mod = lib.types.submodule ({
+    options = {
+      key = lib.mkOption {
+        type = lib.types.str;
+        description = "Key associated with the binding";
+      };
+      command = lib.mkOption {
         type = lib.types.str;
         description = "Command called by the key mapping";
+        default = "";
       };
-      options.description = lib.mkOption {
+      description = lib.mkOption {
         type = lib.types.str;
         description = "Description for the key mapping";
         default = "";
       };
-    });
-    default = { };
-  };
-  which_group_mod = lib.mkOption {
-    type = lib.types.attrsOf (lib.types.submodule {
-      options.name = lib.mkOption {
-        type = lib.types.str;
-        description = "Name for a group of keys";
-        default = "";
+      noremap = lib.mkOption {
+        type = lib.types.bool;
+        description = "Whether to use noremap";
+        default = true;
       };
-      options.keys = which_key_mod;
-    });
-    default = { };
-  };
-  which_mode_mod = lib.mkOption {
-    type = lib.types.submodule {
-      options.normal = which_group_mod;
-      options.visual = which_group_mod;
-      options.replace = which_group_mod;
-      options.command = which_group_mod;
-      options.insert = which_group_mod;
-    };
-    description = "Mode for which the key is valid";
-    default = { };
+    } // common_options;
+  });
+  which_key_bindings = mod: lib.mkOption {
+    type = lib.types.listOf mod;
+    description = "List of key bindings and prefix descriptions";
+    default = [ ];
   };
 in
 {
@@ -54,16 +78,22 @@ in
           };
         };
       };
-      options.which-key = which_mode_mod;
-      options.leader = lib.mkOption {
-        type = lib.types.str;
-        default = " ";
-        description = "The leader key is the main entry-point into the which-key menu";
-      };
-      options.localleader = lib.mkOption {
-        type = lib.types.str;
-        default = ",";
-        description = "The `local` leader key is a main entry point for filetype specific actions";
+      options.which-key = lib.mkOption {
+        type = lib.types.submodule {
+          options.bindings = which_key_bindings key_mod;
+          options.groups = which_key_bindings prefix_mod;
+          options.leader = lib.mkOption {
+            type = lib.types.str;
+            default = " ";
+            description = "The leader key is the main entry-point into the which-key menu";
+          };
+          options.localleader = lib.mkOption {
+            type = lib.types.str;
+            default = ",";
+            description = "The `local` leader key is a main entry point for filetype specific actions";
+          };
+        };
+        default = { };
       };
       options.case = lib.mkOption {
         type = lib.types.enum [ "nomatch" "match" "smart" ];

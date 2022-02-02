@@ -7,34 +7,37 @@ let
   enabled = config.nvim.layers.lsp.enable && (with-lsps || with-linters);
 in
 {
-  config.nvim.which-key.normal = lib.mkIf enabled {
-    "g" = {
-      keys.r = {
+  config.nvim.which-key = lib.mkIf enabled {
+    groups = [
+      { prefix = "<localleader>w"; name = "+Buffer"; }
+      { prefix = "<localleader>d"; name = "+Workspace"; }
+    ];
+    bindings = [
+      {
+        key = "gr";
         command = "<cmd>Telescope lsp_references<cr>";
-        description = "Go to reference";
-      };
-      keys.d = {
+        description = "Reference";
+      }
+      {
+        key = "gd";
         command = "<cmd>Telescope lsp_definitions<cr>";
-        description = "Go to definitions";
-      };
-    };
-    "<localleader>d" = {
-      name = "+document";
-      keys.d = {
+        description = "Definitions";
+      }
+      {
+        key = "<localleader>dd";
         command = "<cmd>Telescope diagnostics bufnr=0<cr>";
         description = "LSP diagnostics";
-      };
-      keys.s = {
+      }
+      {
+        key = "<localleader>ds";
         command = "<cmd>Telescope lsp_document_symbols<cr>";
-        description = "Symbols found by LSP";
-      };
-    };
-    "<localleader>w" = {
-      name = "+workspace";
-      keys.d = {
+        description = "LSP Symbols";
+      }
+      {
+        key = "<localleader>dd";
         command = "<cmd>Telescope diagnostics<cr>";
         description = "LSP diagnostics";
-      };
-    };
+      }
+    ];
   };
 }

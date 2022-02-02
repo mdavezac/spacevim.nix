@@ -6,12 +6,9 @@ let
     && ((builtins.length (builtins.attrNames enabled_formatters)) > 0);
 in
 {
-  config.nvim.which-key.normal = lib.mkIf enabled {
-    "<localleader>" = {
-      keys.f = {
-        command = "<cmd>FormatWrite<cr>";
-        description = "Format current buffer";
-      };
-    };
+  config.nvim.which-key = lib.mkIf enabled {
+    bindings = [
+      { key = "<localleader>f"; command = "<cmd>FormatWrite<cr>"; description = "Format"; }
+    ];
   };
 }

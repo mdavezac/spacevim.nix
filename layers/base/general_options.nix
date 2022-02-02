@@ -28,8 +28,8 @@ in
     '';
     lua = ''
       -- General options defined in base layer
-      vim.g.mapleader = "${config.nvim.leader}"
-      vim.g.maplocalleader = "${config.nvim.localleader}"
+      vim.g.mapleader = "${config.nvim.which-key.leader}"
+      vim.g.maplocalleader = "${config.nvim.which-key.localleader}"
       vim.o.ignorecase = ${case.ignore}
       vim.o.smartcase = ${case.smart}
       vim.o.hlsearch = ${if config.nvim.highlight-search then "true" else "false"}
