@@ -9,8 +9,8 @@ in
 {
   config.nvim.which-key = lib.mkIf enabled {
     groups = [
-      { prefix = "<localleader>w"; name = "+Buffer"; }
-      { prefix = "<localleader>d"; name = "+Workspace"; }
+      { prefix = "<localleader>d"; name = "+Buffer"; }
+      { prefix = "<localleader>w"; name = "+Workspace"; }
     ];
     bindings = [
       {

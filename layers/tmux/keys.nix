@@ -1,35 +1,30 @@
 { config, lib, ... }: {
-  config.nvim.which-key =
-    let
-      switch_pane = {
-        keys."[\"<C-h>\"]" = {
-          command = "<cmd>TmuxNavigateLeft<cr>";
-          description = "Go to one pane left";
-        };
-        keys."[\"<C-j>\"]" = {
-          command = "<cmd>TmuxNavigateDown<cr>";
-          description = "Go to one pane down";
-        };
-        keys."[\"<C-k>\"]" = {
-          command = "<cmd>TmuxNavigateUp<cr>";
-          description = "Go to one pane up";
-        };
-        keys."[\"<C-l>\"]" = {
-          command = "<cmd>TmuxNavigateRight<cr>";
-          description = "Go to one pane right";
-        };
-      };
-    in
-    lib.mkIf config.nvim.layers.tmux.enable {
-      normal = {
-        "" = switch_pane;
-        "w" = switch_pane;
-      };
-      visual = {
-        "" = switch_pane;
-      };
-      insert = {
-        "" = switch_pane;
-      };
-    };
+  config.nvim.which-key = lib.mkIf config.nvim.layers.tmux.enable {
+    bindings = [
+      {
+        key = "<C-h>";
+        command = "<cmd>TmuxNavigateLeft<cr>";
+        description = "Go to one pane left";
+        modes = [ "normal" "visual" "insert" ];
+      }
+      {
+        key = "<C-j>";
+        command = "<cmd>TmuxNavigateDown<cr>";
+        description = "Go to one pane down";
+        modes = [ "normal" "visual" "insert" ];
+      }
+      {
+        key = "<C-k>";
+        command = "<cmd>TmuxNavigateUp<cr>";
+        description = "Go to one pane up";
+        modes = [ "normal" "visual" "insert" ];
+      }
+      {
+        key = "<C-l>";
+        command = "<cmd>TmuxNavigateRight<cr>";
+        description = "Go to one pane right";
+        modes = [ "normal" "visual" "insert" ];
+      }
+    ];
+  };
 }

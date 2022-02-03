@@ -23,21 +23,21 @@ in
     };
   };
   config.nvim.format-on-save = enableIf [ "*.py" ];
-  # config.nvim.linters = enableIf {
-  #   "diagnostics.flake8" = {
-  #     exe = "${pkgs.python38Packages.flake8}/bin/flake8";
-  #     enable = false;
-  #   };
-  # };
-  # config.nvim.dash.python = enableIf [ "python3" ];
-  # config.nvim.post.lua = enableIf ''
-  #   require('nvim-treesitter.configs').setup {
-  #       pyfold = {
-  #           enable = true,
-  #           -- Sets provided foldtext on window where module is active
-  #           custom_foldtext = true
-  #       }
-  #   }
-  # '';
-  # config.nvim.layers.terminal.repl.favored.python = "python";
+  config.nvim.linters = enableIf {
+    "diagnostics.flake8" = {
+      exe = "${pkgs.python38Packages.flake8}/bin/flake8";
+      enable = false;
+    };
+  };
+  config.nvim.dash.python = enableIf [ "python3" ];
+  config.nvim.post.lua = enableIf ''
+    require('nvim-treesitter.configs').setup {
+        pyfold = {
+            enable = true,
+            -- Sets provided foldtext on window where module is active
+            custom_foldtext = true
+        }
+    }
+  '';
+  config.nvim.layers.terminal.repl.favored.python = "python";
 }

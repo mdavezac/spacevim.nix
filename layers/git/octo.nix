@@ -28,7 +28,7 @@ in
   config.nvim.which-key = lib.mkIf enable {
     groups = [
       { prefix = "<leader>o"; name = "+github"; }
-      { prefix = "<leader>oe"; name = "+emote"; }
+      { prefix = "<leader>oe"; name = "+emote"; filetypes = [ "octo" ]; }
     ];
     bindings = [
       {
@@ -40,21 +40,25 @@ in
         key = "<leader>oO";
         command = "<cmd> Octo pr checkout <cr>";
         description = "Checkout current PR";
+        filetypes = [ "octo" ];
       }
       {
         key = "<leader>ob";
         command = "<cmd> Octo pr browser <cr>";
         description = "Open pr in browser";
+        filetypes = [ "octo" ];
       }
       {
         key = "<leader>ov";
         command = "<cmd> Octo pr checks <cr>";
         description = "Check checks";
+        filetypes = [ "octo" ];
       }
       {
         key = "<leader>od";
         command = "<cmd> Octo pr changes <cr>";
         description = "List changes per file";
+        filetypes = [ "octo" ];
       }
       {
         key = "<leader>oc";
@@ -70,46 +74,55 @@ in
         key = "<leader>or";
         command = "<cmd> Octo review resume <cr>";
         description = "Resume review";
+        filetypes = [ "octo" ];
       }
       {
         key = "<leader>oR";
         command = "<cmd> Octo review close <cr>";
         description = "Stop review";
+        filetypes = [ "octo" ];
       }
       {
         key = "<leader>os";
         command = "<cmd> Octo review start <cr>";
         description = "Start review";
+        filetypes = [ "octo" ];
       }
       {
         key = "<leader>oS";
         command = "<cmd> Octo review submit <cr>";
         description = "Submit review";
+        filetypes = [ "octo" ];
       }
       {
         key = "<leader>oeu";
         command = "<cmd> Octo reaction thumbs_up<cr>";
         description = "👍";
+        filetypes = [ "octo" ];
       }
       {
         key = "<leader>oed";
         command = "<cmd> Octo reaction thumbs_down<cr>";
         description = "👎";
+        filetypes = [ "octo" ];
       }
       {
         key = "<leader>oee";
         command = "<cmd> Octo reaction eyes<cr>";
         description = "👀";
+        filetypes = [ "octo" ];
       }
       {
         key = "<leader>oeh";
         command = "<cmd> Octo reaction hooray<cr>";
         description = "🙌";
+        filetypes = [ "octo" ];
       }
       {
         key = "<leader>oep";
         command = "<cmd> Octo reaction party<cr>";
         description = "🎉";
+        filetypes = [ "octo" ];
       }
     ];
   };

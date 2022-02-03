@@ -28,16 +28,20 @@ in
       '' + "\n" + lines
     );
 
-  config.nvim.which-key.normal = lib.mkIf enable {
-    "s" = {
-      keys.k = {
+  config.nvim.which-key = lib.mkIf enable {
+    bindings = [
+      {
+        key = "<leader>sk";
         command = "<cmd>DashWord<cr>";
-        description = "Search dash for word under cursor";
-      };
-      keys.K = {
+        description = "Dash with word under cursor";
+        filetypes = builtins.attrNames filetypes;
+      }
+      {
+        key = "<leader>sK";
         command = "<cmd>Dash<cr>";
-        description = "Search dash";
-      };
-    };
+        description = "Dash";
+        filetypes = builtins.attrNames filetypes;
+      }
+    ];
   };
 }

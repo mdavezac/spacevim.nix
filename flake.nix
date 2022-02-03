@@ -56,10 +56,10 @@
         ./layers/languages
         ./layers/git
         ./layers/motion
-        #        ./layers/terminal
-        #        ./layers/tmux
-        #        ./layers/dash
-        #        ./layers/testing
+        ./layers/terminal
+        ./layers/tmux
+        ./layers/dash
+        ./layers/testing
       ];
       default = (import ./.) modules_paths;
       make-overlay = self: k: v: self.vimUtils.buildVimPluginFrom2Nix {

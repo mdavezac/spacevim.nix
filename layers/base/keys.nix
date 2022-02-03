@@ -1,8 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.nvim.layers;
-  barbar = false; # cfg.pimp.enable && cfg.pimp.tabline == "barbar";
-  enable-tmux = false; # config.nvim.layers.tmux.enable;
+  barbar = cfg.pimp.enable && cfg.pimp.tabline == "barbar";
+  enable-tmux = config.nvim.layers.tmux.enable;
 in
 {
   config.nvim.which-key = lib.mkIf config.nvim.layers.base.enable {
@@ -64,7 +64,7 @@ in
         description = "Command-history";
       }
       {
-        key = "<leader>sh";
+        key = "<leader>s<leader>";
         command = "<cmd>nohlsearch<cr>";
         description = "Turn-off search highlight";
       }
