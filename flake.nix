@@ -14,8 +14,6 @@
 
     # base
     nvim-telescope = { url = "github:nvim-telescope/telescope.nvim"; flake = false; };
-    # treesitter
-    nvim-treesitter = { url = "github:nvim-treesitter/nvim-treesitter/0e25e0e98990803e95c7851236e43b3ee934d443"; flake = false; };
     # pimp
     rainglow = { url = "github:rainglow/vim"; flake = false; };
     neon = { url = "github:rafamadriz/neon"; flake = false; };
@@ -43,6 +41,8 @@
     vim-test = { url = "github:vim-test/vim-test"; flake = false; };
     # terminal
     iron-nvim = { url = "github:hkupty/iron.nvim"; flake = false; };
+    # neorg
+    neorg = { url = "github:nvim-neorg/neorg"; flake = false; };
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
@@ -60,6 +60,7 @@
         ./layers/tmux
         ./layers/dash
         ./layers/testing
+        ./layers/neorg
       ];
       default = (import ./.) modules_paths;
       make-overlay = self: k: v: self.vimUtils.buildVimPluginFrom2Nix {
@@ -79,6 +80,28 @@
             src = inputs.dash-nvim;
             buildPhase = "make install";
           };
+          nvim-treesitter = super.vimPlugins.nvim-treesitter.overrideAttrs (old: {
+            passthru.withPlugins =
+              grammarFn: self.vimPlugins.nvim-treesitter.overrideAttrs (_: {
+                postPatch =
+                  let
+                    grammars = self.tree-sitter.withPlugins grammarFn;
+                    darwin-patch = ''
+                      rm -r parser
+                      mkdir parser
+                      for f in ${grammars}/*.dylib; do 
+                         g=`basename $f`
+                         ln -s -- "$f" "parser/''${g%.dylib}.so"
+                      done
+                    '';
+                    other-patch = ''
+                      rm -r parser
+                      ln -s ${grammars} parser
+                    '';
+                  in
+                  if self.stdenv.isDarwin then darwin-patch else other-patch;
+              });
+          });
         } // (nvim-plugins self);
       };
       overlays_ = [
