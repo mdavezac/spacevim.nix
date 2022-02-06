@@ -2,6 +2,7 @@
   description = "Big Neovim Energy";
 
   inputs = {
+    # nixpkgs.url = "github:mdavezac/nixpkgs/nvim-tree-sitter-darwin";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     devshell.url = "github:numtide/devshell";
@@ -60,7 +61,8 @@
         ./layers/tmux
         ./layers/dash
         ./layers/testing
-        ./layers/neorg
+        ./layers/completion
+        # ./layers/neorg
       ];
       default = (import ./.) modules_paths;
       make-overlay = self: k: v: self.vimUtils.buildVimPluginFrom2Nix {
