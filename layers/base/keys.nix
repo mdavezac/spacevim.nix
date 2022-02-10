@@ -27,6 +27,8 @@ in
         command = "<cmd>view ${placeholder "out"}<cr>";
         description = "Open vim.init";
       }
+      { key = "<leader>ft"; command = "<cmd>NvimTreeToggle<cr>"; description = "File tree"; }
+      { key = "<leader>fT"; command = "<cmd>NvimTreeFindFile<cr>"; description = "Current file in tree"; }
       { key = "<leader>bb"; command = "<cmd>Telescope buffers<cr>"; description = "Find"; }
       { key = "<leader>b<TAB>"; command = "<cmd>b#<cr>"; description = "Switch to last"; }
       {
@@ -93,8 +95,8 @@ in
       }
       { key = "]b"; command = "<CMD>bnext<CR>"; description = "Next buffer"; }
       { key = "[b"; command = "<CMD>bprevious<CR>"; description = "Previous buffer"; }
-      { key = "]t"; command = "<CMD>tnext<CR>"; description = "Next tab"; }
-      { key = "[t"; command = "<CMD>tprevious<CR>"; description = "Previous tab"; }
+      { key = "]t"; command = "<CMD>tabNext<CR>"; description = "Next tab"; }
+      { key = "[t"; command = "<CMD>tabNext<CR>"; description = "Previous tab"; }
       { key = "]q"; command = "<CMD>cnext<CR>"; description = "Next quickfix"; }
       { key = "[q"; command = "<CMD>cprevious<CR>"; description = "Previous quickfix"; }
       (lib.mkIf (!enable-tmux)
