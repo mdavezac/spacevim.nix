@@ -30,5 +30,13 @@ in
     languages.python = true;
     languages.nix = true;
     colorscheme = "monochrome";
+    layers.neorg.workspaces = [
+      {
+        name = "neorg";
+        path = "~/neorg/";
+        key = "n";
+      }
+    ];
+    layers.neorg.gtd = "neorg";
   };
 }

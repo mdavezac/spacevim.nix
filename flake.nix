@@ -62,7 +62,7 @@
         ./layers/dash
         ./layers/testing
         ./layers/completion
-        # ./layers/neorg
+        ./layers/neorg
       ];
       default = (import ./.) modules_paths;
       make-overlay = self: k: v: self.vimUtils.buildVimPluginFrom2Nix {
