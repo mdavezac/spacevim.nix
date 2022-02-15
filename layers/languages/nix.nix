@@ -7,4 +7,20 @@
     enable = true;
   };
   config.nvim.format-on-save = [ "*.nix" ];
+  config.nvim.layers.completion = lib.mkIf config.nvim.languages.nix {
+    sources = [
+      {
+        name = "tree-sitter";
+        priority = 2;
+        group_index = 2;
+        filetypes = [ "nix" ];
+      }
+      {
+        name = "nvim_lsp";
+        priority = 2;
+        group_index = 2;
+        filetypes = [ "nix" ];
+      }
+    ];
+  };
 }

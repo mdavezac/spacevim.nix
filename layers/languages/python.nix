@@ -8,6 +8,20 @@ in
   config.nvim.plugins.start = lib.mkIf (config.nvim.languages.python && config.nvim.layers.treesitter.enable) [
     pkgs.vimPlugins.nvim-treesitter-pyfold
   ];
+  config.nvim.layers.completion = enableIf {
+    sources = [{
+      name = "tree-sitter";
+      priority = 2;
+      group_index = 2;
+      filetypes = [ "python" ];
+    }
+      {
+        name = "nvim_lsp";
+        priority = 2;
+        group_index = 2;
+        filetypes = [ "python" ];
+      }];
+  };
   config.nvim.formatters = enableIf {
     black = {
       exe = "${pkgs.black}/bin/black";
