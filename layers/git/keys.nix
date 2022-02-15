@@ -36,7 +36,7 @@
       }
       {
         key = "<leader>gl";
-        command = "<cmd>lua require('gitsigns').blame_line(true) <cr>";
+        command = "<cmd>lua require('gitsigns').blame_line{full=true} <cr>";
         description = "Blame line";
       }
       {
