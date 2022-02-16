@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
-  enableIf = lib.mkIf config.nvim.layers.neorg.enable;
+  enable = config.nvim.layers.neorg.enable;
+  enableIf = lib.mkIf enable;
   with-completion = config.nvim.layers.completion.enable;
   with-dirman = ((builtins.length config.nvim.layers.neorg.workspaces) > 0);
   gtd = config.nvim.layers.neorg.gtd;
@@ -8,6 +9,9 @@ in
 {
   config.nvim.plugins.start = enableIf [ pkgs.vimPlugins.neorg ];
   config.nvim.treesitter-languages = enableIf [ "norg" ];
+  config.nvim.layers.completion.sources = lib.mkIf (with-completion && enable) [
+    { name = "neorg"; filetypes = [ "norg" ]; group_index = 0; priority = 0; }
+  ];
   config.nvim.init = enableIf {
     lua =
       let
@@ -38,20 +42,6 @@ in
             else [ ]
           )
         );
-        completion_setup =
-          if with-completion then ''
-            function completion_neorg_setup()
-                require('cmp').setup.buffer({
-                    sources = {
-                        { name = 'neorg' },
-                        { name = 'buffer' },
-                        { name = 'emoji' },
-                        { name = 'path' }
-                    }
-                })
-            end
-            vim.api.nvim_exec([[autocmd FileType norg :lua completion_neorg_setup()]], false)
-          '' else "";
       in
       ''
         require('neorg').setup {
@@ -59,7 +49,6 @@ in
                 ${modules}
             }
         }
-        ${completion_setup}
       '';
   };
   config.nvim.post = enableIf {
