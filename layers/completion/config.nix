@@ -34,7 +34,7 @@ in
               print_source
               (builtins.filter
                 (k: builtins.any
-                  (v: v == filetype || (filetype != ":" && filetype != "/" && v == "all"))
+                  (v: (v == filetype) && ((filetype != ":" && filetype != "/") || v != "all"))
                   k.filetypes)
                 sources)
             )
