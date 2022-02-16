@@ -9,18 +9,20 @@ in
     pkgs.vimPlugins.nvim-treesitter-pyfold
   ];
   config.nvim.layers.completion = enableIf {
-    sources = [{
-      name = "tree-sitter";
-      priority = 2;
-      group_index = 2;
-      filetypes = [ "python" ];
-    }
+    sources = [
+      {
+        name = "treesitter";
+        priority = 2;
+        group_index = 2;
+        filetypes = [ "python" ];
+      }
       {
         name = "nvim_lsp";
         priority = 2;
         group_index = 2;
         filetypes = [ "python" ];
-      }];
+      }
+    ];
   };
   config.nvim.formatters = enableIf {
     black = {

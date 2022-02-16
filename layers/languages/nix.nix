@@ -10,7 +10,7 @@
   config.nvim.layers.completion = lib.mkIf config.nvim.languages.nix {
     sources = [
       {
-        name = "tree-sitter";
+        name = "treesitter";
         priority = 2;
         group_index = 2;
         filetypes = [ "nix" ];
