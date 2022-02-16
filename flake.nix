@@ -29,6 +29,11 @@
     guihua = { url = "github:ray-x/guihua.lua"; flake = false; };
     lsp-navigator = { url = "github:ray-x/navigator.lua"; flake = false; };
     lspsaga-nvim = { url = "github:tami5/lspsaga.nvim"; flake = false; };
+    # treesitter
+    nvim-treesitter-textsubjects = {
+      url = "github:RRethy/nvim-treesitter-textsubjects";
+      flake = false;
+    };
     # git
     octo = { url = "github:pwntester/octo.nvim"; flake = false; };
     vim-diffview = { url = "github:sindrets/diffview.nvim"; flake = false; };

@@ -14,6 +14,7 @@ in
             config.nvim.treesitter-languages))
       pkgs.vimPlugins.nvim-treesitter-textobjects
       pkgs.vimPlugins.nvim-treesitter-context
+      pkgs.vimPlugins.nvim-treesitter-textsubjects
     ];
   config.nvim.init.lua = lib.mkIf
     enabled
@@ -39,6 +40,8 @@ in
               ["ic"] = "@class.inner",
               ["aa"] = "@parameter.outer",
               ["ia"] = "@parameter.inner",
+              ["ab"] = "@block.outer",
+              ["ib"] = "@block.inner",
             },
           },
         },
@@ -64,6 +67,18 @@ in
                 -- 'case',
             },
         },
+      }
+
+      require('nvim-treesitter.configs').setup {
+            textsubjects = {
+                enable = true,
+                prev_selection = ',', -- (Optional) keymap to select the previous selection
+                keymaps = {
+                    ['.'] = 'textsubjects-smart',
+                    ['a;'] = 'textsubjects-container-outer',
+                    ['i;'] = 'textsubjects-container-inner',
+                },
+            },
       }
     '';
   config.nvim.post.vim = lib.mkIf
