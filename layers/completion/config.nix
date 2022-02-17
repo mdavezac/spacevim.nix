@@ -16,6 +16,7 @@ in
     pkgs.vimPlugins.cmp-buffer
     pkgs.vimPlugins.cmp-emoji
     pkgs.vimPlugins.cmp-path
+    pkgs.vimPlugins.lspkind-nvim
   ];
   config.nvim.init =
     let
@@ -81,6 +82,8 @@ in
               end
             end,
           },
+          view = { entries = "native" },
+          formatting = { format = require('lspkind').cmp_format({ mode = "symbol" }) },
           ${other_sources}
         }
       '' + (print_all_sources cfg_sources);
