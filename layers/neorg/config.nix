@@ -9,9 +9,9 @@ in
 {
   config.nvim.plugins.start = enableIf [ pkgs.vimPlugins.neorg ];
   config.nvim.treesitter-languages = enableIf [ "norg" ];
-  config.nvim.layers.completion.sources = lib.mkIf (with-completion && enable) [
-    { name = "neorg"; filetypes = [ "norg" ]; group_index = 0; priority = 0; }
-  ];
+  config.nvim.layers.completion.sources = lib.mkIf (with-completion && enable) {
+    norg = [{ name = "neorg"; group_index = 0; priority = 0; }];
+  };
   config.nvim.init = enableIf {
     lua =
       let

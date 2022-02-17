@@ -38,10 +38,12 @@ in
       }
     ];
     layers.neorg.gtd = "neorg";
-    layers.completion.sources = [
-      { name = "buffer"; group_index = 3; priority = 100; }
-      { name = "path"; group_index = 2; priority = 50; }
-      { name = "emoji"; group_index = 2; priority = 50; }
-    ];
+    layers.completion.sources = {
+      other = [
+        { name = "buffer"; group_index = 3; priority = 100; }
+        { name = "path"; group_index = 2; priority = 50; }
+        { name = "emoji"; group_index = 2; priority = 50; }
+      ];
+    };
   };
 }

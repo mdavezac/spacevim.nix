@@ -14,11 +14,6 @@ let
       type = lib.types.int;
       default = 1;
     };
-    filetypes = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ "all" ];
-      description = "Which filetypes for which to enable the completion source";
-    };
   };
   options = {
     enable = lib.mkOption {
@@ -27,9 +22,16 @@ let
       description = "Whether to enable the completion layer";
     };
     sources = lib.mkOption {
-      type = lib.types.listOf (lib.types.submodule { options = source_options; });
-      default = [ ];
-      description = "Potential sources";
+      type = lib.types.attrsOf (lib.types.listOf (lib.types.submodule { options = source_options; }));
+      default = { };
+      description = ''
+        Mapping from filtype to a list of sources.
+
+        There are three special filetypes:
+        - other: default set of sources for filetypes that are not explicitly given
+        - "/": for search. Not implemented.
+        - ":": for command. Not implemented.
+      '';
     };
   };
 in

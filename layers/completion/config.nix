@@ -25,33 +25,29 @@ in
           priority = builtins.toString source.priority;
         in
         "{ name=\"${source.name}\", group_index=${group_index}, priority=${priority} }";
-      print_filetype = filetype: sources: (
+      print_filetype = sources: (
         "   sources = {\n"
         + (
           builtins.concatStringsSep
             ",\n      "
-            (builtins.map
-              print_source
-              (builtins.filter
-                (k: builtins.any
-                  (v: (v == filetype) && ((filetype != ":" && filetype != "/") || v != "all"))
-                  k.filetypes)
-                sources)
-            )
+            (builtins.map print_source sources)
         ) + "   }\n"
       );
-      print_filetype2 = sources: filetype: ''
+      print_filetype2 = filetype: sources: ''
         cmp.setup.filetype('${filetype}', {
-            ${print_filetype filetype sources}
+            ${print_filetype sources}
         })
       '';
-      filetypes = sources: lib.unique (
-        builtins.filter (k: k != "all" && k != "/" && k != ":")
-          (lib.flatten (builtins.map (k: k.filetypes) sources))
-      );
       print_all_sources = sources: builtins.concatStringsSep "\n" (
-        builtins.map (print_filetype2 sources) (filetypes sources)
+        builtins.attrValues (
+          lib.mapAttrs print_filetype2
+            (lib.filterAttrs (k: n: k != "other" && k != "/" && k != ":") sources)
+        )
       );
+      cfg_sources = config.nvim.layers.completion.sources;
+      other_sources =
+        if (builtins.hasAttr "other" cfg_sources)
+        then (print_filetype cfg_sources.other) else "";
     in
     lib.mkIf enabled {
       lua = ''
@@ -85,8 +81,8 @@ in
               end
             end,
           },
-          ${print_filetype "all" config.nvim.layers.completion.sources}
+          ${other_sources}
         }
-      '' + (print_all_sources config.nvim.layers.completion.sources);
+      '' + (print_all_sources cfg_sources);
     };
 }

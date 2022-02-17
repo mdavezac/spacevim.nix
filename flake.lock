@@ -331,6 +331,22 @@
         "type": "github"
       }
     },
+    "nvim-treesitter-textsubjects": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1644361436,
+        "narHash": "sha256-zgkRYQmG4SBigI3if04JG8bId0CNA00s7iP6il455pg=",
+        "owner": "RRethy",
+        "repo": "nvim-treesitter-textsubjects",
+        "rev": "c960b0d8b0d8c405d69bfa51f1587fb54aed1c88",
+        "type": "github"
+      },
+      "original": {
+        "owner": "RRethy",
+        "repo": "nvim-treesitter-textsubjects",
+        "type": "github"
+      }
+    },
     "octo": {
       "flake": false,
       "locked": {
@@ -383,6 +399,7 @@
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-notify": "nvim-notify",
         "nvim-telescope": "nvim-telescope",
+        "nvim-treesitter-textsubjects": "nvim-treesitter-textsubjects",
         "octo": "octo",
         "rainglow": "rainglow",
         "ultest": "ultest",

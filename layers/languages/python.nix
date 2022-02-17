@@ -8,19 +8,17 @@ in
   config.nvim.plugins.start = lib.mkIf (config.nvim.languages.python && config.nvim.layers.treesitter.enable) [
     pkgs.vimPlugins.nvim-treesitter-pyfold
   ];
-  config.nvim.layers.completion = enableIf {
-    sources = [
+  config.nvim.layers.completion.sources = enableIf {
+    python = [
       {
         name = "treesitter";
         priority = 2;
         group_index = 2;
-        filetypes = [ "python" ];
       }
       {
         name = "nvim_lsp";
         priority = 2;
         group_index = 2;
-        filetypes = [ "python" ];
       }
     ];
   };
