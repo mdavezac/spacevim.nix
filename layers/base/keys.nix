@@ -87,9 +87,9 @@ in
       {
         key = "<leader>tL";
         command = "<CMD>" + (builtins.concatStringsSep ";" [
-          "lua local is_on = vim.o.number and not vim.o.relativenumber"
+          "lua local is_on = vim.o.number and vim.o.relativenumber"
           "vim.o.number = not is_on"
-          "vim.o.relativenumber = true;"
+          "vim.o.relativenumber = true and not is_on;"
         ]) + "<CR>";
         description = "Relative line numbers";
       }
