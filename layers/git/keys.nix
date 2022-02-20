@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   config.nvim.which-key = lib.mkIf config.nvim.layers.git.enable {
-    groups = [{ prefix = "<leader>g"; name = "+git"; }];
+    groups = [{ prefix = "<leader>g"; name = "+Git"; }];
     bindings = [
       { key = "<leader>gc"; command = "<cmd>Telescope git_commit<cr>"; description = "Commits"; }
       { key = "<leader>gs"; command = ''<cmd>Neogit kind=vsplit<cr>''; description = "Status"; }
