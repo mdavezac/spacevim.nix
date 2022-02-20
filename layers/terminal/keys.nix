@@ -9,6 +9,9 @@ let
 in
 {
   config.nvim.which-key = lib.mkIf enable {
+    groups = lib.mkIf enable-repl [
+      { prefix = "<leader>r"; name = "REPL"; }
+    ];
     bindings = [
       {
         key = "<leader>;";
