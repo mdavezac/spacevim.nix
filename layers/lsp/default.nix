@@ -5,5 +5,6 @@
     ./keys.nix
     ./navigator.nix
     ./lspsaga.nix
+    ./signature.nix
   ];
 }
