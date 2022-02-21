@@ -15,57 +15,12 @@ let
   enabled = config.nvim.layers.lsp.enable && (with-any-lsp || with-linters);
 in
 {
-  options.nvim = lib.mkOption {
-    type = lib.types.submodule {
-      options.layers = lib.mkOption {
-        type = lib.types.submodule {
-          options.lsp = lib.mkOption {
-            type = lib.types.submodule {
-              options.enable = lib.mkOption {
-                type = lib.types.bool;
-                default = true;
-                description = "Whether to enable the lsp layer";
-              };
-              options.saga = lib.mkOption {
-                type = lib.types.bool;
-                default = true;
-                description = "Whether to enable lsp-saga";
-              };
-            };
-            default = { };
-          };
-        };
-      };
-      options.lsp-instances = lib.mkOption {
-        type = lib.types.attrsOf (lib.types.submodule {
-          options.enable = lib.mkOption {
-            type = lib.types.bool;
-            description = "Whether to enable a particular LSP";
-            default = true;
-          };
-          options.cmd = lib.mkOption {
-            type = lib.types.listOf lib.types.string;
-            description = "Command and argument list";
-          };
-          options.setup_location = lib.mkOption {
-            type = lib.types.enum [ "lsp" "navigator" ];
-            default = "lsp";
-            description = "Where to do the setup";
-          };
-        });
-        description = ''LSP instances'';
-        default = { };
-      };
-      options.include-lspconfig = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-        description = "Whether to include lsp-config in plugins";
-      };
-    };
-  };
-
   config.nvim.plugins.start =
-    lib.mkIf (enabled && config.nvim.include-lspconfig) [ pkgs.vimPlugins.nvim-lspconfig ];
+    [
+      (lib.mkIf (enabled && config.nvim.include-lspconfig) pkgs.vimPlugins.nvim-lspconfig)
+      (lib.mkIf (enabled && config.nvim.layers.lsp.colors) pkgs.vimPlugins.lsp-colors-nvim)
+      (lib.mkIf (enabled && config.nvim.layers.lsp.trouble) pkgs.vimPlugins.trouble-nvim)
+    ];
   config.nvim.init.lua =
     let
       instances = lib.sort (a: b: a < b) config.nvim.lsp-instances;
@@ -91,6 +46,8 @@ in
 
             local lsp = require('lspconfig')
           ''
+          (if config.nvim.layers.lsp.colors then "require(\"lsp-colors\").setup({})" else "")
+          (if config.nvim.layers.lsp.trouble then "require(\"trouble\").setup({})" else "")
         ] ++ (builtins.attrValues (builtins.mapAttrs setup-lsp internal-lsp))
       )
     );

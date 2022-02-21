@@ -6,5 +6,6 @@
     ./navigator.nix
     ./lspsaga.nix
     ./signature.nix
+    ./options.nix
   ];
 }
