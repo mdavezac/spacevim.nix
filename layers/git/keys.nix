@@ -50,6 +50,11 @@
         description = "File history";
       }
       {
+        key = "<leader>gd";
+        command = "<cmd>DiffviewToggle<cr>";
+        description = "Diff view";
+      }
+      {
         key = "]h";
         command = "<cmd>lua require('gitsigns.actions').next_hunk()<cr>";
         description = "Hunk";

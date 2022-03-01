@@ -9,7 +9,7 @@ in
     groups = [
       { prefix = "<leader>f"; name = "+File"; }
       { prefix = "<leader>b"; name = "+Buffer"; }
-      { prefix = "<leader>w"; name = "+Window"; }
+      { prefix = "<leader>w"; name = "+Window&Tabs"; }
       { prefix = "<leader>s"; name = "+Search"; }
       { prefix = "<leader>t"; name = "+Toggles"; }
     ];
@@ -44,6 +44,7 @@ in
       { key = "<leader>wv"; command = "<cmd>vsplit<cr>"; description = "Vertical split"; }
       { key = "<leader>w="; command = "<C-w>="; description = "Equalize size"; }
       { key = "<leader>wz"; command = "<C-w>|"; description = "Zoom"; }
+      { key = "<leader>wc"; command = "<CMD>tabc<CR>"; description = "Close tab"; }
       {
         key = "<leader>ss";
         command = "<cmd>Telescope current_buffer_fuzzy_find<cr>";
@@ -93,12 +94,14 @@ in
         ]) + "<CR>";
         description = "Relative line numbers";
       }
-      { key = "]b"; command = "<CMD>bnext<CR>"; description = "Next buffer"; }
-      { key = "[b"; command = "<CMD>bprevious<CR>"; description = "Previous buffer"; }
-      { key = "]t"; command = "<CMD>tabNext<CR>"; description = "Next tab"; }
-      { key = "[t"; command = "<CMD>tabNext<CR>"; description = "Previous tab"; }
-      { key = "]q"; command = "<CMD>cnext<CR>"; description = "Next quickfix"; }
-      { key = "[q"; command = "<CMD>cprevious<CR>"; description = "Previous quickfix"; }
+      { key = "]b"; command = "<CMD>bnext<CR>"; description = "Buffer"; }
+      { key = "[b"; command = "<CMD>bprevious<CR>"; description = "Buffer"; }
+      { key = "]t"; command = "<CMD>tabNext<CR>"; description = "Tab"; }
+      { key = "[t"; command = "<CMD>tabNext<CR>"; description = "Tab"; }
+      { key = "]q"; command = "<CMD>cnext<CR>"; description = "Quickfix"; }
+      { key = "[q"; command = "<CMD>cprevious<CR>"; description = "Quickfix"; }
+      { key = "]l"; command = "<CMD>lnext<CR>"; description = "Location"; }
+      { key = "[l"; command = "<CMD>lprevious<CR>"; description = "Location"; }
       (lib.mkIf (!enable-tmux)
         {
           key = "<C-h>";

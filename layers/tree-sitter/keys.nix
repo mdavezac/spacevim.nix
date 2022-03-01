@@ -10,9 +10,14 @@ in
     lib.mkIf enabled {
       bindings = builtins.map (k: k // { filetypes = config.nvim.treesitter-languages; }) [
         {
-          key = "<leader>so";
+          key = "<leader>st";
           command = "<cmd>Telescope treesitter<cr>";
-          description = "Search syntax nodes of current buffer";
+          description = "Treesitter";
+        }
+        {
+          key = "<localleader>t";
+          command = "<cmd>Telescope treesitter<cr>";
+          description = "Treesitter";
         }
         { key = "if"; modes = [ "operator" ]; description = "function body"; }
         { key = "af"; modes = [ "operator" ]; description = "function"; }

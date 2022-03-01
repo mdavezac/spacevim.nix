@@ -27,8 +27,8 @@ in
 
   config.nvim.which-key = lib.mkIf enable {
     groups = [
-      { prefix = "<leader>o"; name = "+github"; }
-      { prefix = "<leader>oe"; name = "+emote"; filetypes = [ "octo" ]; }
+      { prefix = "<leader>o"; name = "+Github"; }
+      { prefix = "<leader>oe"; name = "+Emote"; filetypes = [ "octo" ]; }
     ];
     bindings = [
       {

@@ -33,8 +33,8 @@ in
         })
       (lib.mkIf enable-repl
         {
-          key = "<leader><CR>";
-          command = "<Plug>(iron-send-line)";
+          key = "<CR>";
+          command = "<CMD>lua require('iron').core.send_line()<CR>j";
           description = "Send line to REPL";
           filetypes = repl-filetypes;
         })
