@@ -11,6 +11,8 @@ in
 {
   config.nvim.plugins.start = lib.mkIf enabled [ pkgs.vimPlugins.lsp_signature-nvim ];
   config.nvim.post.lua = lib.mkIf enabled ''
-    require'lsp_signature'.setup({zindex=50})
+    require'lsp_signature'.setup({
+        zindex=50, hint_enable=false, timer_interval=1, auto_close_after=10
+    })
   '';
 }

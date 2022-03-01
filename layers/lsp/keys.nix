@@ -5,13 +5,10 @@ let
     (v: v.enable)
     (builtins.attrValues config.nvim.lsp-instances);
   enabled = config.nvim.layers.lsp.enable && (with-lsps || with-linters);
+  without-trouble = lib.mkIf (!config.nvim.layers.lsp.trouble);
 in
 {
   config.nvim.which-key = lib.mkIf enabled {
-    groups = [
-      { prefix = "<localleader>d"; name = "+Buffer"; }
-      { prefix = "<localleader>w"; name = "+Workspace"; }
-    ];
     bindings = [
       {
         key = "gr";
@@ -24,20 +21,20 @@ in
         description = "Definitions";
       }
       {
-        key = "<localleader>dd";
-        command = "<cmd>Telescope diagnostics bufnr=0<cr>";
-        description = "LSP diagnostics";
-      }
-      {
-        key = "<localleader>ds";
+        key = "<leader>sl";
         command = "<cmd>Telescope lsp_document_symbols<cr>";
         description = "LSP Symbols";
       }
       {
-        key = "<localleader>dd";
+        key = "<localleader>l";
+        command = "<cmd>Telescope lsp_document_symbols<cr>";
+        description = "LSP Symbols";
+      }
+      (without-trouble {
+        key = "<localleader>d";
         command = "<cmd>Telescope diagnostics<cr>";
         description = "LSP diagnostics";
-      }
+      })
     ];
   };
 }

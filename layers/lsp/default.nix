@@ -7,5 +7,6 @@
     ./lspsaga.nix
     ./signature.nix
     ./options.nix
+    ./trouble.nix
   ];
 }

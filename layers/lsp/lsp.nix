@@ -19,7 +19,6 @@ in
     [
       (lib.mkIf (enabled && config.nvim.include-lspconfig) pkgs.vimPlugins.nvim-lspconfig)
       (lib.mkIf (enabled && config.nvim.layers.lsp.colors) pkgs.vimPlugins.lsp-colors-nvim)
-      (lib.mkIf (enabled && config.nvim.layers.lsp.trouble) pkgs.vimPlugins.trouble-nvim)
     ];
   config.nvim.init.lua =
     let
@@ -47,7 +46,6 @@ in
             local lsp = require('lspconfig')
           ''
           (if config.nvim.layers.lsp.colors then "require(\"lsp-colors\").setup({})" else "")
-          (if config.nvim.layers.lsp.trouble then "require(\"trouble\").setup({})" else "")
         ] ++ (builtins.attrValues (builtins.mapAttrs setup-lsp internal-lsp))
       )
     );

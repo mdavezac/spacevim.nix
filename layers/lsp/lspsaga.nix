@@ -7,6 +7,7 @@ let
     (k: v: v.enable && (v.setup_location == "internal"))
     config.nvim.lsp-instances;
   enabled = config.nvim.layers.lsp.enable && config.nvim.layers.lsp.saga && with-internal-lsp;
+  without-trouble = lib.mkIf (!config.nvim.layers.lsp.trouble);
 in
 {
   config.nvim.plugins.start = lib.mkIf enabled [ pkgs.vimPlugins.lspsaga-nvim ];
@@ -15,11 +16,11 @@ in
   '';
   config.nvim.which-key = lib.mkIf enabled {
     bindings = [
-      {
+      (without-trouble {
         key = "<localleader>r";
         command = "<cmd>lua require'lspsaga.provider'.lsp_finder()<cr>";
         description = "References and definition";
-      }
+      })
       {
         key = "<localleader>s";
         command = "<cmd>lua require('lspsaga.signaturehelp').signature_help()<cr>";
