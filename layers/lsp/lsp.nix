@@ -15,11 +15,10 @@ let
   enabled = config.nvim.layers.lsp.enable && (with-any-lsp || with-linters);
 in
 {
-  config.nvim.plugins.start =
-    [
-      (lib.mkIf (enabled && config.nvim.include-lspconfig) pkgs.vimPlugins.nvim-lspconfig)
-      (lib.mkIf (enabled && config.nvim.layers.lsp.colors) pkgs.vimPlugins.lsp-colors-nvim)
-    ];
+  config.nvim.plugins.start = [
+    (lib.mkIf (enabled && config.nvim.include-lspconfig) pkgs.vimPlugins.nvim-lspconfig)
+    (lib.mkIf (enabled && config.nvim.layers.lsp.colors) pkgs.vimPlugins.lsp-colors-nvim)
+  ];
   config.nvim.init.lua =
     let
       instances = lib.sort (a: b: a < b) config.nvim.lsp-instances;
@@ -29,10 +28,17 @@ in
         (if_has_instance "rnix" "lsp.rnix.setup{cmd = {'${pkgs.rnix-lsp}/bin/rnix-lsp'}}\n\n")
       ];
       cmd-list = v: builtins.concatStringsSep "," (builtins.map (x: "\"${x}\"") v);
+      on-attach = code:
+        if ((builtins.length code) > 0) then ''
+          on_attach = function (client, bufnr)
+            ${builtins.concatStringsSep "\n            " code}
+          end
+        '' else "";
       setup-lsp = (k: v: ''
         lsp.${k}.setup({
            cmd={${cmd-list v.cmd}},
-           capabilities=capabilities
+           capabilities=capabilities,
+           ${on-attach v.on-attach}
         })
       '');
     in

@@ -8,5 +8,6 @@
     ./signature.nix
     ./options.nix
     ./trouble.nix
+    ./aerial.nix
   ];
 }

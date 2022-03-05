@@ -14,7 +14,7 @@ let
     signature = lib.mkOption {
       type = lib.types.bool;
       default = true;
-      description = "Whether to enable lsp-saga";
+      description = "Whether to enable lsp-signature";
     };
     colors = lib.mkOption {
       type = lib.types.bool;
@@ -25,6 +25,11 @@ let
       type = lib.types.bool;
       default = true;
       description = "Whether to enable trouble";
+    };
+    aerial = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Whether to enable aerial";
     };
   };
   instance_options = {
@@ -41,6 +46,11 @@ let
       type = lib.types.enum [ "lsp" "navigator" ];
       default = "lsp";
       description = "Where to do the setup";
+    };
+    on-attach = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "Code to run in on-attach function";
     };
   };
 in
