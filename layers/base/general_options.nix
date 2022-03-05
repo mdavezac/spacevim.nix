@@ -16,11 +16,14 @@ in
   config.nvim.init = lib.mkIf enabled {
     vim = ''
       " General options defined in base layer
-      if !isdirectory("$HOME/.local/share/spacevim/backup")
-          silent !mkdir "$HOME/.local/share/spacevim/backup" > /dev/null 2>&1
+      if has("persistent_undo")
+        let target_path = expand('~/.local/share/spacevim/backup')
+        if !isdirectory(target_path)
+            call mkdir(target_path, "p", 0700)
+        endif
+        let &undodir=target_path
+        set undofile
       endif
-      set undodir=$HOME/.local/share/spacevim/backup
-      set undofile
       set noswapfile
 
       set mouse+=a

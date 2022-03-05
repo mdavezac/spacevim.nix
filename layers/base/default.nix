@@ -11,6 +11,7 @@ in
       pkgs.vimPlugins.which-key-nvim
       pkgs.vimPlugins.telescope-fzy-native-nvim
       pkgs.vimPlugins.nvim-tree-lua
+      pkgs.vimPlugins.undotree
     ];
   config.nvim.init.lua = lib.mkIf enabled ''
     require('telescope').load_extension('fzy_native')

@@ -32,6 +32,11 @@ in
       { key = "<leader>bb"; command = "<cmd>Telescope buffers<cr>"; description = "Find"; }
       { key = "<leader>b<TAB>"; command = "<cmd>b#<cr>"; description = "Switch to last"; }
       {
+        key = "<leader>bu";
+        command = "<cmd>UndotreeToggle<cr>";
+        description = "Undotree";
+      }
+      {
         key = "<leader><TAB>";
         command = "<cmd>b#<cr>";
         description = "Switch to last buffer";
