@@ -17,7 +17,7 @@ in
     vim = ''
       " General options defined in base layer
       if has("persistent_undo")
-        let target_path = expand('~/.local/share/spacevim/backup')
+        let target_path = expand('${config.nvim.backup-dir}')
         if !isdirectory(target_path)
             call mkdir(target_path, "p", 0700)
         endif

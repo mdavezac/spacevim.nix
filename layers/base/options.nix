@@ -135,6 +135,11 @@ in
         default = 4;
         description = ''Tab width'';
       };
+      options.backup-dir = lib.mkOption {
+        type = lib.types.str;
+        description = "Location of undo directory";
+        default = "~/.cache/spacenix/backup";
+      };
     };
   };
 }
