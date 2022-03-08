@@ -43,6 +43,7 @@ in
       vim.o.textwidth = ${builtins.toString config.nvim.textwidth}
       vim.o.shiftwidth = ${builtins.toString config.nvim.tabwidth}
       vim.o.tabstop = ${builtins.toString config.nvim.tabwidth}
+      vim.o.scrolloff = ${builtins.toString config.nvim.scrolloff}
       -- End of general options defined in base layer
     '';
   };
