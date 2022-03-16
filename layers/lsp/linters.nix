@@ -17,8 +17,8 @@ in
             type = lib.types.str;
           };
           options.extra_args = lib.mkOption {
-            type = lib.types.str;
-            default = "";
+            type = lib.types.listOf lib.types.str;
+            default = [ ];
             description = "Additional arguments for the builtin tool";
           };
           options.timeout = lib.mkOption {
@@ -37,10 +37,13 @@ in
   config.nvim.include-lspconfig = !enabled;
   config.nvim.init.lua =
     let
+      extra_args = args: builtins.concatStringsSep ", " (
+        builtins.map (f: "\"${builtins.toString f}\"") args
+      );
       null-text = builtins.concatStringsSep ","
         (
           lib.mapAttrsToList
-            (k: v: "nulls.builtins.${k}.with({command=\"${v.exe}\", extra_args={${v.extra_args}}, timeout=${builtins.toString v.timeout}})")
+            (k: v: "nulls.builtins.${k}.with({command=\"${v.exe}\", extra_args={${extra_args v.extra_args}}, timeout=${builtins.toString v.timeout}})")
             (lib.filterAttrs (k: v: v.enable) config.nvim.linters)
         );
     in
