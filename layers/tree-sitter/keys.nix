@@ -15,7 +15,7 @@ in
           description = "Treesitter";
         }
         {
-          key = "<localleader>t";
+          key = "<localleader>T";
           command = "<cmd>Telescope treesitter<cr>";
           description = "Treesitter";
         }
