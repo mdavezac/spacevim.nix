@@ -3,7 +3,8 @@
 
   inputs = {
     # nixpkgs.url = "github:mdavezac/nixpkgs/nvim-tree-sitter-darwin";
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    /* nixpkgs.url = "path:/Users/mdavezac/personal/nixpkgs/"; */
+    nixpkgs.url = "github:nixos/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
     devshell.url = "github:numtide/devshell";
 
@@ -49,6 +50,8 @@
     iron-nvim = { url = "github:hkupty/iron.nvim"; flake = false; };
     # neorg
     neorg = { url = "github:nvim-neorg/neorg"; flake = false; };
+    #
+    aniseed = { url = "github:olical/aniseed"; flake = false; };
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
@@ -87,28 +90,6 @@
             src = inputs.dash-nvim;
             buildPhase = "make install";
           };
-          nvim-treesitter = super.vimPlugins.nvim-treesitter.overrideAttrs (old: {
-            passthru.withPlugins =
-              grammarFn: self.vimPlugins.nvim-treesitter.overrideAttrs (_: {
-                postPatch =
-                  let
-                    grammars = self.tree-sitter.withPlugins grammarFn;
-                    darwin-patch = ''
-                      rm -r parser
-                      mkdir parser
-                      for f in ${grammars}/*.dylib; do 
-                         g=`basename $f`
-                         ln -s -- "$f" "parser/''${g%.dylib}.so"
-                      done
-                    '';
-                    other-patch = ''
-                      rm -r parser
-                      ln -s ${grammars} parser
-                    '';
-                  in
-                  if self.stdenv.isDarwin then darwin-patch else other-patch;
-              });
-          });
         } // (nvim-plugins self);
       };
       overlays_ = [

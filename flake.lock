@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "aniseed": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1647464092,
+        "narHash": "sha256-qejD2J4NGNlotoIgN+ED1mTTlW0n6ZfddRi64EobJSs=",
+        "owner": "olical",
+        "repo": "aniseed",
+        "rev": "4242b5620b47791c9aff7a7e8dbae9647f6d3994",
+        "type": "github"
+      },
+      "original": {
+        "owner": "olical",
+        "repo": "aniseed",
+        "type": "github"
+      }
+    },
     "catpuccino": {
       "flake": false,
       "locked": {
@@ -253,16 +269,15 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1643653624,
-        "narHash": "sha256-+8hLMsQrZ2rkvcEtEId6HMe8GPxVb5ga+Vh1fdsqJDU=",
+        "lastModified": 1647639920,
+        "narHash": "sha256-Id5AfZzk5aSSF67OR5dQYfiJOCFVVUU3RNGcp9f6HLc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "a529f0c125a78343b145a8eb2b915b0295e4f459",
+        "rev": "fcb6bb628b199f82f5209bf27ba747e6585fe69e",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -381,6 +396,7 @@
     },
     "root": {
       "inputs": {
+        "aniseed": "aniseed",
         "catpuccino": "catpuccino",
         "dash-nvim": "dash-nvim",
         "devshell": "devshell",
