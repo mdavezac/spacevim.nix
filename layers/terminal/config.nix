@@ -8,8 +8,7 @@ let
 in
 {
   config.nvim.plugins.start = [
-    (lib.mkIf enable pkgs.vimPlugins.nterm-nvim)
-    (lib.mkIf enable pkgs.vimPlugins.aniseed)
+    (lib.mkIf enable pkgs.vimPlugins.toggleterm-nvim)
     (lib.mkIf enable-repl pkgs.vimPlugins.iron-nvim)
   ];
   config.nvim.init = lib.mkIf enable {
@@ -47,23 +46,35 @@ in
               repl_open_cmd = ${cfg.terminal.repl.repl-open-cmd},
           }
         '';
+        toggleterm = ''
+          require("toggleterm").setup {
+              size=100,
+              shell="${pkgs.fish}/bin/fish",
+              direction="vertical",
+              insert_mappings=false,
+              terminal_mappings=false,
+          }
+
+          function _G.set_terminal_keymaps()
+            local opts = {noremap = true}
+            vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+            vim.api.nvim_buf_set_keymap(0, 't', '<C-[>', [[<C-\><C-n>]], opts)
+            vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+            vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+            vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+            vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+          end
+          vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+        '';
       in
       builtins.concatStringsSep "\n" [
-        nterm
+        toggleterm
         (if enable-repl then repl else "")
       ];
-    vim = ''
-      tnoremap <C-h> <C-\><C-N><C-w>h
-      tnoremap <C-j> <C-\><C-N><C-w>j
-      tnoremap <C-k> <C-\><C-N><C-w>k
-      tnoremap <C-l> <C-\><C-N><C-w>l
-      tnoremap <C-[> <C-\><C-N>
-      tnoremap <C-q> <C-\><C-N><CMD>q<CR>
-    '';
   };
-  config.nvim.post.lua = lib.mkIf (enable && cfg.base.enable) ''
-    require('telescope').load_extension('nterm')
-  '';
+  /* config.nvim.post.lua = lib.mkIf (enable && cfg.base.enable) '' */
+  /*   require('telescope').load_extension('nterm') */
+  /* ''; */
   config.nvim.post.vim = lib.mkIf enable-repl ''
     let g:iron_map_defaults = 0
     let g:iron_map_extended = 0

@@ -15,13 +15,8 @@ in
     bindings = [
       {
         key = "<leader>;";
-        command = "<cmd>lua term_toggle()<cr>";
+        command = "<cmd>ToggleTerm<cr>";
         description = "Toggle terminal and focus";
-      }
-      {
-        key = "<leader>tt";
-        command = "<cmd>lua require'nterm.main'.term_toggle()<cr>";
-        description = "Toggle terminal without focussing";
       }
       (lib.mkIf enable-repl
         {
