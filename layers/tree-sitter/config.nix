@@ -5,19 +5,17 @@ let
     && ((builtins.length config.nvim.treesitter-languages) > 0);
 in
 {
-  config.nvim.plugins.start = lib.mkIf enabled
-    [
-      (pkgs.vimPlugins.nvim-treesitter.withPlugins
-        (plugins:
-          builtins.map
-            (k: builtins.getAttr "tree-sitter-${k}" plugins)
-            config.nvim.treesitter-languages))
-      pkgs.vimPlugins.nvim-treesitter-textobjects
-      pkgs.vimPlugins.nvim-treesitter-context
-      pkgs.vimPlugins.nvim-treesitter-textsubjects
-    ];
-  config.nvim.init.lua = lib.mkIf
-    enabled
+  config.nvim.plugins.start = with pkgs.vimPlugins; lib.mkIf enabled [
+    (nvim-treesitter.withPlugins
+      (plugins: builtins.map
+        (k: builtins.getAttr "tree-sitter-${k}" plugins)
+        config.nvim.treesitter-languages))
+    nvim-treesitter-textobjects
+    nvim-treesitter-context
+    nvim-treesitter-textsubjects
+    (lib.mkIf config.nvim.layers.treesitter.spelling nvim-spellsitter)
+  ];
+  config.nvim.init.lua = lib.mkIf enabled (
     ''
       require'nvim-treesitter.configs'.setup {
           highlight = {
@@ -80,7 +78,14 @@ in
                 },
             },
       }
-    '';
+    '' + (
+      if config.nvim.layers.treesitter.spelling then
+        ''
+          require('spellsitter').setup()
+        ''
+      else ""
+    )
+  );
   config.nvim.post.vim = lib.mkIf
     enabled
     ''

@@ -43,5 +43,7 @@ in
       { name = "path"; group_index = 2; priority = 50; }
       { name = "emoji"; group_index = 2; priority = 50; }
     ];
+    layers.completion.sources."/" = [{ name = "buffer"; }];
+    layers.completion.sources.":" = [{ name = "cmdline"; }];
   };
 }

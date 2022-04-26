@@ -26,6 +26,7 @@
     monochrome = { url = "github:kdheepak/monochrome.nvim"; flake = false; };
     # lsp
     nvim-cmp = { url = "github:hrsh7th/nvim-cmp"; flake = false; };
+    cmp-cmdline = { url = "github:hrsh7th/cmp-cmdline"; flake = false; };
     nvim-lspconfig = { url = "github:neovim/nvim-lspconfig"; flake = false; };
     guihua = { url = "github:ray-x/guihua.lua"; flake = false; };
     lsp-navigator = { url = "github:ray-x/navigator.lua"; flake = false; };
@@ -33,6 +34,10 @@
     # treesitter
     nvim-treesitter-textsubjects = {
       url = "github:RRethy/nvim-treesitter-textsubjects";
+      flake = false;
+    };
+    nvim-spellsitter = {
+      url = "github:lewis6991/spellsitter.nvim";
       flake = false;
     };
     # git

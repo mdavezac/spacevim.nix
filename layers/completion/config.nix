@@ -11,6 +11,7 @@ in
 {
   config.nvim.plugins.start = lib.mkIf enabled [
     pkgs.vimPlugins.nvim-cmp
+    pkgs.vimPlugins.cmp-cmdline
     (lib.mkIf with-treesitter pkgs.vimPlugins.cmp-treesitter)
     (lib.mkIf (with-lsps || with-linters) pkgs.vimPlugins.cmp-nvim-lsp)
     pkgs.vimPlugins.cmp-buffer
@@ -34,15 +35,25 @@ in
             (builtins.map print_source sources)
         ) + "   }\n"
       );
-      print_filetype2 = filetype: sources: ''
-        cmp.setup.filetype('${filetype}', {
-            ${print_filetype sources}
-        })
-      '';
+      print_filetype2 = filetype: sources:
+        let
+          function = if filetype == "/" || filetype == ":" then "cmdline" else "filetype";
+        in
+        ''
+          cmp.setup.${function}('${filetype}', {
+              ${print_filetype sources}
+          })
+        '';
       print_all_sources = sources: builtins.concatStringsSep "\n" (
         builtins.attrValues (
           lib.mapAttrs print_filetype2
             (lib.filterAttrs (k: n: k != "other" && k != "/" && k != ":") sources)
+        )
+      );
+      print_special_sources = special: sources: builtins.concatStringsSep "\n" (
+        builtins.attrValues (
+          lib.mapAttrs print_filetype2
+            (lib.filterAttrs (k: n: k == special) sources)
         )
       );
       cfg_sources = config.nvim.layers.completion.sources;
@@ -82,10 +93,11 @@ in
               end
             end,
           },
-          view = { entries = "native" },
           formatting = { format = require('lspkind').cmp_format({ mode = "symbol" }) },
           ${other_sources}
         }
-      '' + (print_all_sources cfg_sources);
+      '' + (print_all_sources cfg_sources)
+      + (print_special_sources "/" cfg_sources)
+      + (print_special_sources ":" cfg_sources);
     };
 }

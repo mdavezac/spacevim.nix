@@ -26,6 +26,11 @@ in
                 default = true;
                 description = "Whether to enable the treesitter layer";
               };
+              options.spelling = lib.mkOption {
+                type = lib.types.bool;
+                default = true;
+                description = "Whether to enable the spellsitter plugin (spelling in comments)";
+              };
             };
             default = { };
           };
