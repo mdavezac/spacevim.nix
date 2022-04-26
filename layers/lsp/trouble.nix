@@ -11,7 +11,7 @@ let
 in
 {
   config.nvim.plugins.start = with-trouble [ pkgs.vimPlugins.trouble-nvim ];
-  config.nvim.init = with-trouble {
+  config.nvim.post = with-trouble {
     lua = ''
       require("trouble").setup({
         action_keys = {

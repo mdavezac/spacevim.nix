@@ -22,6 +22,9 @@ in
   config.nvim.plugins.start = lib.mkIf enabled [ pkgs.vimPlugins.aerial-nvim ];
   config.nvim.init.lua = ''
     require('telescope').load_extension('aerial')
+    require("aerial").setup({
+      backends = { "treesitter", "lsp", "markdown" },
+    })
   '';
   config.nvim.which-key = lib.mkIf enabled {
     bindings = [

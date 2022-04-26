@@ -32,6 +32,22 @@
         "type": "github"
       }
     },
+    "cmp-cmdline": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1644756337,
+        "narHash": "sha256-8KlmtXYfapji+n6tntAGlTcHYT3CJtdZaFR8luEu7Go=",
+        "owner": "hrsh7th",
+        "repo": "cmp-cmdline",
+        "rev": "f4beb74e8e036f9532bedbcac0b93c7a55a0f8b0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hrsh7th",
+        "repo": "cmp-cmdline",
+        "type": "github"
+      }
+    },
     "dash-nvim": {
       "flake": false,
       "locked": {
@@ -330,6 +346,22 @@
         "type": "github"
       }
     },
+    "nvim-spellsitter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1648571721,
+        "narHash": "sha256-lYyTA9hvxljNy0n3xZCCwC1e+W1mBBwdGDKXiWY1x4E=",
+        "owner": "lewis6991",
+        "repo": "spellsitter.nvim",
+        "rev": "f84e7a31c516f2a9cb857a02e4b551b009a81afb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lewis6991",
+        "repo": "spellsitter.nvim",
+        "type": "github"
+      }
+    },
     "nvim-telescope": {
       "flake": false,
       "locked": {
@@ -398,6 +430,7 @@
       "inputs": {
         "aniseed": "aniseed",
         "catpuccino": "catpuccino",
+        "cmp-cmdline": "cmp-cmdline",
         "dash-nvim": "dash-nvim",
         "devshell": "devshell",
         "flake-utils": "flake-utils_2",
@@ -414,14 +447,32 @@
         "nvim-cmp": "nvim-cmp",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-notify": "nvim-notify",
+        "nvim-spellsitter": "nvim-spellsitter",
         "nvim-telescope": "nvim-telescope",
         "nvim-treesitter-textsubjects": "nvim-treesitter-textsubjects",
         "octo": "octo",
         "rainglow": "rainglow",
+        "trouble-nvim": "trouble-nvim",
         "ultest": "ultest",
         "vim-diffview": "vim-diffview",
         "vim-test": "vim-test",
         "zenbones": "zenbones"
+      }
+    },
+    "trouble-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1647585739,
+        "narHash": "sha256-oUf8YbJ9HmSLN8o2c7CXzCYPu7PwKzvVKNiM9HtHQbQ=",
+        "owner": "folke",
+        "repo": "trouble.nvim",
+        "rev": "691d490cc4eadc430d226fa7d77aaa84e2e0a125",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "trouble.nvim",
+        "type": "github"
       }
     },
     "ultest": {

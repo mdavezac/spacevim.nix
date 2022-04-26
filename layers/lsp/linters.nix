@@ -9,6 +9,19 @@ in
 {
   options.nvim = lib.mkOption {
     type = lib.types.submodule {
+      options.layers = lib.mkOption {
+        type = lib.types.submodule {
+          options.lsp = lib.mkOption {
+            type = lib.types.submodule {
+              options.debug-nulls = lib.mkOption {
+                type = lib.types.bool;
+                default = false;
+                description = "Enable more debug info in null-ls logs";
+              };
+            };
+          };
+        };
+      };
       options.linters = lib.mkOption {
         type = lib.types.attrsOf (lib.types.submodule {
           options.enable =
@@ -46,11 +59,12 @@ in
             (k: v: "nulls.builtins.${k}.with({command=\"${v.exe}\", extra_args={${extra_args v.extra_args}}, timeout=${builtins.toString v.timeout}})")
             (lib.filterAttrs (k: v: v.enable) config.nvim.linters)
         );
+      debug = if config.nvim.layers.lsp.debug-nulls then "true" else "false";
     in
     lib.mkIf enabled ''
       local nulls = require("null-ls")
       nulls.setup({
-          debug=true,
+          debug=${debug},
           sources={${null-text}},
       })
     '';

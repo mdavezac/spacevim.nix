@@ -31,6 +31,7 @@
     guihua = { url = "github:ray-x/guihua.lua"; flake = false; };
     lsp-navigator = { url = "github:ray-x/navigator.lua"; flake = false; };
     lspsaga-nvim = { url = "github:tami5/lspsaga.nvim"; flake = false; };
+    trouble-nvim = { url = "github:folke/trouble.nvim"; flake = false; };
     # treesitter
     nvim-treesitter-textsubjects = {
       url = "github:RRethy/nvim-treesitter-textsubjects";
