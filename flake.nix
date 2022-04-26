@@ -4,12 +4,12 @@
   inputs = {
     # nixpkgs.url = "github:mdavezac/nixpkgs/nvim-tree-sitter-darwin";
     /* nixpkgs.url = "path:/Users/mdavezac/personal/nixpkgs/"; */
-    nixpkgs.url = "github:nixos/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     devshell.url = "github:numtide/devshell";
 
     neovim = {
-      url = "github:neovim/neovim/v0.6.1?dir=contrib";
+      url = "github:neovim/neovim/v0.7.0?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
