@@ -398,16 +398,17 @@
     "octo": {
       "flake": false,
       "locked": {
-        "lastModified": 1650965918,
-        "narHash": "sha256-7wv5ODDGXreRAiQWZk5evLIyFaEIIuApVu3csPhx+QI=",
+        "lastModified": 1650820055,
+        "narHash": "sha256-kZFxerZ8+2hFn3aa6KUTqR4zpnFkrO9innOaixbZrow=",
         "owner": "pwntester",
         "repo": "octo.nvim",
-        "rev": "622ab9feaa735dc0999e567183ce357f3dff080f",
+        "rev": "7f6555f0bc0bb5d7b184b00b96b5ae737253f3a7",
         "type": "github"
       },
       "original": {
         "owner": "pwntester",
         "repo": "octo.nvim",
+        "rev": "7f6555f0bc0bb5d7b184b00b96b5ae737253f3a7",
         "type": "github"
       }
     },
