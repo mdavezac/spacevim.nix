@@ -64,6 +64,7 @@ in
           highlight HopUnmatched guifg=#335566
         '' else if (is_colorscheme "monochrome") then ''
           highlight HopUnmatched guifg=#444455
+          highlight VertSplit guifg=#333344
           highlight link GitSignsCurrentLineBlame Comment
         '' else ""
       )
