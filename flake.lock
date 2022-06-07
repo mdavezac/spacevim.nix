@@ -21,14 +21,14 @@
       "locked": {
         "lastModified": 1650316185,
         "narHash": "sha256-KSjPg/93YzprFyAFKOcGYZXlm2kjxMIYTZOeuu7OJvE=",
-        "owner": "Pocco81",
-        "repo": "Catppuccino.nvim",
+        "owner": "catppuccin",
+        "repo": "nvim",
         "rev": "8a67df6da476cba68ecf26a519a5279686edbd2e",
         "type": "github"
       },
       "original": {
-        "owner": "Pocco81",
-        "repo": "Catppuccino.nvim",
+        "owner": "catppuccin",
+        "repo": "nvim",
         "type": "github"
       }
     },
@@ -398,17 +398,16 @@
     "octo": {
       "flake": false,
       "locked": {
-        "lastModified": 1650820055,
-        "narHash": "sha256-kZFxerZ8+2hFn3aa6KUTqR4zpnFkrO9innOaixbZrow=",
+        "lastModified": 1653310719,
+        "narHash": "sha256-Qs2ev69ViM/MdwX0lb8vZNY9Zfsxplb6NBXzCZvhzVI=",
         "owner": "pwntester",
         "repo": "octo.nvim",
-        "rev": "7f6555f0bc0bb5d7b184b00b96b5ae737253f3a7",
+        "rev": "5517cbdf302be2abc4ac43e5b8b2a812d0222bbb",
         "type": "github"
       },
       "original": {
         "owner": "pwntester",
         "repo": "octo.nvim",
-        "rev": "7f6555f0bc0bb5d7b184b00b96b5ae737253f3a7",
         "type": "github"
       }
     },

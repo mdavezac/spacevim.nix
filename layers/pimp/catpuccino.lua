@@ -1,19 +1,16 @@
-local catppuccino = require("catppuccino")
-
-catppuccino.setup(
+require("catppuccin").setup(
     {
-		colorscheme = "soft_manilo",
 		transparency = false,
 		term_colors = false,
 		styles = {
 			comments = "italic",
 			functions = "NONE",
-			keywords = "italic",
-			strings = "NONE",
+			keywords = "bold",
+			strings = "italic",
 			variables = "NONE",
 		},
 		integrations = {
-			treesitter = true,
+			treesitter = false,
 			native_lsp = {
 				enabled = true,
 				virtual_text = {
@@ -35,6 +32,13 @@ catppuccino.setup(
 			neogit = true,
 			barbar = true,
 			hop = true,
+            nvimtree = {
+                enabled = true,
+                show_root = false,
+                transparent_panel = false,
+            },
+            cmp = true,
+            lsp_trouble = true,
 		}
 	}
 )

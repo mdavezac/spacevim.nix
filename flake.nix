@@ -19,7 +19,7 @@
     # pimp
     rainglow = { url = "github:rainglow/vim"; flake = false; };
     neon = { url = "github:rafamadriz/neon"; flake = false; };
-    catpuccino = { url = "github:Pocco81/Catppuccino.nvim"; flake = false; };
+    catpuccino = { url = "github:catppuccin/nvim"; flake = false; };
     nvim-notify = { url = "github:rcarriga/nvim-notify"; flake = false; };
     lush = { url = "github:rktjmp/lush.nvim"; flake = false; };
     zenbones = { url = "github:mcchrish/zenbones.nvim"; flake = false; };

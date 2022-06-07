@@ -31,10 +31,7 @@ in
         }
         -- End of pimp layer
       ''
-      (
-        if (is_colorscheme "catppuccino")
-        then (builtins.readFile ./catpuccino.lua) else ""
-      )
+      (if (is_colorscheme "catppuccin") then (builtins.readFile ./catpuccino.lua) else "")
     ]
   );
   config.nvim.post.vim = lib.mkIf enabled (
