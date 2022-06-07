@@ -32,7 +32,7 @@ in
         };
         options.repl-open-cmd = lib.mkOption {
           type = lib.types.str;
-          default = "require('iron.view').openwin('rightbelow vertical split')";
+          default = "'rightbelow vertical split'";
           description = "Command to run when opening REPL window";
         };
         options.favored = lib.mkOption {

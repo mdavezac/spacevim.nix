@@ -35,16 +35,18 @@ in
         '';
         preferred = builtins.concatStringsSep "\n        " (
           builtins.attrValues
-            (builtins.mapAttrs (k: v: ''${k} = "${v}",'') cfg.terminal.repl.favored)
+            (builtins.mapAttrs (k: v: ''${k} = ${v},'') cfg.terminal.repl.favored)
         );
         repl = ''
-          local iron = require('iron');
-          iron.core.set_config {
-              preferred = {
-                    ${preferred}
-              },
-              repl_open_cmd = ${cfg.terminal.repl.repl-open-cmd},
+            local iron = require('iron.core');
+            iron.setup({
+          config = {
+                  repl_definition = {
+                        ${preferred}
+                  },
+                  repl_open_cmd = ${cfg.terminal.repl.repl-open-cmd},
           }
+            })
         '';
         toggleterm = ''
           require("toggleterm").setup {

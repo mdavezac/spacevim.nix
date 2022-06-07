@@ -44,6 +44,17 @@ in
               ${print_filetype sources}
           })
         '';
+      print_special_filetype2 = filetype: sources:
+        let
+          function = if filetype == "/" || filetype == ":" then "cmdline" else "filetype";
+        in
+        ''
+          cmp.setup.${function}('${filetype}', {
+              mapping = cmp.mapping.preset.cmdline(),
+              ${print_filetype sources}
+          })
+        '';
+
       print_all_sources = sources: builtins.concatStringsSep "\n" (
         builtins.attrValues (
           lib.mapAttrs print_filetype2
@@ -52,7 +63,7 @@ in
       );
       print_special_sources = special: sources: builtins.concatStringsSep "\n" (
         builtins.attrValues (
-          lib.mapAttrs print_filetype2
+          lib.mapAttrs print_special_filetype2
             (lib.filterAttrs (k: n: k == special) sources)
         )
       );

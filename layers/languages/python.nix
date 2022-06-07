@@ -58,5 +58,5 @@ in
         }
     }
   '';
-  config.nvim.layers.terminal.repl.favored.python = "python";
+  config.nvim.layers.terminal.repl.favored.python = "require('iron.fts.python').python3";
 }
