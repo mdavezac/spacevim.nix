@@ -29,6 +29,7 @@ in
   default_config.nvim = {
     languages.python = true;
     languages.nix = true;
+    languages.markdown = true;
     colorscheme = "monochrome";
     layers.neorg.workspaces = [
       {

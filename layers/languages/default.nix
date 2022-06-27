@@ -13,11 +13,16 @@
             default = false;
             description = "Whether to enable the nix language layer";
           };
+          options.markdown = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+            description = "Whether to enable the markdown language layer";
+          };
         };
         default = { };
       };
     };
   };
-  imports = [ ./nix.nix ./python.nix ];
+  imports = [ ./nix.nix ./python.nix ./markdown.nix ];
   config.nvim.plugins.start = [ pkgs.vimPlugins.vim-commentary ];
 }
