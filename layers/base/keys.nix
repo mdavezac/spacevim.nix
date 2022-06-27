@@ -135,8 +135,8 @@ in
           description = "Go to one pane right";
           modes = [ "normal" "visual" "insert" ];
         })
-      { key = "ts"; command = "<CMD>setlocal spell!<CR>"; description = "Spelling (local)"; }
-      { key = "tS"; command = "<CMD>set spell!<CR>"; description = "Spelling (global)"; }
+      { key = "<leader>ts"; command = "<CMD>setlocal spell!<CR>"; description = "Spelling (local)"; }
+      { key = "<leader>tS"; command = "<CMD>set spell!<CR>"; description = "Spelling (global)"; }
     ];
   };
 }

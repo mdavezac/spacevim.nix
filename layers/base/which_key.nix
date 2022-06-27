@@ -21,7 +21,7 @@
             strmode = builtins.substring 0 1 mode;
           in
           (
-            "    wk.register({\n        "
+            "    require(\"which-key\").register({\n        "
             + (
               builtins.concatStringsSep ",\n        "
                 (
@@ -69,8 +69,14 @@
           (filetypes cfgs));
 
         text = ''
-          local wk = require("which-key")
-          wk.setup({})
+          require("which-key").setup({
+            plugins = {
+                spelling = {
+                    enabled = true,
+                },
+            },
+            operators = { gc = "Comments" },
+          })
 
         '' + (print_functions all_options)
         + "\n\n which_key_any()\n" + (print_autocmds (filetypes all_options));
