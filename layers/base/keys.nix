@@ -37,7 +37,7 @@ in
         description = "Undotree";
       }
       {
-        key = "<leader><TAB>";
+        key = "<leader><leader>";
         command = "<cmd>b#<cr>";
         description = "Switch to last buffer";
       }
