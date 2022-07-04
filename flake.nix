@@ -2,9 +2,7 @@
   description = "Big Neovim Energy";
 
   inputs = {
-    # nixpkgs.url = "github:mdavezac/nixpkgs/nvim-tree-sitter-darwin";
-    /* nixpkgs.url = "path:/Users/mdavezac/personal/nixpkgs/"; */
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
     flake-utils.url = "github:numtide/flake-utils";
     devshell.url = "github:numtide/devshell";
 
@@ -46,7 +44,7 @@
     vim-diffview = { url = "github:sindrets/diffview.nvim"; flake = false; };
     # dash
     dash-nvim = {
-      url = "github:mrjones2014/dash.nvim";
+      url = "github:mrjones2014/dash.nvim/6296e87fddece1996c7d324ef8511d6908184a55";
       flake = false;
     };
     # testing
@@ -78,7 +76,7 @@
         ./layers/completion
         ./layers/neorg
       ];
-      default = (import ./.) modules_paths;
+      local_default = (import ./.) modules_paths;
       make-overlay = self: k: v: self.vimUtils.buildVimPluginFrom2Nix {
         pname = k;
         version = v.shortRev;
@@ -87,27 +85,53 @@
       nvim-plugins = self: builtins.mapAttrs
         (make-overlay self)
         (builtins.removeAttrs inputs [ "self" "nixpkgs" "flake-utils" "devshell" "neovim" "dash-nvim" ]);
-      overlay_ = self: super: {
-        spacenix-wrapper = (default { pkgs = super; }).customNeovim;
+      overlay_ = final: super: rec {
+        spacenix-wrapper = local_default.customNeovim;
         vimPlugins = super.vimPlugins // {
-          dash-nvim = self.vimUtils.buildVimPluginFrom2Nix {
+          dash-nvim = final.vimUtils.buildVimPluginFrom2Nix {
             pname = "dash-nvim";
             version = inputs.dash-nvim.shortRev;
             src = inputs.dash-nvim;
             buildPhase = "make install";
           };
-        } // (nvim-plugins self);
+        } // (nvim-plugins final);
+        nvimDevShellSettings = pkgs: configuration:
+          let
+            nvim = spacenix-wrapper pkgs configuration;
+            vicmd = ''
+              rpc=$PRJ_DATA_DIR/nvim.rpc
+              [ -e $rpc ] && ${pkgs.neovim-remote}/bin/nvr --servername $rpc -s $@ || ${nvim}/bin/nvim $@
+            '';
+            vi_args = [
+              "${pkgs.neovim-remote}/bin/nvr"
+              "--servername"
+              "$PRJ_DATA_DIR/nvim.rpc"
+              "-cc split"
+              "--remote-wait"
+              "-s"
+              "$@"
+            ];
+          in
+          {
+            devshell.packages = [ nvim ];
+            commands = builtins.map (x: { name = x; command = vicmd; }) [ "vim" "vi" ];
+            env = [
+              { name = "EDITOR"; value = builtins.concatStringsSep " " vi_args; }
+              { name = "NVIM_LISTEN_ADDRESS"; eval = "$PRJ_DATA_DIR/nvim.rpc"; }
+            ];
+          };
       };
-      overlays_ = [
-        neovim.overlay
-        (final: prev: {
+      overlays = {
+        neovim = neovim.overlay;
+        python = (final: prev: {
           python = prev.python3;
-        })
-        overlay_
-      ];
+        });
+        default = overlay_;
+
+      };
     in
     {
-      overlay_list = overlays_;
+      overlays = overlays;
     } //
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -115,39 +139,24 @@
         pkgs = import nixpkgs {
           inherit system;
           config = { allowUnfree = true; };
-          overlays = [ devshell.overlay ] ++ overlays_;
+          overlays = [ devshell.overlay ] ++ (builtins.attrValues overlays);
         };
-        customNeovim = (default { inherit pkgs; }).customNeovim;
-        default_config = (default { inherit pkgs; }).default_config;
       in
       rec {
-        defaultPackage = customNeovim default_config;
-        apps = {
+        packages.default = local_default.customNeovim pkgs local_default.default_config;
+        lib.spacenix-wrapper = local_default.customNeovim pkgs;
+        modules.devshell = import ./devshell.mod.nix;
+        apps = rec {
           nvim = flake-utils.lib.mkApp {
-            drv = defaultPackage;
+            drv = packages.default;
             name = "nvim";
           };
+          default = nvim;
         };
 
-        wrapper = customNeovim;
-        defaultApp = apps.nvim;
-
-        devShell = pkgs.devshell.mkShell {
+        devShells.default = pkgs.devshell.mkShell {
           name = "neovim";
-          packages = [ defaultPackage ];
-
-          commands = [
-            {
-              name = "vim";
-              command = "${defaultPackage}/bin/nvim \"$@\"";
-              help = "alias for neovim with spacenix config";
-            }
-            {
-              name = "vi";
-              command = "${defaultPackage}/bin/nvim \"$@\"";
-              help = "alias for neovim with spacenix config";
-            }
-          ];
+          imports = [ (modules.devshell packages.default) ];
         };
       }
     );

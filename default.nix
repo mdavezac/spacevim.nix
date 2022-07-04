@@ -1,13 +1,13 @@
-module_paths: { system ? builtins.currentSystem, pkgs ? (import (import <nixpkgs>) { inherit system; }) }:
+module_paths:
 let
-  evalModules_ = configuration: pkgs.lib.evalModules {
+  evalModules_ = pkgs: configuration: pkgs.lib.evalModules {
     modules = [ ./layers/module.nix { _module.args.pkgs = pkgs; } ]
       ++ module_paths
       ++ [ configuration ];
   };
-  customNeovim_ = configuration:
+  customNeovim_ = pkgs: configuration:
     let
-      module = evalModules_ configuration;
+      module = evalModules_ pkgs configuration;
     in
     pkgs.wrapNeovim pkgs.neovim {
       configure = {
