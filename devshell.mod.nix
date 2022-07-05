@@ -16,7 +16,8 @@ let
 in
 {
   config = {
-    commands = builtins.map (x: { name = x; command = vicmd; help = "Alias to nvim+remote"; }) [ "nvim" "vim" "vi" ];
+    devshell.packages = [ wrapped_nvim ];
+    commands = builtins.map (x: { name = x; command = vicmd; help = "Alias to nvim+remote"; }) [ "vim" "vi" ];
     env = [
       { name = "EDITOR"; value = builtins.concatStringsSep " " vi_args; }
       { name = "NVIM_LISTEN_ADDRESS"; eval = "$PRJ_DATA_DIR/nvim.rpc"; }
