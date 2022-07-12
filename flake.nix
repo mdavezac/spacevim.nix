@@ -7,7 +7,7 @@
     devshell.url = "github:numtide/devshell";
 
     neovim = {
-      url = "github:neovim/neovim/v0.7.0?dir=contrib";
+      url = "github:neovim/neovim/v0.7.2?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
@@ -48,8 +48,10 @@
       flake = false;
     };
     # testing
-    ultest = { url = "github:rcarriga/vim-ultest"; flake = false; };
-    vim-test = { url = "github:vim-test/vim-test"; flake = false; };
+    neotest = { url = "github:nvim-neotest/neotest"; flake = false; };
+    neotest-plenary = { url = "github:nvim-neotest/neotest-plenary"; flake = false; };
+    neotest-python = { url = "github:nvim-neotest/neotest-python"; flake = false; };
+    neotest-vim-test = { url = "github:nvim-neotest/neotest-vim-test"; flake = false; };
     # terminal
     iron-nvim = { url = "github:hkupty/iron.nvim"; flake = false; };
     # neorg

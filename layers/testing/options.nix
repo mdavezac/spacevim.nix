@@ -10,11 +10,6 @@
                 default = true;
                 description = "Whether to enable the testing layer";
               };
-              options.strategy = lib.mkOption {
-                type = lib.types.enum [ "neovim" "basic" "make" "neoterm" ];
-                default = "basic";
-                description = "Where to run the tests";
-              };
               options.python = lib.mkOption {
                 type = lib.types.enum [
                   "pytest"
@@ -27,6 +22,11 @@
                 ];
                 default = "pytest";
                 description = "Python test framework";
+              };
+              options.others = lib.mkOption {
+                type = lib.types.listOf lib.types.str;
+                default = [ ];
+                description = "Filetypes to include via vim-test";
               };
             };
             default = { };

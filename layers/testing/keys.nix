@@ -1,9 +1,13 @@
 { config, lib, pkgs, ... }:
 let
-  filetypes = [ "python" ];
+  add_if = condition: value: (if condition then value else [ ]);
+  conditions = (import ./utils.nix) config;
+  filetypes = (add_if conditions.is_python_enabled [ "python" ]) ++ (
+    add_if conditions.is_others_enabled config.layers.testing.others
+  );
 in
 {
-  config.nvim.which-key = lib.mkIf config.nvim.layers.testing.enable {
+  config.nvim.which-key = lib.mkIf conditions.is_enabled {
     groups = [{
       prefix = "<localleader>t";
       name = "+Testing";
@@ -12,43 +16,31 @@ in
     bindings = [
       {
         key = "<localleader>tt";
-        command = "<cmd>UltestNearest<cr>";
+        command = ''<cmd>lua require('neotest').run.run()<cr>'';
         description = "Nearest test";
         filetypes = filetypes;
       }
       {
         key = "<localleader>tf";
-        command = ''<cmd>Ultest<cr>'';
+        command = ''<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>'';
         description = "Test file";
         filetypes = filetypes;
       }
       {
-        key = "<localleader>ts";
-        command = "<cmd>TestSuite<cr>";
-        description = "Run full test-suite";
-        filetypes = filetypes;
-      }
-      {
         key = "<localleader>tl";
-        command = "<cmd>TestLast<cr>";
+        command = "<cmd>lua require('neotest').run.run_last()<cr>";
         description = "Run last test";
         filetypes = filetypes;
       }
       {
-        key = "<localleader>tv";
-        command = "<cmd>TestVisit<cr>";
-        description = "Open last test file";
-        filetypes = filetypes;
-      }
-      {
         key = "<localleader>to";
-        command = "<cmd>UltestOutput<cr>";
+        command = "<cmd>lua require('neotest').output.open({})<cr>";
         description = "Show lastest output for nearest test";
         filetypes = filetypes;
       }
       {
         key = "<localleader>t<localleader>";
-        command = "<cmd>UltestSummary<cr>";
+        command = "<cmd>lua require('neotest').summary.toggle()<cr>";
         description = "Toggle summary window";
         filetypes = filetypes;
       }
