@@ -3,7 +3,6 @@ let
   enableIf = lib.mkIf config.nvim.languages.markdown;
 in
 {
-  config.nvim.treesitter-languages = enableIf [ "markdown" ];
   config.nvim.plugins.start = enableIf [
     pkgs.vimPlugins.vim-markdown
     pkgs.vimPlugins.glow-nvim
