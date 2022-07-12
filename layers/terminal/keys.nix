@@ -21,7 +21,7 @@ in
       (lib.mkIf enable-repl
         {
           key = "<CR>";
-          command = "<Plug>(iron-visual-send)";
+          command = "<CMD>lua require('iron').core.visual_send()<CR>";
           description = "Send selection to REPL";
           modes = [ "visual" ];
           filetypes = repl-filetypes;
@@ -43,14 +43,14 @@ in
       (lib.mkIf enable-repl
         {
           key = "<leader>rl";
-          command = "<Plug>(iron-send-line)";
+          command = "<CMD>lua require('iron').core.send_line()<CR>j";
           description = "Send line to REPL";
           filetypes = repl-filetypes;
         })
       (lib.mkIf enable-repl
         {
           key = "<leader>rt";
-          command = "<Plug>(iron-send-motion)";
+          command = "<CMD>lua require('iron').core.send_motion()<CR>j";
           description = "Send motion to REPL";
           filetypes = repl-filetypes;
         })
