@@ -63,6 +63,9 @@ in
           highlight HopUnmatched guifg=#444455
           highlight VertSplit guifg=#333344
           highlight link GitSignsCurrentLineBlame Comment
+        ''
+        else if (is_colorscheme "papercolor") then ''
+          highlight BufferInactive guifg=#707070
         '' else ""
       )
       ''" End of pimp layer''
