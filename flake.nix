@@ -58,6 +58,8 @@
     neorg = { url = "github:nvim-neorg/neorg"; flake = false; };
     #
     aniseed = { url = "github:olical/aniseed"; flake = false; };
+    # debugger
+    nvim-dap-python = { url = "github:mfussenegger/nvim-dap-python"; flake = false; };
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
@@ -77,6 +79,7 @@
         ./layers/testing
         ./layers/completion
         ./layers/neorg
+        ./layers/debugger
       ];
       local_default = (import ./.) modules_paths;
       make-overlay = self: k: v: self.vimUtils.buildVimPluginFrom2Nix {

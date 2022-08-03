@@ -380,6 +380,22 @@
         "type": "github"
       }
     },
+    "nvim-dap-python": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1657265025,
+        "narHash": "sha256-E8JnKdju+gi5bVkGmxhTvG6BqCmi0Yu2wpba1Qj/TN8=",
+        "owner": "mfussenegger",
+        "repo": "nvim-dap-python",
+        "rev": "cc6732ab33a84b3a6b4300fcda5b2f837851b88e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mfussenegger",
+        "repo": "nvim-dap-python",
+        "type": "github"
+      }
+    },
     "nvim-lspconfig": {
       "flake": false,
       "locked": {
@@ -515,6 +531,7 @@
         "neovim": "neovim",
         "nixpkgs": "nixpkgs_2",
         "nvim-cmp": "nvim-cmp",
+        "nvim-dap-python": "nvim-dap-python",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-notify": "nvim-notify",
         "nvim-spellsitter": "nvim-spellsitter",

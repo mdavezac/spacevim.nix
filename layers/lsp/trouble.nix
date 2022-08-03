@@ -88,7 +88,7 @@ in
         description = "Loclist";
       }
       {
-        key = "<localleader>d";
+        key = "<localleader>D";
         command = "<cmd>TroubleToggle<cr>";
         description = "Diagnostics";
       }

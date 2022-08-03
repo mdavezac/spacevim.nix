@@ -1,6 +1,13 @@
 { config, lib, pkgs, ... }:
 let
   enableIf = lib.mkIf config.nvim.languages.python;
+  with_debugger = config.nvim.layers.debugger.enable && config.nvim.languages.python;
+  with_pytest = (
+    config.nvim.layers.testing.enable
+    && config.nvim.languages.python
+    && config.nvim.layers.testing.python == "pytest"
+    && config.nvim.layers.debugger.enable
+  );
 in
 {
   config.nvim.lsp-instances.pyright = enableIf {
@@ -10,9 +17,14 @@ in
     ];
   };
   config.nvim.treesitter-languages = enableIf [ "python" ];
-  config.nvim.plugins.start = lib.mkIf (config.nvim.languages.python && config.nvim.layers.treesitter.enable) [
-    pkgs.vimPlugins.nvim-treesitter-pyfold
-  ];
+  config.nvim.plugins.start =
+    let
+      conditional = condition: x: if condition then [ x ] else [ ];
+    in
+    enableIf (
+      (conditional config.nvim.layers.treesitter.enable pkgs.vimPlugins.nvim-treesitter-pyfold)
+      ++ (conditional config.nvim.layers.debugger.enable pkgs.vimPlugins.nvim-dap-python)
+    );
   config.nvim.layers.completion.sources = enableIf {
     python = [
       {
@@ -58,5 +70,22 @@ in
         }
     }
   '';
-  config.nvim.layers.terminal.repl.favored.python = "require('iron.fts.python').python3";
+  config.nvim.layers.terminal.repl.favored.python = enableIf "require('iron.fts.python').python3";
+  config.nvim.init.lua =
+    let
+      python = pkgs.python.withPackages (p: [ p.debugpy ]);
+      conditional = condition: value: if condition then value else "";
+    in
+    enableIf (
+      (conditional config.nvim.layers.debugger.enable ''
+        require("dap-python").setup("${python}/bin/python")
+      '') + (conditional with_pytest ''
+        require('dap-python').test_runner = 'pytest'
+      '')
+    );
+  config.nvim.which-key = lib.mkIf with_debugger {
+    bindings = [
+      { key = "<localleader>dt"; command = "<cmd>lua require('dap-python').test_method()<cr>"; description = "method"; }
+    ];
+  };
 }

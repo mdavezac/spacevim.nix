@@ -11,6 +11,7 @@ in
   config.nvim.init.lua = lib.mkIf enable ''
     require('neogit').setup {
       integrations = { diffview = true },
+      auto_refresh = false,
     }
     require('gitsigns').setup {
       current_line_blame_opts = {
