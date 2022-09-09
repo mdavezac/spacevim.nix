@@ -34,6 +34,14 @@ in
       (if (is_colorscheme "catppuccin") then (builtins.readFile ./catpuccino.lua) else "")
     ]
   );
+  config.nvim.which-key.bindings = [
+    {
+      key = "<leader>tb";
+      command = "<CMD>if &background == 'light' | set background=dark | else | set background=light | end <CR>";
+      description = "Background";
+    }
+  ];
+
   config.nvim.post.vim = lib.mkIf enabled (
     builtins.concatStringsSep "\n" [
       ''" Pimp layer
