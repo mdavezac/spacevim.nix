@@ -35,6 +35,10 @@
       url = "github:RRethy/nvim-treesitter-textsubjects";
       flake = false;
     };
+    vim-illuminate = {
+      url = "github:RRethy/vim-illuminate";
+      flake = false;
+    };
     nvim-spellsitter = {
       url = "github:lewis6991/spellsitter.nvim";
       flake = false;
@@ -48,8 +52,8 @@
       flake = false;
     };
     # testing
+    plenary-nvim = { url = "github:nvim-lua/plenary.nvim"; flake = false; };
     neotest = { url = "github:nvim-neotest/neotest"; flake = false; };
-    neotest-plenary = { url = "github:nvim-neotest/neotest-plenary"; flake = false; };
     neotest-python = { url = "github:nvim-neotest/neotest-python"; flake = false; };
     neotest-vim-test = { url = "github:nvim-neotest/neotest-vim-test"; flake = false; };
     # terminal

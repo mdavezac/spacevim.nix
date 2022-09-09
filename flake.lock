@@ -258,22 +258,6 @@
         "type": "github"
       }
     },
-    "neotest-plenary": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1658780636,
-        "narHash": "sha256-cCnPlCHL/LowfAZ9MC51/zbK/Qn5Nxw6uV+dLyu0FBc=",
-        "owner": "nvim-neotest",
-        "repo": "neotest-plenary",
-        "rev": "7c3656f4d74da2b17a407038cacafa0d411b396b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvim-neotest",
-        "repo": "neotest-plenary",
-        "type": "github"
-      }
-    },
     "neotest-python": {
       "flake": false,
       "locked": {
@@ -492,6 +476,22 @@
         "type": "github"
       }
     },
+    "plenary-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662196864,
+        "narHash": "sha256-qIfsQScKdwrVXUYry+RDjoMoKLuhlsw1GHOVoeOphfo=",
+        "owner": "nvim-lua",
+        "repo": "plenary.nvim",
+        "rev": "4b66054e75356ac0b909bbfee9c682e703f535c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-lua",
+        "repo": "plenary.nvim",
+        "type": "github"
+      }
+    },
     "rainglow": {
       "flake": false,
       "locked": {
@@ -525,7 +525,6 @@
         "neon": "neon",
         "neorg": "neorg",
         "neotest": "neotest",
-        "neotest-plenary": "neotest-plenary",
         "neotest-python": "neotest-python",
         "neotest-vim-test": "neotest-vim-test",
         "neovim": "neovim",
@@ -538,9 +537,11 @@
         "nvim-telescope": "nvim-telescope",
         "nvim-treesitter-textsubjects": "nvim-treesitter-textsubjects",
         "octo": "octo",
+        "plenary-nvim": "plenary-nvim",
         "rainglow": "rainglow",
         "trouble-nvim": "trouble-nvim",
         "vim-diffview": "vim-diffview",
+        "vim-illuminate": "vim-illuminate",
         "zenbones": "zenbones"
       }
     },
@@ -573,6 +574,22 @@
       "original": {
         "owner": "sindrets",
         "repo": "diffview.nvim",
+        "type": "github"
+      }
+    },
+    "vim-illuminate": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662423154,
+        "narHash": "sha256-e0kLJEk437GeU9bbYVL5Rz4oeqy+k7bbW0fOBhr4CAY=",
+        "owner": "RRethy",
+        "repo": "vim-illuminate",
+        "rev": "1c8132dc81078fc1ec7a4a1492352b8f541ee84b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "RRethy",
+        "repo": "vim-illuminate",
         "type": "github"
       }
     },

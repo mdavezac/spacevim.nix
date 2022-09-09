@@ -7,7 +7,6 @@ in
   config.nvim.plugins.start = lib.mkIf conditions.is_enabled [
     pkgs.vimPlugins.neotest
     pkgs.vimPlugins.neotest-vim-test
-    pkgs.vimPlugins.neotest-plenary
     pkgs.vimPlugins.FixCursorHold-nvim
     (lib.mkIf config.nvim.languages.python pkgs.vimPlugins.neotest-python)
   ];

@@ -13,6 +13,7 @@ in
     nvim-treesitter-textobjects
     nvim-treesitter-context
     nvim-treesitter-textsubjects
+    vim-illuminate
     (lib.mkIf config.nvim.layers.treesitter.spelling nvim-spellsitter)
   ];
   config.nvim.init.lua = lib.mkIf enabled (
@@ -78,6 +79,11 @@ in
                 },
             },
       }
+      require('illuminate').configure({
+        providers = { "treesitter", "lsp" },
+        filetype_denylist = { "NeogitStatus", "octo" }
+      })
+
     '' + (
       if config.nvim.layers.treesitter.spelling then
         ''
