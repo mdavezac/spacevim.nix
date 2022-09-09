@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
-  enable = config.nvim.layers.git.enable;
+  cfg = config.nvim.layers.git;
+  enable = cfg.enable;
 in
 {
   config.nvim.plugins.start = lib.mkIf enable [
@@ -11,7 +12,7 @@ in
   config.nvim.init.lua = lib.mkIf enable ''
     require('neogit').setup {
       integrations = { diffview = true },
-      auto_refresh = false,
+      auto_refresh = ${builtins.toString cfg.auto_refresh},
     }
     require('gitsigns').setup {
       current_line_blame_opts = {
