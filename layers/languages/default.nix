@@ -18,11 +18,16 @@
             default = true;
             description = "Whether to enable the markdown language layer";
           };
+          options.rust = lib.mkOption {
+            type = lib.types.bool;
+            default = true;
+            description = "Whether to enable the rust language layer";
+          };
         };
         default = { };
       };
     };
   };
-  imports = [ ./nix.nix ./python.nix ./markdown.nix ];
+  imports = [ ./nix.nix ./python.nix ./markdown.nix ./rust.nix ];
   config.nvim.plugins.start = [ pkgs.vimPlugins.vim-commentary ];
 }
