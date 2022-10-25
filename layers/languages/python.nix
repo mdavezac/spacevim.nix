@@ -83,6 +83,9 @@ in
         require('dap-python').test_runner = 'pytest'
       '')
     );
+  config.nvim.init.vim = ''
+    au FileType python setlocal comments+=b:#:
+  '';
   config.nvim.which-key = lib.mkIf with_debugger {
     bindings = [
       { key = "<localleader>dt"; command = "<cmd>lua require('dap-python').test_method()<cr>"; description = "method"; }
