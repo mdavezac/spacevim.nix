@@ -2,12 +2,12 @@
   description = "Big Neovim Energy";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
+    nixpkgs.url = "github:nixos/nixpkgs/master";
     flake-utils.url = "github:numtide/flake-utils";
     devshell.url = "github:numtide/devshell";
 
     neovim = {
-      url = "github:neovim/neovim/v0.7.2?dir=contrib";
+      url = "github:neovim/neovim/v0.8.0?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
@@ -94,7 +94,9 @@
       nvim-plugins = self: builtins.mapAttrs
         (make-overlay self)
         (builtins.removeAttrs inputs [ "self" "nixpkgs" "flake-utils" "devshell" "neovim" "dash-nvim" ]);
-      overlay_ = final: super: rec {
+    in
+    {
+      overlay = final: super: rec {
         spacenix-wrapper = local_default.customNeovim;
         vimPlugins = super.vimPlugins // {
           dash-nvim = final.vimUtils.buildVimPluginFrom2Nix {
@@ -130,17 +132,6 @@
             ];
           };
       };
-      overlays = {
-        neovim = neovim.overlay;
-        python = (final: prev: {
-          python = prev.python3;
-        });
-        default = overlay_;
-
-      };
-    in
-    {
-      overlays = overlays;
     } //
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -148,7 +139,14 @@
         pkgs = import nixpkgs {
           inherit system;
           config = { allowUnfree = true; };
-          overlays = [ devshell.overlay ] ++ (builtins.attrValues overlays);
+          overlays = [
+            devshell.overlay
+            self.overlay
+            neovim.overlay
+            (final: prev: {
+              python = prev.python3;
+            })
+          ];
         };
       in
       rec {

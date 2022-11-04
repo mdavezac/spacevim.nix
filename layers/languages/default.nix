@@ -15,12 +15,12 @@
           };
           options.markdown = lib.mkOption {
             type = lib.types.bool;
-            default = true;
+            default = false;
             description = "Whether to enable the markdown language layer";
           };
           options.rust = lib.mkOption {
             type = lib.types.bool;
-            default = true;
+            default = false;
             description = "Whether to enable the rust language layer";
           };
         };

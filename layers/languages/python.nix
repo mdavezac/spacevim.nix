@@ -12,9 +12,6 @@ in
 {
   config.nvim.lsp-instances.pyright = enableIf {
     cmd = [ "${pkgs.nodePackages.pyright}/bin/pyright-langserver" "--stdio" ];
-    on-attach = lib.mkIf config.nvim.layers.lsp.aerial [
-      ''require("aerial").on_attach(client, bufnr)''
-    ];
   };
   config.nvim.treesitter-languages = enableIf [ "python" ];
   config.nvim.plugins.start =

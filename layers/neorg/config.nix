@@ -51,9 +51,4 @@ in
         }
       '';
   };
-  config.nvim.post = enableIf {
-    vim = ''
-      NeorgStart
-    '';
-  };
 }
