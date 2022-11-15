@@ -32,5 +32,13 @@ in
       },
     })
   '';
+  config.nvim.format-on-save = enableIf [ "*.rs" ];
+  config.nvim.formatters = enableIf {
+    rustfmt = {
+      exe = "${pkgs.rustfmt}/bin/rustfmt";
+      filetype = "rust";
+      enable = true;
+    };
+  };
   config.nvim.dash.rust = [ "rust" ];
 }
