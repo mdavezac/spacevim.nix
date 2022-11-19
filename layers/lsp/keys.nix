@@ -30,6 +30,11 @@ in
         command = "<cmd>Telescope lsp_document_symbols<cr>";
         description = "LSP Symbols";
       }
+      {
+        key = "<localleader>w";
+        command = "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>";
+        description = "LSP Symbols";
+      }
       (without-trouble {
         key = "<localleader>d";
         command = "<cmd>Telescope diagnostics<cr>";
