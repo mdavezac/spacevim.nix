@@ -91,6 +91,7 @@
           };
         } // (nvim-plugins final);
       };
+      modules.spacevim = import ./layers;
     } //
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -110,8 +111,6 @@
       in
       rec {
         packages.default = local_default.customNeovim pkgs local_default.default_config;
-        lib.spacenix-wrapper = local_default.customNeovim pkgs;
-        modules.devshell = import ./devshell.mod.nix;
         apps = rec {
           nvim = flake-utils.lib.mkApp {
             drv = packages.default;
@@ -122,7 +121,7 @@
 
         devShells.default = pkgs.devshell.mkShell {
           name = "neovim";
-          imports = [ (modules.devshell packages.default) ];
+          imports = [ ./devshell.mod.nix ];
         };
       }
     );
