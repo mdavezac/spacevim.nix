@@ -10,11 +10,41 @@ in
       pkgs.vimPlugins.plenary-nvim
       pkgs.vimPlugins.which-key-nvim
       pkgs.vimPlugins.telescope-fzy-native-nvim
+      pkgs.vimPlugins.telescope-ui-select-nvim
       pkgs.vimPlugins.nvim-tree-lua
       pkgs.vimPlugins.undotree
     ];
-  config.nvim.init.lua = lib.mkIf enabled ''
-    require('telescope').load_extension('fzy_native')
-    require('nvim-tree').setup {}
-  '';
+  config.nvim.init.lua =
+    let
+      theme = (
+        if builtins.isNull config.nvim.telescope-theme
+        then "nill" else builtins.toString config.nvim.telscope-theme
+      );
+    in
+    lib.mkIf enabled ''
+      require('telescope').load_extension('fzy_native')
+      require('nvim-tree').setup {}
+      require("telescope").setup {
+        pickers = {
+          find_files = {
+              theme = ${theme},
+          },
+          live_grep = {
+              theme = ${theme},
+          },
+          lsp_references = {
+              theme = ${theme},
+          },
+          lsp_workspace_symbols = {
+              theme = ${theme},
+          },
+          current_buffer_fuzzy_find = {
+              theme = ${theme},
+          },
+          aerial = {
+              theme = ${theme},
+          },
+        }
+      }
+    '';
 }

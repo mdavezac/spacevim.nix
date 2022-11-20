@@ -111,6 +111,11 @@ let
       description = "Location of undo directory";
       default = "~/.cache/spacenix/backup";
     };
+    telescope-theme = lib.mkOption {
+      type = lib.types.nullOr (lib.types.enum [ "dropdown" "ivy" "cursor" ]);
+      description = "Theme for the main telescope pickers";
+      default = null;
+    };
   };
 in
 {
