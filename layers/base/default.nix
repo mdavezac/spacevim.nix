@@ -17,8 +17,8 @@ in
   config.nvim.init.lua =
     let
       theme = (
-        if builtins.isNull config.nvim.telescope-theme
-        then "nill" else builtins.toString config.nvim.telscope-theme
+        if (builtins.isNull config.nvim.telescope-theme)
+        then "nill" else "\"${config.nvim.telescope-theme}\""
       );
     in
     lib.mkIf enabled ''

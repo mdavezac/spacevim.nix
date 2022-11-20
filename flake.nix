@@ -46,6 +46,7 @@
     # git
     octo = { url = "github:pwntester/octo.nvim"; flake = false; };
     vim-diffview = { url = "github:sindrets/diffview.nvim"; flake = false; };
+    vim-hydra = { url = "github:anuvyklack/hydra.nvim"; flake = false; };
     # dash
     dash-nvim = {
       url = "github:mrjones2014/dash.nvim/6296e87fddece1996c7d324ef8511d6908184a55";
@@ -68,24 +69,7 @@
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:
     let
-      modules_paths = [
-        ./layers/base
-        ./layers/tree-sitter
-        ./layers/pimp
-        ./layers/lsp
-        ./layers/formatter
-        ./layers/languages
-        ./layers/git
-        ./layers/motion
-        ./layers/terminal
-        ./layers/tmux
-        ./layers/dash
-        ./layers/testing
-        ./layers/completion
-        ./layers/neorg
-        ./layers/debugger
-      ];
-      local_default = (import ./.) modules_paths;
+      local_default = (import ./.);
       make-overlay = self: k: v: self.vimUtils.buildVimPluginFrom2Nix {
         pname = k;
         version = v.shortRev;

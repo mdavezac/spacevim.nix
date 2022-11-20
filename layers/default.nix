@@ -42,6 +42,23 @@ let
           (builtins.mapAttrs (k: v: (lib.getAttrFromPath (lib.splitString "." name) v)) layers)));
 in
 {
+  imports = [
+    ./base
+    ./tree-sitter
+    ./pimp
+    ./lsp
+    ./formatter
+    ./languages
+    ./git
+    ./motion
+    ./terminal
+    ./tmux
+    ./dash
+    ./testing
+    ./completion
+    ./neorg
+    ./debugger
+  ];
   options.nvim = lib.mkOption {
     type = lib.types.submodule {
       options.plugins = plugins_opt;

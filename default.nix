@@ -1,8 +1,6 @@
-module_paths:
 let
   evalModules_ = pkgs: configuration: pkgs.lib.evalModules {
-    modules = [ ./layers/module.nix { _module.args.pkgs = pkgs; } ]
-      ++ module_paths
+    modules = [ ./layers { _module.args.pkgs = pkgs; } ]
       ++ [ configuration ];
   };
   customNeovim_ = pkgs: configuration:
