@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   languages =
     builtins.attrNames (lib.importJSON "${pkgs.vimPlugins.nvim-treesitter.src}/lockfile.json");

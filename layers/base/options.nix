@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ... }:
+{ lib, ... }:
 let
   common_options = {
     modes = lib.mkOption {

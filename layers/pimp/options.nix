@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ lib, ... }: {
   options.nvim = lib.mkOption {
     type = lib.types.submodule {
       options.colorscheme = lib.mkOption {
@@ -7,7 +7,7 @@
         description = ''Colorschemes'';
       };
       options.background = lib.mkOption {
-        type = lib.types.enum ["dark" "light"];
+        type = lib.types.enum [ "dark" "light" ];
         default = "dark";
         description = ''Background'';
       };

@@ -1,24 +1,5 @@
 { config, lib, pkgs, ... }: {
-  imports = [ ./keys.nix ];
-
-  options.nvim = lib.mkOption {
-    type = lib.types.submodule {
-      options.layers = lib.mkOption {
-        type = lib.types.submodule {
-          options.tmux = lib.mkOption {
-            type = lib.types.submodule {
-              options.enable = lib.mkOption {
-                type = lib.types.bool;
-                default = true;
-                description = "Whether to enable the tmux layer";
-              };
-            };
-            default = { };
-          };
-        };
-      };
-    };
-  };
+  imports = [ ./options.nix ./keys.nix ];
 
   config.nvim.plugins.start = lib.mkIf config.nvim.layers.tmux.enable [
     pkgs.vimPlugins.vim-tmux-navigator
