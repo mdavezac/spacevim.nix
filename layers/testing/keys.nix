@@ -5,6 +5,7 @@ let
   filetypes = (add_if conditions.is_python_enabled [ "python" ]) ++ (
     add_if conditions.is_others_enabled config.layers.testing.others
   );
+  with_debug = config.nvim.layers.debugger.enable;
 in
 {
   config.nvim.which-key = lib.mkIf conditions.is_enabled {
@@ -43,6 +44,11 @@ in
         command = "<cmd>lua require('neotest').summary.toggle()<cr>";
         description = "Toggle summary window";
         filetypes = filetypes;
+      }
+      {
+        key = "<localleader>td";
+        command = "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>";
+        description = "Step into";
       }
     ];
   };
