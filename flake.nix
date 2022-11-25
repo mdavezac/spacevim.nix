@@ -22,6 +22,7 @@
     lush = { url = "github:rktjmp/lush.nvim"; flake = false; };
     zenbones = { url = "github:mcchrish/zenbones.nvim"; flake = false; };
     monochrome = { url = "github:kdheepak/monochrome.nvim"; flake = false; };
+    oh-lucy = { url = "github:Yazeed1s/oh-lucy.nvim"; flake = false; };
     # lsp
     nvim-cmp = { url = "github:hrsh7th/nvim-cmp"; flake = false; };
     cmp-cmdline = { url = "github:hrsh7th/cmp-cmdline"; flake = false; };
@@ -78,8 +79,42 @@
       nvim-plugins = self: builtins.mapAttrs
         (make-overlay self)
         (builtins.removeAttrs inputs [ "self" "nixpkgs" "flake-utils" "devshell" "neovim" "dash-nvim" ]);
+      systemized = flake-utils.lib.eachDefaultSystem (system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            config = { allowUnfree = true; };
+            overlays = [
+              devshell.overlay
+              self.overlay
+              neovim.overlay
+              (final: prev: {
+                python = prev.python3;
+              })
+            ];
+          };
+        in
+        rec {
+          lib.spacenix-wrapper = local_default.customNeovim pkgs;
+          modules.prepackaged = (import ./prepackaged.mod.nix) lib.spacenix-wrapper;
+          packages.default = local_default.customNeovim pkgs local_default.default_config;
+          apps = rec {
+            nvim = flake-utils.lib.mkApp {
+              drv = packages.default;
+              name = "nvim";
+            };
+            default = nvim;
+          };
+
+          devShells.default = pkgs.devshell.mkShell {
+            name = "neovim";
+            imports = [ self.modules.devshell modules.prepackaged { config = local_default.default_config; } ];
+          };
+        }
+      );
     in
-    {
+    rec {
+      inherit (systemized) packages apps devShells lib;
       overlay = final: super: rec {
         spacenix-wrapper = local_default.customNeovim;
         vimPlugins = super.vimPlugins // {
@@ -91,38 +126,9 @@
           };
         } // (nvim-plugins final);
       };
-      modules.spacevim = import ./layers;
-    } //
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          config = { allowUnfree = true; };
-          overlays = [
-            devshell.overlay
-            self.overlay
-            neovim.overlay
-            (final: prev: {
-              python = prev.python3;
-            })
-          ];
-        };
-      in
-      rec {
-        packages.default = local_default.customNeovim pkgs local_default.default_config;
-        apps = rec {
-          nvim = flake-utils.lib.mkApp {
-            drv = packages.default;
-            name = "nvim";
-          };
-          default = nvim;
-        };
-
-        devShells.default = pkgs.devshell.mkShell {
-          name = "neovim";
-          imports = [ ./devshell.mod.nix ];
-        };
-      }
-    );
+      modules = systemized.modules // {
+        spacevim = import ./raw.nix;
+        devshell = import ./devshell.mod.nix;
+      };
+    };
 }

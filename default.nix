@@ -1,11 +1,11 @@
 let
-  evalModules_ = pkgs: configuration: pkgs.lib.evalModules {
+  evalModules = pkgs: configuration: pkgs.lib.evalModules {
     modules = [ ./layers { _module.args.pkgs = pkgs; } ]
       ++ [ configuration ];
   };
-  customNeovim_ = pkgs: configuration:
+  customNeovim = pkgs: configuration:
     let
-      module = evalModules_ pkgs configuration;
+      module = evalModules pkgs configuration;
     in
     pkgs.wrapNeovim pkgs.neovim {
       configure = {
@@ -22,8 +22,7 @@ let
     };
 in
 {
-  evalModules = evalModules_;
-  customNeovim = customNeovim_;
+  inherit evalModules customNeovim;
   default_config.nvim = {
     languages.python = true;
     languages.nix = true;

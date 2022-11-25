@@ -21,28 +21,6 @@ in
 {
   imports = [ ./layers ];
   config = {
-    nvim = {
-      languages.python = true;
-      languages.nix = true;
-      languages.markdown = true;
-      colorscheme = "monochrome";
-      layers.neorg.workspaces = [
-        {
-          name = "neorg";
-          path = "~/neorg/";
-          key = "n";
-        }
-      ];
-      layers.neorg.gtd = "neorg";
-      layers.completion.sources.other = [
-        { name = "buffer"; group_index = 3; priority = 100; }
-        { name = "path"; group_index = 2; priority = 50; }
-        { name = "emoji"; group_index = 2; priority = 50; }
-      ];
-      layers.completion.sources."/" = [{ name = "buffer"; }];
-      layers.completion.sources.":" = [{ name = "cmdline"; }];
-    };
-
     commands = builtins.map (x: { name = x; command = vicmd; help = "Alias to nvim+remote"; }) [ "vim" "vi" ];
     env = [
       { name = "EDITOR"; value = builtins.concatStringsSep " " vi_args; }

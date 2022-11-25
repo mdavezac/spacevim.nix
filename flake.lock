@@ -476,6 +476,22 @@
         "type": "github"
       }
     },
+    "oh-lucy": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667868561,
+        "narHash": "sha256-a6cMPZjeVomkUJM7rgXu9lh0Evzomu0cJofDMdTK3ok=",
+        "owner": "Yazeed1s",
+        "repo": "oh-lucy.nvim",
+        "rev": "fbdabf3533636da10e1efe4f2e15242e982a6a31",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Yazeed1s",
+        "repo": "oh-lucy.nvim",
+        "type": "github"
+      }
+    },
     "plenary-nvim": {
       "flake": false,
       "locked": {
@@ -537,6 +553,7 @@
         "nvim-telescope": "nvim-telescope",
         "nvim-treesitter-textsubjects": "nvim-treesitter-textsubjects",
         "octo": "octo",
+        "oh-lucy": "oh-lucy",
         "plenary-nvim": "plenary-nvim",
         "rainglow": "rainglow",
         "trouble-nvim": "trouble-nvim",
