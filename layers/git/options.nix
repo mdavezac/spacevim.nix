@@ -16,6 +16,11 @@ let
       default = true;
       description = "Whether to enable github integration";
     };
+    nvr = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "When running from terminal, launch nvr";
+    };
   };
 in
 {

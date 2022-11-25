@@ -10,6 +10,21 @@ in
     pkgs.vimPlugins.vim-diffview
     pkgs.vimPlugins.vim-hydra
   ];
+  config.nvim.init.vim =
+    let
+      nvr = (
+        "${pkgs.neovim-remote}/bin/nvr " +
+        "--servername \${NVIM_LISTEN_ADDRESS:-~/.cache/config/nvr} " +
+        "-cc split --remote-wait"
+      );
+    in
+    lib.mkIf cfg.nvr
+      ''
+        if has('nvim')
+          let $GIT_EDITOR = '${nvr}'
+        endif
+        autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
+      '';
   config.nvim.init.lua = lib.mkIf enable ''
     require('neogit').setup {
       integrations = { diffview = true },
