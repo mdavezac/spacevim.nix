@@ -18,6 +18,7 @@ in
     pkgs.vimPlugins.catpuccino
     pkgs.vimPlugins.awesome-vim-colorschemes
     pkgs.vimPlugins.nvim-web-devicons
+    pkgs.vimPlugins.oh-lucy
   ];
   config.nvim.init.vim = lib.mkIf enabled ''
     set background=${config.nvim.background}

@@ -44,6 +44,8 @@ in
       vim.o.shiftwidth = ${builtins.toString config.nvim.tabwidth}
       vim.o.tabstop = ${builtins.toString config.nvim.tabwidth}
       vim.o.scrolloff = ${builtins.toString config.nvim.scrolloff}
+      vim.o.cursorline = ${if config.nvim.cursorline then "true" else "false"}
+      vim.o.cursorcolumn = ${if config.nvim.cursorcolumn then "true" else "false"}
       -- End of general options defined in base layer
     '';
   };

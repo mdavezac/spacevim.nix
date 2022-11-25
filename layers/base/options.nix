@@ -116,6 +116,16 @@ let
       description = "Theme for the main telescope pickers";
       default = null;
     };
+    cursorline = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Highlight cursor line";
+    };
+    cursorcolumn = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Highlight cursor column";
+    };
   };
 in
 {
