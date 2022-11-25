@@ -96,7 +96,10 @@
         in
         rec {
           lib.spacenix-wrapper = local_default.customNeovim pkgs;
-          modules.prepackaged = (import ./prepackaged.mod.nix) lib.spacenix-wrapper;
+          modules.prepackaged = (import ./prepackaged.mod.nix) {
+            wrapper = local_default.customNeovim;
+            prepackaged_pkgs = pkgs;
+          };
           packages.default = local_default.customNeovim pkgs local_default.default_config;
           apps = rec {
             nvim = flake-utils.lib.mkApp {
@@ -108,7 +111,7 @@
 
           devShells.default = pkgs.devshell.mkShell {
             name = "neovim";
-            imports = [ self.modules.devshell modules.prepackaged { config = local_default.default_config; } ];
+            imports = [ self.modules.devshell self.modules.spacevim { config = local_default.default_config; } ];
           };
         }
       );
