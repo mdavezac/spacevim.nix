@@ -1,0 +1,83 @@
+{ config, lib, pkgs, ... }:
+let
+  is_colorscheme = color:
+    (!(builtins.isNull config.spacenix.colorscheme))
+    && config.spacenix.colorscheme == color;
+  isnt_colorscheme = color:
+    (!(builtins.isNull config.spacenix.colorscheme))
+    && config.spacenix.colorscheme != color;
+  enabled = config.spacenix.layers.pimp.enable;
+in
+{
+  config.nvim.plugins.start = lib.mkIf enabled [
+    pkgs.vimPlugins.monochrome
+    pkgs.vimPlugins.rainglow
+    pkgs.vimPlugins.neon
+    pkgs.vimPlugins.lush
+    pkgs.vimPlugins.zenbones
+    pkgs.vimPlugins.catpuccino
+    pkgs.vimPlugins.awesome-vim-colorschemes
+    pkgs.vimPlugins.nvim-web-devicons
+    pkgs.vimPlugins.oh-lucy
+  ];
+  config.nvim.init.vim = lib.mkIf enabled ''
+    set background=${config.spacenix.background}
+  '';
+  config.nvim.init.lua = lib.mkIf enabled (
+    builtins.concatStringsSep "\n" [
+      ''
+        -- Pimp layer
+        require'nvim-web-devicons'.setup {
+         default = true;
+        }
+        -- End of pimp layer
+      ''
+      (if (is_colorscheme "catppuccin") then (builtins.readFile ./catpuccino.lua) else "")
+    ]
+  );
+  config.spacenix.which-key.bindings = [
+    {
+      key = "<leader>tb";
+      command = "<CMD>if &background == 'light' | set background=dark | else | set background=light | end <CR>";
+      description = "Background";
+    }
+  ];
+
+  config.nvim.post.vim = lib.mkIf enabled (
+    builtins.concatStringsSep "\n" [
+      ''" Pimp layer
+        set termguicolors
+      ''
+      (
+        if (is_colorscheme "neon")
+        then ''
+          let g:neon_style = "${config.spacenix.background}"
+          let g:neon_italic_keyword = 1
+          let g:neon_italic_function = 1
+          let g:neon_transparent = 0
+        ''
+        else ""
+      )
+      (
+        if (builtins.isNull config.spacenix.colorscheme) then ""
+        else "colorscheme ${config.spacenix.colorscheme}"
+      )
+      (
+        if (is_colorscheme "neon") then ''
+          highlight HopNextKey gui=bold,underline guifg=red
+          highlight HopNextKey1 gui=bold,underline guifg=blue
+          highlight HopNextKey2 gui=bold,underline guifg=green
+          highlight HopUnmatched guifg=#335566
+        '' else if (is_colorscheme "monochrome") then ''
+          highlight HopUnmatched guifg=#444455
+          highlight VertSplit guifg=#333344
+          highlight link GitSignsCurrentLineBlame Comment
+        ''
+        else if (is_colorscheme "papercolor") then ''
+          highlight BufferInactive guifg=#707070
+        '' else ""
+      )
+      ''" End of pimp layer''
+    ]
+  );
+}

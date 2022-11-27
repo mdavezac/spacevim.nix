@@ -1,0 +1,21 @@
+{
+  imports = [
+    ./options.nvim.nix
+    ./options.spacevim.nix
+    ./base
+    ./tree-sitter
+    ./pimp
+    ./lsp
+    ./formatter
+    ./languages
+    ./git
+    ./motion
+    ./terminal
+    ./tmux
+    ./dash
+    ./testing
+    ./completion
+    ./neorg
+    ./debugger
+  ];
+}

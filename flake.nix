@@ -96,7 +96,7 @@
         in
         rec {
           lib.spacenix-wrapper = local_default.customNeovim pkgs;
-          modules.prepackaged = (import ./prepackaged.mod.nix) {
+          modules.prepackaged = (import ./modules/prepackaged.mod.nix) {
             wrapper = local_default.customNeovim;
             prepackaged_pkgs = pkgs;
           };
@@ -130,8 +130,8 @@
         } // (nvim-plugins final);
       };
       modules = systemized.modules // {
-        spacevim = import ./raw.nix;
-        devshell = import ./devshell.mod.nix;
+        spacevim = import ./modules/raw.nix;
+        devshell = import ./modules/devshell.mod.nix;
       };
     };
 }
