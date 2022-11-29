@@ -76,10 +76,8 @@ in
         (if enable-repl then repl else "")
       ];
   };
-  /* config.nvim.post.lua = lib.mkIf (enable && cfg.base.enable) '' */
-  /*   require('telescope').load_extension('nterm') */
-  /* ''; */
   config.nvim.post.vim = lib.mkIf enable-repl ''
+    set scrollback=100000
     let g:iron_map_defaults = 0
     let g:iron_map_extended = 0
   '';
