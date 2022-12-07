@@ -40,15 +40,15 @@ in
             (builtins.mapAttrs (k: v: ''${k} = ${v},'') repls)
         );
         repl = ''
-            local iron = require('iron.core');
-            iron.setup({
-          config = {
-                  repl_definition = {
-                        ${preferred}
-                  },
-                  repl_open_cmd = ${cfg.terminal.repl.repl-open-cmd},
-          }
-            })
+          local iron = require('iron.core');
+          iron.setup({
+             config = {
+                 repl_definition = {
+                     ${preferred}
+                 },
+                 repl_open_cmd = ${cfg.terminal.repl.repl-open-cmd},
+             }
+          })
         '';
         toggleterm = ''
           require("toggleterm").setup {
@@ -67,8 +67,25 @@ in
             vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
             vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
             vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+            vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<cmd>close<CR>', {noremap = true, silent = true})
           end
           vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+          local Terminal = require('toggleterm.terminal').Terminal
+          local lazygit = Terminal:new({
+              cmd = "${pkgs.lazygit}/bin/lazygit",
+              direction = "float",
+              float_opts = {
+                border = "double",
+              },
+          })
+          local shell = Terminal:new({ shell="${pkgs.fish}/bin/fish" })
+          
+          function _lazygit_toggle()
+            lazygit:toggle()
+          end
+          function _shell_toggle()
+            shell:toggle()
+          end
         '';
       in
       builtins.concatStringsSep "\n" [

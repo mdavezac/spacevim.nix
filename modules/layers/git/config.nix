@@ -56,7 +56,7 @@ in
     local hint = [[
     _j_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
     _k_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full 
-    ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
+    _x_: reset hunk  _S_: stage buffer      ^ ^                 _/_: show base file
     ^
     ^ ^              _<Enter>_: Neogit              _q_: exit
     ]]
@@ -117,6 +117,7 @@ in
                 end,
                 { desc = 'stage hunk' } },
              { 'u', gitsigns.undo_stage_hunk, { desc = 'undo last stage' } },
+             { 'x', gitsigns.reset_hunk, { desc = 'reset hunk' } },
              { 'S', gitsigns.stage_buffer, { desc = 'stage buffer' } },
              { 'p', gitsigns.preview_hunk, { desc = 'preview hunk' } },
              { 'd', gitsigns.toggle_deleted, { nowait = true, desc = 'toggle deleted' } },

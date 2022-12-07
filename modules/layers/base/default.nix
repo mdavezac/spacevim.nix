@@ -3,7 +3,13 @@ let
   enabled = config.spacenix.layers.base.enable;
 in
 {
-  imports = [ ./options.nix ./general_options.nix ./which_key.nix ./keys.nix ];
+  imports = [
+    ./options.nix
+    ./general_options.nix
+    ./which_key.nix
+    ./keys.nix
+    ./legendary.nix
+  ];
   config.nvim.plugins.start = lib.mkIf enabled [
     pkgs.vimPlugins.telescope-nvim
     pkgs.vimPlugins.plenary-nvim

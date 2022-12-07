@@ -22,6 +22,11 @@ in
         priority = 2;
         group_index = 2;
       }
+      {
+        name = "luasnip";
+        priority = 100;
+        group_index = 3;
+      }
     ];
   };
   config.nvim.init.lua = enableIf ''

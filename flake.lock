@@ -84,6 +84,22 @@
         "type": "github"
       }
     },
+    "dressing": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1670226345,
+        "narHash": "sha256-JqzbNEZ/dLqOYWqFhkvV0By3M12IcyR3wsjGIjBnJTY=",
+        "owner": "stevearc",
+        "repo": "dressing.nvim",
+        "rev": "ed44aa798ab07dc298f43f35c8e0c93a1b335abb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "dressing.nvim",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1642700792,
@@ -143,6 +159,22 @@
       "original": {
         "owner": "hkupty",
         "repo": "iron.nvim",
+        "type": "github"
+      }
+    },
+    "legendary": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1670370861,
+        "narHash": "sha256-7BGxpIhLnrrdTUZA2fznqYRXqnFvAS0x2OWNa2emuJ8=",
+        "owner": "mrjones2014",
+        "repo": "legendary.nvim",
+        "rev": "aae3024b355f28fc7a3c797f2fa3251919264c3b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrjones2014",
+        "repo": "legendary.nvim",
         "type": "github"
       }
     },
@@ -334,16 +366,16 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1668681245,
-        "narHash": "sha256-IH8t+b9hCfNwEvdC55UEymn8jL457Fo/hx3N/kNTZso=",
+        "lastModified": 1669833724,
+        "narHash": "sha256-/HEZNyGbnQecrgJnfE8d0WC5c1xuPSD2LUpB6YXlg4c=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "bd4bfd814e96488febb38b4b4d0549c56b840c7f",
+        "rev": "4d2b37a84fad1091b9de401eb450aae66f1a741e",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "master",
+        "ref": "22.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -531,9 +563,11 @@
         "cmp-cmdline": "cmp-cmdline",
         "dash-nvim": "dash-nvim",
         "devshell": "devshell",
+        "dressing": "dressing",
         "flake-utils": "flake-utils_2",
         "guihua": "guihua",
         "iron-nvim": "iron-nvim",
+        "legendary": "legendary",
         "lsp-navigator": "lsp-navigator",
         "lspsaga-nvim": "lspsaga-nvim",
         "lush": "lush",

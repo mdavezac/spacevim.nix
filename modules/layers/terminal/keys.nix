@@ -15,8 +15,13 @@ in
     bindings = [
       {
         key = "<leader>;";
-        command = "<cmd>ToggleTerm<cr>";
+        command = "<cmd>lua _shell_toggle()<cr>";
         description = "Toggle terminal and focus";
+      }
+      {
+        key = "<leader>g;";
+        command = "<cmd>lua _lazygit_toggle()<CR>";
+        description = "Lazygit UI";
       }
       (lib.mkIf enable-repl
         {

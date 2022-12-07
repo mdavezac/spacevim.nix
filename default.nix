@@ -28,6 +28,7 @@ in
     languages.nix = true;
     languages.markdown = true;
     colorscheme = "monochrome";
+    layers.pimp.notify = false;
     layers.neorg.workspaces = [
       {
         name = "neorg";

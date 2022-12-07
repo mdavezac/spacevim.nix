@@ -2,7 +2,7 @@
   description = "Big Neovim Energy";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/master";
+    nixpkgs.url = "github:nixos/nixpkgs/22.11";
     flake-utils.url = "github:numtide/flake-utils";
     devshell.url = "github:numtide/devshell";
 
@@ -15,6 +15,7 @@
     # base
     nvim-telescope = { url = "github:nvim-telescope/telescope.nvim"; flake = false; };
     # pimp
+    dressing = { url = "github:stevearc/dressing.nvim"; flake = false; };
     rainglow = { url = "github:rainglow/vim"; flake = false; };
     neon = { url = "github:rafamadriz/neon"; flake = false; };
     catpuccino = { url = "github:catppuccin/nvim"; flake = false; };
@@ -66,6 +67,9 @@
     aniseed = { url = "github:olical/aniseed"; flake = false; };
     # debugger
     nvim-dap-python = { url = "github:mfussenegger/nvim-dap-python"; flake = false; };
+
+    # 
+    legendary = { url = "github:mrjones2014/legendary.nvim"; flake = false; };
   };
 
   outputs = inputs @ { self, nixpkgs, neovim, flake-utils, devshell, ... }:

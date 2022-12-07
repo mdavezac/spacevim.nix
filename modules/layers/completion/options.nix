@@ -29,8 +29,8 @@ let
 
         There are three special filetypes:
         - other: default set of sources for filetypes that are not explicitly given
-        - "/": for search. Not implemented.
-        - ":": for command. Not implemented.
+        - "/": for search.
+        - ":": for command.
       '';
     };
   };

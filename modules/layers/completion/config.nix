@@ -18,6 +18,8 @@ in
     pkgs.vimPlugins.cmp-emoji
     pkgs.vimPlugins.cmp-path
     pkgs.vimPlugins.lspkind-nvim
+    pkgs.vimPlugins.cmp_luasnip
+    pkgs.vimPlugins.luasnip
   ];
   config.nvim.init =
     let
@@ -105,6 +107,11 @@ in
             end,
           },
           formatting = { format = require('lspkind').cmp_format({ mode = "symbol" }) },
+          snippet = {
+            expand = function(args)
+                require'luasnip'.lsp_expand(args.body)
+            end
+          },
           ${other_sources}
         }
       '' + (print_all_sources cfg_sources)
