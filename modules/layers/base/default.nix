@@ -46,6 +46,9 @@ in
           current_buffer_fuzzy_find = {
               theme = ${theme},
           },
+          buffers = {
+              theme = ${theme},
+          },
           aerial = {
               theme = ${theme},
           },

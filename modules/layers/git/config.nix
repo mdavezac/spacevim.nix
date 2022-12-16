@@ -54,9 +54,9 @@ in
 
     local gitsigns = require('gitsigns')
     local hint = [[
-    _j_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
-    _k_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full 
-    _x_: reset hunk  _S_: stage buffer      ^ ^                 _/_: show base file
+    _n_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
+    _N_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full 
+    _x_: reset hunk  _S_: stage buffer
     ^
     ^ ^              _<Enter>_: Neogit              _q_: exit
     ]]
@@ -67,6 +67,7 @@ in
              buffer = bufnr,
              color = 'red',
              invoke_on_body = true,
+             foreign_keys = 'warn',
              hint = {
                 border = 'rounded',
                 type = 'window',
@@ -90,14 +91,14 @@ in
           mode = {'n','x'},
           body = '<leader>gg',
           heads = {
-             { 'j',
+             { 'n',
                 function()
                    if vim.wo.diff then return ']c' end
                    vim.schedule(function() gitsigns.next_hunk() end)
                    return '<Ignore>'
                 end,
                 { expr = true, desc = 'next hunk' } },
-             { 'k',
+             { 'N',
                 function()
                    if vim.wo.diff then return '[c' end
                    vim.schedule(function() gitsigns.prev_hunk() end)
@@ -123,7 +124,6 @@ in
              { 'd', gitsigns.toggle_deleted, { nowait = true, desc = 'toggle deleted' } },
              { 'b', gitsigns.blame_line, { desc = 'blame' } },
              { 'B', function() gitsigns.blame_line{ full = true } end, { desc = 'blame show full' } },
-             { '/', gitsigns.show, { exit = true, desc = 'show base file' } }, -- show the base of the file
              { '<Enter>', function() vim.cmd('Neogit') end, { exit = true, desc = 'Neogit' } },
              { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
           }
