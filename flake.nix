@@ -45,6 +45,10 @@
       url = "github:lewis6991/spellsitter.nvim";
       flake = false;
     };
+    tree-climber = {
+      url = "github:Dkendal/nvim-treeclimber";
+      flake = false;
+    };
     # git
     octo = { url = "github:pwntester/octo.nvim"; flake = false; };
     vim-diffview = { url = "github:sindrets/diffview.nvim"; flake = false; };

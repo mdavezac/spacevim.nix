@@ -213,11 +213,11 @@
     "lush": {
       "flake": false,
       "locked": {
-        "lastModified": 1667992663,
-        "narHash": "sha256-XHi9SHPxzHKkGtR4nJaHZ1wwsXfxRNCcpmZ92eFutvY=",
+        "lastModified": 1671189607,
+        "narHash": "sha256-Hct/DNJ8OPBil+qHSyyBK7sxoVTuuMaAmClPVVFLi38=",
         "owner": "rktjmp",
         "repo": "lush.nvim",
-        "rev": "979f4d206e7111c2b710aa85cc723f6140d2ec98",
+        "rev": "4cc81a12731fbefce1582a940b755691eb3eb6d1",
         "type": "github"
       },
       "original": {
@@ -590,11 +590,28 @@
         "oh-lucy": "oh-lucy",
         "plenary-nvim": "plenary-nvim",
         "rainglow": "rainglow",
+        "tree-climber": "tree-climber",
         "trouble-nvim": "trouble-nvim",
         "vim-diffview": "vim-diffview",
         "vim-hydra": "vim-hydra",
         "vim-illuminate": "vim-illuminate",
         "zenbones": "zenbones"
+      }
+    },
+    "tree-climber": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1669401974,
+        "narHash": "sha256-ssZTwp1PNpsch+tArf5rb1h/WoNgZuszo8Ah14FAYVc=",
+        "owner": "Dkendal",
+        "repo": "nvim-treeclimber",
+        "rev": "c09d1cda77307cffc9fc44aea934e85d3ae14826",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Dkendal",
+        "repo": "nvim-treeclimber",
+        "type": "github"
       }
     },
     "trouble-nvim": {

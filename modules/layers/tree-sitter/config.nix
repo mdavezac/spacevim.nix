@@ -15,6 +15,8 @@ in
     nvim-treesitter-textsubjects
     vim-illuminate
     (lib.mkIf config.spacenix.layers.treesitter.spelling nvim-spellsitter)
+    tree-climber
+    lush # for tree-climber
   ];
   config.nvim.init.lua = lib.mkIf enabled (
     ''
@@ -82,6 +84,7 @@ in
         filetype_denylist = { "NeogitStatus", "octo" }
       })
 
+
     '' + (
       if config.spacenix.layers.treesitter.spelling then
         ''
@@ -99,4 +102,45 @@ in
       set foldexpr=nvim_treesitter#foldexpr()
       " End of tree-sitter layer
     '';
+  config.nvim.post.lua = lib.mkIf enabled ''
+    local tc = require('nvim-treeclimber')
+    local hint = [[
+    _v_: Current node   _k_: Control flow   _p_: Expand    _c_: Shrink
+    _e_: Forward        _b_: Backward       _]_: Next      _[_: Previous
+    _t_: Top            ^                   _}_: Add next  _{_: Add previous
+    ^
+    ^ ^ ^  _q_: exit
+    ]]
+    require('hydra')({
+          name = 'Tree climber',
+          hint = hint,
+          config = {
+             buffer = bufnr,
+             color = 'amaranth',
+             invoke_on_body = true,
+             foreign_keys = 'warn',
+             hint = {
+                border = 'rounded',
+                type = 'window',
+                position = 'bottom-right'
+             },
+          },
+          mode = {'n','x'},
+          body = '<leader>x',
+          heads = {
+             { 'v', tc.select_current_node, { desc = "Select current node" } },
+             { 'k', tc.show_control_flow, { desc = "Show control flow" } },
+             { 'p', tc.select_expand, { desc = "Select parent node" } },
+             { 'e', tc.select_forward_end, { desc = "Select forward" } },
+             { 'b', tc.select_backward, { desc = "Select backward" } },
+             { '[', tc.select_sibling_backward, { desc = "Select previous sibling" } },
+             { ']', tc.select_sibling_forward, { desc = "Select next sibling" } },
+             { 't', tc.select_top_level, { desc = "Select top level node" } },
+             { 'c', tc.select_shrink, { desc = "Select child node" } },
+             { '{', tc.select_grow_backward, { desc = "Add previous sibling node" } },
+             { '}', tc.select_grow_forward, { desc = "Add next sibling node" } },
+             { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
+          }
+       }) 
+  '';
 }
