@@ -24,6 +24,7 @@
     zenbones = { url = "github:mcchrish/zenbones.nvim"; flake = false; };
     monochrome = { url = "github:kdheepak/monochrome.nvim"; flake = false; };
     oh-lucy = { url = "github:Yazeed1s/oh-lucy.nvim"; flake = false; };
+    nvim-animate = { url = "github:echasnovski/mini.animate"; flake = false; };
     # lsp
     nvim-cmp = { url = "github:hrsh7th/nvim-cmp"; flake = false; };
     cmp-cmdline = { url = "github:hrsh7th/cmp-cmdline"; flake = false; };
@@ -119,7 +120,7 @@
 
           devShells.default = pkgs.devshell.mkShell {
             name = "neovim";
-            imports = [ self.modules.devshell self.modules.spacevim { config = local_default.default_config; } ];
+            imports = [ self.modules.devshell self.modules."${system}".prepackaged { config = local_default.default_config; } ];
           };
         }
       );
