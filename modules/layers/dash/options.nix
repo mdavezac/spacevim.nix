@@ -8,7 +8,7 @@
             type = lib.types.submodule {
               options.enable = lib.mkOption {
                 type = lib.types.bool;
-                default = true;
+                default = (pkgs.system == "x86_64-darwin");
                 description = "Whether to enable the dash layer";
               };
             };
