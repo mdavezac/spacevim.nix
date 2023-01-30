@@ -7,7 +7,7 @@
     devshell.url = "github:numtide/devshell";
 
     neovim = {
-      url = "github:neovim/neovim/v0.8.2?dir=contrib";
+      url = "github:neovim/neovim/master?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };

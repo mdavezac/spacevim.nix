@@ -7,8 +7,9 @@ in
   config.nvim = lib.mkIf enable {
     plugins.start = [ pkgs.vimPlugins.nvim-animate ];
     init.lua = ''
-      require('mini.animate').setup()
+      if not vim.g.neovide then
+        require('mini.animate').setup()
+      end
     '';
-
   };
 }
