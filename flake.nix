@@ -24,6 +24,7 @@
     zenbones = { url = "github:mcchrish/zenbones.nvim"; flake = false; };
     monochrome = { url = "github:kdheepak/monochrome.nvim"; flake = false; };
     oh-lucy = { url = "github:Yazeed1s/oh-lucy.nvim"; flake = false; };
+    nightfox = { url = "github:EdenEast/nightfox.nvim"; flake = false; };
     nvim-animate = { url = "github:echasnovski/mini.animate"; flake = false; };
     # lsp
     nvim-cmp = { url = "github:hrsh7th/nvim-cmp"; flake = false; };

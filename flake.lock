@@ -348,6 +348,22 @@
         "type": "github"
       }
     },
+    "nightfox": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1675014029,
+        "narHash": "sha256-PI9LwHtzSmh2m+DrAdm1aLvPhSkJ1Ec+QK2BZE0itJY=",
+        "owner": "EdenEast",
+        "repo": "nightfox.nvim",
+        "rev": "aa793975d10dda69817190faea84e28eeb176934",
+        "type": "github"
+      },
+      "original": {
+        "owner": "EdenEast",
+        "repo": "nightfox.nvim",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1643381941,
@@ -594,6 +610,7 @@
         "neotest-python": "neotest-python",
         "neotest-vim-test": "neotest-vim-test",
         "neovim": "neovim",
+        "nightfox": "nightfox",
         "nixpkgs": "nixpkgs_2",
         "nvim-animate": "nvim-animate",
         "nvim-cmp": "nvim-cmp",

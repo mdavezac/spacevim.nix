@@ -19,6 +19,7 @@ in
     pkgs.vimPlugins.awesome-vim-colorschemes
     pkgs.vimPlugins.nvim-web-devicons
     pkgs.vimPlugins.oh-lucy
+    pkgs.vimPlugins.nightfox
   ];
   config.nvim.init.vim = lib.mkIf enabled ''
     set background=${config.spacenix.background}

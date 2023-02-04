@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }:
 let
-  command = ''[ -z "''${NVIM:-}" ] && exec nvim $@ || nvim --server $NVIM --remote $@'';
+  command = ''[ -z "''${NVIM:-}" ] && exec nvim $@ || exec nvim --server $NVIM --remote $@'';
 in
 {
   imports = [ ./layers ];
