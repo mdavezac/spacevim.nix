@@ -69,14 +69,14 @@ in
           };
           options.nixpkgs-fmt = formatter-option {
             exe = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
-            enable = config.spacenix.languages.nix;
+            enable = false;
             filetype = "nix";
           };
           options.alejandra = formatter-option {
             exe = "${pkgs.alejandra}/bin/alejandra";
+            enable = config.spacenix.languages.nix;
             filetype = "nix";
             args = [ "-q" ];
-            enable = false;
           };
         };
         description = ''Dictionary of formatter configurations.'';

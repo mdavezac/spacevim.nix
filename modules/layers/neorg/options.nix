@@ -1,9 +1,8 @@
-{ lib, ... }:
-let
+{lib, ...}: let
   options = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = false;
       description = "Whether to enable the neorg layer";
     };
     gtd = lib.mkOption {
@@ -26,12 +25,11 @@ let
           description = "Key associated with the workspace";
         };
       });
-      default = [ ];
+      default = [];
       description = "List of workspaces";
     };
   };
-in
-{
+in {
   options.spacenix = lib.mkOption {
     type = lib.types.submodule {
       options.layers = lib.mkOption {
@@ -40,7 +38,7 @@ in
             type = lib.types.submodule {
               options = options;
             };
-            default = { };
+            default = {};
           };
         };
       };

@@ -1,12 +1,13 @@
 let
-  evalModules = pkgs: configuration: pkgs.lib.evalModules {
-    modules = [ ./modules/layers { _module.args.pkgs = pkgs; } ]
-      ++ [ configuration ];
-  };
-  customNeovim = pkgs: configuration:
-    let
-      module = evalModules pkgs configuration;
-    in
+  evalModules = pkgs: configuration:
+    pkgs.lib.evalModules {
+      modules =
+        [./modules/layers {_module.args.pkgs = pkgs;}]
+        ++ [configuration];
+    };
+  customNeovim = pkgs: configuration: let
+    module = evalModules pkgs configuration;
+  in
     pkgs.wrapNeovim pkgs.neovim {
       configure = {
         customRC =
@@ -20,30 +21,31 @@ let
         };
       };
     };
-in
-{
+in {
   inherit evalModules customNeovim;
   default_config.spacenix = {
     languages.python = true;
     languages.nix = true;
     languages.markdown = true;
     colorscheme = "monochrome";
-    layers.pimp.notify = false;
-    layers.neorg.enable = false;
-    layers.neorg.workspaces = [
+    layers.completion.sources.other = [
       {
-        name = "neorg";
-        path = "~/neorg/";
-        key = "n";
+        name = "buffer";
+        group_index = 3;
+        priority = 100;
+      }
+      {
+        name = "path";
+        group_index = 2;
+        priority = 50;
+      }
+      {
+        name = "emoji";
+        group_index = 2;
+        priority = 50;
       }
     ];
-    layers.neorg.gtd = "neorg";
-    layers.completion.sources.other = [
-      { name = "buffer"; group_index = 3; priority = 100; }
-      { name = "path"; group_index = 2; priority = 50; }
-      { name = "emoji"; group_index = 2; priority = 50; }
-    ];
-    layers.completion.sources."/" = [{ name = "buffer"; }];
-    layers.completion.sources.":" = [{ name = "cmdline"; }];
+    layers.completion.sources."/" = [{name = "buffer";}];
+    layers.completion.sources.":" = [{name = "cmdline";}];
   };
 }
