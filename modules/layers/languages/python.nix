@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   enableIf = lib.mkIf config.spacenix.languages.python;
   with_debugger = config.spacenix.layers.debugger.enable && config.spacenix.languages.python;
   with_pytest = (
@@ -8,16 +12,17 @@ let
     && config.spacenix.layers.testing.python == "pytest"
     && config.spacenix.layers.debugger.enable
   );
-in
-{
+in {
   config.spacenix.lsp-instances.pyright = enableIf {
-    cmd = [ "${pkgs.nodePackages.pyright}/bin/pyright-langserver" "--stdio" ];
+    cmd = "\"${pkgs.nodePackages.pyright}/bin/pyright-langserver\", \"--stdio\"";
   };
-  config.spacenix.treesitter-languages = enableIf [ "python" ];
-  config.nvim.plugins.start =
-    let
-      conditional = condition: x: if condition then [ x ] else [ ];
-    in
+  config.spacenix.treesitter-languages = enableIf ["python"];
+  config.nvim.plugins.start = let
+    conditional = condition: x:
+      if condition
+      then [x]
+      else [];
+  in
     enableIf (
       (conditional config.spacenix.layers.treesitter.enable pkgs.vimPlugins.nvim-treesitter-pyfold)
       ++ (conditional config.spacenix.layers.debugger.enable pkgs.vimPlugins.nvim-dap-python)
@@ -41,14 +46,14 @@ in
       }
     ];
   };
-  config.spacenix.format-on-save = enableIf [ "*.py" ];
+  config.spacenix.format-on-save = enableIf ["*.py"];
   config.spacenix.linters = enableIf {
     "diagnostics.flake8" = {
       exe = "${pkgs.python38Packages.flake8}/bin/flake8";
       enable = false;
     };
   };
-  config.spacenix.dash.python = enableIf [ "python3" ];
+  config.spacenix.dash.python = enableIf ["python3"];
   config.nvim.post.lua = enableIf ''
     require('nvim-treesitter.configs').setup {
         pyfold = {
@@ -60,15 +65,18 @@ in
   '';
   config.spacenix.layers.terminal.repl._default_repls.python =
     enableIf "require('iron.fts.python').python3";
-  config.nvim.init.lua =
-    let
-      python = pkgs.python.withPackages (p: [ p.debugpy ]);
-      conditional = condition: value: if condition then value else "";
-    in
+  config.nvim.init.lua = let
+    python = pkgs.python.withPackages (p: [p.debugpy]);
+    conditional = condition: value:
+      if condition
+      then value
+      else "";
+  in
     enableIf (
       (conditional config.spacenix.layers.debugger.enable ''
         require("dap-python").setup("${python}/bin/python")
-      '') + (conditional with_pytest ''
+      '')
+      + (conditional with_pytest ''
         require('dap-python').test_runner = 'pytest'
       '')
     );
@@ -77,7 +85,11 @@ in
   '';
   config.spacenix.which-key = lib.mkIf with_debugger {
     bindings = [
-      { key = "<localleader>dt"; command = "<cmd>lua require('dap-python').test_method()<cr>"; description = "method"; }
+      {
+        key = "<localleader>dt";
+        command = "<cmd>lua require('dap-python').test_method()<cr>";
+        description = "method";
+      }
     ];
   };
 }

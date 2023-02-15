@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{lib, ...}: {
   options.spacenix = lib.mkOption {
     type = lib.types.submodule {
       options.languages = lib.mkOption {
@@ -23,8 +23,13 @@
             default = false;
             description = "Whether to enable the rust language layer";
           };
+          options.haskell = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = "Whether to enable the haskell language layer";
+          };
         };
-        default = { };
+        default = {};
       };
     };
   };
