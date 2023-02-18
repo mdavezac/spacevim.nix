@@ -127,10 +127,6 @@
       flake = false;
     };
     # testing
-    plenary-nvim = {
-      url = "github:nvim-lua/plenary.nvim";
-      flake = false;
-    };
     neotest = {
       url = "github:nvim-neotest/neotest";
       flake = false;
@@ -165,10 +161,11 @@
     };
 
     #
-    legendary = {
-      url = "github:mrjones2014/legendary.nvim";
-      flake = false;
-    };
+    legendary.url = "github:mrjones2014/legendary.nvim";
+    legendary.flake = false;
+
+    # haskell
+    haskell-tools-nvim.url = "github:MrcJkb/haskell-tools.nvim/1.8.0";
   };
 
   outputs = inputs @ {
@@ -177,6 +174,7 @@
     neovim,
     flake-utils,
     devshell,
+    haskell-tools-nvim,
     ...
   }: let
     local_default = import ./.;
@@ -189,7 +187,15 @@
     nvim-plugins = self:
       builtins.mapAttrs
       (make-overlay self)
-      (builtins.removeAttrs inputs ["self" "nixpkgs" "flake-utils" "devshell" "neovim" "dash-nvim"]);
+      (builtins.removeAttrs inputs [
+        "self"
+        "nixpkgs"
+        "flake-utils"
+        "devshell"
+        "neovim"
+        "dash-nvim"
+        "haskell-tools-nvim"
+      ]);
     systemized = flake-utils.lib.eachDefaultSystem (
       system: let
         pkgs = import nixpkgs {
@@ -202,6 +208,7 @@
             (final: prev: {
               python = prev.python3;
             })
+            haskell-tools-nvim.overlays.haskell-tooling-overlay
           ];
         };
       in rec {

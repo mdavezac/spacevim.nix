@@ -27,6 +27,7 @@ in {
     languages.python = true;
     languages.nix = true;
     languages.markdown = true;
+    languages.haskell = false;
     colorscheme = "monochrome";
     layers.completion.sources.other = [
       {
