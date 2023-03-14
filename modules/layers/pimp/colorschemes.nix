@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   is_colorscheme = color:
     (!(builtins.isNull config.spacenix.colorscheme))
     && config.spacenix.colorscheme == color;
@@ -7,8 +11,7 @@ let
     (!(builtins.isNull config.spacenix.colorscheme))
     && config.spacenix.colorscheme != color;
   enabled = config.spacenix.layers.pimp.enable;
-in
-{
+in {
   config.nvim.plugins.start = lib.mkIf enabled [
     pkgs.vimPlugins.monochrome
     pkgs.vimPlugins.rainglow
@@ -20,6 +23,7 @@ in
     pkgs.vimPlugins.nvim-web-devicons
     pkgs.vimPlugins.oh-lucy
     pkgs.vimPlugins.nightfox
+    pkgs.vimPlugins.bluloco
   ];
   config.nvim.init.vim = lib.mkIf enabled ''
     set background=${config.spacenix.background}
@@ -33,7 +37,16 @@ in
         }
         -- End of pimp layer
       ''
-      (if (is_colorscheme "catppuccin") then (builtins.readFile ./catpuccino.lua) else "")
+      (
+        if (is_colorscheme "catppuccin")
+        then (builtins.readFile ./catpuccino.lua)
+        else ""
+      )
+      (
+        if (is_colorscheme "bluloco")
+        then "require(\"bluloco\").setup({italics=true})\n"
+        else ""
+      )
     ]
   );
   config.spacenix.which-key.bindings = [
@@ -46,8 +59,8 @@ in
 
   config.nvim.post.vim = lib.mkIf enabled (
     builtins.concatStringsSep "\n" [
-      ''" Pimp layer
-        set termguicolors
+      ''        " Pimp layer
+                set termguicolors
       ''
       (
         if (is_colorscheme "neon")
@@ -60,23 +73,29 @@ in
         else ""
       )
       (
-        if (builtins.isNull config.spacenix.colorscheme) then ""
+        if (builtins.isNull config.spacenix.colorscheme)
+        then ""
         else "colorscheme ${config.spacenix.colorscheme}"
       )
       (
-        if (is_colorscheme "neon") then ''
+        if (is_colorscheme "neon")
+        then ''
           highlight HopNextKey gui=bold,underline guifg=red
           highlight HopNextKey1 gui=bold,underline guifg=blue
           highlight HopNextKey2 gui=bold,underline guifg=green
           highlight HopUnmatched guifg=#335566
-        '' else if (is_colorscheme "monochrome") then ''
+        ''
+        else if (is_colorscheme "monochrome")
+        then ''
           highlight HopUnmatched guifg=#444455
           highlight VertSplit guifg=#333344
           highlight link GitSignsCurrentLineBlame Comment
         ''
-        else if (is_colorscheme "papercolor") then ''
+        else if (is_colorscheme "papercolor")
+        then ''
           highlight BufferInactive guifg=#707070
-        '' else ""
+        ''
+        else ""
       )
       ''" End of pimp layer''
     ]

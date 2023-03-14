@@ -11,6 +11,8 @@
     ./markdown.nix
     ./rust.nix
     ./haskell.nix
+    ./cpp.nix
+    ./cmake.nix
   ];
   config.nvim.plugins.start = [pkgs.vimPlugins.vim-commentary];
 }

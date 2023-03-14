@@ -46,7 +46,7 @@ in
       vim.o.scrolloff = ${builtins.toString config.spacenix.scrolloff}
       vim.o.cursorline = ${if config.spacenix.cursorline then "true" else "false"}
       vim.o.cursorcolumn = ${if config.spacenix.cursorcolumn then "true" else "false"}
-      vim.o.splitkeep = "screen"
+      -- vim.o.splitkeep = "screen"
       -- End of general options defined in base layer
     '';
   };

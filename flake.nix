@@ -7,61 +7,39 @@
     devshell.url = "github:numtide/devshell";
 
     neovim = {
-      url = "github:neovim/neovim/master?dir=contrib";
+      url = "github:neovim/neovim/v0.8.3?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
 
     # base
-    nvim-telescope = {
-      url = "github:nvim-telescope/telescope.nvim";
-      flake = false;
-    };
+    nvim-telescope.url = "github:nvim-telescope/telescope.nvim";
+    nvim-telescope.flake = false;
     # pimp
-    dressing = {
-      url = "github:stevearc/dressing.nvim";
-      flake = false;
-    };
-    rainglow = {
-      url = "github:rainglow/vim";
-      flake = false;
-    };
-    neon = {
-      url = "github:rafamadriz/neon";
-      flake = false;
-    };
-    catpuccino = {
-      url = "github:catppuccin/nvim";
-      flake = false;
-    };
-    nvim-notify = {
-      url = "github:rcarriga/nvim-notify";
-      flake = false;
-    };
-    lush = {
-      url = "github:rktjmp/lush.nvim";
-      flake = false;
-    };
-    zenbones = {
-      url = "github:mcchrish/zenbones.nvim";
-      flake = false;
-    };
-    monochrome = {
-      url = "github:kdheepak/monochrome.nvim";
-      flake = false;
-    };
-    oh-lucy = {
-      url = "github:Yazeed1s/oh-lucy.nvim";
-      flake = false;
-    };
-    nightfox = {
-      url = "github:EdenEast/nightfox.nvim";
-      flake = false;
-    };
-    nvim-animate = {
-      url = "github:echasnovski/mini.animate";
-      flake = false;
-    };
+    dressing.url = "github:stevearc/dressing.nvim";
+    dressing.flake = false;
+    rainglow.url = "github:rainglow/vim";
+    rainglow.flake = false;
+    neon.url = "github:rafamadriz/neon";
+    neon.flake = false;
+    catpuccino.url = "github:catppuccin/nvim";
+    catpuccino.flake = false;
+    nvim-notify.url = "github:rcarriga/nvim-notify";
+    nvim-notify.flake = false;
+    lush.url = "github:rktjmp/lush.nvim";
+    lush.flake = false;
+    zenbones.url = "github:mcchrish/zenbones.nvim";
+    zenbones.flake = false;
+    monochrome.url = "github:kdheepak/monochrome.nvim";
+    monochrome.flake = false;
+    oh-lucy.url = "github:Yazeed1s/oh-lucy.nvim";
+    oh-lucy.flake = false;
+    nightfox.url = "github:EdenEast/nightfox.nvim";
+    nightfox.flake = false;
+    bluloco.url = "github:uloco/bluloco.nvim";
+    bluloco.flake = false;
+    nvim-animate.url = "github:echasnovski/mini.animate";
+    nvim-animate.flake = false;
     # lsp
     nvim-cmp = {
       url = "github:hrsh7th/nvim-cmp";

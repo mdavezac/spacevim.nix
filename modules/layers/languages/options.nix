@@ -28,6 +28,16 @@
             default = false;
             description = "Whether to enable the haskell language layer";
           };
+          options.cpp = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = "Whether to enable the c++ language layer";
+          };
+          options.cmake = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = "Whether to enable the cmake language layer";
+          };
         };
         default = {};
       };

@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "bluloco": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1677497364,
+        "narHash": "sha256-fE0F+zNWKgvirz68cnwOW4HpvAnbQ+F1f4hYZtQIVdA=",
+        "owner": "uloco",
+        "repo": "bluloco.nvim",
+        "rev": "ee349b5a1ad19111d4153fa88b75f65ef3a1e8a6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "uloco",
+        "repo": "bluloco.nvim",
+        "type": "github"
+      }
+    },
     "catpuccino": {
       "flake": false,
       "locked": {
@@ -460,17 +476,17 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1675069266,
-        "narHash": "sha256-llOLYG1GO5uTEeJwLDjatAIXW1vKO5VvmvHwRKiLhuI=",
+        "lastModified": 1675344803,
+        "narHash": "sha256-ItJ8aX/WUfcAovxRsXXyWKBAI92hFloYIZiv7viPIdQ=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "21257d8580780a5e28f06562cea4f8889e6b0932",
+        "rev": "129264dbb41404b94b835baadfc3fa25ffac3d3e",
         "type": "github"
       },
       "original": {
         "dir": "contrib",
         "owner": "neovim",
-        "ref": "master",
+        "ref": "v0.8.3",
         "repo": "neovim",
         "type": "github"
       }
@@ -855,6 +871,7 @@
     "root": {
       "inputs": {
         "aniseed": "aniseed",
+        "bluloco": "bluloco",
         "catpuccino": "catpuccino",
         "cmp-cmdline": "cmp-cmdline",
         "dash-nvim": "dash-nvim",

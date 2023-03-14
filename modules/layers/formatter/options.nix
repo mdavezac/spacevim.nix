@@ -1,37 +1,47 @@
-{ lib, config, pkgs, ... }:
-let
-  formatter-option = { enable ? false, filetype, exe, args ? [ ], stdin ? true }: lib.mkOption {
-    type = lib.types.submodule {
-      options.enable = lib.mkOption {
-        type = lib.types.bool;
-        default = enable;
-        description = "Whether to run this specific formatter";
-      };
-      options.filetype = lib.mkOption {
-        type = lib.types.str;
-        default = filetype;
-        description = "Filetype for which to run this formatter";
-      };
-      options.exe = lib.mkOption {
-        type = lib.types.str;
-        description = "Binary to call for formatting";
-        default = exe;
-      };
-      options.args = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        description = "List of command-line arguments for the formatter";
-        default = args;
-      };
-      options.stdin = lib.mkOption {
-        type = lib.types.bool;
-        description = "Whether the formatter can use stdin";
-        default = stdin;
-      };
-    };
-    default = { };
-  };
-in
 {
+  lib,
+  config,
+  pkgs,
+  ...
+}: let
+  formatter-option = {
+    enable ? false,
+    filetype,
+    exe,
+    args ? [],
+    stdin ? true,
+  }:
+    lib.mkOption {
+      type = lib.types.submodule {
+        options.enable = lib.mkOption {
+          type = lib.types.bool;
+          default = enable;
+          description = "Whether to run this specific formatter";
+        };
+        options.filetype = lib.mkOption {
+          type = lib.types.str;
+          default = filetype;
+          description = "Filetype for which to run this formatter";
+        };
+        options.exe = lib.mkOption {
+          type = lib.types.str;
+          description = "Binary to call for formatting";
+          default = exe;
+        };
+        options.args = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+          description = "List of command-line arguments for the formatter";
+          default = args;
+        };
+        options.stdin = lib.mkOption {
+          type = lib.types.bool;
+          description = "Whether the formatter can use stdin";
+          default = stdin;
+        };
+      };
+      default = {};
+    };
+in {
   options.spacenix = lib.mkOption {
     type = lib.types.submodule {
       options.layers = lib.mkOption {
@@ -44,7 +54,7 @@ in
                 description = "Whether to enable the formatter layer";
               };
             };
-            default = { };
+            default = {};
           };
         };
       };
@@ -53,13 +63,13 @@ in
           options.black = formatter-option {
             exe = "${pkgs.black}/bin/black";
             enable = config.spacenix.languages.python;
-            args = [ "-q" "-" ];
+            args = ["-q" "-"];
             filetype = "python";
           };
           options.isort = formatter-option {
             exe = "${pkgs.python39Packages.isort}/bin/isort";
             enable = config.spacenix.languages.python;
-            args = [ "-" ];
+            args = ["-"];
             filetype = "python";
           };
           options.rustfmt = formatter-option {
@@ -76,16 +86,30 @@ in
             exe = "${pkgs.alejandra}/bin/alejandra";
             enable = config.spacenix.languages.nix;
             filetype = "nix";
-            args = [ "-q" ];
+            args = ["-q"];
+          };
+          options.clang-format = formatter-option {
+            exe = "${pkgs.clang-tools}/bin/clang-format";
+            enable = config.spacenix.languages.cpp;
+            filetype = "cpp";
+            args = ["-style=file"];
+            stdin = true;
+          };
+          options.cmake-format = formatter-option {
+            exe = "${pkgs.cmake-format}/bin/cmake-format";
+            enable = config.spacenix.languages.cmake;
+            filetype = "cmake";
+            args = ["-"];
+            stdin = true;
           };
         };
         description = ''Dictionary of formatter configurations.'';
-        default = { };
+        default = {};
       };
       options.format-on-save = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        description = ''List of filetypes for which to run format-on-save'';
-        default = [ ];
+        description = ''List of file patterns for which to run format-on-save'';
+        default = [];
         example = ''["*.py"]'';
       };
     };
