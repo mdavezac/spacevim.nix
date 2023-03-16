@@ -224,6 +224,22 @@
         "type": "github"
       }
     },
+    "flatten-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1678878915,
+        "narHash": "sha256-hpQWJaUSFj2vGKmGl0czIDk7t+h765z9oPRlgzdJp/I=",
+        "owner": "willothy",
+        "repo": "flatten.nvim",
+        "rev": "3ff516ed0f9a572ae630ae7b8fed519f54a90b86",
+        "type": "github"
+      },
+      "original": {
+        "owner": "willothy",
+        "repo": "flatten.nvim",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -878,6 +894,7 @@
         "devshell": "devshell",
         "dressing": "dressing",
         "flake-utils": "flake-utils_2",
+        "flatten-nvim": "flatten-nvim",
         "guihua": "guihua",
         "haskell-tools-nvim": "haskell-tools-nvim",
         "iron-nvim": "iron-nvim",

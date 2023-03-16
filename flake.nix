@@ -41,102 +41,60 @@
     nvim-animate.url = "github:echasnovski/mini.animate";
     nvim-animate.flake = false;
     # lsp
-    nvim-cmp = {
-      url = "github:hrsh7th/nvim-cmp";
-      flake = false;
-    };
-    cmp-cmdline = {
-      url = "github:hrsh7th/cmp-cmdline";
-      flake = false;
-    };
-    nvim-lspconfig = {
-      url = "github:neovim/nvim-lspconfig";
-      flake = false;
-    };
-    guihua = {
-      url = "github:ray-x/guihua.lua";
-      flake = false;
-    };
-    lsp-navigator = {
-      url = "github:ray-x/navigator.lua";
-      flake = false;
-    };
-    lspsaga-nvim = {
-      url = "github:tami5/lspsaga.nvim";
-      flake = false;
-    };
-    trouble-nvim = {
-      url = "github:folke/trouble.nvim";
-      flake = false;
-    };
+    nvim-cmp.url = "github:hrsh7th/nvim-cmp";
+    nvim-cmp.flake = false;
+    cmp-cmdline.url = "github:hrsh7th/cmp-cmdline";
+    cmp-cmdline.flake = false;
+    nvim-lspconfig.url = "github:neovim/nvim-lspconfig";
+    nvim-lspconfig.flake = false;
+    guihua.url = "github:ray-x/guihua.lua";
+    guihua.flake = false;
+    lsp-navigator.url = "github:ray-x/navigator.lua";
+    lsp-navigator.flake = false;
+    lspsaga-nvim.url = "github:tami5/lspsaga.nvim";
+    lspsaga-nvim.flake = false;
+    trouble-nvim.url = "github:folke/trouble.nvim";
+    trouble-nvim.flake = false;
     # treesitter
-    nvim-treesitter-textsubjects = {
-      url = "github:RRethy/nvim-treesitter-textsubjects";
-      flake = false;
-    };
-    vim-illuminate = {
-      url = "github:RRethy/vim-illuminate";
-      flake = false;
-    };
-    nvim-spellsitter = {
-      url = "github:lewis6991/spellsitter.nvim";
-      flake = false;
-    };
-    tree-climber = {
-      url = "github:Dkendal/nvim-treeclimber";
-      flake = false;
-    };
+    nvim-treesitter-textsubjects.url = "github:RRethy/nvim-treesitter-textsubjects";
+    nvim-treesitter-textsubjects.flake = false;
+    vim-illuminate.url = "github:RRethy/vim-illuminate";
+    vim-illuminate.flake = false;
+    nvim-spellsitter.url = "github:lewis6991/spellsitter.nvim";
+    nvim-spellsitter.flake = false;
+    tree-climber.url = "github:Dkendal/nvim-treeclimber";
+    tree-climber.flake = false;
     # git
-    octo = {
-      url = "github:pwntester/octo.nvim";
-      flake = false;
-    };
-    vim-diffview = {
-      url = "github:sindrets/diffview.nvim";
-      flake = false;
-    };
-    vim-hydra = {
-      url = "github:anuvyklack/hydra.nvim";
-      flake = false;
-    };
+    octo.url = "github:pwntester/octo.nvim";
+    octo.flake = false;
+    vim-diffview.url = "github:sindrets/diffview.nvim";
+    vim-diffview.flake = false;
+    vim-hydra.url = "github:anuvyklack/hydra.nvim";
+    vim-hydra.flake = false;
     # dash
-    dash-nvim = {
-      url = "github:mrjones2014/dash.nvim/6296e87fddece1996c7d324ef8511d6908184a55";
-      flake = false;
-    };
+    dash-nvim.url = "github:mrjones2014/dash.nvim/6296e87fddece1996c7d324ef8511d6908184a55";
+    dash-nvim.flake = false;
     # testing
-    neotest = {
-      url = "github:nvim-neotest/neotest";
-      flake = false;
-    };
-    neotest-python = {
-      url = "github:nvim-neotest/neotest-python";
-      flake = false;
-    };
-    neotest-vim-test = {
-      url = "github:nvim-neotest/neotest-vim-test";
-      flake = false;
-    };
+    neotest.url = "github:nvim-neotest/neotest";
+    neotest.flake = false;
+    neotest-python.url = "github:nvim-neotest/neotest-python";
+    neotest-python.flake = false;
+    neotest-vim-test.url = "github:nvim-neotest/neotest-vim-test";
+    neotest-vim-test.flake = false;
     # terminal
-    iron-nvim = {
-      url = "github:hkupty/iron.nvim";
-      flake = false;
-    };
+    iron-nvim.url = "github:hkupty/iron.nvim";
+    iron-nvim.flake = false;
+    flatten-nvim.url = "github:willothy/flatten.nvim";
+    flatten-nvim.flake = false;
     # neorg
-    neorg = {
-      url = "github:nvim-neorg/neorg";
-      flake = false;
-    };
+    neorg.url = "github:nvim-neorg/neorg";
+    neorg.flake = false;
     #
-    aniseed = {
-      url = "github:olical/aniseed";
-      flake = false;
-    };
+    aniseed.url = "github:olical/aniseed";
+    aniseed.flake = false;
     # debugger
-    nvim-dap-python = {
-      url = "github:mfussenegger/nvim-dap-python";
-      flake = false;
-    };
+    nvim-dap-python.url = "github:mfussenegger/nvim-dap-python";
+    nvim-dap-python.flake = false;
 
     #
     legendary.url = "github:mrjones2014/legendary.nvim";

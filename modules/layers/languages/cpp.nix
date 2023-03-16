@@ -37,5 +37,9 @@ in {
     ];
   };
   config.spacenix.format-on-save = enableIf ["*.cpp" "*.cc" "*.h" "*.hpp"];
+  config.nvim.init.vim = ''
+    autocmd FileType cpp setlocal comments+=b://!
+    autocmd FileType cpp setlocal commentstring=//\ %s
+  '';
   config.spacenix.dash.cpp = ["cpp"];
 }

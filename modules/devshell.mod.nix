@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  command = ''[ -z "''${NVIM:-}" ] && exec nvim $@ || exec nvim --server $NVIM --remote $@'';
+  command = ''exec nvim $@'';
 in {
   config = {
     commands = builtins.map (x: {
