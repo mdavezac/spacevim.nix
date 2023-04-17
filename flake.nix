@@ -84,8 +84,6 @@
     # terminal
     iron-nvim.url = "github:hkupty/iron.nvim";
     iron-nvim.flake = false;
-    flatten-nvim.url = "github:willothy/flatten.nvim";
-    flatten-nvim.flake = false;
     # neorg
     neorg.url = "github:nvim-neorg/neorg";
     neorg.flake = false;

@@ -10,13 +10,6 @@ in {
   config.spacenix.lsp-instances.clangd = enableIf {
     cmd = "\"${pkgs.clang-tools}/bin/clangd\"";
   };
-  config.nvim.plugins.start = let
-    conditional = condition: x:
-      if condition
-      then [x]
-      else [];
-  in
-    enableIf [pkgs.vimPlugins.rust-tools-nvim];
   config.spacenix.layers.completion.sources = enableIf {
     rust = [
       {
@@ -37,9 +30,11 @@ in {
     ];
   };
   config.spacenix.format-on-save = enableIf ["*.cpp" "*.cc" "*.h" "*.hpp"];
-  config.nvim.init.vim = ''
-    autocmd FileType cpp setlocal comments+=b://!
-    autocmd FileType cpp setlocal commentstring=//\ %s
-  '';
-  config.spacenix.dash.cpp = ["cpp"];
+  config.nvim.init = enableIf {
+    vim = ''
+      autocmd FileType cpp setlocal comments+=b://!
+      autocmd FileType cpp setlocal commentstring=//\ %s
+    '';
+  };
+  config.spacenix.dash = enableIf {cpp = ["cpp"];};
 }
