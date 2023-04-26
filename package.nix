@@ -7,50 +7,77 @@
     name = "luasnip";
     paths = [pkgs.vimPlugins.luasnip pkgs.luajitPackages.jsregexp];
   };
-  lazy-nix = pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "lazy-nix";
-    version = "0.0.0";
-    src = ./lua;
-    buildPhase = ''
-      mkdir lua/
-      mv config plugins lua
-
-      cat >lua/config/directories.lua <<EOF
-      return {
-          stylua = '${pkgs.stylua}/bin/stylua',
-          shfmt = '${pkgs.shfmt}/bin/shfmt',
-          alejandra = '${pkgs.alejandra}/bin/alejandra',
-          lua_ls = '${pkgs.sumneko-lua-language-server}/bin/lua-language-server',
-          pyright = {"${pkgs.nodePackages.pyright}/bin/pyright-langserver", "--stdio"},
-          lazygit = "${pkgs.lazygit}/bin/lazygit"
+  lazy-nix = let
+    packages = pkgs.linkFarm "vim-plugins" [
+      {
+        name = "stylua";
+        path = pkgs.stylua;
       }
-      EOF
-
-      cat > lua/plugins/hardcoded.lua <<EOF
-      return {
-        { "nvim-treesitter/nvim-treesitter", name="nvim-treesitter",
-          dir='${treesitter}', pin=true, opts = { ensure_installed = {} }, },
-        { "L3MON4D3/LuaSnip", name="LuaSnip", dir='${luasnip}', pin=true },
+      {
+        name = "shfmt";
+        path = pkgs.shfmt;
       }
-      EOF
-    '';
-  };
+      {
+        name = "alejandra";
+        path = pkgs.alejandra;
+      }
+      {
+        name = "luals";
+        path = pkgs.sumneko-lua-language-server;
+      }
+      {
+        name = "pyright";
+        path = pkgs.nodePackages.pyright;
+      }
+      {
+        name = "lazygit";
+        path = pkgs.lazygit;
+      }
+      {
+        name = "lazy-dist";
+        path = pkgs.vimPlugins.lazy-dist;
+      }
+    ];
+  in
+    pkgs.vimUtils.buildVimPluginFrom2Nix {
+      pname = "lazy-nix";
+      version = "0.0.0";
+      src = ./lua;
+      buildPhase = ''
+        mkdir lua/
+        mv config plugins lua
+
+        cat >lua/config/directories.lua <<EOF
+        return '${packages}'
+        EOF
+
+        cat > lua/plugins/hardcoded.lua <<EOF
+        return {
+          { "nvim-treesitter/nvim-treesitter", name="nvim-treesitter",
+            dir='${treesitter}', pin=true, opts = { ensure_installed = {} }, },
+          { "L3MON4D3/LuaSnip", name="LuaSnip", dir='${luasnip}', pin=true },
+        }
+        EOF
+      '';
+    };
   lazy-nvim = pkgs.vimPlugins.lazy-nvim.overrideAttrs (finalAttrs: previousAttrs: {
-    depsBuildInput = [pkgs.neovim lazy-nix];
+    depsBuildInput = [pkgs.neovim];
     buildPhase = ''
-      cp -r ${lazy-nix}/lua/* lua
       ${pkgs.neovim}/bin/nvim -i NONE --clean -V -e ":helptags doc" -es +q
     '';
   });
+  distribution = pkgs.symlinkJoin {
+    name = "LazyNvim";
+    paths = [lazy-nvim lazy-nix];
+  };
 in
   pkgs.wrapNeovim pkgs.neovim {
     configure = {
       customRC = ''
-        lua require("config.directories").lazydir = '${pkgs.vimPlugins.lazy-dist}'
-        lua require('config.lazy').setup('${pkgs.vimPlugins.lazy-dist}')
+        lua require('config.lazy').setup()
       '';
       packages.lazy = {
-        start = [lazy-nvim];
+        start = [distribution];
       };
     };
   }

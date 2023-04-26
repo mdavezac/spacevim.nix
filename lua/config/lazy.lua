@@ -1,11 +1,17 @@
 local M = {}
 
-M.setup = function(directory)
+M.setup = function()
 	local os = require("os")
 	local opts = {
 		spec = {
 			-- add LazyVim and import its plugins
-			{ "LazyVim/LazyVim", name = "LazyVim", import = "lazyvim.plugins", dir = directory, pin = true },
+			{
+				"LazyVim/LazyVim",
+				name = "LazyVim",
+				import = "lazyvim.plugins",
+				dir = require("config.directories") .. "/lazy-dist",
+				pin = true,
+			},
 			-- { name="CrazyVim", import = "lazyvim.plugins", dir=directory },
 			-- import any extras modules here
 			-- { import = "lazyvim.plugins.extras.lang.typescript" },
@@ -48,7 +54,6 @@ M.setup = function(directory)
 		opts.state = os.getenv("LAZY_NIX_ROOT") .. "/state.json"
 	end
 	require("lazy").setup(opts)
-	M.lazydir = directory
 end
 
 return M

@@ -9,6 +9,12 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		opts = { servers = { pyright = { cmd = require("config.directories").pyright } } },
+		opts = {
+			servers = {
+				pyright = {
+					cmd = { require("config.directories") .. "/pyright/bin/pyright-langserver", "--stdio" },
+				},
+			},
+		},
 	},
 }

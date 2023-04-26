@@ -13,8 +13,11 @@ local function map(mode, lhs, rhs, opts)
 end
 
 map("n", "<leader>gg", function()
-	Util.float_term({ require("config.directories").lazygit }, { cwd = Util.get_root(), esc_esc = false })
+	Util.float_term(
+		{ require("config.directories") .. "/lazygit/bin/lazygit" },
+		{ cwd = Util.get_root(), esc_esc = false }
+	)
 end, { desc = "Lazygit (root dir)" })
 map("n", "<leader>gG", function()
-	Util.float_term({ require("config.directories").lazygit }, { esc_esc = false })
+	Util.float_term({ require("config.directories") .. "/lazygit/bin/lazygit" }, { esc_esc = false })
 end, { desc = "Lazygit (cwd)" })
