@@ -1,5 +1,21 @@
 return {
 	{
+		"akinsho/toggleterm.nvim",
+		dir = require("config.directories") .. "/toggleterm",
+		opts = {
+			size = 100,
+			direction = "vertical",
+			insert_mappings = false,
+			terminal_mapping = false,
+		},
+		keys = {
+            {
+			"<leader>;",
+			"<Cmd>exe v:count1 . 'ToggleTerm'<CR>",
+			desc = "Terminal",}
+		},
+	},
+	{
 		"aserowy/tmux.nvim",
 		opts = {
 			copy_sync = { enable = false },

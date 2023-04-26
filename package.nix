@@ -37,6 +37,10 @@
         name = "lazy-dist";
         path = pkgs.vimPlugins.lazy-dist;
       }
+      {
+        name = "toggleterm";
+        path = pkgs.vimPlugins.toggleterm-nvim;
+      }
     ];
   in
     pkgs.vimUtils.buildVimPluginFrom2Nix {
