@@ -12,7 +12,9 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		opts = {
-			servers = { lua_ls = { cmd = { require("config.directories") .. "/luals/bin/lua-language-server" } } },
+			servers = {
+				lua_ls = { cmd = { require("config.directories") .. "/luals/bin/lua-language-server" } },
+			},
 		},
 	},
 }

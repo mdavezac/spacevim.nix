@@ -24,7 +24,7 @@ in {
           cat  > lua/lazyvim/plugins/core.lua <<EOF
           require("lazyvim.config").init()
           return {
-              { "folke/lazy.nvim", version = "*", enable=false, },
+              { "folke/lazy.nvim", pin = true, enable=false, },
               {
                 name="LazyVim", dir='${placeholder "out"}', priority = 10000,
                 lazy = false, config = true, pin=true

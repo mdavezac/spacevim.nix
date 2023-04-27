@@ -1,7 +1,28 @@
 {pkgs}: let
   treesitter = pkgs.buildEnv {
     name = "nvim-treesitter";
-    paths = [pkgs.vimPlugins.nvim-treesitter] ++ pkgs.vimPlugins.nvim-treesitter.withAllGrammars.passthru.dependencies;
+    paths = let
+      langs = p: [
+        p.c
+        p.cpp
+        p.python
+        p.rust
+        p.javascript
+        p.nix
+        p.cmake
+        p.yaml
+        p.json
+        p.jsonc
+        p.json5
+        p.julia
+        p.haskell
+        p.racket
+        p.r
+        p.nickel
+      ];
+      ts = l: (pkgs.vimPlugins.nvim-treesitter.withPlugins l).passthru.dependencies;
+    in
+      [pkgs.vimPlugins.nvim-treesitter] ++ (ts langs);
   };
   luasnip = pkgs.buildEnv {
     name = "luasnip";
@@ -26,6 +47,10 @@
         path = pkgs.sumneko-lua-language-server;
       }
       {
+        name = "rnix";
+        path = pkgs.rnix-lsp;
+      }
+      {
         name = "pyright";
         path = pkgs.nodePackages.pyright;
       }
@@ -40,6 +65,10 @@
       {
         name = "toggleterm";
         path = pkgs.vimPlugins.toggleterm-nvim;
+      }
+      {
+        name = "iron";
+        path = pkgs.vimPlugins.iron-nvim;
       }
     ];
   in

@@ -52,6 +52,22 @@
         "type": "github"
       }
     },
+    "iron-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1681392128,
+        "narHash": "sha256-aNDZSAjEwTx72DFjxHG2RYbfGNUQe86SFpOAnlZItm0=",
+        "owner": "hkupty",
+        "repo": "iron.nvim",
+        "rev": "792dd11752c4699ea52c737b5e932d6f21b25834",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hkupty",
+        "repo": "iron.nvim",
+        "type": "github"
+      }
+    },
     "lazy-dist": {
       "flake": false,
       "locked": {
@@ -146,6 +162,7 @@
       "inputs": {
         "devshell": "devshell",
         "flake-utils": "flake-utils_2",
+        "iron-nvim": "iron-nvim",
         "lazy-dist": "lazy-dist",
         "lazy-nvim": "lazy-nvim",
         "neovim": "neovim",

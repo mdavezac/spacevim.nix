@@ -1,5 +1,42 @@
 return {
 	{
+		"Vigemus/iron.nvim",
+		dir = require("config.directories") .. "/iron",
+		main = "iron.core",
+		opts = {
+			config = {
+				repl_open_cmd = require("iron.view").split.vertical.botright(
+					"50%",
+					{ number = false, relativenumber = false }
+				),
+			},
+			keymaps = {},
+		},
+		filtype = {},
+		keys = {
+			{
+				"<leader>r",
+				"<CMD>IronRepl<CR>",
+				desc = "REPL",
+			},
+			{
+				"<CR>",
+				function()
+					require("iron").core.visual_send()
+				end,
+				mode = "v",
+				desc = "Send visual selection to REPL",
+			},
+			{
+				"<CR>",
+				function()
+					require("iron").core.send_line()
+				end,
+				desc = "Send visual selection to REPL",
+			},
+		},
+	},
+	{
 		"akinsho/toggleterm.nvim",
 		dir = require("config.directories") .. "/toggleterm",
 		opts = {
@@ -9,10 +46,11 @@ return {
 			terminal_mapping = false,
 		},
 		keys = {
-            {
-			"<leader>;",
-			"<Cmd>exe v:count1 . 'ToggleTerm'<CR>",
-			desc = "Terminal",}
+			{
+				"<leader>;",
+				"<Cmd>exe v:count1 . 'ToggleTerm'<CR>",
+				desc = "Terminal",
+			},
 		},
 	},
 	{

@@ -9,6 +9,8 @@
     lazy-nvim.flake = false;
     lazy-dist.url = "github:LazyVim/LazyVim";
     lazy-dist.flake = false;
+    iron-nvim.url = "github:hkupty/iron.nvim";
+    iron-nvim.flake = false;
 
     neovim = {
       url = "github:neovim/neovim/v0.8.3?dir=contrib";

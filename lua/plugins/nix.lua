@@ -3,16 +3,20 @@ return {
 		"jose-elias-alvarez/null-ls.nvim",
 		opts = function(_, opts)
 			local nls = require("null-ls")
-			table.insert(opts.sources, nls.builtins.formatting.isort)
-			table.insert(opts.sources, nls.builtins.formatting.black)
+			table.insert(
+				opts.sources,
+				nls.builtins.formatting.alejandra.with({
+					command = require("config.directories") .. "/alejandra/bin/alejandra",
+				})
+			)
 		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
-				pyright = {
-					cmd = { require("config.directories") .. "/pyright/bin/pyright-langserver", "--stdio" },
+				rnix = {
+					cmd = { require("config.directories") .. "/rnix/bin/rnix-lsp" },
 				},
 			},
 		},
@@ -20,12 +24,12 @@ return {
 	{
 		"Vigemus/iron.nvim",
 		dir = require("config.directories") .. "/iron",
-		ft = { "python" },
+		ft = { "nix" },
 
 		opts = {
 			config = {
 				repl_definition = {
-					python = { command = { "python" } },
+					nix = { command = { "nix repl" } },
 				},
 			},
 		},
