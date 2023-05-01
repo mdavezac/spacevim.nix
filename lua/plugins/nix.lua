@@ -29,7 +29,7 @@ return {
 		opts = {
 			config = {
 				repl_definition = {
-					nix = { command = { "nix repl" } },
+					nix = { command = { "nix", "repl" } },
 				},
 			},
 		},

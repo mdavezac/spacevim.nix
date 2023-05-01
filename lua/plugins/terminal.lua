@@ -13,28 +13,6 @@ return {
 			keymaps = {},
 		},
 		filtype = {},
-		keys = {
-			{
-				"<leader>r",
-				"<CMD>IronRepl<CR>",
-				desc = "REPL",
-			},
-			{
-				"<CR>",
-				function()
-					require("iron").core.visual_send()
-				end,
-				mode = "v",
-				desc = "Send visual selection to REPL",
-			},
-			{
-				"<CR>",
-				function()
-					require("iron").core.send_line()
-				end,
-				desc = "Send visual selection to REPL",
-			},
-		},
 	},
 	{
 		"akinsho/toggleterm.nvim",

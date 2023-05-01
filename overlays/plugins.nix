@@ -9,7 +9,8 @@ inputs @ {
       version = v.shortRev;
       src = v;
     };
-  non-plugins = builtins.filter (x: (!lib.strings.hasSuffix "-nvim" x)) (builtins.attrNames inputs);
+  filter = x: (!lib.strings.hasSuffix "-nvim" x) && (!lib.strings.hasPrefix "nvim-" x);
+  non-plugins = builtins.filter filter (builtins.attrNames inputs);
   plugins = builtins.removeAttrs inputs non-plugins;
 in {
   vimPlugins =

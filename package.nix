@@ -2,34 +2,29 @@
   treesitter = pkgs.buildEnv {
     name = "nvim-treesitter";
     paths = let
-      langs = p: [
-        p.c
-        p.cpp
-        p.python
-        p.rust
-        p.javascript
-        p.nix
-        p.cmake
-        p.yaml
-        p.json
-        p.jsonc
-        p.json5
-        p.julia
-        p.haskell
-        p.racket
-        p.r
-        p.nickel
-      ];
-      ts = l: (pkgs.vimPlugins.nvim-treesitter.withPlugins l).passthru.dependencies;
+      grammars = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.passthru.dependencies;
+      filtered = builtins.filter (x: x.name != "nvim-treesitter-help-grammar") grammars;
     in
-      [pkgs.vimPlugins.nvim-treesitter] ++ (ts langs);
+      [pkgs.vimPlugins.nvim-treesitter] ++ filtered;
   };
   luasnip = pkgs.buildEnv {
     name = "luasnip";
     paths = [pkgs.vimPlugins.luasnip pkgs.luajitPackages.jsregexp];
   };
+  cpptools = pkgs.buildEnv {
+    name = "cpptools";
+    paths = [pkgs.cmake-language-server pkgs.clang-tools];
+  };
   lazy-nix = let
     packages = pkgs.linkFarm "vim-plugins" [
+      {
+        name = "luasnip";
+        path = luasnip;
+      }
+      {
+        name = "treesitter";
+        path = treesitter;
+      }
       {
         name = "stylua";
         path = pkgs.stylua;
@@ -53,6 +48,10 @@
       {
         name = "pyright";
         path = pkgs.nodePackages.pyright;
+      }
+      {
+        name = "cpp";
+        path = cpptools;
       }
       {
         name = "lazygit";
@@ -80,17 +79,7 @@
         mkdir lua/
         mv config plugins lua
 
-        cat >lua/config/directories.lua <<EOF
-        return '${packages}'
-        EOF
-
-        cat > lua/plugins/hardcoded.lua <<EOF
-        return {
-          { "nvim-treesitter/nvim-treesitter", name="nvim-treesitter",
-            dir='${treesitter}', pin=true, opts = { ensure_installed = {} }, },
-          { "L3MON4D3/LuaSnip", name="LuaSnip", dir='${luasnip}', pin=true },
-        }
-        EOF
+        echo  "return '${packages}'" > lua/config/directories.lua
       '';
     };
   lazy-nvim = pkgs.vimPlugins.lazy-nvim.overrideAttrs (finalAttrs: previousAttrs: {

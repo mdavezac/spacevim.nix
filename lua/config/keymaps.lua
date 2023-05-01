@@ -21,3 +21,10 @@ end, { desc = "Lazygit (root dir)" })
 map("n", "<leader>gG", function()
 	Util.float_term({ require("config.directories") .. "/lazygit/bin/lazygit" }, { esc_esc = false })
 end, { desc = "Lazygit (cwd)" })
+
+local function which_key_iron_repl()
+	map("n", "<leader>r", "<CMD>IronRepl<CR>", { desc = "REPL" })
+	map("v", "<CR>", require("iron").core.visual_send, { desc = "Send to REPL" })
+	map("n", "<CR>", require("iron").core.send_line, { desc = "Send line to REPL" })
+end
+vim.api.nvim_create_autocmd({ "FileType" }, { pattern = { "python" }, callback = which_key_iron_repl })
