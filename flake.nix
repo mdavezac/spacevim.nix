@@ -11,6 +11,8 @@
     lazy-dist.flake = false;
     iron-nvim.url = "github:hkupty/iron.nvim";
     iron-nvim.flake = false;
+    nvim-lspconfig.url = "github:neovim/nvim-lspconfig";
+    nvim-lspconfig.flake = false;
 
     neovim = {
       url = "github:neovim/neovim/v0.8.3?dir=contrib";

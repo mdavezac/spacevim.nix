@@ -69,6 +69,10 @@
         name = "iron";
         path = pkgs.vimPlugins.iron-nvim;
       }
+      {
+        name = "bufferline";
+        path = pkgs.vimPlugins.bufferline-nvim;
+      }
     ];
   in
     pkgs.vimUtils.buildVimPluginFrom2Nix {

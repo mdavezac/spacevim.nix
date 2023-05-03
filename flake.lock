@@ -158,6 +158,22 @@
         "type": "github"
       }
     },
+    "nvim-lspconfig": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1682947665,
+        "narHash": "sha256-T0urZXkaGjmO0bYbj2oKgviSYwbbWr0ZE1tH3yOFANQ=",
+        "owner": "neovim",
+        "repo": "nvim-lspconfig",
+        "rev": "5f7a8311dd6e67de74c12fa9ac2f1aa75f72b19e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neovim",
+        "repo": "nvim-lspconfig",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "devshell": "devshell",
@@ -166,7 +182,8 @@
         "lazy-dist": "lazy-dist",
         "lazy-nvim": "lazy-nvim",
         "neovim": "neovim",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "nvim-lspconfig": "nvim-lspconfig"
       }
     },
     "systems": {
