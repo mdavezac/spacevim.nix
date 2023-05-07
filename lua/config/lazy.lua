@@ -1,25 +1,26 @@
 local M = {}
-
 M.setup = function()
 	local os = require("os")
-	local opts = {
-		spec = {
-			-- add LazyVim and import its plugins
-			{
-				"LazyVim/LazyVim",
-				name = "LazyVim",
-				import = "lazyvim.plugins",
-				dir = require("config.directories") .. "/lazy-dist",
-				pin = true,
-			},
-			-- { name="CrazyVim", import = "lazyvim.plugins", dir=directory },
-			-- import any extras modules here
-			-- { import = "lazyvim.plugins.extras.lang.typescript" },
-			-- { import = "lazyvim.plugins.extras.lang.json" },
-			-- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-			-- import/override with your plugins
-			{ import = "plugins" },
+	local specs = {
+		-- add LazyVim and import its plugins
+		{
+			"LazyVim/LazyVim",
+			name = "LazyVim",
+			import = "lazyvim.plugins",
+			dir = require("config.directories") .. "/lazy-dist",
+			pin = true,
 		},
+		-- import any extras modules here
+		-- { import = "lazyvim.plugins.extras.lang.typescript" },
+		-- { import = "lazyvim.plugins.extras.lang.json" },
+		-- { import = "lazyvim.plugins.extras.ui.mini-animate" },
+		-- import/override with your plugins
+		{ import = "plugins" },
+		{ import = "config.localproject" },
+	}
+
+	local opts = {
+		spec = specs,
 		defaults = {
 			-- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
 			-- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
@@ -29,8 +30,7 @@ M.setup = function()
 			version = false, -- always use the latest git commit
 			-- version = "*", -- try installing the latest stable version for plugins that support semver
 		},
-		install = { colorscheme = { "gruvbox", "tokyonight", "habamax" } },
-		checker = { enabled = true }, -- automatically check for plugin updates
+		checker = { enabled = false }, -- automatically check for plugin updates
 		performance = {
 			rtp = {
 				-- disable some rtp plugins
