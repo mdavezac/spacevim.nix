@@ -15,6 +15,10 @@
     name = "cpptools";
     paths = [pkgs.cmake-language-server pkgs.clang-tools];
   };
+  pytools = pkgs.buildEnv {
+    name = "pytools";
+    paths = [pkgs.nodePackages.pyright pkgs.black pkgs.isort];
+  };
   lazy-nix = let
     packages = pkgs.linkFarm "vim-plugins" [
       {
@@ -46,8 +50,8 @@
         path = pkgs.rnix-lsp;
       }
       {
-        name = "pyright";
-        path = pkgs.nodePackages.pyright;
+        name = "pytools";
+        path = pytools;
       }
       {
         name = "cpp";
@@ -72,6 +76,14 @@
       {
         name = "bufferline";
         path = pkgs.vimPlugins.bufferline-nvim;
+      }
+      {
+        name = "neotest";
+        path = pkgs.vimPlugins.neotest-nvim;
+      }
+      {
+        name = "neotest-python";
+        path = pkgs.vimPlugins.neotest-python-nvim;
       }
     ];
   in

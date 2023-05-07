@@ -100,6 +100,38 @@
         "type": "github"
       }
     },
+    "neotest-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1683451536,
+        "narHash": "sha256-uVGVN4FW91T9bKmmXvrxgIS9v0frYd/lVJa4xrKDXjU=",
+        "owner": "nvim-neotest",
+        "repo": "neotest",
+        "rev": "f3570eb751de11b30438eda89a6988e55f41e985",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-neotest",
+        "repo": "neotest",
+        "type": "github"
+      }
+    },
+    "neotest-python-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676712877,
+        "narHash": "sha256-DeMEMwMscOJrazrv9LmuaaxtN4TYow9W/D4b8MRxyz4=",
+        "owner": "nvim-neotest",
+        "repo": "neotest-python",
+        "rev": "6c06041cfb45f45e276068020baa06c06fe20d5c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-neotest",
+        "repo": "neotest-python",
+        "type": "github"
+      }
+    },
     "neovim": {
       "inputs": {
         "flake-utils": [
@@ -181,6 +213,8 @@
         "iron-nvim": "iron-nvim",
         "lazy-dist": "lazy-dist",
         "lazy-nvim": "lazy-nvim",
+        "neotest-nvim": "neotest-nvim",
+        "neotest-python-nvim": "neotest-python-nvim",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs_2",
         "nvim-lspconfig": "nvim-lspconfig"

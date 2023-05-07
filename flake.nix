@@ -13,6 +13,10 @@
     iron-nvim.flake = false;
     nvim-lspconfig.url = "github:neovim/nvim-lspconfig";
     nvim-lspconfig.flake = false;
+    neotest-nvim.url = "github:nvim-neotest/neotest";
+    neotest-nvim.flake = false;
+    neotest-python-nvim.url = "github:nvim-neotest/neotest-python";
+    neotest-python-nvim.flake = false;
 
     neovim = {
       url = "github:neovim/neovim/v0.8.3?dir=contrib";
