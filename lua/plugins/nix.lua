@@ -23,9 +23,7 @@ return {
 	},
 	{
 		"Vigemus/iron.nvim",
-		dir = require("config.directories") .. "/iron",
 		ft = { "nix" },
-
 		opts = {
 			config = {
 				repl_definition = {

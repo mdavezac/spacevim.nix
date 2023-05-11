@@ -1,17 +1,18 @@
 return {
 	{
 		"Vigemus/iron.nvim",
-		dir = require("config.directories") .. "/iron",
 		main = "iron.core",
-		opts = {
-			config = {
-				repl_open_cmd = require("iron.view").split.vertical.botright(
-					"50%",
-					{ number = false, relativenumber = false }
-				),
-			},
-			keymaps = {},
-		},
+		opts = function(_, opts)
+			return vim.tbl_deep_extend("force", opts or {}, {
+				config = {
+					repl_open_cmd = require("iron.view").split.vertical.botright(
+						"50%",
+						{ number = false, relativenumber = false }
+					),
+				},
+				keymaps = {},
+			})
+		end,
 		filtype = {},
 	},
 	{

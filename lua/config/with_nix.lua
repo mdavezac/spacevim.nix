@@ -5,7 +5,7 @@ return {
 		dir = require("config.directories") .. "/treesitter",
 		lazy = false,
 		pin = true,
-		opts = { ensure_installed = {} },
+		opts = { ensure_installed = {}, indent = { disable = { "python" } } },
 	},
 	{ "L3MON4D3/LuaSnip", name = "LuaSnip", dir = require("config.directories") .. "/luasnip", pin = true },
 	{
@@ -17,4 +17,5 @@ return {
 		},
 		pin = true,
 	},
+	{ "Vigemus/iron.nvim", dir = require("config.directories") .. "/iron", name = "iron.nvim" },
 }

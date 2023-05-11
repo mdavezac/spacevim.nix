@@ -31,7 +31,6 @@ return {
 	},
 	{
 		"Vigemus/iron.nvim",
-		dir = localdir .. "/iron",
 		ft = { "python" },
 
 		opts = {

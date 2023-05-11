@@ -17,6 +17,7 @@ M.setup = function()
 		-- import/override with your plugins
 		{ import = "plugins" },
 		{ import = "config.localproject" },
+		{ import = "config.with_nix" },
 	}
 
 	local opts = {
