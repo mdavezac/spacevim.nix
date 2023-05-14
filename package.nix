@@ -22,7 +22,7 @@
   lazy-nix = let
     packages = pkgs.linkFarm "vim-plugins" [
       {
-        name = "luasnip";
+        name = "LuaSnip";
         path = luasnip;
       }
       {
@@ -62,15 +62,15 @@
         path = pkgs.lazygit;
       }
       {
-        name = "lazy-dist";
+        name = "LazyVim";
         path = pkgs.vimPlugins.lazy-dist;
       }
       {
-        name = "toggleterm";
+        name = "toggleterm.nvim";
         path = pkgs.vimPlugins.toggleterm-nvim;
       }
       {
-        name = "iron";
+        name = "iron.nvim";
         path = pkgs.vimPlugins.iron-nvim;
       }
       {

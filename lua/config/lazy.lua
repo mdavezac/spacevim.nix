@@ -7,7 +7,7 @@ M.setup = function()
 			"LazyVim/LazyVim",
 			name = "LazyVim",
 			import = "lazyvim.plugins",
-			dir = require("config.directories") .. "/lazy-dist",
+			dir = require("config.directories") .. "/LazyVim",
 			pin = true,
 		},
 		-- import any extras modules here

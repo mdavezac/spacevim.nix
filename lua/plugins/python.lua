@@ -1,4 +1,3 @@
-local localdir = require("config.directories")
 return {
 	{
 		"jose-elias-alvarez/null-ls.nvim",
@@ -43,7 +42,6 @@ return {
 	},
 	{
 		"nvim-neotest/neotest",
-		dir = localdir .. "/neotest",
 		ft = { "python" },
 		opts = function(_, opts)
 			if opts.adapters ~= nil then
@@ -53,4 +51,9 @@ return {
 			end
 		end,
 	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		opts = { indent = { disable = { "python" } } },
+	},
+	{ "nvim-neotest/neotest-python" },
 }

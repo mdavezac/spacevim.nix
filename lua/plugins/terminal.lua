@@ -17,7 +17,6 @@ return {
 	},
 	{
 		"akinsho/toggleterm.nvim",
-		dir = require("config.directories") .. "/toggleterm",
 		opts = {
 			size = 100,
 			direction = "vertical",
