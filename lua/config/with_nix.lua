@@ -5,6 +5,8 @@ local function list_plugins(directory, plugins)
 		local stat_path = vim.loop.fs_lstat(path)
 		if stat_path ~= nil then
 			pinned[#pinned + 1] = { plugin[1], name = plugin.name, dir = path }
+		else
+			print("Missing static plugin " .. vim.inspect(plugin))
 		end
 	end
 	return pinned
