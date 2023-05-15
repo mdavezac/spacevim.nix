@@ -18,5 +18,6 @@ local plugins = {
 	{ "nvim-neotest/neotest-python", name = "neotest-python" },
 	{ "Vigemus/iron.nvim", name = "iron.nvim" },
 	{ "LazyVim/LazyVim", name = "LazyVim" },
+	{ "nvim-treesitter/nvim-treesitter", name = "nvim-treesitter" },
 }
 return list_plugins(require("config.directories"), plugins)

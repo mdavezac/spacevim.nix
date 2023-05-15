@@ -26,7 +26,7 @@
         path = luasnip;
       }
       {
-        name = "treesitter";
+        name = "nvim-treesitter";
         path = treesitter;
       }
       {
