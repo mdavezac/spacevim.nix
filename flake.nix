@@ -2,7 +2,7 @@
   description = "Big Neovim Energy";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/22.11";
+    nixpkgs.url = "github:nixos/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
     devshell.url = "github:numtide/devshell";
     lazy-nvim.url = "github:folke/lazy.nvim";
@@ -19,7 +19,7 @@
     neotest-python-nvim.flake = false;
 
     neovim = {
-      url = "github:neovim/neovim/v0.8.3?dir=contrib";
+      url = "github:neovim/neovim/stable?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };

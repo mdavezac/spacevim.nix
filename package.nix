@@ -3,9 +3,8 @@
     name = "nvim-treesitter";
     paths = let
       grammars = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.passthru.dependencies;
-      filtered = builtins.filter (x: x.name != "nvim-treesitter-help-grammar") grammars;
     in
-      [pkgs.vimPlugins.nvim-treesitter] ++ filtered;
+      [pkgs.vimPlugins.nvim-treesitter] ++ grammars;
   };
   luasnip = pkgs.buildEnv {
     name = "luasnip";
