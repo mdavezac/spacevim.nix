@@ -1,11 +1,5 @@
 {pkgs}: let
-  treesitter = pkgs.buildEnv {
-    name = "nvim-treesitter";
-    paths = let
-      grammars = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.passthru.dependencies;
-    in
-      [pkgs.vimPlugins.nvim-treesitter] ++ grammars;
-  };
+  treesitter = (pkgs.callPackage ./treesitter.nix) {};
   luasnip = pkgs.buildEnv {
     name = "luasnip";
     paths = [pkgs.vimPlugins.luasnip pkgs.luajitPackages.jsregexp];
@@ -89,11 +83,9 @@
     pkgs.vimUtils.buildVimPluginFrom2Nix {
       pname = "lazy-nix";
       version = "0.0.0";
-      src = ./lua;
+      src = [./lua ./ftplugin];
+      sourceRoot = ".";
       buildPhase = ''
-        mkdir lua/
-        mv config plugins lua
-
         echo  "return '${packages}'" > lua/config/directories.lua
       '';
     };
@@ -111,7 +103,7 @@ in
   pkgs.wrapNeovim pkgs.neovim {
     configure = {
       customRC = ''
-        lua require('config.lazy').setup()
+        lua require('config.lazyentry').setup()
       '';
       packages.lazy = {
         start = [distribution];
