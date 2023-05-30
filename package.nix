@@ -82,6 +82,10 @@
         name = "shfmt";
         path = pkgs.shfmt;
       }
+      {
+        name = "flatten.nvim";
+        path = pkgs.vimPlugins.flatten-nvim;
+      }
     ];
   in
     pkgs.vimUtils.buildVimPluginFrom2Nix {

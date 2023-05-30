@@ -52,6 +52,22 @@
         "type": "github"
       }
     },
+    "flatten-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1682217307,
+        "narHash": "sha256-g52+sVJJ844J0Rg0V2IPHRYN/gElSZj1W0CM5bZj5BI=",
+        "owner": "willothy",
+        "repo": "flatten.nvim",
+        "rev": "d92c93959e9ac52a00002d6fd64c2d2ca5dd7192",
+        "type": "github"
+      },
+      "original": {
+        "owner": "willothy",
+        "repo": "flatten.nvim",
+        "type": "github"
+      }
+    },
     "iron-nvim": {
       "flake": false,
       "locked": {
@@ -209,6 +225,7 @@
       "inputs": {
         "devshell": "devshell",
         "flake-utils": "flake-utils_2",
+        "flatten-nvim": "flatten-nvim",
         "iron-nvim": "iron-nvim",
         "lazy-dist": "lazy-dist",
         "lazy-nvim": "lazy-nvim",

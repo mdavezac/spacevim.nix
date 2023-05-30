@@ -17,6 +17,8 @@
     neotest-nvim.flake = false;
     neotest-python-nvim.url = "github:nvim-neotest/neotest-python";
     neotest-python-nvim.flake = false;
+    flatten-nvim.url = "github:willothy/flatten.nvim";
+    flatten-nvim.flake = false;
 
     neovim = {
       url = "github:neovim/neovim/stable?dir=contrib";

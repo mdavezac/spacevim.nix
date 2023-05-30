@@ -1,5 +1,5 @@
 local M = {}
-M.setup = function()
+local function fullsetup()
 	local os = require("os")
 	local specs = {
 		-- add LazyVim and import its plugins
@@ -57,4 +57,14 @@ M.setup = function()
 	require("lazy").setup(opts)
 end
 
+local function flattensetup()
+	local path = require("config.directories") .. "/flatten.nvim"
+	require("lazy").setup({ { "willothy/flatten.nvim", config = true, dir = path } })
+end
+
+if os.getenv("NVIM") ~= nil then
+	M.setup = flattensetup
+else
+	M.setup = fullsetup
+end
 return M

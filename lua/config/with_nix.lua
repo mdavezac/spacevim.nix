@@ -19,5 +19,6 @@ local plugins = {
 	{ "Vigemus/iron.nvim", name = "iron.nvim" },
 	{ "LazyVim/LazyVim", name = "LazyVim" },
 	{ "nvim-treesitter/nvim-treesitter", name = "nvim-treesitter" },
+	{ "willothy/flatten.nvim", name = "flatten.nvim" },
 }
 return list_plugins(require("config.directories"), plugins)
