@@ -78,6 +78,10 @@
         name = "neotest-python";
         path = pkgs.vimPlugins.neotest-python-nvim;
       }
+      {
+        name = "shfmt";
+        path = pkgs.shfmt;
+      }
     ];
   in
     pkgs.vimUtils.buildVimPluginFrom2Nix {
