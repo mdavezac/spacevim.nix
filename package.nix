@@ -98,6 +98,14 @@
         name = "rust";
         path = rust;
       }
+      {
+        name = "rg";
+        path = pkgs.ripgrep;
+      }
+      {
+        name = "telescope.nvim";
+        path = pkgs.vimPlugins.telescope-nvim;
+      }
     ];
   in
     pkgs.vimUtils.buildVimPluginFrom2Nix {

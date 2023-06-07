@@ -21,5 +21,6 @@ local plugins = {
 	{ "nvim-treesitter/nvim-treesitter", name = "nvim-treesitter" },
 	{ "willothy/flatten.nvim", name = "flatten.nvim" },
 	{ "simrat39/rust-tools.nvim", name = "rust-tools" },
+	{ "telescope.nvim", name = "telescope.nvim" },
 }
 return list_plugins(require("config.directories"), plugins)
