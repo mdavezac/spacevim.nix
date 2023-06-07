@@ -20,5 +20,6 @@ local plugins = {
 	{ "LazyVim/LazyVim", name = "LazyVim" },
 	{ "nvim-treesitter/nvim-treesitter", name = "nvim-treesitter" },
 	{ "willothy/flatten.nvim", name = "flatten.nvim" },
+	{ "simrat39/rust-tools.nvim", name = "rust-tools" },
 }
 return list_plugins(require("config.directories"), plugins)

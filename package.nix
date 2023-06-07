@@ -12,6 +12,10 @@
     name = "pytools";
     paths = [pkgs.nodePackages.pyright pkgs.black pkgs.isort];
   };
+  rust = pkgs.buildEnv {
+    name = "pytools";
+    paths = [pkgs.rust-analyzer];
+  };
   lazy-nix = let
     packages = pkgs.linkFarm "vim-plugins" [
       {
@@ -85,6 +89,14 @@
       {
         name = "flatten.nvim";
         path = pkgs.vimPlugins.flatten-nvim;
+      }
+      {
+        name = "rust-tools";
+        path = pkgs.vimPlugins.rust-tools-nvim;
+      }
+      {
+        name = "rust";
+        path = rust;
       }
     ];
   in
