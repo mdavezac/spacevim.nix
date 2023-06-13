@@ -42,16 +42,23 @@
         overlays = [
           devshell.overlays.default
           neovim.overlay
-          (import ./overlays/plugins.nix ({lib = pkgs.lib;} // inputs))
+          (import ./spacevim/overlays/plugins.nix ({lib = pkgs.lib;} // inputs))
         ];
       };
     in rec {
-      packages.default = (import ./package.nix) {inherit pkgs;};
-      apps = rec {
-        nvim = flake-utils.lib.mkApp {
-          drv = packages.default;
-          name = "nvim";
-        };
+      packages.nvim = (import ./spacevim) {inherit pkgs;};
+      packages.tmux = (import ./tmux) {inherit pkgs;};
+      packages.git = (import ./git) {inherit pkgs;};
+      apps = let
+        make = name:
+          flake-utils.lib.mkApp {
+            drv = builtins.getAttr name packages;
+            name = name;
+          };
+      in rec {
+        nvim = make "nvim";
+        tmux = make "tmux";
+        git = make "git";
         default = nvim;
       };
 

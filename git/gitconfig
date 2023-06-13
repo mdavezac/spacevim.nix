@@ -1,0 +1,44 @@
+# vi: ft=gitconfig
+[user]
+  useConfigOnly = true
+[user "roke"]
+  name = Mayeul d'Avezac
+  email = mayeul.davezacdecastera@roke.co.uk
+  signingKey = "1CEC2DC082392DED"
+[user "gitlab"]
+  name = Mayeul d'Avezac
+  email = "1085775-mdavezac@users.noreply.gitlab.com"
+  signingKey = "4BFEEACF1FBF028A"
+[user "github"]
+  name = Mayeul d'Avezac
+  email = "2745737+mdavezac@users.noreply.github.com"
+  signingKey = "4BFEEACF1FBF028A"
+[core]
+  autoclrf = "input";
+  excludesFiles = "@out@/share/git/ignore"
+[color]
+  ui = true;
+[apply]
+  whitespace = "nowarn";
+[branch]
+  autosetupmerge = true;
+[push]
+  default = "upstream";
+[pull]
+  rebase = false;
+[advice]
+  statusHints = false;
+[format]
+  pretty = "format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset";
+[init]
+  defaultBranch = "main"
+[commit]
+  gpgsign = true
+[alias]
+  identity = ! @git@ config user.name "$(@git@ config user.$1.name)" && @git@ config user.email "$(@git@ config user.$1.email)" && @git@ config user.signingkey "$(@git@ config user.$1.signingkey)"
+[credential "https://github.com"]
+	helper = 
+	helper = !@gh@ auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !@gh@ auth git-credential
