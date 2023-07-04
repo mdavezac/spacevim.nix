@@ -14,8 +14,8 @@
   email = "2745737+mdavezac@users.noreply.github.com"
   signingKey = "4BFEEACF1FBF028A"
 [core]
-  autoclrf = "input";
-  excludesFiles = "@out@/share/git/ignore"
+  autoclrf = input
+  excludesFile = "@out@/share/git/ignore"
 [color]
   ui = true;
 [apply]
