@@ -15,6 +15,6 @@ pkgs.stdenv.mkDerivation {
 
     cp ${./gitignore} $out/share/git/ignore
 
-    makeWrapper ${pkgs.git}/bin/git $out/bin/git  --set-default GIT_CONFIG_GLOBAL "$out/share/git/config"
+    makeWrapper ${pkgs.git}/bin/git $out/bin/git  --set-default GIT_CONFIG_SYSTEM "$out/share/git/config"
   '';
 }
