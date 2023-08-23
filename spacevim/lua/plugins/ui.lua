@@ -1,4 +1,5 @@
 return {
+	{ "lukas-reineke/indent-blankline.nvim", enabled = false },
 	{
 		"akinsho/bufferline.nvim",
 		keys = { { "gb", "<CMD>BufferLinePick<CR>", { desc = "Pick buffer" } } },
