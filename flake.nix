@@ -59,7 +59,6 @@
         nvim = make "nvim";
         tmux = make "tmux";
         git = make "git";
-        default = nvim;
       };
 
       devShells.default = pkgs.devshell.mkShell {
