@@ -49,6 +49,10 @@
       packages.nvim = (import ./spacevim) {inherit pkgs;};
       packages.tmux = (import ./tmux) {inherit pkgs;};
       packages.git = (import ./git) {inherit pkgs;};
+      packages.nushell = (import ./nushell) {
+        inherit pkgs;
+        inherit (packages) nvim git tmux;
+      };
       apps = let
         make = name:
           flake-utils.lib.mkApp {
@@ -59,6 +63,10 @@
         nvim = make "nvim";
         tmux = make "tmux";
         git = make "git";
+        nushell = flake-utils.lib.mkApp {
+          drv = packages.nushell;
+          name = "nu";
+        };
       };
 
       devShells.default = pkgs.devshell.mkShell {
