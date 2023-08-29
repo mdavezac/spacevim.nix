@@ -25,7 +25,6 @@ pkgs.stdenv.mkDerivation {
     starship init nu > $out/share/nushell/overlays/starship.nu
     echo "overlay use $out/share/nushell/overlays/starship.nu" >> $out/share/nushell/config.nu
     echo "overlay use $out/share/nushell/overlays/spaceenv.nu" >> $out/share/nushell/config.nu
-    echo "overlay new scratch" >> $out/share/nushell/config.nu
 
     makeWrapper \
       ${pkgs.nushell}/bin/nu \

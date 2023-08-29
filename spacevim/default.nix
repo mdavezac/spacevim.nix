@@ -13,8 +13,12 @@
     paths = [pkgs.nodePackages.pyright pkgs.black pkgs.isort];
   };
   rust = pkgs.buildEnv {
-    name = "pytools";
+    name = "rusttools";
     paths = [pkgs.rust-analyzer];
+  };
+  json = pkgs.buildEnv {
+    name = "jsontools";
+    paths = [pkgs.vscode-langservers-extracted];
   };
   lazy-nix = let
     packages = pkgs.linkFarm "vim-plugins" [
@@ -97,6 +101,10 @@
       {
         name = "rust";
         path = rust;
+      }
+      {
+        name = "json";
+        path = json;
       }
       {
         name = "rg";
