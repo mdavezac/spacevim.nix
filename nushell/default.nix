@@ -8,7 +8,7 @@ pkgs.stdenv.mkDerivation {
   name = "nushell";
   nativeBuildInputs = [pkgs.makeWrapper];
   src = ./.;
-  buildInputs = [pkgs.nushell pkgs.starship pkgs.bat];
+  buildInputs = [pkgs.nushell pkgs.starship pkgs.bat pkgs.atuin];
   version = pkgs.nushell.version;
   buildPhase = "true";
   installPhase = ''
@@ -16,6 +16,8 @@ pkgs.stdenv.mkDerivation {
 
     cp ./env.nu ./config.nu ./starship.toml $out/share/nushell/
     sed -i -e "s!@carapace@!${pkgs.carapace}/bin/carapace!g" $out/share/nushell/config.nu
+    sed -i -e "s!@atuin@!${pkgs.atuin}!g" $out/share/nushell/config.nu
+    sed -i -e "s!@atuin@!${pkgs.atuin}!g" $out/share/nushell/env.nu
 
     cp ./spaceenv.nu $out/share/nushell/overlays/
     sed -i -e "s!@nvim@!${nvim}!g" $out/share/nushell/overlays/spaceenv.nu
