@@ -19,6 +19,8 @@
     neotest-python-nvim.flake = false;
     flatten-nvim.url = "github:willothy/flatten.nvim";
     flatten-nvim.flake = false;
+    nuscripts.url = "github:nushell/nu_scripts";
+    nuscripts.flake = false;
 
     neovim = {
       url = "github:neovim/neovim/stable?dir=contrib";
@@ -43,6 +45,7 @@
           devshell.overlays.default
           neovim.overlay
           (import ./spacevim/overlays/plugins.nix ({lib = pkgs.lib;} // inputs))
+          (final: previous: {nuscripts = inputs.nuscripts;})
         ];
       };
     in rec {

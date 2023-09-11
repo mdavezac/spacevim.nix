@@ -205,6 +205,22 @@
         "type": "github"
       }
     },
+    "nuscripts": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1694351584,
+        "narHash": "sha256-awW5j2BEKwdGNtz/v3hjl+84e1U7SyoSiH1bLIyC8Aw=",
+        "owner": "nushell",
+        "repo": "nu_scripts",
+        "rev": "cfd7a7950bcd50d5fee585eedd3bfe6f008e21b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nushell",
+        "repo": "nu_scripts",
+        "type": "github"
+      }
+    },
     "nvim-lspconfig": {
       "flake": false,
       "locked": {
@@ -233,6 +249,7 @@
         "neotest-python-nvim": "neotest-python-nvim",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs_2",
+        "nuscripts": "nuscripts",
         "nvim-lspconfig": "nvim-lspconfig"
       }
     },
