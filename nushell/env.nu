@@ -31,8 +31,8 @@ $env.NU_PLUGIN_DIRS = [
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 $env.PATH = (
   $env.PATH | split row (char esep)
-  | prepend '/nix/var/nix/profiles/default/bin/'
-  | prepend '/home/dev/.nix-profile/bin/'
+  | prepend '/run/current-system/sw/bin/'
+  | prepend '~/.nix-profile/bin/'
   | prepend @atuin@/bin
   | prepend @direnv@/bin
 )
