@@ -71,4 +71,33 @@ return {
 			table.insert(opts.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
 		end,
 	},
+	{
+		"Civitasv/cmake-tools.nvim",
+		opts = {
+			cmake_build_options = { "--parallel", "4" },
+			cmake_soft_link_compile_commands = false,
+			cmake_executor = {
+				name = "quickfix",
+				opts = {
+					show = "only_on_error",
+				},
+			},
+		},
+		keys = {
+			{ "<leader>cb", "<CMD>CMakeBuild<CR>", desc = "Build" },
+			{ "<leader>cs", "<CMD>CMakeSettings<CR>", desc = "Settings" },
+			{ "<leader>cS", "<CMD>CMakeStop<CR>", desc = "Stop" },
+			{ "<leader>cc", "<CMD>CMakeSelectConfigurePreset<CR>", desc = "Configure" },
+			{ "<leader>cq", "<CMD>CMakeClose<CR>", desc = "Close CMake Window" },
+			{ "<leader>co", "<CMD>CMakeOpen<CR>", desc = "Open CMake Window" },
+		},
+	},
+	{
+		"folke/which-key.nvim",
+		opts = {
+			defaults = {
+				["<leader>cc"] = { name = "+cmake" },
+			},
+		},
+	},
 }
