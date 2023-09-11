@@ -85,19 +85,11 @@ return {
 		},
 		keys = {
 			{ "<leader>cb", "<CMD>CMakeBuild<CR>", desc = "Build" },
-			{ "<leader>cs", "<CMD>CMakeSettings<CR>", desc = "Settings" },
-			{ "<leader>cS", "<CMD>CMakeStop<CR>", desc = "Stop" },
-			{ "<leader>cc", "<CMD>CMakeSelectConfigurePreset<CR>", desc = "Configure" },
+			{ "<leader>cs", "<CMD>CMakeSettings<CR>", desc = "CMake Settings" },
+			{ "<leader>cS", "<CMD>CMakeStop<CR>", desc = "Stop CMake" },
+			{ "<leader>cc", "<CMD>CMakeSelectConfigurePreset<CR>", desc = "CMake Configure" },
 			{ "<leader>cq", "<CMD>CMakeClose<CR>", desc = "Close CMake Window" },
 			{ "<leader>co", "<CMD>CMakeOpen<CR>", desc = "Open CMake Window" },
-		},
-	},
-	{
-		"folke/which-key.nvim",
-		opts = {
-			defaults = {
-				["<leader>cc"] = { name = "+cmake" },
-			},
 		},
 	},
 }

@@ -34,6 +34,7 @@ $env.PATH = (
   | prepend '/nix/var/nix/profiles/default/bin/'
   | prepend '/home/dev/.nix-profile/bin/'
   | prepend @atuin@/bin
+  | prepend @direnv@/bin
 )
 $env.SHELL = "/home/dev/.nix-profile/bin/nu"
 $env.GPG_TTY = $"(tty)"

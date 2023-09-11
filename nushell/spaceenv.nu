@@ -5,7 +5,6 @@ export-env {
       | prepend '@git@/bin'
       | prepend '@tmux@/bin'
       | prepend @lazygit@/bin
-      | prepend @direnv@/bin
       | prepend @glab@/bin
       | prepend @ripgrep@/bin
       | prepend @fd@/bin
