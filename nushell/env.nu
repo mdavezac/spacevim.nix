@@ -32,6 +32,7 @@ $env.NU_PLUGIN_DIRS = [
 $env.PATH = (
   $env.PATH | split row (char esep)
   | prepend '/run/current-system/sw/bin/'
+  | prepend '/nix/var/nix/profiles/default/bin/'
   | prepend '~/.nix-profile/bin/'
   | prepend @atuin@/bin
   | prepend @direnv@/bin
