@@ -37,7 +37,7 @@ $env.PATH = (
   | prepend @atuin@/bin
   | prepend @direnv@/bin
 )
-$env.SHELL = "/home/dev/.nix-profile/bin/nu"
+$env.SHELL = $env.HOME + "/.nix-profile/bin/nu"
 $env.GPG_TTY = $"(tty)"
 $env.EDITOR = "nvim"
 $env.ATUIN_SESSION = (^@atuin@/bin/atuin uuid)
