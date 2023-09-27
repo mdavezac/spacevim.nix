@@ -16,6 +16,7 @@
 [core]
   autoclrf = input
   excludesFile = "@out@/share/git/ignore"
+  commentChar = \"
 [color]
   ui = true;
 [apply]
