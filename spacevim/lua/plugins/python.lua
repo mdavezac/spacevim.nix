@@ -31,7 +31,6 @@ return {
 	{
 		"Vigemus/iron.nvim",
 		ft = { "python" },
-
 		opts = {
 			config = {
 				repl_definition = {
