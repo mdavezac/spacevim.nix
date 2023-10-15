@@ -4,7 +4,7 @@ inputs @ {
   ...
 }: prev: final: let
   build-plugin = k: v:
-    prev.vimUtils.buildVimPluginFrom2Nix {
+    prev.vimUtils.buildVimPlugin {
       pname = k;
       version = v.shortRev;
       src = v;
@@ -17,7 +17,7 @@ in {
     final.vimPlugins
     // (builtins.mapAttrs build-plugin plugins)
     // {
-      lazy-dist = prev.vimUtils.buildVimPluginFrom2Nix {
+      lazy-dist = prev.vimUtils.buildVimPlugin {
         pname = "lazy-dist";
         version = lazy-dist.shortRev;
         src = lazy-dist;
@@ -25,11 +25,8 @@ in {
           cat  > lua/lazyvim/plugins/core.lua <<EOF
           require("lazyvim.config").init()
           return {
-              { "folke/lazy.nvim", pin = true, enable=false, },
-              {
-                name="LazyVim", dir='${placeholder "out"}', priority = 10000,
-                lazy = false, config = true, pin=true
-              }
+              { "folke/lazy.nvim", pin = true, enable=false },
+              { name="LazyVim", dir = require("config.directories") .. "/LazyVim" }
           }
           EOF
         '';

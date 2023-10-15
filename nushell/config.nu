@@ -132,11 +132,6 @@ let light_theme = {
     shape_vardecl: purple
 }
 
-# External completer example
-let carapace_completer = {|spans|
-    ^@carapace@ $spans.0 nushell $spans | from json
-}
-
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
     show_banner: false # true or false to enable or disable the welcome banner at startup
@@ -215,11 +210,11 @@ $env.config = {
         case_sensitive: false # set to true to enable case-sensitive completions
         quick: true    # set this to false to prevent auto-selecting completions when only one remains
         partial: true    # set this to false to prevent partial filling of the prompt
-        algorithm: "prefix"    # prefix or fuzzy
+        algorithm: "fuzzy"    # prefix or fuzzy
         external: {
             enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
             max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-            completer: $carapace_completer
+            completer: {|spans| ^@carapace@ $spans.0 nushell $spans | from json }
         }
     }
 
@@ -248,9 +243,21 @@ $env.config = {
     hooks: {
         pre_prompt: [
           { ||
-            let direnv = (^@direnv@/bin/direnv export json | from json)
-            let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
-            $direnv | load-env
+              let direnv = (direnv export json | from json | default {})
+              if ($direnv | is-empty) {
+                  return
+              }
+              $direnv
+              | items {|key, value|
+                 {
+                    key: $key
+                    value: (if $key in $env.ENV_CONVERSIONS {
+                      do ($env.ENV_CONVERSIONS | get $key | get from_string) $value
+                    } else {
+                        $value
+                    })
+                  }
+              } | transpose -ird | load-env
           }
         ] # run before the prompt is shown
         pre_execution: [{ null }] # run before the repl input is run

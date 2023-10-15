@@ -116,7 +116,7 @@
       }
     ];
   in
-    pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pkgs.vimUtils.buildVimPlugin {
       pname = "lazy-nix";
       version = "0.0.0";
       src = [./lua ./ftplugin];

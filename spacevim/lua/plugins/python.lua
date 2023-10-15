@@ -1,22 +1,16 @@
 return {
 	{
-		"jose-elias-alvarez/null-ls.nvim",
-		opts = function(_, opts)
-			local nls = require("null-ls")
-			table.insert(
-				opts.sources,
-				nls.builtins.formatting.black.with({
-					command = require("config.directories") .. "/pytools/bin/black",
-				})
-			)
-			table.insert(
-				opts.sources,
-				nls.builtins.formatting.isort.with({
+		"stevearc/conform.nvim",
+		opts = {
+			formatters_by_ft = { python = { "black", "isort" } },
+			formatters = {
+				black = { command = require("config.directories") .. "/pytools/bin/black" },
+				isort = {
 					command = require("config.directories") .. "/pytools/bin/isort",
 					args = { "--profile", "black", "--stdout", "--filename", "$FILENAME", "-" },
-				})
-			)
-		end,
+				},
+			},
+		},
 	},
 	{
 		"neovim/nvim-lspconfig",

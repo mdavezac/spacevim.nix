@@ -21,6 +21,8 @@
     flatten-nvim.flake = false;
     nuscripts.url = "github:nushell/nu_scripts";
     nuscripts.flake = false;
+    telescope-nvim.url = "github:nvim-telescope/telescope.nvim";
+    telescope-nvim.flake = false;
 
     neovim = {
       url = "github:neovim/neovim/stable?dir=contrib";

@@ -1,15 +1,10 @@
 return {
 	{
-		"jose-elias-alvarez/null-ls.nvim",
-		opts = function(_, opts)
-			local nls = require("null-ls")
-			table.insert(
-				opts.sources,
-				nls.builtins.formatting.alejandra.with({
-					command = require("config.directories") .. "/alejandra/bin/alejandra",
-				})
-			)
-		end,
+		"stevearc/conform.nvim",
+		opts = {
+			formatters_by_ft = { nix = { "alejandra" } },
+			formatters = { alejandra = { command = require("config.directories") .. "/alejandra/bin/alejandra" } },
+		},
 	},
 	{
 		"neovim/nvim-lspconfig",
