@@ -27,7 +27,7 @@ pkgs.stdenv.mkDerivation {
     echo "\$env.config = (\$env.config | merge {color_config: (${theme})})" >> share/nushell/config.nu
 
 
-    cp ./spaceenv.nu share/nushell/overlays/
+    cp ./spaceenv.nu ./sshagent.nu share/nushell/overlays/
     sed -i -e "s!@nvim@!${nvim}!g" share/nushell/overlays/spaceenv.nu
     sed -i -e "s!@git@!${git}!g" share/nushell/overlays/spaceenv.nu
     sed -i -e "s!@tmux@!${tmux}!g" share/nushell/overlays/spaceenv.nu
@@ -40,6 +40,7 @@ pkgs.stdenv.mkDerivation {
     sed -i -e "s!@STARSHIP_CONFIG@!$out/share/nushell/starship.toml!g" share/nushell/overlays/spaceenv.nu
 
     starship init nu > share/nushell/overlays/starship.nu
+    echo "overlay use $out/share/nushell/overlays/sshagent.nu" >> share/nushell/config.nu
     echo "overlay use $out/share/nushell/overlays/starship.nu" >> share/nushell/config.nu
     echo "overlay use $out/share/nushell/overlays/spaceenv.nu" >> share/nushell/config.nu
 
