@@ -19,8 +19,6 @@ pkgs.stdenv.mkDerivation {
     sed -i -e "s!@carapace@!${pkgs.carapace}/bin/carapace!g" share/nushell/config.nu
     sed -i -e "s!@atuin@!${pkgs.atuin}!g" share/nushell/config.nu
     sed -i -e "s!@direnv@!${pkgs.direnv}!g" share/nushell/config.nu
-    echo "use ${pkgs.nuscripts}/custom-completions/git/git-completions.nu" >> share/nushell/config.nu
-    echo "use ${pkgs.nuscripts}/custom-completions/nix/nix-completions.nu" >> share/nushell/config.nu
     sed -i -e "s!@atuin@!${pkgs.atuin}!g" share/nushell/env.nu
     sed -i -e "s!@direnv@!${pkgs.direnv}!g" share/nushell/env.nu
     echo "use ${pkgs.nuscripts}/themes/themes/${theme}.nu" >> share/nushell/config.nu
