@@ -21,6 +21,15 @@
     paths = [pkgs.vscode-langservers-extracted];
   };
   lazy-nix = let
+    get-plugin = x: builtins.getAttr (builtins.replaceStrings [".nvim"] ["-nvim"] x) pkgs.vimPlugins;
+    make-plugin2 = x: {
+      name = x;
+      path = get-plugin x;
+    };
+    make-plugin = a: b: {
+      name = a;
+      path = builtins.getAttr b pkgs.vimPlugins;
+    };
     packages = pkgs.linkFarm "vim-plugins" [
       {
         name = "LuaSnip";
@@ -67,18 +76,6 @@
         path = pkgs.vimPlugins.lazy-dist;
       }
       {
-        name = "toggleterm.nvim";
-        path = pkgs.vimPlugins.toggleterm-nvim;
-      }
-      {
-        name = "iron.nvim";
-        path = pkgs.vimPlugins.iron-nvim;
-      }
-      {
-        name = "bufferline";
-        path = pkgs.vimPlugins.bufferline-nvim;
-      }
-      {
         name = "neotest";
         path = pkgs.vimPlugins.neotest-nvim;
       }
@@ -89,10 +86,6 @@
       {
         name = "shfmt";
         path = pkgs.shfmt;
-      }
-      {
-        name = "flatten.nvim";
-        path = pkgs.vimPlugins.flatten-nvim;
       }
       {
         name = "rust-tools";
@@ -114,6 +107,25 @@
         name = "telescope.nvim";
         path = pkgs.vimPlugins.telescope-nvim;
       }
+      (make-plugin2 "telescope-fzf-native.nvim")
+      (make-plugin2 "telescope.nvim")
+      (make-plugin2 "toggleterm.nvim")
+      (make-plugin2 "iron.nvim")
+      (make-plugin2 "bufferline.nvim")
+      (make-plugin2 "nvim-cmp")
+      (make-plugin2 "flatten.nvim")
+      (make-plugin2 "nvim-cmp")
+      (make-plugin "cmp-buffer" "cmp-buffer-nvim")
+      (make-plugin "cmp-nvim-lsp" "cmp-lsp-nvim")
+      (make-plugin "cmp-path" "cmp-path-nvim")
+      (make-plugin "cmp_luasnip" "cmp-luasnip-nvim")
+      (make-plugin2 "nui.nvim")
+      (make-plugin2 "noice.nvim")
+      (make-plugin2 "lualine.nvim")
+      (make-plugin2 "which-key.nvim")
+      (make-plugin2 "dressing.nvim")
+      (make-plugin2 "conform.nvim")
+      (make-plugin2 "trouble.nvim")
     ];
   in
     pkgs.vimUtils.buildVimPlugin {

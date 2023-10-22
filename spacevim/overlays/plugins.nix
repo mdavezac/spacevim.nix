@@ -1,5 +1,5 @@
 inputs @ {
-  lib,
+  pkgs,
   lazy-dist,
   ...
 }: prev: final: let
@@ -9,7 +9,7 @@ inputs @ {
       version = v.shortRev;
       src = v;
     };
-  filter = x: (!lib.strings.hasSuffix "-nvim" x) && (!lib.strings.hasPrefix "nvim-" x);
+  filter = x: (!pkgs.lib.strings.hasSuffix "-nvim" x) && (!pkgs.lib.strings.hasPrefix "nvim-" x);
   non-plugins = builtins.filter filter (builtins.attrNames inputs);
   plugins = builtins.removeAttrs inputs non-plugins;
 in {
@@ -29,6 +29,19 @@ in {
               { name="LazyVim", dir = require("config.directories") .. "/LazyVim" }
           }
           EOF
+        '';
+      };
+    }
+    // {
+      telescope-fzf-native-nvim = final.vimUtils.buildVimPlugin {
+        pname = "telescope-fzf-native-nvim";
+        version = inputs.telescope-fzf-native.shortRev;
+        src = inputs.telescope-fzf-native;
+        buildInputs = [pkgs.cmake];
+        buildPhase = ''
+          cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Releasecmake
+          cmake --build build --config Release
+          cmake --install build --prefix build
         '';
       };
     };

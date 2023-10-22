@@ -23,6 +23,34 @@
     nuscripts.flake = false;
     telescope-nvim.url = "github:nvim-telescope/telescope.nvim";
     telescope-nvim.flake = false;
+    telescope-fzf-native.url = "github:nvim-telescope/telescope-fzf-native.nvim";
+    telescope-fzf-native.flake = false;
+    bufferline-nvim.url = "github:akinsho/bufferline.nvim";
+    bufferline-nvim.flake = false;
+    nvim-cmp.url = "github:hrsh7th/nvim-cmp";
+    nvim-cmp.flake = false;
+    cmp-buffer-nvim.url = "github:hrsh7th/cmp-buffer";
+    cmp-buffer-nvim.flake = false;
+    cmp-lsp-nvim.url = "github:hrsh7th/cmp-nvim-lsp";
+    cmp-lsp-nvim.flake = false;
+    cmp-path-nvim.url = "github:hrsh7th/cmp-path";
+    cmp-path-nvim.flake = false;
+    cmp-luasnip-nvim.url = "github:saadparwaiz1/cmp_luasnip";
+    cmp-luasnip-nvim.flake = false;
+    nui-nvim.url = "github:MunifTanjim/nui.nvim";
+    nui-nvim.flake = false;
+    noice-nvim.url = "github:folke/noice.nvim";
+    noice-nvim.flake = false;
+    lualine-nvim.url = "github:nvim-lualine/lualine.nvim";
+    lualine-nvim.flake = false;
+    which-key-nvim.url = "github:folke/which-key.nvim";
+    which-key-nvim.flake = false;
+    dressing-nvim.url = "github:stevearc/dressing.nvim";
+    dressing-nvim.flake = false;
+    conform-nvim.url = "github:stevearc/conform.nvim";
+    conform-nvim.flake = false;
+    trouble-nvim.url = "github:folke/trouble.nvim";
+    trouble-nvim.flake = false;
 
     neovim = {
       url = "github:neovim/neovim/stable?dir=contrib";
@@ -46,7 +74,7 @@
         overlays = [
           devshell.overlays.default
           neovim.overlay
-          (import ./spacevim/overlays/plugins.nix ({lib = pkgs.lib;} // inputs))
+          (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
           (final: previous: {nuscripts = inputs.nuscripts;})
         ];
       };
