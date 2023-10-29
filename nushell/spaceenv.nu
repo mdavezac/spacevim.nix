@@ -9,6 +9,7 @@ export-env {
       | prepend @ripgrep@/bin
       | prepend @fd@/bin
       | prepend @gh@/bin
+      | prepend @zellij@/bin
     )
     $env.STARSHIP_CONFIG = '@STARSHIP_CONFIG@'
 }

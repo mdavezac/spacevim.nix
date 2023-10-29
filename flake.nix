@@ -81,10 +81,11 @@
     in rec {
       packages.nvim = (import ./spacevim) {inherit pkgs;};
       packages.tmux = (import ./tmux) {inherit pkgs;};
+      packages.zellij = (import ./zellij) {inherit pkgs;};
       packages.git = (import ./git) {inherit pkgs;};
       packages.nushell = (import ./nushell) {
         inherit pkgs;
-        inherit (packages) nvim git tmux;
+        inherit (packages) nvim git tmux zellij;
       };
       apps = let
         make = name:
@@ -95,6 +96,7 @@
       in rec {
         nvim = make "nvim";
         tmux = make "tmux";
+        zellij = make "zellij";
         git = make "git";
         nushell = flake-utils.lib.mkApp {
           drv = packages.nushell;

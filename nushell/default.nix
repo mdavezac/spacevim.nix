@@ -3,6 +3,7 @@
   nvim,
   git,
   tmux,
+  zellij,
   theme ? "chalk",
 }:
 pkgs.stdenv.mkDerivation {
@@ -35,6 +36,7 @@ pkgs.stdenv.mkDerivation {
     sed -i -e "s!@gh@!${pkgs.gh}!g" share/nushell/overlays/spaceenv.nu
     sed -i -e "s!@ripgrep@!${pkgs.ripgrep}!g" share/nushell/overlays/spaceenv.nu
     sed -i -e "s!@fd@!${pkgs.fd}!g" share/nushell/overlays/spaceenv.nu
+    sed -i -e "s!@zellij@!${zellij}!g" share/nushell/overlays/spaceenv.nu
     sed -i -e "s!@STARSHIP_CONFIG@!$out/share/nushell/starship.toml!g" share/nushell/overlays/spaceenv.nu
 
     starship init nu > share/nushell/overlays/starship.nu
