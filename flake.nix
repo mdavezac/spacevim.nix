@@ -53,7 +53,7 @@
     trouble-nvim.flake = false;
 
     neovim = {
-      url = "github:neovim/neovim/stable?dir=contrib";
+      url = "github:neovim/neovim/v0.9.2?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
