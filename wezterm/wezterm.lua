@@ -13,7 +13,7 @@ end
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
-config.default_prog = { "nu", "-l" }
+config.default_prog = { os.getenv("HOME") .. "/.nix-profile/bin/nu", "-l" }
 config.color_scheme = "Apprentice"
 config.font = wezterm.font("VictorMono Nerd Font")
 config.enable_tab_bar = false
