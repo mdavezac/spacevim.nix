@@ -40,7 +40,6 @@ pkgs.stdenv.mkDerivation {
     sed -i -e "s!@STARSHIP_CONFIG@!$out/share/nushell/starship.toml!g" share/nushell/overlays/spaceenv.nu
 
     starship init nu > share/nushell/overlays/starship.nu
-    echo "overlay use $out/share/nushell/overlays/sshagent.nu" >> share/nushell/config.nu
     echo "overlay use $out/share/nushell/overlays/starship.nu" >> share/nushell/config.nu
     echo "overlay use $out/share/nushell/overlays/spaceenv.nu" >> share/nushell/config.nu
 
