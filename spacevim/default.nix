@@ -1,12 +1,12 @@
 {pkgs}: let
-  treesitter = (pkgs.callPackage ./treesitter.nix) {};
+  # treesitter = (pkgs.callPackage ./treesitter.nix) {};
   luasnip = pkgs.buildEnv {
     name = "luasnip";
     paths = [pkgs.vimPlugins.luasnip pkgs.luajitPackages.jsregexp];
   };
   cpptools = pkgs.buildEnv {
     name = "cpptools";
-    paths = [pkgs.cmake-language-server pkgs.clang-tools];
+    paths = [pkgs.neocmakelsp pkgs.clang-tools];
   };
   pytools = pkgs.buildEnv {
     name = "pytools";
