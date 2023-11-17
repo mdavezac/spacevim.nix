@@ -1,5 +1,5 @@
 {pkgs}: let
-  # treesitter = (pkgs.callPackage ./treesitter.nix) {};
+  treesitter = (pkgs.callPackage ./treesitter.nix) {};
   luasnip = pkgs.buildEnv {
     name = "luasnip";
     paths = [pkgs.vimPlugins.luasnip pkgs.luajitPackages.jsregexp];
@@ -138,7 +138,6 @@
       '';
     };
   lazy-nvim = pkgs.vimPlugins.lazy-nvim.overrideAttrs (finalAttrs: previousAttrs: {
-    depsBuildInput = [pkgs.neovim];
     buildPhase = ''
       ${pkgs.neovim}/bin/nvim -i NONE --clean -V -e ":helptags doc" -es +q
     '';
@@ -148,7 +147,7 @@
     paths = [lazy-nvim lazy-nix];
   };
 in
-  pkgs.wrapNeovim pkgs.neovim {
+  pkgs.wrapNeovim pkgs.neovim-unwrapped {
     configure = {
       customRC = ''
         lua require('config.lazyentry').setup()
