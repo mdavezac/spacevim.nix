@@ -148,7 +148,7 @@
     paths = [lazy-nvim lazy-nix];
   };
 in
-  pkgs.wrapNeovim pkgs.neovim {
+  pkgs.wrapNeovim pkgs.neovim-unwrapped {
     configure = {
       customRC = ''
         lua require('config.lazyentry').setup()

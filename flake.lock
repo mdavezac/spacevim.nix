@@ -261,32 +261,6 @@
         "type": "github"
       }
     },
-    "neovim": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "dir": "contrib",
-        "lastModified": 1694082368,
-        "narHash": "sha256-kKstlq1BzoBAy+gy9iL1auRViJ223cVpAt5X7pUWT1U=",
-        "owner": "neovim",
-        "repo": "neovim",
-        "rev": "fe869a8ce25a14497a9bf5ddca0ae11a1c38a22c",
-        "type": "github"
-      },
-      "original": {
-        "dir": "contrib",
-        "owner": "neovim",
-        "ref": "v0.9.2",
-        "repo": "neovim",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1677383253,
@@ -416,7 +390,6 @@
         "lualine-nvim": "lualine-nvim",
         "neotest-nvim": "neotest-nvim",
         "neotest-python-nvim": "neotest-python-nvim",
-        "neovim": "neovim",
         "nixpkgs": "nixpkgs_2",
         "noice-nvim": "noice-nvim",
         "nui-nvim": "nui-nvim",
