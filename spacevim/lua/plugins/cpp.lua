@@ -92,4 +92,8 @@ return {
 			{ "<leader>co", "<CMD>CMakeOpen<CR>", desc = "Open CMake Window" },
 		},
 	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		opts = { ensure_installed = { "cpp" } },
+	},
 }

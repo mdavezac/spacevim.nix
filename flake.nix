@@ -51,11 +51,18 @@
     conform-nvim.flake = false;
     trouble-nvim.url = "github:folke/trouble.nvim";
     trouble-nvim.flake = false;
+
+    neovim = {
+      url = "github:neovim/neovim/v0.9.2?dir=contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
+    neovim,
     flake-utils,
     devshell,
     ...
@@ -66,6 +73,7 @@
         config = {allowUnfree = true;};
         overlays = [
           devshell.overlays.default
+          neovim.overlay
           (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
           (final: previous: {nuscripts = inputs.nuscripts;})
         ];
