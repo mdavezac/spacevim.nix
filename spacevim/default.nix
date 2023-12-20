@@ -32,6 +32,10 @@
     };
     packages = pkgs.linkFarm "vim-plugins" [
       {
+        name = "deno";
+        path = pkgs.deno;
+      }
+      {
         name = "LuaSnip";
         path = luasnip;
       }

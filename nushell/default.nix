@@ -20,7 +20,7 @@ pkgs.stdenv.mkDerivation {
     sed -i -e "s!@carapace@!${pkgs.carapace}/bin/carapace!g" share/nushell/config.nu
     sed -i -e "s!@atuin@!${pkgs.atuin}!g" share/nushell/config.nu
     sed -i -e "s!@direnv@!${pkgs.direnv}!g" share/nushell/config.nu
-    sed -i -e "s!@atuin@!${pkgs.atuin}!g" share/nushell/env.nu
+    sed -i -e "s!@atuin@!$out!g" share/nushell/env.nu
     sed -i -e "s!@direnv@!${pkgs.direnv}!g" share/nushell/env.nu
     echo "use ${pkgs.nuscripts}/themes/themes/${theme}.nu" >> share/nushell/config.nu
     echo "\$env.config = (\$env.config | merge {color_config: (${theme})})" >> share/nushell/config.nu
@@ -47,6 +47,13 @@ pkgs.stdenv.mkDerivation {
       ${pkgs.nushell}/bin/nu \
       bin/nu  \
       --add-flags "--config=$out/share/nushell/config.nu --env-config=$out/share/nushell/env.nu"
+
+    mkdir -p share/atuin
+    cp ./atuin.toml share/atuin/config.toml
+    makeWrapper \
+      ${pkgs.atuin}/bin/atuin \
+      bin/atuin  \
+      --set ATUIN_CONFIG_DIR $out/share/atuin
   '';
   installPhase = "mkdir -p $out && cp -r share bin $out/";
 }
