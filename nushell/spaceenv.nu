@@ -10,6 +10,7 @@ export-env {
       | prepend @fd@/bin
       | prepend @gh@/bin
       | prepend @zellij@/bin
+      | prepend @starship@/bin
     )
     $env.STARSHIP_CONFIG = '@STARSHIP_CONFIG@'
 }
