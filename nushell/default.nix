@@ -22,7 +22,7 @@ pkgs.stdenv.mkDerivation {
     sed -i -e "s!@direnv@!${pkgs.direnv}!g" share/nushell/config.nu
     sed -i -e "s!@atuin@!$out!g" share/nushell/env.nu
     sed -i -e "s!@direnv@!${pkgs.direnv}!g" share/nushell/env.nu
-    echo "use ${pkgs.nuscripts}/themes/themes/${theme}.nu" >> share/nushell/config.nu
+    echo "use ${pkgs.nuscripts}/themes/nu-themes/${theme}.nu" >> share/nushell/config.nu
     echo "\$env.config = (\$env.config | merge {color_config: (${theme})})" >> share/nushell/config.nu
 
 
