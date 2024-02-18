@@ -51,6 +51,8 @@
     conform-nvim.flake = false;
     trouble-nvim.url = "github:folke/trouble.nvim";
     trouble-nvim.flake = false;
+    rustaceanvim.url = "github:mrcjkb/rustaceanvim";
+    rustaceanvim.flake = true;
   };
 
   outputs = inputs @ {
@@ -58,6 +60,7 @@
     nixpkgs,
     flake-utils,
     devshell,
+    rustaceanvim,
     ...
   }: let
     systemized = system: let
@@ -68,6 +71,7 @@
           devshell.overlays.default
           (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
           (final: previous: {nuscripts = inputs.nuscripts;})
+          rustaceanvim.overlays.default
         ];
       };
     in rec {

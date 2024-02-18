@@ -20,7 +20,6 @@ local plugins = {
 	{ "LazyVim/LazyVim", name = "LazyVim" },
 	{ "nvim-treesitter/nvim-treesitter", name = "nvim-treesitter" },
 	{ "willothy/flatten.nvim", name = "flatten.nvim" },
-	{ "simrat39/rust-tools.nvim", name = "rust-tools" },
 	{ "nvim-telescope/telescope.nvim", name = "telescope.nvim" },
 	{ "nvim-telescope/telescope-fzf-native.nvim", name = "telescope-fzf-native.nvim" },
 	{ "akinsho/bufferline.nvim", name = "bufferline.nvim" },
@@ -36,5 +35,6 @@ local plugins = {
 	{ "stevearc/dressing.nvim", name = "dressing.nvim" },
 	{ "stevearc/conform.nvim", name = "conform.nvim" },
 	{ "folke/trouble.nvim", name = "trouble.nvim" },
+	{ "mrcjkb/rustaceanvim", name = "rustaceanvim" },
 }
 return list_plugins(require("config.directories"), plugins)

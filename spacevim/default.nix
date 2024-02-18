@@ -111,6 +111,10 @@
         name = "telescope.nvim";
         path = pkgs.vimPlugins.telescope-nvim;
       }
+      {
+        name = "rustaceanvim";
+        path = pkgs.vimPlugins.rustaceanvim;
+      }
       (make-plugin2 "telescope-fzf-native.nvim")
       (make-plugin2 "telescope.nvim")
       (make-plugin2 "toggleterm.nvim")

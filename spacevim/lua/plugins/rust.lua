@@ -1,12 +1,12 @@
 return {
 	{
-		"simrat39/rust-tools.nvim",
-		name = "rust-tools",
+		"nvim-neotest/neotest",
 		ft = { "rust" },
-		opts = {
-			server = {
-				cmd = { require("config.directories") .. "/rust/bin/rust-analyzer" },
-			},
-		},
+		opts = { adapters = { ["rustaceanvim.neotest"] = {} } },
+	},
+	{
+		"mrcjkb/rustaceanvim",
+		name = "rustaceanvim",
+		ft = { "rust" },
 	},
 }
