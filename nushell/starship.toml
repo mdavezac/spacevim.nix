@@ -128,7 +128,7 @@ min_time = 2000
 format = "took [$duration]($style) "
 style = "yellow bold"
 show_milliseconds = false
-disabled = false
+disabled = true
 show_notifications = false
 min_time_to_notify = 45000
 
