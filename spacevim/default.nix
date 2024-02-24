@@ -108,6 +108,10 @@
         path = pkgs.ripgrep;
       }
       {
+        name = "sed";
+        path = pkgs.gnused;
+      }
+      {
         name = "telescope.nvim";
         path = pkgs.vimPlugins.telescope-nvim;
       }
