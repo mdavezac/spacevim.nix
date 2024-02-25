@@ -1,5 +1,4 @@
 return {
-	-- Extend auto completion
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
@@ -24,9 +23,6 @@ return {
 		"nvim-neotest/neotest",
 		ft = { "rust" },
 		opts = { adapters = { ["rustaceanvim.neotest"] = {} } },
-		dependencies = {
-			"rouge8/neotest-rust",
-		},
 	},
 	{
 		"mrcjkb/rustaceanvim",
@@ -80,7 +76,6 @@ return {
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
-				rust_analyzer = {},
 				taplo = {
 					keys = {
 						{
@@ -96,11 +91,6 @@ return {
 						},
 					},
 				},
-			},
-			setup = {
-				rust_analyzer = function()
-					return true
-				end,
 			},
 		},
 	},

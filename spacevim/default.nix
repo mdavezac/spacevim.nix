@@ -108,10 +108,6 @@
         path = pkgs.vimPlugins.telescope-nvim;
       }
       {
-        name = "rustaceanvim";
-        path = pkgs.vimPlugins.rustaceanvim;
-      }
-      {
         name = "taplo-lsp";
         path = pkgs.taplo-lsp;
       }
@@ -134,6 +130,7 @@
       (make-plugin2 "dressing.nvim")
       (make-plugin2 "conform.nvim")
       (make-plugin2 "trouble.nvim")
+      (make-plugin2 "rustaceanvim")
     ];
   in
     pkgs.vimUtils.buildVimPlugin {
