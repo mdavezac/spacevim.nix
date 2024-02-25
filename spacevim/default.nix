@@ -12,10 +12,6 @@
     name = "pytools";
     paths = [pkgs.nodePackages.pyright pkgs.black pkgs.isort];
   };
-  rust = pkgs.buildEnv {
-    name = "rusttools";
-    paths = [pkgs.rust-analyzer];
-  };
   json = pkgs.buildEnv {
     name = "jsontools";
     paths = [pkgs.vscode-langservers-extracted];
@@ -96,10 +92,6 @@
         path = pkgs.vimPlugins.rust-tools-nvim;
       }
       {
-        name = "rust";
-        path = rust;
-      }
-      {
         name = "json";
         path = json;
       }
@@ -118,6 +110,10 @@
       {
         name = "rustaceanvim";
         path = pkgs.vimPlugins.rustaceanvim;
+      }
+      {
+        name = "taplo-lsp";
+        path = pkgs.taplo-lsp;
       }
       (make-plugin2 "telescope-fzf-native.nvim")
       (make-plugin2 "telescope.nvim")
