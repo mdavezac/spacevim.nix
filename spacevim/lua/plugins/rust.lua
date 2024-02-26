@@ -64,6 +64,9 @@ return {
 								["async-recursion"] = { "async_recursion" },
 							},
 						},
+						files = {
+							excludeDirs = { ".git", ".local", ".direnv", ".cache" },
+						},
 					},
 				},
 			},
