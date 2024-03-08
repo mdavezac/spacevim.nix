@@ -11,6 +11,7 @@ export-env {
       | prepend @gh@/bin
       | prepend @zellij@/bin
       | prepend @starship@/bin
+      | prepend @ccache@/bin
     )
     $env.STARSHIP_CONFIG = '@STARSHIP_CONFIG@'
 }
