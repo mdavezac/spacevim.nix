@@ -36,13 +36,14 @@ return {
 	{
 		"nvim-neotest/neotest",
 		ft = { "python" },
-		opts = function(_, opts)
-			if opts.adapters ~= nil then
-				table.insert(opts.adapters, require("neotest-python"))
-			else
-				opts.adapters = { require("neotest-python") }
-			end
-		end,
+		opts = {
+			adapters = {
+				["neotest-python"] = {
+					runner = "pytest",
+					-- python = ".venv/bin/python",
+				},
+			},
+		},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
