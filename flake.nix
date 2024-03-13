@@ -71,6 +71,7 @@
           devshell.overlays.default
           (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
           (final: previous: {nuscripts = inputs.nuscripts;})
+          (final: previous: {codelldb = rustaceanvim.packages.${system}.codelldb;})
           rustaceanvim.overlays.default
         ];
       };

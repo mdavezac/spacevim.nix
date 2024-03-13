@@ -12,6 +12,7 @@ local function fullsetup()
 		},
 		-- import any extras modules here
 		{ import = "lazyvim.plugins.extras.test.core" },
+		{ import = "lazyvim.plugins.extras.dap.core" },
 		-- import/override with your plugins
 		{ import = "plugins" },
 		{ import = "config.localproject" },

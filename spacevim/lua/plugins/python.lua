@@ -44,10 +44,11 @@ return {
 				},
 			},
 		},
+		dependencies = { "nvim-neotest/neotest-python" },
 	},
+	{ "nvim-neotest/neotest-python" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = { indent = { disable = { "python" } } },
 	},
-	{ "nvim-neotest/neotest-python" },
 }

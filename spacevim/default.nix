@@ -6,7 +6,7 @@
   };
   cpptools = pkgs.buildEnv {
     name = "cpptools";
-    paths = [pkgs.cmake-language-server pkgs.clang-tools_16];
+    paths = [pkgs.cmake-language-server pkgs.clang-tools_16 pkgs.codelldb];
   };
   pytools = pkgs.buildEnv {
     name = "pytools";
