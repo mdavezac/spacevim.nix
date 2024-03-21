@@ -6,7 +6,13 @@
   };
   cpptools = pkgs.buildEnv {
     name = "cpptools";
-    paths = [pkgs.cmake-language-server pkgs.clang-tools_16 pkgs.codelldb];
+    paths =
+      [pkgs.cmake-language-server pkgs.clang-tools_16]
+      ++ (
+        if pkgs.system == "x86_64-darwin"
+        then []
+        else [pkgs.codelldb]
+      );
   };
   pytools = pkgs.buildEnv {
     name = "pytools";
@@ -56,8 +62,8 @@
         path = pkgs.sumneko-lua-language-server;
       }
       {
-        name = "rnix";
-        path = pkgs.rnix-lsp;
+        name = "nil";
+        path = pkgs.nil;
       }
       {
         name = "pytools";

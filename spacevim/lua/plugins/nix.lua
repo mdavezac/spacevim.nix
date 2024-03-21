@@ -10,8 +10,8 @@ return {
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
-				rnix = {
-					cmd = { require("config.directories") .. "/rnix/bin/rnix-lsp" },
+				nil_ls = {
+					cmd = { require("config.directories") .. "/nil/bin/nil" },
 				},
 			},
 		},

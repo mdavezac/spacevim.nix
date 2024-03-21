@@ -65,7 +65,7 @@ return {
 							},
 						},
 						files = {
-							excludeDirs = { ".git", ".local", ".direnv", ".cache" },
+							excludeDirs = { ".git", ".local", ".direnv", ".cache", "target" },
 						},
 					},
 				},

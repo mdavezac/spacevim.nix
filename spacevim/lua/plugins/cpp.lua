@@ -1,3 +1,7 @@
+local codelldb = "codelldb"
+if vim.loop.os_uname().sysname ~= "Darwin" then
+	codelldb = require("config.directories") .. "/cpp/bin/codelldb"
+end
 return {
 	{
 		"p00f/clangd_extensions.nvim",
@@ -114,7 +118,7 @@ return {
 					host = "localhost",
 					port = "${port}",
 					executable = {
-						command = require("config.directories") .. "/cpp/bin/codelldb",
+						command = codelldb,
 						args = {
 							"--port",
 							"${port}",
