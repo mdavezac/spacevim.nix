@@ -7,7 +7,7 @@
   cpptools = pkgs.buildEnv {
     name = "cpptools";
     paths =
-      [pkgs.cmake-language-server pkgs.clang-tools_16]
+      [pkgs.cmake-language-server pkgs.clang-tools]
       ++ (
         if pkgs.system == "x86_64-darwin"
         then []

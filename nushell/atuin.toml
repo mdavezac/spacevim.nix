@@ -1,4 +1,4 @@
-k# where to store your database, default is your system data directory
+# where to store your database, default is your system data directory
 ## linux/mac: ~/.local/share/atuin/history.db
 ## windows: %USERPROFILE%/.local/share/atuin/history.db
 # db_path = "~/.history.db"
@@ -58,7 +58,7 @@ workspaces = true
 
 ## the maximum number of lines the interface should take up
 ## set it to 0 to always go full screen
-# inline_height = 0
+inline_height = 10
 
 ## Invert the UI - put the search bar at the top , Default to `false`
 # invert = false
