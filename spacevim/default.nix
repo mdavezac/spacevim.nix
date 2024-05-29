@@ -22,6 +22,10 @@
     name = "jsontools";
     paths = [pkgs.vscode-langservers-extracted];
   };
+  markdown = pkgs.buildEnv {
+    name = "markdown";
+    paths = [pkgs.deno pkgs.marksman];
+  };
   lazy-nix = let
     get-plugin = x: builtins.getAttr (builtins.replaceStrings [".nvim"] ["-nvim"] x) pkgs.vimPlugins;
     make-plugin2 = x: {
@@ -34,8 +38,8 @@
     };
     packages = pkgs.linkFarm "vim-plugins" [
       {
-        name = "deno";
-        path = pkgs.deno;
+        name = "markdown";
+        path = markdown;
       }
       {
         name = "LuaSnip";
