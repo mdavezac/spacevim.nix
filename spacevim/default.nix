@@ -42,6 +42,10 @@
         path = markdown;
       }
       {
+        name = "xml";
+        path = pkgs.lemminx;
+      }
+      {
         name = "LuaSnip";
         path = luasnip;
       }
