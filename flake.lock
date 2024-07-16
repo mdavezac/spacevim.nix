@@ -1031,11 +1031,11 @@
     "which-key-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1697801635,
-        "narHash": "sha256-uvghPj/teWrRMm09Gh8iQ/LV2nYJw0lmoiZK6L4+1cY=",
+        "lastModified": 1721035220,
+        "narHash": "sha256-COmG3XfkwkV1yTFjuTKHv/29L/5rTgqkpLP8az2TX28=",
         "owner": "folke",
         "repo": "which-key.nvim",
-        "rev": "4433e5ec9a507e5097571ed55c02ea9658fb268a",
+        "rev": "dd5baec7a0c616d64ac8ab6b952a2a74ba322ad2",
         "type": "github"
       },
       "original": {

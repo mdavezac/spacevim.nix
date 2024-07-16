@@ -28,14 +28,17 @@ return {
 				on_attach = function(client, bufnr)
 					-- register which-key mappings
 					local wk = require("which-key")
-					wk.register({
-						["<leader>dr"] = {
+					wk.add({
+						{
+							"<leader>dr",
 							function()
 								vim.cmd.RustLsp("debuggables")
 							end,
-							"Rust debuggables",
+							desc = "Rust debuggables",
+							mode = "n",
+							buffer = bufnr,
 						},
-					}, { mode = "n", buffer = bufnr })
+					})
 				end,
 				settings = {
 					-- rust-analyzer language server configuration
