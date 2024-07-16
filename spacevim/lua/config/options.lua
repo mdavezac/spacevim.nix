@@ -8,3 +8,4 @@ vim.opt.swapfile = false
 vim.opt.pumblend = 0
 vim.opt.grepprg = require("config.directories") .. "/rg/bin/rg --vimgrep"
 vim.filetype.add({ extension = { nu = "nu" } })
+vim.opt.runtimepath:append(vim.fn.expand("~/.local/state/nvim/tree-sitter"))

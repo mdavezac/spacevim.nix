@@ -1,5 +1,11 @@
 {pkgs}: let
-  treesitter = (pkgs.callPackage ./treesitter.nix) {};
+  treesitter = pkgs.buildEnv {
+    name = "treesitter";
+    paths = [
+      ((pkgs.callPackage ./treesitter.nix) {})
+      pkgs.zig
+    ];
+  };
   luasnip = pkgs.buildEnv {
     name = "luasnip";
     paths = [pkgs.vimPlugins.luasnip pkgs.luajitPackages.jsregexp];

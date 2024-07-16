@@ -9,8 +9,8 @@
   nu-src = fetchFromGitHub {
     owner = "nushell";
     repo = "tree-sitter-nu";
-    rev = "8198386ac0f87067fd1b95e0ec2710a80bf808f2";
-    hash = "sha256-uc20yioP2qHzLNiqsmX5XUKQdOknrjSpWOL2tmcqmLs=";
+    rev = "0bb9a602d9bc94b66fab96ce51d46a5a227ab76c";
+    hash = "sha256-A5GiOpITOv3H0wytCv6t43buQ8IzxEXrk3gTlOrO0K0=";
   };
   nu-grammar = tree-sitter.buildGrammar {
     language = "nu";
@@ -30,7 +30,7 @@
       mkdir -p $out/parser
       ln -s ${nu-grammar}/parser $out/parser/nu.so
       mkdir -p $out/queries/nu
-      cp ${nu-src}/queries/highlights.scm $out/queries/nu/highlights.scm
+      cp -r ${nu-src}/queries/nu $out/queries/
     '';
 in
   buildEnv {

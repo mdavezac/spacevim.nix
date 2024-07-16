@@ -148,4 +148,13 @@ return {
 			end
 		end,
 	},
+	{
+		"stevearc/conform.nvim",
+		opts = {
+			formatters_by_ft = { cpp = { "clang-format" } },
+			formatters = {
+				["clang-format"] = { command = require("config.directories") .. "/cpp/bin/clang-format" },
+			},
+		},
+	},
 }

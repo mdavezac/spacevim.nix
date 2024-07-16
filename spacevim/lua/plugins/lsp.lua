@@ -42,6 +42,12 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		lazy = false,
-		opts = { ensure_installed = {} },
+		opts = function(_, opts)
+			require("nvim-treesitter.install").compilers = { require("config.directories") .. "/treesitter/bin/zig" }
+			return vim.tbl_deep_extend("force", opts or {}, {
+				ensure_installed = {},
+				parser_install_dir = vim.fn.expand("~/.local/state/nvim/tree-sitter"),
+			})
+		end,
 	},
 }
