@@ -17,7 +17,7 @@ return {
 		opts = {
 			servers = {
 				pyright = {
-					cmd = { require("config.directories") .. "/pytools/bin/pyright-langserver", "--stdio" },
+					cmd = { require("config.directories") .. "/pytools/bin/basedpyright-langserver", "--stdio" },
 				},
 				ruff_lsp = {
 					cmd = { require("config.directories") .. "/pytools/bin/ruff-lsp" },

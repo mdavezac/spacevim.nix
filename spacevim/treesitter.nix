@@ -38,5 +38,5 @@ in
     paths = let
       grammars = vimPlugins.nvim-treesitter.withAllGrammars.passthru.dependencies;
     in
-      [vimPlugins.nvim-treesitter] ++ grammars ++ [nu-plugin];
+      [vimPlugins.nvim-treesitter] ++ (builtins.map lib.lowPrio grammars) ++ [nu-plugin];
   }

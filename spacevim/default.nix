@@ -22,7 +22,7 @@
   };
   pytools = pkgs.buildEnv {
     name = "pytools";
-    paths = [pkgs.nodePackages.pyright pkgs.black pkgs.isort pkgs.ruff pkgs.ruff-lsp];
+    paths = [pkgs.basedpyright pkgs.black pkgs.isort pkgs.ruff pkgs.ruff-lsp];
   };
   json = pkgs.buildEnv {
     name = "jsontools";
