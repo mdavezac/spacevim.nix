@@ -10,7 +10,7 @@ return {
 		opts = {
 			defaults = {
 				vimgrep_arguments = {
-					require("config.directories") .. "/rg/bin/rg",
+					require("config.directories") .. "/search/bin/rg",
 					"--color=never",
 					"--no-heading",
 					"--with-filename",
@@ -18,6 +18,16 @@ return {
 					"--column",
 					"--smart-case",
 				},
+			},
+		},
+	},
+	{
+		"MagicDuck/grug-far.nvim",
+		opts = {
+			headerMaxWidth = 80,
+			engines = {
+				ripgrep = { path = require("config.directories") .. "/search/bin/rg" },
+				astgrep = { path = require("config.directories") .. "/search/bin/ast-grep" },
 			},
 		},
 	},

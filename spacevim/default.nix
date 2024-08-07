@@ -32,6 +32,10 @@
     name = "markdown";
     paths = [pkgs.deno pkgs.marksman];
   };
+  search = pkgs.buildEnv {
+    name = "search";
+    paths = [pkgs.ripgrep pkgs.ast-grep];
+  };
   lazy-nix = let
     get-plugin = x: builtins.getAttr (builtins.replaceStrings [".nvim"] ["-nvim"] x) pkgs.vimPlugins;
     make-plugin2 = x: {
@@ -116,12 +120,8 @@
         path = json;
       }
       {
-        name = "rg";
-        path = pkgs.ripgrep;
-      }
-      {
-        name = "sed";
-        path = pkgs.gnused;
+        name = "search";
+        path = search;
       }
       {
         name = "telescope.nvim";
