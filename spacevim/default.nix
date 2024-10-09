@@ -36,6 +36,10 @@
     name = "search";
     paths = [pkgs.ripgrep pkgs.ast-grep];
   };
+  typescript = pkgs.buildEnv {
+    name = "typescript";
+    paths = [pkgs.vtsls pkgs.vscode-langservers-extracted];
+  };
   lazy-nix = let
     get-plugin = x: builtins.getAttr (builtins.replaceStrings [".nvim"] ["-nvim"] x) pkgs.vimPlugins;
     make-plugin2 = x: {
@@ -130,6 +134,10 @@
       {
         name = "taplo-lsp";
         path = pkgs.taplo-lsp;
+      }
+      {
+        name = "typescript";
+        path = typescript;
       }
       (make-plugin2 "telescope-fzf-native.nvim")
       (make-plugin2 "telescope.nvim")

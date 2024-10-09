@@ -64,16 +64,20 @@
     ...
   }: let
     systemized = system: let
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {allowUnfree = true;};
-        overlays = [
-          devshell.overlays.default
-          (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
-          (final: previous: {nuscripts = inputs.nuscripts;})
-          rustaceanvim.overlays.default
-        ];
-      };
+      pkgs = let
+        vtsls = import ./vtsls/default.nix {inherit pkgs;};
+      in
+        import nixpkgs {
+          inherit system;
+          config = {allowUnfree = true;};
+          overlays = [
+            devshell.overlays.default
+            (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
+            (final: previous: {nuscripts = inputs.nuscripts;})
+            (final: previous: {vtsls = vtsls."@vtsls/language-server";})
+            rustaceanvim.overlays.default
+          ];
+        };
     in rec {
       packages.nvim = (import ./spacevim) {inherit pkgs;};
       packages.tmux = (import ./tmux) {inherit pkgs;};
@@ -89,7 +93,7 @@
             drv = builtins.getAttr name packages;
             name = name;
           };
-      in rec {
+      in {
         nvim = make "nvim";
         tmux = make "tmux";
         zellij = make "zellij";
