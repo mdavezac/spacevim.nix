@@ -14,8 +14,6 @@ end
 local plugins = {
 	{ "L3MON4D3/LuaSnip", name = "LuaSnip" },
 	{ "akinsho/toggleterm.nvim", name = "toggleterm.nvim" },
-	{ "nvim-neotest/neotest", name = "neotest" },
-	{ "nvim-neotest/neotest-python", name = "neotest-python" },
 	{ "Vigemus/iron.nvim", name = "iron.nvim" },
 	{ "LazyVim/LazyVim", name = "LazyVim" },
 	{ "nvim-treesitter/nvim-treesitter", name = "nvim-treesitter" },
@@ -36,5 +34,11 @@ local plugins = {
 	{ "stevearc/conform.nvim", name = "conform.nvim" },
 	{ "folke/trouble.nvim", name = "trouble.nvim" },
 	{ "mrcjkb/rustaceanvim", name = "rustaceanvim" },
+	{ "mrcjkb/haskell-tools.nvim", name = "haskell-tools" },
+	{ "nvim-neotest/neotest", name = "neotest" },
+	{ "nvim-neotest/neotest-python", name = "neotest-python" },
+	{ "alfaix/neotest-gtest", name = "neotest-gtest" },
+	{ "mrcjkb/neotest-haskell", name = "neotest-haskell" },
+	{ "marilari88/neotest-vitest", name = "neotest-vitest" },
 }
 return list_plugins(require("config.directories"), plugins)

@@ -38,4 +38,30 @@ return {
 			},
 		},
 	},
+	{
+		"nvim-neotest/neotest",
+		optional = true,
+		ft = { "typescript", "javascript" },
+		opts = {
+			adapters = {
+				["neotest-vitest"] = {},
+			},
+		},
+		dependencies = { "marilari88/neotest-vitest" },
+	},
+	{ "marilari88/neotest-vitest" },
+	{
+		"mrcjkb/haskell-tools.nvim",
+		version = "^3",
+		ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
+		dependencies = {
+			{ "nvim-telescope/telescope.nvim", optional = true },
+		},
+		config = function()
+			local ok, telescope = pcall(require, "telescope")
+			if ok then
+				telescope.load_extension("ht")
+			end
+		end,
+	},
 }

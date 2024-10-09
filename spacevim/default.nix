@@ -104,14 +104,6 @@
         path = pkgs.vimPlugins.lazy-dist;
       }
       {
-        name = "neotest";
-        path = pkgs.vimPlugins.neotest-nvim;
-      }
-      {
-        name = "neotest-python";
-        path = pkgs.vimPlugins.neotest-python-nvim;
-      }
-      {
         name = "shfmt";
         path = pkgs.shfmt;
       }
@@ -159,6 +151,12 @@
       (make-plugin2 "conform.nvim")
       (make-plugin2 "trouble.nvim")
       (make-plugin2 "rustaceanvim")
+      (make-plugin "haskell-tools" "haskell-tools-nvim")
+      (make-plugin "neotest" "neotest-nvim")
+      (make-plugin "neotest-python" "neotest-python-nvim")
+      (make-plugin2 "neotest-vitest")
+      (make-plugin2 "neotest-haskell")
+      (make-plugin2 "neotest-gtest")
     ];
   in
     pkgs.vimUtils.buildVimPlugin {
