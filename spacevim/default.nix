@@ -38,7 +38,7 @@
   };
   typescript = pkgs.buildEnv {
     name = "typescript";
-    paths = [pkgs.vtsls pkgs.vscode-langservers-extracted];
+    paths = [pkgs.vtsls pkgs.vscode-langservers-extracted pkgs.prettierd];
   };
   lazy-nix = let
     get-plugin = x: builtins.getAttr (builtins.replaceStrings [".nvim"] ["-nvim"] x) pkgs.vimPlugins;
