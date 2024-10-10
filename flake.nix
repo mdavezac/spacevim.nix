@@ -53,6 +53,13 @@
     trouble-nvim.flake = false;
     rustaceanvim.url = "github:mrcjkb/rustaceanvim";
     rustaceanvim.flake = true;
+    rustaceanvim.inputs.nixpkgs.follows = "nixpkgs";
+    neotest-haskell.url = "github:mrcjkb/neotest-haskell";
+    neotest-haskell.flake = true;
+    neotest-haskell.inputs.nixpkgs.follows = "nixpkgs";
+    haskell-tools.url = "github:mrcjkb/haskell-tools.nvim";
+    haskell-tools.flake = true;
+    haskell-tools.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -61,6 +68,8 @@
     flake-utils,
     devshell,
     rustaceanvim,
+    neotest-haskell,
+    haskell-tools,
     ...
   }: let
     systemized = system: let
@@ -76,6 +85,8 @@
             (final: previous: {nuscripts = inputs.nuscripts;})
             (final: previous: {vtsls = vtsls."@vtsls/language-server";})
             rustaceanvim.overlays.default
+            neotest-haskell.overlays.default
+            haskell-tools.overlays.default
           ];
         };
     in rec {
