@@ -5,6 +5,7 @@ end
 return {
 	{
 		"p00f/clangd_extensions.nvim",
+		ft = { "cpp", "c" },
 		lazy = true,
 		config = function() end,
 		opts = {
