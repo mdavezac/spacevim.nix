@@ -46,6 +46,7 @@ local function fullsetup()
 			},
 		},
 		ui = { icons = { lazy = "💤" } },
+		rocks = { hererocks = false },
 	}
 	if os.getenv("LAZY_NIX_ROOT") then
 		opts.root = os.getenv("LAZY_NIX_ROOT") .. "/data"

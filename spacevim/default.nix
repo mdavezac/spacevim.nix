@@ -1,4 +1,8 @@
 {pkgs}: let
+  execs = pkgs.buildEnv {
+    name = "execs";
+    paths = [pkgs.luarocks pkgs.lua5_1 pkgs.tree-sitter];
+  };
   treesitter = pkgs.buildEnv {
     name = "treesitter";
     paths = [
@@ -51,6 +55,10 @@
       path = builtins.getAttr b pkgs.vimPlugins;
     };
     packages = pkgs.linkFarm "vim-plugins" [
+      {
+        name = "execs";
+        path = execs;
+      }
       {
         name = "markdown";
         path = markdown;

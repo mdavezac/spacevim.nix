@@ -8,3 +8,7 @@ vim.opt.swapfile = false
 vim.opt.pumblend = 0
 vim.filetype.add({ extension = { nu = "nu" } })
 vim.opt.runtimepath:append(vim.fn.expand("~/.local/state/nvim/tree-sitter"))
+local execs = require("config.directories") .. "/execs/bin"
+if not string.find(vim.env.PATH, execs) then
+	vim.env.PATH = vim.env.PATH .. ":" .. execs
+end
