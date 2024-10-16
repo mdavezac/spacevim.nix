@@ -10,7 +10,7 @@ return {
 		},
 		dependencies = { "mrcjkb/neotest-haskell" },
 	},
-	{ "mrcjkb/neotest-haskell" },
+	{ "mrcjkb/neotest-haskell", ft = "haskell" },
 	{
 		"mrcjkb/haskell-snippets.nvim",
 		dependencies = { "L3MON4D3/LuaSnip" },

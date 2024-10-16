@@ -106,7 +106,7 @@ return {
 		},
 		dependencies = { "alfaix/neotest-gtest" },
 	},
-	{ "alfaix/neotest-gtest" },
+	{ "alfaix/neotest-gtest", ft = { "cpp" } },
 	{
 		"mfussenegger/nvim-dap",
 		optional = true,

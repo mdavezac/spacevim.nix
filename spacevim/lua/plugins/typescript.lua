@@ -49,7 +49,7 @@ return {
 		},
 		dependencies = { "marilari88/neotest-vitest" },
 	},
-	{ "marilari88/neotest-vitest" },
+	{ "marilari88/neotest-vitest", ft = { "typescript", "javascript" } },
 	{
 		"mrcjkb/haskell-tools.nvim",
 		version = "^3",

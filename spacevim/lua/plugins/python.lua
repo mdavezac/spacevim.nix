@@ -74,7 +74,7 @@ return {
 		},
 		dependencies = { "nvim-neotest/neotest-python" },
 	},
-	{ "nvim-neotest/neotest-python" },
+	{ "nvim-neotest/neotest-python", ft = { "python" } },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = { indent = { disable = { "python" } } },
