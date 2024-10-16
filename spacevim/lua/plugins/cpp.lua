@@ -87,6 +87,7 @@ return {
 				},
 			},
 		},
+		ft = { "cmake", "cpp" },
 		keys = {
 			{ "<leader>cb", "<CMD>CMakeBuild<CR>", desc = "Build" },
 			{ "<leader>cs", "<CMD>CMakeSettings<CR>", desc = "CMake Settings" },
