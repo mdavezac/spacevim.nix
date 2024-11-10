@@ -139,6 +139,10 @@
         name = "typescript";
         path = typescript;
       }
+      {
+        name = "yaml";
+        path = pkgs.yamlfmt;
+      }
       (make-plugin2 "telescope-fzf-native.nvim")
       (make-plugin2 "telescope.nvim")
       (make-plugin2 "toggleterm.nvim")
