@@ -2,8 +2,12 @@
   description = "Big Neovim Energy";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     flake-utils.url = "github:numtide/flake-utils";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    rio-themes.url = "github:mbadolato/iTerm2-Color-Schemes";
+    rio-themes.flake = false;
     devshell.url = "github:numtide/devshell";
     lazy-nvim.url = "github:folke/lazy.nvim";
     lazy-nvim.flake = false;
@@ -72,23 +76,21 @@
     haskell-tools,
     ...
   }: let
+    mk-overlays = pkgs: [
+      devshell.overlays.default
+      (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
+      (final: previous: {nuscripts = inputs.nuscripts;})
+      (final: previous: {vtsls = (import ./vtsls/default.nix {inherit pkgs;})."@vtsls/language-server";})
+      rustaceanvim.overlays.default
+      neotest-haskell.overlays.default
+      haskell-tools.overlays.default
+    ];
     systemized = system: let
-      pkgs = let
-        vtsls = import ./vtsls/default.nix {inherit pkgs;};
-      in
-        import nixpkgs {
-          inherit system;
-          config = {allowUnfree = true;};
-          overlays = [
-            devshell.overlays.default
-            (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
-            (final: previous: {nuscripts = inputs.nuscripts;})
-            (final: previous: {vtsls = vtsls."@vtsls/language-server";})
-            rustaceanvim.overlays.default
-            neotest-haskell.overlays.default
-            haskell-tools.overlays.default
-          ];
-        };
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {allowUnfree = true;};
+        overlays = mk-overlays pkgs;
+      };
     in rec {
       packages.nvim = (import ./spacevim) {inherit pkgs;};
       packages.tmux = (import ./tmux) {inherit pkgs;};
@@ -121,5 +123,27 @@
       };
     };
   in
-    flake-utils.lib.eachDefaultSystem systemized;
+    (flake-utils.lib.eachDefaultSystem systemized)
+    // {
+      nixosConfigurations.loubakgou = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          # Import the previous configuration.nix we used,
+          # so the old configuration file still takes effect
+          ./system/configuration.nix
+          inputs.home-manager.nixosModules.home-manager
+          {
+            nixpkgs.overlays = mk-overlays nixpkgs;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            # TODO replace ryan with your own username
+            home-manager.users.mdavezac = import ./home;
+            home-manager.backupFileExtension = "hm-backup";
+
+            home-manager.extraSpecialArgs.rio-themes = inputs.rio-themes;
+          }
+        ];
+      };
+    };
 }

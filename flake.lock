@@ -1430,6 +1430,27 @@
         "type": "github"
       }
     },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1733951536,
+        "narHash": "sha256-Zb5ZCa7Xj+0gy5XVXINTSr71fCfAv+IKtmIXNrykT54=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "1318c3f3b068cdcea922fa7c1a0a1f0c96c22f5f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-24.11",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "iron-nvim": {
       "flake": false,
       "locked": {
@@ -2013,15 +2034,16 @@
     },
     "nixpkgs_11": {
       "locked": {
-        "lastModified": 1722927481,
-        "narHash": "sha256-sqtyLcN9kMIVv1hcCN7BIxjBXFrTnoOh5//UWmepKfE=",
-        "owner": "nixos",
+        "lastModified": 1734083684,
+        "narHash": "sha256-5fNndbndxSx5d+C/D0p/VF32xDiJCJzyOqorOYW4JEo=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8fea621314ee47610b2e451b28569351021907cf",
+        "rev": "314e12ba369ccdb9b352a4db26ff419f7c49fa84",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
+        "owner": "NixOS",
+        "ref": "nixos-24.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -2351,6 +2373,22 @@
         "type": "github"
       }
     },
+    "rio-themes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1734218138,
+        "narHash": "sha256-DbBp/wjXfcFkYLnPhft1+CY/WkijCZHLzvDKkZoKv2Y=",
+        "owner": "mbadolato",
+        "repo": "iTerm2-Color-Schemes",
+        "rev": "5fd82e34a349e36a5b3422d8225c4e044c8b3b4b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mbadolato",
+        "repo": "iTerm2-Color-Schemes",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "bufferline-nvim": "bufferline-nvim",
@@ -2364,6 +2402,7 @@
         "flake-utils": "flake-utils",
         "flatten-nvim": "flatten-nvim",
         "haskell-tools": "haskell-tools",
+        "home-manager": "home-manager",
         "iron-nvim": "iron-nvim",
         "lazy-dist": "lazy-dist",
         "lazy-nvim": "lazy-nvim",
@@ -2377,6 +2416,7 @@
         "nuscripts": "nuscripts",
         "nvim-cmp": "nvim-cmp",
         "nvim-lspconfig": "nvim-lspconfig",
+        "rio-themes": "rio-themes",
         "rustaceanvim": "rustaceanvim",
         "telescope-fzf-native": "telescope-fzf-native",
         "telescope-nvim": "telescope-nvim",
