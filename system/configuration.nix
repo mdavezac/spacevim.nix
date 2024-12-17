@@ -89,6 +89,8 @@
     extraGroups = ["networkmanager" "wheel"];
   };
 
+  programs.steam.enable = true;
+
   # Install firefox.
   fonts.packages = with pkgs; [
     (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
