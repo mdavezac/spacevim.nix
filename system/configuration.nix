@@ -87,6 +87,7 @@
     isNormalUser = true;
     description = "Mayeul d'Avezac";
     extraGroups = ["networkmanager" "wheel"];
+    shell = pkgs.nushell;
   };
 
   programs.steam.enable = true;
