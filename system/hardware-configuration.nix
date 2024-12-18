@@ -34,6 +34,12 @@
       randomEncryption.enable = true;
     }
   ];
+  services.fstrim.enable = true;
+
+  services.tlp.enable =
+    lib.mkDefault ((lib.versionOlder (lib.versions.majorMinor lib.version) "21.05")
+      || !config.services.power-profiles-daemon.enable);
+  hardware.enableAllFirmware = true;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
