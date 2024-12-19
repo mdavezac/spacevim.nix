@@ -138,7 +138,6 @@
           inputs.home-manager.nixosModules.home-manager
           inputs.stylix.nixosModules.stylix
           inputs.niri.nixosModules.niri
-
           ./system/configuration.nix
           {
             nixpkgs.overlays = mk-overlays nixpkgs;

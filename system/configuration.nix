@@ -54,6 +54,7 @@
 
   stylix = {
     enable = true;
+    autoEnable = true;
     image = let
       winter = {
         url = "https://www.pixelstalk.net/wp-content/uploads/image11/Winter-night-with-stars-shining-above-a-snowy-landscape.jpg";

@@ -26,10 +26,10 @@
       };
 
       layout = {
-        gaps = 16;
-        struts.left = 64;
-        struts.right = 64;
-        border.width = 4;
+        gaps = 4;
+        struts.left = 16;
+        struts.right = 16;
+        border.width = 2;
       };
 
       hotkey-overlay.skip-at-startup = true;
