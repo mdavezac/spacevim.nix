@@ -1,10 +1,12 @@
 {
   pkgs,
+  lib,
   rio-themes,
   ...
 }: {
   imports = [
     ./shell.nix
+    ./niri.nix
   ];
 
   # TODO please change the username & home directory to your own
@@ -17,7 +19,7 @@
   };
 
   # set cursor size and dpi for 4k monitor
-  xresources.properties = {
+  xresources.properties = lib.mkForce {
     "Xcursor.size" = 16;
     "Xft.dpi" = 172;
   };
@@ -30,6 +32,12 @@
     heroic
     nvitop
   ];
+
+  programs.kitty = {
+    enable = true;
+    font.name = lib.mkForce "FiraCode Nerd Font";
+    font.size = 12;
+  };
 
   programs.firefox = {
     enable = true;

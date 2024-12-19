@@ -5,7 +5,9 @@ pkgs.wrapNeovim pkgs.neovim-unwrapped {
       lua require('config.lazyentry').setup()
     '';
     packages.lazy = {
-      start = [((import ./dist.nix) pkgs)];
+      start = [
+        ((import ./dist.nix) pkgs)
+      ];
     };
   };
 }

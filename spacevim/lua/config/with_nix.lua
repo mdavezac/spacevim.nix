@@ -40,5 +40,6 @@ local plugins = {
 	{ "alfaix/neotest-gtest", name = "neotest-gtest" },
 	{ "mrcjkb/neotest-haskell", name = "neotest-haskell" },
 	{ "marilari88/neotest-vitest", name = "neotest-vitest" },
+	{ "echasnovski/mini.base16", name = "mini.base16" },
 }
 return list_plugins(require("config.directories"), plugins)

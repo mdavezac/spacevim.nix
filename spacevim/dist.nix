@@ -169,6 +169,10 @@ pkgs: let
       (make-plugin2 "neotest-vitest")
       (make-plugin2 "neotest-haskell")
       (make-plugin2 "neotest-gtest")
+      {
+        name = "mini.base16";
+        path = pkgs.vimPlugins.mini-base16;
+      }
     ];
   in
     pkgs.vimUtils.buildVimPlugin {

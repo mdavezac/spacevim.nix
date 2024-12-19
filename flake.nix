@@ -6,6 +6,11 @@
     flake-utils.url = "github:numtide/flake-utils";
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    niri.url = "github:sodiboo/niri-flake";
+    niri.inputs.nixpkgs-stable.follows = "nixpkgs";
+    stylix.url = "github:danth/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+
     rio-themes.url = "github:mbadolato/iTerm2-Color-Schemes";
     rio-themes.flake = false;
     devshell.url = "github:numtide/devshell";
@@ -130,8 +135,11 @@
         modules = [
           # Import the previous configuration.nix we used,
           # so the old configuration file still takes effect
-          ./system/configuration.nix
           inputs.home-manager.nixosModules.home-manager
+          inputs.stylix.nixosModules.stylix
+          inputs.niri.nixosModules.niri
+
+          ./system/configuration.nix
           {
             nixpkgs.overlays = mk-overlays nixpkgs;
             home-manager.useGlobalPkgs = true;
