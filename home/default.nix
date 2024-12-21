@@ -6,7 +6,8 @@
 }: {
   imports = [
     ./shell.nix
-    ./niri.nix
+    # ./niri.nix
+    ./hyprland.nix
   ];
 
   # TODO please change the username & home directory to your own
@@ -36,7 +37,7 @@
   programs.kitty = {
     enable = true;
     font.name = lib.mkForce "FiraCode Nerd Font";
-    font.size = 12;
+    font.size = lib.mkForce 8;
   };
 
   programs.firefox = {
@@ -58,11 +59,11 @@
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
   programs.alacritty = {
-    enable = true;
+    enable = false;
     settings = {
       env.TERM = "xterm-256color";
       shell = "nu";
-      font.size = 12;
+      font.size = 10;
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
     };

@@ -50,7 +50,10 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  programs.niri.enable = true;
+  programs.niri.enable = false;
+  programs.hyprland.enable = true;
+  programs.hyprlock.enable = config.programs.hyprland.enable;
+  services.hypridle.enable = config.programs.hyprland.enable;
 
   stylix = {
     enable = true;
@@ -110,6 +113,7 @@
   };
 
   programs.steam.enable = true;
+  services.xserver.libinput.naturalScrolling = true;
 
   # Install firefox.
   fonts.packages = with pkgs; [
@@ -122,9 +126,8 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];

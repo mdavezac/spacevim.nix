@@ -1,9 +1,8 @@
 default_shell "nu";
 
+session_serialization = false
+
 themes {
-   dracula {
-        fg 248 248 242
-        bg 40 42 54
         black 0 0 0
         red 255 85 85
         green 80 250 123
@@ -252,14 +251,14 @@ plugins {
 //   - detach (Default)
 //   - quit
 //
-// on_force_close "quit"
+on_force_close "detach"
 
 //  Send a request for a simplified ui (without arrow fonts) to plugins
 //  Options:
 //    - true
 //    - false (Default)
 //
-// simplified_ui true
+simplified_ui true
 
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
