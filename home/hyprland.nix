@@ -7,8 +7,9 @@
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
     exec-once = ["waybar"];
+    windowrulev2 = "size 800 600, class:firefox, title:Save As";
     bind = let
-      pactl = "${pkgs.pulseaudio-ctl}/bin/pactl";
+      pactl = "${pkgs.pulseaudio}/bin/pactl";
       brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
     in
       [

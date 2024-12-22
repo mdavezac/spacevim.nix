@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.packages = [pkgs.blueman pkgs.pavucontrol];
+  home.packages = [pkgs.pavucontrol];
 
   programs.waybar = {
     enable = true;
@@ -80,7 +80,7 @@
     };
     style = ''
       tooltip label {
-        color: black;
+        color: grey;
         text-shadow: none;
       }
       #battery.warning:not(.charging) {
