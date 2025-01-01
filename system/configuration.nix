@@ -100,12 +100,7 @@
   programs.steam.enable = true;
   services.libinput.touchpad.naturalScrolling = false;
 
-  # Install firefox.
-  fonts.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
-    fira-code
-  ];
-
+  fonts.packages = [pkgs.nerdfonts];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 

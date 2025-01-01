@@ -34,11 +34,7 @@
     nvitop
   ];
 
-  programs.kitty = {
-    enable = true;
-    font.name = lib.mkForce "FiraCode Nerd Font";
-    font.size = lib.mkForce 8;
-  };
+  programs.kitty.enable = true;
 
   programs.firefox = {
     enable = true;

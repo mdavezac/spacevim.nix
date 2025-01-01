@@ -15,5 +15,13 @@
       pkgs.fetchurl winter;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
     polarity = "dark";
+    fonts.monospace.name = "Hasklug Nerd Font";
+    fonts.monospace.package = pkgs.hasklig;
+    fonts.sizes.applications = 9;
+    fonts.sizes.desktop = 7;
+    fonts.sizes.popups = 8;
+    fonts.sizes.terminal = 8;
+    opacity.desktop = 0.5;
+    opacity.terminal = 0.8;
   };
 }
