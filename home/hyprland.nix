@@ -6,6 +6,11 @@
   services.hyprpaper.enable = true;
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
+    input.natural_scroll = true;
+    device = {
+      name = "asuf1205:00-2808:0106-touchpad";
+      natural_scroll = true;
+    };
     exec-once = ["waybar"];
     windowrulev2 = "size 800 600, class:firefox, title:Save As";
     bind = let
