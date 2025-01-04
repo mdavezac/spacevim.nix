@@ -6,13 +6,50 @@
   services.hyprpaper.enable = true;
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
-    input.natural_scroll = true;
-    device = {
-      name = "asuf1205:00-2808:0106-touchpad";
-      natural_scroll = true;
+    general.border_size = 1;
+    general.gaps_out = 8;
+    general.gaps_in = 4;
+    decoration = {
+      rounding = 15;
+      blur = {
+        enabled = true;
+        xray = true;
+        special = false;
+        new_optimizations = true;
+        size = 14;
+        passes = 4;
+        brightness = 1;
+        noise = 0.01;
+        contrast = 1;
+        popups = true;
+        popups_ignorealpha = 0.6;
+      };
+      shadow.enabled = false;
+      dim_inactive = true;
+      dim_strength = 0.15;
     };
+    input.natural_scroll = true;
+    device = [
+      {
+        name = "asuf1205:00-2808:0106-touchpad";
+        natural_scroll = true;
+      }
+      {
+        name = "logitech-pebble-mouse";
+        natural_scroll = true;
+      }
+    ];
     exec-once = ["waybar"];
-    windowrulev2 = "size 800 600, class:firefox, title:Save As";
+    windowrule = [
+      "float,title:^(Open File)(.*)$"
+      "float,title:^(Select a File)(.*)$"
+      "float,title:^(Choose wallpaper)(.*)$"
+      "float,title:^(Open Folder)(.*)$"
+      "float,title:^(Save As)(.*)$"
+      "float,title:^(Library)(.*)$"
+      "float,title:^(File Upload)(.*)$"
+    ];
+    windowrulev2 = ["size 800 600, class:firefox, title:Save As"];
     bind = let
       pactl = "${pkgs.pulseaudio}/bin/pactl";
       brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
@@ -27,6 +64,7 @@
         "$mod, F, fullscreen"
         "$mod, P, pseudo"
         "$mod, J, togglesplit"
+        "$mod, b, exec, pkill waybar || waybar"
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
         "$mod, up, movefocus, u"
