@@ -8,6 +8,8 @@
     ./shell.nix
     # ./niri.nix
     ./hyprland.nix
+    # ./nixvim
+    ./stylix.nix
   ];
 
   # TODO please change the username & home directory to your own

@@ -6,10 +6,19 @@
     flake-utils.url = "github:numtide/flake-utils";
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs-stable.follows = "nixpkgs";
     stylix.url = "github:danth/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
+
+    blink-nvim.url = "github:Saghen/blink.nvim";
+    blink-nvim.inputs.nixpkgs.follows = "nixpkgs";
+    blink-compat.url = "github:Saghen/blink.compat";
+    blink-compat.flake = false;
+
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.home-manager.follows = "home-manager";
 
     rio-themes.url = "github:mbadolato/iTerm2-Color-Schemes";
     rio-themes.flake = false;
@@ -130,27 +139,65 @@
   in
     (flake-utils.lib.eachDefaultSystem systemized)
     // {
-      nixosConfigurations.loubakgou = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.loubakgou = let
         system = "x86_64-linux";
-        modules = [
-          # Import the previous configuration.nix we used,
-          # so the old configuration file still takes effect
-          inputs.home-manager.nixosModules.home-manager
-          inputs.stylix.nixosModules.stylix
-          inputs.niri.nixosModules.niri
-          ./system/configuration.nix
-          {
-            nixpkgs.overlays = mk-overlays nixpkgs;
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            # Import the previous configuration.nix we used,
+            # so the old configuration file still takes effect
+            inputs.home-manager.nixosModules.home-manager
+            inputs.niri.nixosModules.niri
+            ./system/configuration.nix
+            {
+              nixpkgs.overlays =
+                (mk-overlays nixpkgs)
+                ++ [
+                  (prev: final: {
+                    vimPlugins =
+                      final.vimPlugins
+                      // {
+                        blink-cmp =
+                          final.buildEnv {
+                            name = "blink-cmp";
+                            paths = [
+                              inputs.blink-nvim.packages.${system}.blink-nvim
+                              (final.writeTextFile {
+                                name = "blink-cmp";
+                                text = ''return require('blink')'';
+                                destination = "/lua/plugins/blink-cmp.nvim";
+                              })
+                            ];
+                          }
+                          // {
+                            version = inputs.blink-nvim.packages.${system}.blink-nvim.version;
+                          };
+                        blink-compat = prev.vimUtils.buildVimPlugin {
+                          pname = "blink-compat";
+                          version = inputs.blink-compat.shortRev;
+                          src = inputs.blink-compat;
+                        };
+                      };
+                  })
+                ];
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
 
-            # TODO replace ryan with your own username
-            home-manager.users.mdavezac = import ./home;
-            home-manager.backupFileExtension = "hm-backup";
+              # TODO replace ryan with your own username
+              home-manager.users.mdavezac = {
+                imports = [
+                  inputs.nixvim.homeManagerModules.nixvim
+                  inputs.stylix.homeManagerModules.stylix
+                  ./home
+                ];
+              };
 
-            home-manager.extraSpecialArgs.rio-themes = inputs.rio-themes;
-          }
-        ];
-      };
+              home-manager.backupFileExtension = "hm-backup";
+
+              home-manager.extraSpecialArgs.rio-themes = inputs.rio-themes;
+            }
+          ];
+        };
     };
 }
