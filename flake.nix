@@ -91,7 +91,7 @@
     haskell-tools,
     ...
   }: let
-    mk-overlays = pkgs: [
+    mk-overlays = system: pkgs: [
       devshell.overlays.default
       (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
       (final: previous: {nuscripts = inputs.nuscripts;})
@@ -99,12 +99,20 @@
       rustaceanvim.overlays.default
       neotest-haskell.overlays.default
       haskell-tools.overlays.default
+      (prev: final: {
+        vimPlugins =
+          final.vimPlugins
+          // {
+            blink-cmp = inputs.unstable.legacyPackages.${system}.vimPlugins.blink-cmp;
+            blink-compat = inputs.unstable.legacyPackages.${system}.vimPlugins.blink-compat;
+          };
+      })
     ];
     systemized = system: let
       pkgs = import nixpkgs {
         inherit system;
         config = {allowUnfree = true;};
-        overlays = mk-overlays pkgs;
+        overlays = mk-overlays system pkgs;
       };
     in rec {
       packages.nvim = (import ./spacevim) {inherit pkgs;};
@@ -152,18 +160,7 @@
             inputs.niri.nixosModules.niri
             ./system/configuration.nix
             {
-              nixpkgs.overlays =
-                (mk-overlays nixpkgs)
-                ++ [
-                  (prev: final: {
-                    vimPlugins =
-                      final.vimPlugins
-                      // {
-                        blink-cmp = inputs.unstable.legacyPackages.${system}.vimPlugins.blink-cmp;
-                        blink-compat = inputs.unstable.legacyPackages.${system}.vimPlugins.blink-compat;
-                      };
-                  })
-                ];
+              nixpkgs.overlays = mk-overlays nixpkgs;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
@@ -180,6 +177,27 @@
 
               home-manager.extraSpecialArgs.rio-themes = inputs.rio-themes;
             }
+          ];
+        };
+      homeConfigurations."mac" = let
+        system = "x86_64-linux";
+      in
+        inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = mk-overlays system nixpkgs;
+          };
+          modules = [
+            {
+              home.username = "guest";
+              home.homeDirectory = "/home/guest";
+              home.stateVersion = "24.11";
+              programs.home-manager.enable = true;
+            }
+            inputs.nixvim.homeManagerModules.nixvim
+            inputs.stylix.homeManagerModules.stylix
+            ./home/nixvim
+            ./home/shell.nix
           ];
         };
     };
