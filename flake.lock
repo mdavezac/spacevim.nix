@@ -2985,6 +2985,7 @@
         "telescope-fzf-native": "telescope-fzf-native",
         "telescope-nvim": "telescope-nvim",
         "trouble-nvim": "trouble-nvim",
+        "unstable": "unstable",
         "which-key-nvim": "which-key-nvim"
       }
     },
@@ -3252,6 +3253,21 @@
       "original": {
         "owner": "folke",
         "repo": "trouble.nvim",
+        "type": "github"
+      }
+    },
+    "unstable": {
+      "locked": {
+        "lastModified": 1736107123,
+        "narHash": "sha256-fI3WTOHzpaWdDBaM7DwcFIFp+y/8FgPbGkdz6cRty+I=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4d24b79482f7500654494334ecc6fc88ab0d33d7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },

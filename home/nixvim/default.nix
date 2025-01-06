@@ -12,7 +12,8 @@
         enable = true;
         standalonePlugins = [
           "nvim-treesitter"
-          "blink-compat"
+          "blink.compat"
+          "blink.cmp"
         ];
       };
       byteCompileLua.enable = false;

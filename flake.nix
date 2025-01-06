@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    unstable.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -158,26 +159,8 @@
                     vimPlugins =
                       final.vimPlugins
                       // {
-                        blink-cmp =
-                          final.buildEnv {
-                            name = "blink-cmp";
-                            paths = [
-                              inputs.blink-nvim.packages.${system}.blink-nvim
-                              (final.writeTextFile {
-                                name = "blink-cmp";
-                                text = ''return require('blink')'';
-                                destination = "/lua/plugins/blink-cmp.nvim";
-                              })
-                            ];
-                          }
-                          // {
-                            version = inputs.blink-nvim.packages.${system}.blink-nvim.version;
-                          };
-                        blink-compat = prev.vimUtils.buildVimPlugin {
-                          pname = "blink-compat";
-                          version = inputs.blink-compat.shortRev;
-                          src = inputs.blink-compat;
-                        };
+                        blink-cmp = inputs.unstable.legacyPackages.${system}.vimPlugins.blink-cmp;
+                        blink-compat = inputs.unstable.legacyPackages.${system}.vimPlugins.blink-compat;
                       };
                   })
                 ];

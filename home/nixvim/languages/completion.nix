@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   programs.nixvim.plugins = {
     cmp-emoji.enable = true;
     cmp-git.enable = true;
@@ -20,7 +20,7 @@
         '';
 
       settings = {
-        keymap.preset = "super-tab";
+        keymap.preset = "enter";
         signature.enabled = true;
         sources = {
           default = [
@@ -54,7 +54,7 @@
         };
 
         appearance = {
-          use_nvim_cmp_as_default = false;
+          use_nvim_cmp_as_default = true;
           nerd_font_variant = "mono";
           kind_icons = {
             Text = "󰉿";
@@ -120,6 +120,7 @@
           };
           accept.auto_brackets.enabled = true;
         };
+        fuzzy.prebuilt_binaries.download = false;
       };
     };
   };

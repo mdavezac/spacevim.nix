@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   programs.nushell = {
@@ -13,7 +14,7 @@
   programs.ripgrep.enable = true;
 
   programs.neovim = {
-    enable = true;
+    enable = !config.programs.nixvim.enable;
     defaultEditor = true;
     extraLuaConfig = ''
       require('config.lazyentry').setup()

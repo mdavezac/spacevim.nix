@@ -8,7 +8,7 @@
     ./shell.nix
     # ./niri.nix
     ./hyprland.nix
-    # ./nixvim
+    ./nixvim
     ./stylix.nix
   ];
 
