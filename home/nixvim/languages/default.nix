@@ -1,5 +1,5 @@
 {
-  imports = [./nix.nix ./lsp-base.nix ./conform-base.nix ./completion.nix];
+  imports = [./nix.nix ./lsp-base.nix ./conform-base.nix ./completion.nix ./rust.nix];
   programs.nixvim.plugins = {
     treesitter.enable = true;
     treesitter-context.enable = true;

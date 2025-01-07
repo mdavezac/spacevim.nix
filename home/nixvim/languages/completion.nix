@@ -1,4 +1,4 @@
-{
+{lib, ...}: {
   programs.nixvim.plugins = {
     cmp-emoji.enable = true;
     cmp-git.enable = true;
@@ -10,19 +10,19 @@
       ''
         capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities())
       '';
-    blink-compat.enable = true;
+    blink-compat = {
+      enable = true;
+      settings.debug = true;
+      settings.impersonate_nvim_cmp = true;
+    };
+
     blink-cmp = {
       enable = true;
-      luaConfig.pre =
-        # lua
-        ''
-          require('blink.compat').setup({debug = true, impersonate_nvim_cmp = true})
-        '';
-
       settings = {
         keymap.preset = "enter";
         signature.enabled = true;
         sources = {
+          cmdline.__empty = {};
           default = [
             "buffer"
             "calc"

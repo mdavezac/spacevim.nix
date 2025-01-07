@@ -160,7 +160,7 @@
             inputs.niri.nixosModules.niri
             ./system/configuration.nix
             {
-              nixpkgs.overlays = mk-overlays nixpkgs;
+              nixpkgs.overlays = mk-overlays system nixpkgs;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 

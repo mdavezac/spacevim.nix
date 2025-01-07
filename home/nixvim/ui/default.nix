@@ -33,7 +33,7 @@
     }
     {
       key = "<leader>e";
-      action = "lua MiniFiles.open()";
+      action.__raw = "function() MiniFiles.open() end";
       options.desc = "Explore files";
     }
   ];

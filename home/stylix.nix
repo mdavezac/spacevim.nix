@@ -17,11 +17,11 @@
     polarity = "dark";
     fonts.monospace.name = "Hasklug Nerd Font";
     fonts.monospace.package = pkgs.hasklig;
-    fonts.sizes.applications = 9;
-    fonts.sizes.desktop = 7;
-    fonts.sizes.popups = 8;
-    fonts.sizes.terminal = 8;
-    opacity.desktop = 0.5;
-    opacity.terminal = 0.8;
+    fonts.sizes.applications = 11;
+    fonts.sizes.desktop = 9;
+    fonts.sizes.popups = 10;
+    fonts.sizes.terminal = 10;
+    opacity.desktop = 0.8;
+    opacity.terminal = 0.9;
   };
 }

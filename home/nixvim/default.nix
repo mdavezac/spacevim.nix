@@ -3,6 +3,7 @@
     ./options.nix
     ./ui
     ./languages
+    ./git.nix
   ];
   programs.nixvim = {
     enable = true;
@@ -21,6 +22,5 @@
       # vimAlias = true;
       # luaLoader.enable = true;
     };
-    globals.mapleader = " ";
   };
 }

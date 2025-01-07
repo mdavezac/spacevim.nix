@@ -90,6 +90,16 @@
         keys = "<Leader>c";
         desc = "+Code";
       }
+      {
+        mode = "n";
+        keys = "<Leader>n";
+        desc = "+Gid";
+      }
+      {
+        mode = "x";
+        keys = "<Leader>n";
+        desc = "+Gid";
+      }
     ];
   };
 }
