@@ -36,5 +36,31 @@
       action.__raw = "function() MiniFiles.open() end";
       options.desc = "Explore files";
     }
+    {
+      key = "<C-h>";
+      action = "<C-w>h";
+    }
+    {
+      key = "<C-l>";
+      action = "<C-w>l";
+    }
+    {
+      key = "<C-k>";
+      action = "<C-w>k";
+    }
+    {
+      key = "<C-j>";
+      action = "<C-w>j";
+    }
+    {
+      key = "<space>|";
+      action = "<cmd>vsplit<enter>";
+      options.desc = "Split vertically";
+    }
+    {
+      key = "<space>-";
+      action = "<cmd>split<enter>";
+      options.desc = "Split horizontally";
+    }
   ];
 }
