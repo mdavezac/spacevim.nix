@@ -179,7 +179,7 @@
             }
           ];
         };
-      homeConfigurations."mac" = let
+      homeConfigurations."mdavezac" = let
         system = "x86_64-linux";
       in
         inputs.home-manager.lib.homeManagerConfiguration {
@@ -189,8 +189,8 @@
           };
           modules = [
             {
-              home.username = "guest";
-              home.homeDirectory = "/home/guest";
+              home.username = "mdavezac";
+              home.homeDirectory = "/home/mdavezac";
               home.stateVersion = "24.11";
               programs.home-manager.enable = true;
             }

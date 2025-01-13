@@ -8,6 +8,7 @@
     enable = true;
     configFile.source = ./config.nu;
     environmentVariables.SHELL = "nu";
+    envFile.source = ./env.nu;
   };
 
   programs.bat.enable = true;
@@ -90,6 +91,8 @@
     enable = true;
     enableNushellIntegration = true;
   };
+
+  programs.fd.enable = true;
 
   programs.eza = {
     enable = false;

@@ -6,7 +6,7 @@
     ./git.nix
   ];
   programs.nixvim = {
-    enable = true;
+    enable = false;
     defaultEditor = true;
     performance = {
       combinePlugins = {
