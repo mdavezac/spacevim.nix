@@ -103,8 +103,12 @@
         vimPlugins =
           final.vimPlugins
           // {
-            blink-cmp = inputs.unstable.legacyPackages.${system}.vimPlugins.blink-cmp;
-            blink-compat = inputs.unstable.legacyPackages.${system}.vimPlugins.blink-compat;
+            inherit
+              (inputs.unstable.legacyPackages.${system}.vimPlugins)
+              blink-cmp
+              blink-compat
+              lsp-config
+              ;
           };
       })
     ];

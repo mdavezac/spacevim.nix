@@ -1,7 +1,16 @@
 {
+  lib,
+  config,
+  ...
+}: {
   programs.nixvim.plugins.lsp = {
     enable = true;
     inlayHints = true;
+    onAttach = lib.mkIf config.programs.nixvim.plugins.navic.enable ''
+      if client.supports_method("textDocument/documentSymbol") then
+          require("nvim-navic").attach(client, bufnr)
+      end
+    '';
     keymaps = {
       silent = true;
       lspBuf = {

@@ -73,10 +73,15 @@
             {
               __unkeyed-1 = "progress";
             }
+            {
+              __unkeyed-1 = "location";
+            }
           ];
           lualine_z = [
             {
-              __unkeyed-1 = "location";
+              __unkeyed-1.__raw = ''
+                function() return " " .. os.date("%R") end
+              '';
             }
           ];
         };

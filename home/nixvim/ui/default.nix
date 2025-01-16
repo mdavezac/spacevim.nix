@@ -3,6 +3,7 @@
   programs.nixvim.colorschemes.base16.enable = true;
   programs.nixvim.plugins = {
     barbar.enable = true;
+    notify.enable = true;
     mini.modules.icons = {};
     mini.modules.files = {};
   };

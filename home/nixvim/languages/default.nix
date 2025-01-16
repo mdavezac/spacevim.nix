@@ -1,14 +1,15 @@
-{
+{config, ...}: {
   imports = [./nix.nix ./lsp-base.nix ./conform-base.nix ./completion.nix ./rust.nix];
   programs.nixvim.plugins = {
     treesitter.enable = true;
-    treesitter-context.enable = true;
+    treesitter-context.enable = config.programs.nixvim.plugins.navic.enable;
+    navic.enable = true;
     mini.modules.comment = {
       enable = true;
-      comment = "<leader>/";
-      comment_line = "<leader>/";
-      comment_visual = "<leader>/";
-      textobject = "<leader>/";
+      comment = "gc";
+      comment_line = "gcc";
+      comment_visual = "gc";
+      textobject = "gc";
     };
   };
 }

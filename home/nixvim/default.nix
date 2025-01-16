@@ -12,12 +12,11 @@
       combinePlugins = {
         enable = true;
         standalonePlugins = [
-          "nvim-treesitter"
           "blink.compat"
-          "blink.cmp"
+          "nvim-lspconfig"
         ];
       };
-      byteCompileLua.enable = false;
+      byteCompileLua.enable = true;
       # viAlias = true;
       # vimAlias = true;
       # luaLoader.enable = true;
