@@ -4,6 +4,7 @@
   config,
   ...
 }: {
+  home.packages = [pkgs.glab];
   programs.nushell = {
     enable = true;
     configFile.source = ./config.nu;

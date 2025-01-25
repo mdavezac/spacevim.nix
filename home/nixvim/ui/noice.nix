@@ -4,12 +4,12 @@
     enable = true;
     settings = {
       notify = {
-        enabled = false;
+        enabled = true;
         view = "notify";
       };
       messages = {
         enabled = true;
-        view = "mini";
+        view = "notify";
       };
       lsp = {
         message = {

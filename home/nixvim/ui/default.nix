@@ -1,5 +1,5 @@
 {
-  imports = [./lualine.nix ./noice.nix ./mini-clue.nix ./noice.nix ./fzf-lua.nix];
+  imports = [./mini-clue.nix ./lualine.nix ./fzf-lua.nix ./noice.nix];
   programs.nixvim.colorschemes.base16.enable = true;
   programs.nixvim.plugins = {
     barbar.enable = true;

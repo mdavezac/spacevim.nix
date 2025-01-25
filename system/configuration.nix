@@ -104,7 +104,7 @@
   programs.steam.enable = true;
   services.libinput.touchpad.naturalScrolling = false;
 
-  fonts.packages = [pkgs.nerdfonts];
+  fonts.packages = [pkgs.nerdfonts pkgs.helvetica-neue-lt-std];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
