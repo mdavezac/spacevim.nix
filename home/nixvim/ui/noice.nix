@@ -9,7 +9,7 @@
       };
       messages = {
         enabled = true;
-        view = "notify";
+        view = "mini";
       };
       lsp = {
         message = {
@@ -24,8 +24,20 @@
         enabled = true;
         backend = "nui";
       };
+      routes = [
+        {
+          filter.find = "git commit";
+          filter.event = "msg_show";
+          skip = true;
+        }
+        {
+          filter.find = ".git/COMMIT_EDITMSG";
+          filter.event = "msg_show";
+          skip = true;
+        }
+      ];
       presets = {
-        bottom_search = true;
+        bottom_search = false;
         command_palette = true;
         long_message_to_split = true;
       };
