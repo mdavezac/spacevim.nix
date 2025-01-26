@@ -31,6 +31,11 @@
           skip = true;
         }
         {
+          filter.find = "git push";
+          filter.event = "msg_show";
+          skip = true;
+        }
+        {
           filter.find = ".git/COMMIT_EDITMSG";
           filter.event = "msg_show";
           skip = true;
