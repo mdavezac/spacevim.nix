@@ -35,8 +35,8 @@
     heroic
     nvitop
   ];
-
   programs.kitty.enable = true;
+  programs.nixvim.clipboard.providers.wl-copy.enable = true;
 
   programs.firefox = {
     enable = true;

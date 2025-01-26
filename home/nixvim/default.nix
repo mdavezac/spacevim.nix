@@ -14,6 +14,7 @@
         standalonePlugins = [
           "blink.compat"
           "nvim-lspconfig"
+          "nui.nvim"
         ];
       };
       byteCompileLua.enable = true;

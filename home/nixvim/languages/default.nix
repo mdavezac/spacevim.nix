@@ -1,5 +1,5 @@
 {config, ...}: {
-  imports = [./nix.nix ./lsp-base.nix ./conform-base.nix ./completion.nix ./rust.nix];
+  imports = [./nix.nix ./lsp-base.nix ./conform-base.nix ./completion.nix ./rust.nix ./python.nix];
   programs.nixvim.plugins = {
     treesitter.enable = true;
     treesitter-context.enable = config.programs.nixvim.plugins.navic.enable;

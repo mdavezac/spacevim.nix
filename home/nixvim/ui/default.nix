@@ -4,8 +4,13 @@
   programs.nixvim.plugins = {
     barbar.enable = true;
     notify.enable = true;
+    neo-tree = {
+      enable = true;
+      enableDiagnostics = true;
+      enableGitStatus = true;
+      enableModifiedMarkers = true;
+    };
     mini.modules.icons = {};
-    mini.modules.files = {};
   };
   programs.nixvim.keymaps = [
     {
@@ -17,6 +22,12 @@
     {
       key = "[b";
       action = "<cmd>bp<enter>";
+      options.desc = "Previous buffer";
+      options.silent = true;
+    }
+    {
+      key = "<leader>bb";
+      action = "<cmd>b#<enter>";
       options.desc = "Previous buffer";
       options.silent = true;
     }
@@ -34,7 +45,7 @@
     }
     {
       key = "<leader>e";
-      action.__raw = "function() MiniFiles.open() end";
+      action = "<cmd>Neotree toggle<enter>";
       options.desc = "Explore files";
     }
     {
