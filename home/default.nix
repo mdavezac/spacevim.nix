@@ -29,13 +29,12 @@
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    gcr
     wine64
     winetricks
     heroic
     nvitop
   ];
-  programs.kitty.enable = true;
+  programs.kitty.enable = false;
   programs.nixvim.clipboard.providers.wl-copy.enable = true;
 
   programs.firefox = {
@@ -44,7 +43,7 @@
   };
 
   programs.rio = {
-    enable = true;
+    enable = false;
     settings = {
       editor.program = "nvim";
       editor.args = [];
@@ -66,8 +65,6 @@
       selection.save_to_clipboard = true;
     };
   };
-
-  programs.fd.enable = true;
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
