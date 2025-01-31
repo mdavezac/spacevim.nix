@@ -66,6 +66,8 @@
     };
   };
 
+  services.gpg-agent.pinentryPackage = pkgs.pinentry-gnome3;
+
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards

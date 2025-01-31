@@ -6,7 +6,7 @@
     ./git.nix
   ];
   programs.nixvim = {
-    enable = false;
+    enable = true;
     defaultEditor = true;
     performance = {
       combinePlugins = {
@@ -17,7 +17,7 @@
           "nui.nvim"
         ];
       };
-      byteCompileLua.enable = false;
+      byteCompileLua.enable = true;
       # viAlias = true;
       # vimAlias = true;
       # luaLoader.enable = true;

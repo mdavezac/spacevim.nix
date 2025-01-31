@@ -185,23 +185,32 @@
         };
       homeConfigurations."mdavezac" = let
         system = "x86_64-linux";
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = mk-overlays system nixpkgs;
+        };
       in
         inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = mk-overlays system nixpkgs;
-          };
+          inherit pkgs;
           modules = [
+            inputs.nixvim.homeManagerModules.nixvim
+            inputs.stylix.homeManagerModules.stylix
             {
               home.username = "mdavezac";
               home.homeDirectory = "/home/mdavezac";
               home.stateVersion = "24.11";
               programs.home-manager.enable = true;
+              stylix.targets.gnome.enable = false;
+              stylix.targets.gtk.enable = false;
+              stylix.targets.kde.enable = false;
+              stylix.targets.xfce.enable = false;
+              imports = [
+                {services.gpg-agent.pinentryPackage = pkgs.pinentry-tty;}
+                ./home/shell.nix
+                ./home/nixvim
+                ./home/stylix.nix
+              ];
             }
-            inputs.nixvim.homeManagerModules.nixvim
-            inputs.stylix.homeManagerModules.stylix
-            ./home/nixvim
-            ./home/shell.nix
           ];
         };
     };

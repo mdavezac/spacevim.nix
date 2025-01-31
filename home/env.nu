@@ -36,4 +36,5 @@ $env.PATH = (
   | append '/usr/local/bin'
 )
 $env.SHELL = $env.HOME + "/.nix-profile/bin/nu"
+$env.GPG_TTY = $"(tty)"
 $env.EDITOR = "nvim"

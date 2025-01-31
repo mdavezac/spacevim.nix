@@ -4,7 +4,7 @@
   config,
   ...
 }: {
-  home.packages = [pkgs.glab];
+  home.packages = [pkgs.glab pkgs.devenv];
   programs.nushell = {
     enable = true;
     configFile.source = ./config.nu;
@@ -109,7 +109,6 @@
     enable = true;
     enableNushellIntegration = true;
     defaultCacheTtl = 80000;
-    pinentryPackage = pkgs.pinentry-gnome3;
   };
 
   programs.zellij.enable = true;
