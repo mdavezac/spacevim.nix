@@ -43,8 +43,8 @@
     extraConfig = {
       "user \"roke\"" = {
         name = "Mayeul d'Avezac";
-        email = "1085775-mdavezac@users.noreply.gitlab.com";
-        signingKey = "4BFEEACF1FBF028A";
+        email = "mayeul.davezacdecastera@roke.co.uk";
+        signingKey = "1CEC2DC082392DED";
       };
       "user \"gitlab\"" = {
         name = "Mayeul d'Avezac";
