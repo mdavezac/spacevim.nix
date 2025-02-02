@@ -205,7 +205,7 @@
               stylix.targets.kde.enable = false;
               stylix.targets.xfce.enable = false;
               imports = [
-                {services.gpg-agent.pinentryPackage = pkgs.pinentry-tty;}
+                {services.gpg-agent.pinentryPackage = pkgs.pinentry-curses;}
                 ./home/shell.nix
                 ./home/nixvim
                 ./home/stylix.nix
