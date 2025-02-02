@@ -87,7 +87,6 @@
         };
       };
     };
-    barbar.enable = true;
     web-devicons.enable = true;
   };
 }

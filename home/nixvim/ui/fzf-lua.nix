@@ -20,7 +20,7 @@
           desc = "Search project for text";
         };
       };
-      "<leader>sb" = {
+      "<leader>b/" = {
         action = "lgrep_curbuf";
         options = {
           desc = "Search buffer for text";

@@ -2,6 +2,7 @@
   imports = [
     ./mini-clue.nix
     ./lualine.nix
+    ./bufferline.nix
     ./fzf-lua.nix
     ./noice.nix
     ./flash.nix
@@ -10,24 +11,11 @@
   ];
   programs.nixvim.colorschemes.base16.enable = true;
   programs.nixvim.plugins = {
-    barbar.enable = true;
     notify.enable = true;
     persistence.enable = true;
     mini.modules.icons = {};
   };
   programs.nixvim.keymaps = [
-    {
-      action = "<cmd>bn<enter>";
-      key = "]b";
-      options.desc = "Next buffer";
-      options.silent = true;
-    }
-    {
-      key = "[b";
-      action = "<cmd>bp<enter>";
-      options.desc = "Previous buffer";
-      options.silent = true;
-    }
     {
       key = "<leader>bb";
       action = "<cmd>b#<enter>";
