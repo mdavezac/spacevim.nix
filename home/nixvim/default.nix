@@ -22,5 +22,6 @@
       # vimAlias = true;
       # luaLoader.enable = true;
     };
+    plugins.lz-n.enable = true;
   };
 }

@@ -1,6 +1,7 @@
 {
   programs.nixvim.plugins.rustaceanvim = {
     enable = true;
+    lazyLoad.settings.ft = "rust";
     settings.server.default_settings.rust-analyzer = {
       cargo = {
         allFeatures = true;

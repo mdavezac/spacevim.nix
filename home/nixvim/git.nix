@@ -1,6 +1,10 @@
 {
   programs.nixvim = {
-    plugins.neogit.enable = true;
+    plugins.neogit = {
+      enable = true;
+      lazyLoad.settings.cmd = "Neogit";
+      lazyLoad.settings.keys = ["<leader>gs"];
+    };
     plugins.gitsigns = {
       enable = true;
       settings.__raw = ''
@@ -62,7 +66,7 @@
     keymaps = [
       {
         key = "<leader>gs";
-        action.__raw = ''function () require("neogit").open({kind="floating"}) end'';
+        action = "<cmd>Neogit kind=floating<cr>";
         options.desc = "Git status";
       }
     ];
