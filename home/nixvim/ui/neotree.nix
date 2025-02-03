@@ -57,7 +57,7 @@
             require("neo-tree.command").execute({toggle=true, source = "document_symbols"})
         end
       '';
-      options.desc = "Buffer explorer";
+      options.desc = "Symbols explorer";
     }
   ];
 }

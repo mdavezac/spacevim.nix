@@ -23,6 +23,15 @@
       options.silent = true;
     }
     {
+      key = "<leader>bD";
+      action.__raw = ''
+        function(n)
+            require("snacks").bufdelete(n)
+        end
+      '';
+      options.desc = "Deleter Buffer";
+    }
+    {
       key = "]t";
       action = "<cmd>tn<enter>";
       options.desc = "Next tab";

@@ -82,23 +82,23 @@
       {__raw = "require('mini.clue').gen_clues.z()";}
       {
         mode = "n";
-        keys = "<Leader>s";
-        desc = "+Search";
-      }
-      {
-        mode = "n";
         keys = "<Leader>c";
         desc = "+Code";
       }
       {
         mode = "n";
-        keys = "<Leader>n";
-        desc = "+Gid";
+        keys = "<Leader>b";
+        desc = "+Buffer";
       }
       {
-        mode = "x";
-        keys = "<Leader>n";
-        desc = "+Gid";
+        mode = "n";
+        keys = "<Leader>g";
+        desc = "+Git";
+      }
+      {
+        mode = "n";
+        keys = "<Leader>f";
+        desc = "+File";
       }
     ];
   };

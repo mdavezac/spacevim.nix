@@ -26,6 +26,18 @@
           desc = "Search buffer for text";
         };
       };
+      "<leader>c/" = {
+        action = "lsp_workspace_symbols";
+        options = {
+          desc = "Search workspace for symbol";
+        };
+      };
+      "<leader>cD" = {
+        action = "lsp_workspace_diagnostics";
+        options = {
+          desc = "Search workspace for diagnostic";
+        };
+      };
     };
   };
 }

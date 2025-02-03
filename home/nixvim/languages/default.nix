@@ -20,4 +20,49 @@
       textobject = "gc";
     };
   };
+  programs.nixvim.plugins.neotest = {
+    lazyLoad.settings = {
+      ft = ["rust" "python"];
+      after.__raw = ''
+        function()
+            require("neotest").setup({ adapters = { require("neotest-python") } })
+        end
+      '';
+      cmd = "Neotest";
+      keys = [
+        {
+          __unkeyed-1 = "<leader>cs";
+          __unkeyed-2 = "<CMD>Neotest summary<CR>";
+          desc = "Test Summary";
+        }
+        {
+          __unkeyed-1 = "<leader>ct";
+          __unkeyed-2.__raw = ''
+            function()
+                require("neotest").run.run()
+            end
+          '';
+          desc = "Run nearest test";
+        }
+        {
+          __unkeyed-1 = "<leader>cT";
+          __unkeyed-2.__raw = ''
+            function()
+                require("neotest").run.stop()
+            end
+          '';
+          desc = "Stop test";
+        }
+        {
+          __unkeyed-1 = "<leader>cF";
+          __unkeyed-2.__raw = ''
+            function()
+                require("neotest").run.run(vim.fn.expand("%"))
+            end
+          '';
+          desc = "Run test file";
+        }
+      ];
+    };
+  };
 }

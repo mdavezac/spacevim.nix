@@ -17,7 +17,7 @@
           "nui.nvim"
         ];
       };
-      byteCompileLua.enable = true;
+      byteCompileLua.enable = false;
       # viAlias = true;
       # vimAlias = true;
       # luaLoader.enable = true;

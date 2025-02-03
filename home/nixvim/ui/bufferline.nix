@@ -14,7 +14,7 @@
       always_show_bufferline = false;
       close_command.__raw = ''
         function(n)
-            require("Snacks").bufdelete(n)
+            require("snacks").bufdelete(n)
         end
       '';
       diagnostics = "nvim_lsp";
