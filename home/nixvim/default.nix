@@ -16,6 +16,7 @@
           "blink.compat"
           "nvim-lspconfig"
           "nui.nvim"
+          "neotest-python"
         ];
       };
       byteCompileLua.enable = false;

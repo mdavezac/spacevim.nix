@@ -23,11 +23,6 @@
   programs.nixvim.plugins.neotest = {
     lazyLoad.settings = {
       ft = ["rust" "python"];
-      after.__raw = ''
-        function()
-            require("neotest").setup({ adapters = { require("neotest-python") } })
-        end
-      '';
       cmd = "Neotest";
       keys = [
         {

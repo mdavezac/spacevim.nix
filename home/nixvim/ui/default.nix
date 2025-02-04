@@ -23,6 +23,18 @@
       options.silent = true;
     }
     {
+      key = "<leader>ud";
+      action = "<cmd>Noice dismiss<enter>";
+      options.desc = "Dismiss notifications";
+      options.silent = true;
+    }
+    {
+      key = "<leader>ur";
+      action = "<cmd>new | put =split(&runtimepath, ',')<enter>";
+      options.desc = "Show runtimepaths";
+      options.silent = true;
+    }
+    {
       key = "<leader>bD";
       action.__raw = ''
         function(n)

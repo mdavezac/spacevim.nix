@@ -38,7 +38,7 @@
         }
       ];
       "__unkeyed-2.recent_files_current_directory" = {
-        __raw = "require('mini.starter').sections.recent_files(5, false)";
+        __raw = "require('mini.starter').sections.recent_files(5, true)";
       };
     };
   };

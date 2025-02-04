@@ -87,6 +87,11 @@
       }
       {
         mode = "n";
+        keys = "<Leader>u";
+        desc = "+UI";
+      }
+      {
+        mode = "n";
         keys = "<Leader>b";
         desc = "+Buffer";
       }

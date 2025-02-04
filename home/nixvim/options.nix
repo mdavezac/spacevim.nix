@@ -14,6 +14,7 @@
     };
 
     opts = {
+      sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,terminal";
       updatetime = 100; # Faster completion
       relativenumber = true; # Relative line numbers
       number = true; # Display the absolute line number of the current line

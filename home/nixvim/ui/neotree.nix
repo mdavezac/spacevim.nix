@@ -7,7 +7,14 @@
     autoCleanAfterSessionRestore = true;
     closeIfLastWindow = true;
     sources = ["filesystem" "buffers" "git_status" "document_symbols"];
-    extraOptions.open_files_do_not_replace_types = ["terminal" "Trouble" "trouble" "qf" "Outline"];
+    extraOptions.open_files_do_not_replace_types = [
+      "terminal"
+      "Trouble"
+      "trouble"
+      "qf"
+      "Outline"
+      "Neotest Summary"
+    ];
     filesystem = {
       followCurrentFile.enabled = true;
       bindToCwd = true;
