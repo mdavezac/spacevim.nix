@@ -9,7 +9,6 @@
     ./neotree.nix
     ./dashboard.nix
   ];
-  programs.nixvim.colorschemes.base16.enable = true;
   programs.nixvim.plugins = {
     notify.enable = true;
     persistence.enable = true;

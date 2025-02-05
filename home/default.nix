@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./shell.nix
+    ./shell
     # ./niri.nix
     ./hyprland.nix
     ./nixvim

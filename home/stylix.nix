@@ -13,7 +13,7 @@
       };
     in
       pkgs.fetchurl winter;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/material.yaml";
     polarity = "dark";
     fonts.monospace.name = "Hasklug Nerd Font";
     fonts.monospace.package = pkgs.hasklig;
