@@ -13,8 +13,13 @@
       };
     in
       pkgs.fetchurl winter;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/material.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/onedark.yaml";
     polarity = "dark";
+    targets.nushell.enable = true;
+    targets.nixvim.enable = true;
+    targets.nixvim.plugin = "mini.base16";
+    targets.zellij.enable = true;
+    targets.bat.enable = true;
     fonts.monospace.name = "Hasklug Nerd Font";
     fonts.monospace.package = pkgs.hasklig;
     fonts.sizes.applications = 11;

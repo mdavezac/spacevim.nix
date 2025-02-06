@@ -11,10 +11,14 @@
     configFile.source = ./config.nu;
     environmentVariables.SHELL = "nu";
     envFile.source = ./env.nu;
+    shellAliases.vi = "nvim";
+    shellAliases.vim = "nvim";
+    shellAliases.cat = "bat";
   };
 
   programs.bat.enable = true;
   programs.ripgrep.enable = true;
+  programs.lazygit.enable = true;
 
   programs.neovim = {
     enable = !config.programs.nixvim.enable;

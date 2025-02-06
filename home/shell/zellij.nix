@@ -18,7 +18,7 @@
     on_force_close = "detach";
     simplified_ui = true;
     pane_frames = false;
-    theme = "stylix";
+    theme = "default";
     default_mode = "locked";
     scroll_buffer_size = 10000;
     scrollback_editor = "nvim";
