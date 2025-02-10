@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   programs.zellij.enable = true;
   programs.zellij.settings = {
     default_shell = "nu";
@@ -211,7 +211,7 @@
         };
       };
       "shared_except \"locked\" \"renametab\" \"renamepane\"" = {
-        "bind \"Alt g\"".SwitchToMode = "locked";
+        "bind \"Ctrl g\"".SwitchToMode = "locked";
         "bind \"Alt q\"".Quit = {};
       };
       "shared_except \"locked\" \"entersearch\"" = {
