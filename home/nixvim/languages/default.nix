@@ -7,6 +7,7 @@
     ./rust.nix
     ./python.nix
     ./lean.nix
+    ./cpp.nix
   ];
   programs.nixvim.plugins = {
     treesitter.enable = true;
