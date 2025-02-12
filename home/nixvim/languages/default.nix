@@ -10,6 +10,63 @@
   ];
   programs.nixvim.plugins = {
     treesitter.enable = true;
+    treesitter.settings = {
+      highlights.enable = true;
+      indent.enable = true;
+      incremental_selection = {
+        enable = true;
+        init_selection = "<C-space>";
+        node_incremental = "<C-space>";
+        scope_incremental = false;
+        node_decremental = "<bs>";
+      };
+    };
+    treesitter-textobjects.enable = true;
+    treesitter-textobjects.move = {
+      enable = true;
+      gotoNextStart = {
+        "]f" = "@function.outer";
+        "]c" = "@class.outer";
+        "]a" = "@parameter.inner";
+      };
+      gotoNextEnd = {
+        "]F" = "@function.outer";
+        "]C" = "@class.outer";
+        "]A" = "@parameter.inner";
+      };
+      gotoPreviousStart = {
+        "[f" = "@function.outer";
+        "[c" = "@class.outer";
+        "[a" = "@parameter.inner";
+      };
+      gotoPreviousEnd = {
+        "[F" = "@function.outer";
+        "[C" = "@class.outer";
+        "[A" = "@parameter.inner";
+      };
+    };
+    mini.modules.ai = {
+      enable = true;
+      n_lines = 500;
+      custom_textobjects.__raw = ''
+        {
+            o = require('mini.ai').gen_spec.treesitter({ -- code block
+              a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+              i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+            }),
+            f = require('mini.ai').gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
+            c = require('mini.ai').gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
+            t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
+            d = { "%f[%d]%d+" }, -- digits
+            e = { -- Word with case
+              { "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
+              "^().*()$",
+            },
+            u = require('mini.ai').gen_spec.function_call(), -- u for "Usage"
+            U = require('mini.ai').gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
+        }
+      '';
+    };
     treesitter-context.enable = !config.programs.nixvim.plugins.navic.enable;
     navic.enable = true;
     mini.modules.comment = {

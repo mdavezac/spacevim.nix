@@ -4,14 +4,14 @@
     default_shell = "nu";
     session_serialization = false;
     plugins = {
-      compact-bar._props.location = "zellij:compact-bar";
-      configuration._props.location = "zellij:configuration";
+      # compact-bar._props.location = "zellij:compact-bar";
+      # configuration._props.location = "zellij:configuration";
       filepicker._props.location = "zellij:strider";
-      filepicker.cwd = "~/";
-      plugin-manager._props.location = "zellij:plugin-manager";
+      filepicker.cwd = ".";
+      # plugin-manager._props.location = "zellij:plugin-manager";
       session-manager._props.location = "zellij:session-manager";
       status-bar._props.location = "zellij:status-bar";
-      strider._props.location = "zellij:strider";
+      # strider._props.location = "zellij:strider";
       welcome-screen._props.location = "zellij:session-manager";
       welcome-screen.welcome_screen = true;
     };
