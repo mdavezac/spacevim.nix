@@ -91,7 +91,7 @@ return {
 		ft = { "cmake", "cpp" },
 		keys = {
 			{ "<leader>cb", "<CMD>CMakeBuild<CR>", desc = "Build" },
-			{ "<leader>cs", "<CMD>CMakeSettings<CR>", desc = "CMake Settings" },
+			{ "<leader>cg", "<CMD>CMakeSettings<CR>", desc = "CMake Settings" },
 			{ "<leader>cS", "<CMD>CMakeStopExecutor<CR>", desc = "Stop CMake" },
 			{ "<leader>cC", "<CMD>CMakeSelectConfigurePreset<CR>", desc = "CMake Configure" },
 			{ "<leader>cq", "<CMD>CMakeClose<CR>", desc = "Close CMake Window" },
