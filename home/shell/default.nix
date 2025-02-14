@@ -79,6 +79,7 @@
     enable = true;
     mutableTrust = true;
     mutableKeys = true;
+    settings.pinentry-mode = "loopback";
   };
 
   programs.atuin = {
@@ -114,5 +115,8 @@
     enable = true;
     enableNushellIntegration = true;
     defaultCacheTtl = 80000;
+    extraConfig = ''
+      allow-loopback-pinentry
+    '';
   };
 }
