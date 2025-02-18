@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   imports = [
     ./mini-clue.nix
     ./lualine.nix
@@ -13,6 +13,34 @@
     notify.enable = true;
     persistence.enable = true;
     mini.modules.icons = {};
+    grug-far = {
+      enable = true;
+      settings = {
+        engine = "ripgrep";
+        enines.ripgrep = {
+          path = "${pkgs.ripgrep}/bin/rg";
+          showReplaceDiff = true;
+        };
+      };
+      lazyLoad.settings.keys = [
+        {
+          __unkeyed-1 = "<leader>r";
+          __unkeyed-2.__raw = ''
+            function()
+              local grug = require("grug-far")
+              local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+              grug.open({
+                transient = true,
+                prefills = {
+                  filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+                },
+              })
+            end
+          '';
+          desc = "Search & Replace";
+        }
+      ];
+    };
   };
   programs.nixvim.keymaps = [
     {

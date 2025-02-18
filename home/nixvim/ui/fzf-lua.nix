@@ -32,6 +32,12 @@
           desc = "Search workspace for symbol";
         };
       };
+      "<leader>cR" = {
+        action = "lsp_references";
+        options = {
+          desc = "Search workspace for symbol";
+        };
+      };
       "<leader>cD" = {
         action = "lsp_workspace_diagnostics";
         options = {

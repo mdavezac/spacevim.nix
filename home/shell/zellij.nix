@@ -24,7 +24,7 @@
     scrollback_editor = "nvim";
     keybinds = {
       _props.clear-defaults = true;
-      locked."bind \"Ctrl g\"".SwitchToMode = "normal";
+      locked."bind \"Ctrl b\"".SwitchToMode = "normal";
       pane = {
         "bind \"left\"".MoveFocus = "left";
         "bind \"down\"".MoveFocus = "down";
@@ -211,7 +211,7 @@
         };
       };
       "shared_except \"locked\" \"renametab\" \"renamepane\"" = {
-        "bind \"Ctrl g\"".SwitchToMode = "locked";
+        "bind \"Ctrl b\"".SwitchToMode = "locked";
         "bind \"Alt q\"".Quit = {};
       };
       "shared_except \"locked\" \"entersearch\"" = {

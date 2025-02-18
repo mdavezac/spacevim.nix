@@ -3,7 +3,6 @@
     plugins.neogit = {
       enable = true;
       lazyLoad.settings.cmd = "Neogit";
-      lazyLoad.settings.keys = ["<leader>gs"];
     };
     plugins.gitsigns = {
       enable = true;
