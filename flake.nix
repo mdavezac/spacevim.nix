@@ -100,6 +100,7 @@
       neotest-haskell.overlays.default
       haskell-tools.overlays.default
       (prev: final: {
+        heroic = inputs.unstable.legacyPackages.${system}.heroic;
         vimPlugins =
           final.vimPlugins
           // {
