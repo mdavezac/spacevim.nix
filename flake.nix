@@ -183,35 +183,45 @@
             }
           ];
         };
-      homeConfigurations."mdavezac" = let
+      homeConfigurations = let
         system = "x86_64-linux";
         pkgs = import nixpkgs {
           inherit system;
           overlays = mk-overlays system nixpkgs;
         };
-      in
-        inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            inputs.nixvim.homeManagerModules.nixvim
-            inputs.stylix.homeManagerModules.stylix
-            {
-              home.username = "mdavezac";
-              home.homeDirectory = "/home/mdavezac";
-              home.stateVersion = "24.11";
-              programs.home-manager.enable = true;
-              stylix.targets.gnome.enable = false;
-              stylix.targets.gtk.enable = false;
-              stylix.targets.kde.enable = false;
-              stylix.targets.xfce.enable = false;
-              imports = [
-                {services.gpg-agent.pinentryPackage = pkgs.pinentry-curses;}
-                ./home/shell
-                ./home/nixvim
-                ./home/stylix.nix
+        modules = [
+          inputs.nixvim.homeManagerModules.nixvim
+          inputs.stylix.homeManagerModules.stylix
+          {
+            home.stateVersion = "24.11";
+            programs.home-manager.enable = true;
+            stylix.targets.gnome.enable = false;
+            stylix.targets.gtk.enable = false;
+            stylix.targets.kde.enable = false;
+            stylix.targets.xfce.enable = false;
+            imports = [
+              {services.gpg-agent.pinentryPackage = pkgs.pinentry-curses;}
+              ./home/shell
+              ./home/nixvim
+              ./home/stylix.nix
+            ];
+          }
+        ];
+        configuration = name:
+          inputs.home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules =
+              modules
+              ++ [
+                {
+                  home.username = name;
+                  home.homeDirectory = "/home/${name}";
+                }
               ];
-            }
-          ];
-        };
+          };
+      in {
+        mac = configuration "mac";
+        mdavezac = configuration "mdavezac";
+      };
     };
 }
