@@ -13,7 +13,7 @@
       };
     in
       pkgs.fetchurl winter;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/onedark.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/chalk.yaml";
     polarity = "dark";
     targets.nushell.enable = true;
     targets.nixvim.enable = true;
