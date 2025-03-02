@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./mini-clue.nix
     ./lualine.nix
@@ -13,6 +17,11 @@
     notify.enable = true;
     persistence.enable = true;
     mini.modules.icons = {};
+    tmux-navigator = {
+      settings.disable_when_zoomed = 1;
+      settings.save_on_switch = 1;
+      enable = true;
+    };
     grug-far = {
       enable = true;
       settings = {

@@ -4,7 +4,7 @@
   config,
   ...
 }: {
-  imports = [./zellij.nix ./git.nix];
+  imports = [./zellij.nix ./git.nix ./tmux.nix];
   home.packages = [pkgs.devenv];
   programs.nushell = {
     enable = true;
