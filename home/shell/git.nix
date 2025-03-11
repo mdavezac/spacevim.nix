@@ -74,7 +74,8 @@
   services.gpg-agent = {
     enable = true;
     enableNushellIntegration = true;
-    defaultCacheTtl = 80000;
+    defaultCacheTtl = 1000000;
+    maxCacheTtl = 1000000;
     extraConfig = ''
       allow-loopback-pinentry
     '';
