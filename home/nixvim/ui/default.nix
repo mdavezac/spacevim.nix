@@ -92,6 +92,31 @@
       options.silent = true;
     }
     {
+      key = "<leader>w=";
+      action = "<C-w>=";
+      options.desc = "Equalize window sizes";
+    }
+    {
+      key = "<leader>wh";
+      action = "<C-w>h";
+      options.desc = "Focus left";
+    }
+    {
+      key = "<leader>wl";
+      action = "<C-w>l";
+      options.desc = "Focus right";
+    }
+    {
+      key = "<leader>wk";
+      action = "<C-w>k";
+      options.desc = "Focus up";
+    }
+    {
+      key = "<leader>wj";
+      action = "<C-w>j";
+      options.desc = "Focus down";
+    }
+    {
       key = "<C-h>";
       action = "<C-w>h";
     }

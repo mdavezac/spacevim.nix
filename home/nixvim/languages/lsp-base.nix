@@ -34,6 +34,10 @@
           action = "type_definition";
           desc = "Type Definition";
         };
+        "<leader>ca" = {
+          action = "code_action";
+          desc = "Code Action";
+        };
         "<leader>cr" = {
           action = "rename";
           desc = "Rename";

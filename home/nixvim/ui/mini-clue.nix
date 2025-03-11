@@ -105,6 +105,11 @@
         keys = "<Leader>f";
         desc = "+File";
       }
+      {
+        mode = "n";
+        keys = "<Leader>w";
+        desc = "+Window";
+      }
     ];
   };
 }
