@@ -20,7 +20,7 @@
             desc = "Build";
           }
           {
-            __unkeyed-1 = "<leader>cs";
+            __unkeyed-1 = "<leader>cg";
             __unkeyed-2 = "<CMD>CMakeSettings<CR>";
             desc = "CMake Settings";
           }
