@@ -165,6 +165,10 @@
             inputs.niri.nixosModules.niri
             ./system/configuration.nix
             {
+              nix.extraOptions = ''
+                trusted-users = root mdavezac
+              '';
+              programs.nix-ld.enable = true;
               nixpkgs.overlays = mk-overlays system nixpkgs;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

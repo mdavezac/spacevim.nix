@@ -97,9 +97,10 @@
   users.users.mdavezac = {
     isNormalUser = true;
     description = "Mayeul d'Avezac";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     shell = pkgs.nushell;
   };
+  virtualisation.docker.enable = true;
 
   programs.steam.enable = true;
   services.libinput.touchpad.naturalScrolling = false;
