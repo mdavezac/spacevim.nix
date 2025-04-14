@@ -51,7 +51,7 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   programs.niri.enable = false;
-  programs.hyprland.enable = true;
+  programs.hyprland.enable = false;
   programs.hyprlock.enable = config.programs.hyprland.enable;
   services.hypridle.enable = config.programs.hyprland.enable;
 
@@ -70,7 +70,7 @@
 
   services.blueman.enable = true;
   hardware.bluetooth.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -105,14 +105,19 @@
   programs.steam.enable = true;
   services.libinput.touchpad.naturalScrolling = false;
 
-  fonts.packages = [pkgs.nerdfonts pkgs.helvetica-neue-lt-std];
+  fonts.packages = [
+    pkgs.nerd-fonts.fira-code
+    pkgs.nerd-fonts.fira-mono
+    pkgs.nerd-fonts.hasklug
+    pkgs.helvetica-neue-lt-std
+  ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = [
-    pkgs.podman-tui
+    # pkgs.podman-tui
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   ];
 

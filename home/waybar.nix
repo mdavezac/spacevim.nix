@@ -1,8 +1,12 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   home.packages = [pkgs.pavucontrol];
 
   programs.waybar = {
-    enable = true;
+    enable = false;
     systemd.enable = true;
     settings.main-bar = {
       layer = "top";

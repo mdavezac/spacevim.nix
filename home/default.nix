@@ -43,6 +43,7 @@
     enable = true;
     languagePacks = ["en-US" "en-GB" "fr-FR"];
   };
+  stylix.targets.firefox.profileNames = ["default"];
 
   programs.rio = {
     enable = false;

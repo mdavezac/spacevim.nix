@@ -21,8 +21,8 @@
       settings = {
         keymap.preset = "enter";
         signature.enabled = true;
+        cmdline.sources = {};
         sources = {
-          cmdline.__empty = {};
           default = [
             "buffer"
             "calc"
