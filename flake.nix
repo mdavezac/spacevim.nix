@@ -155,6 +155,13 @@
     // {
       nixosConfigurations.loubakgou = let
         system = "x86_64-linux";
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {
+            allowUnfree = true;
+            allowUnfreePredicate = _: true;
+          };
+        };
       in
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -178,11 +185,11 @@
                   inputs.nixvim.homeManagerModules.nixvim
                   inputs.stylix.homeManagerModules.stylix
                   ./home
+                  {home.packages = [pkgs.google-chrome];}
                 ];
               };
 
               home-manager.backupFileExtension = "hm-backup";
-
               home-manager.extraSpecialArgs.rio-themes = inputs.rio-themes;
             }
           ];
