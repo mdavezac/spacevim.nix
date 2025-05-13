@@ -195,7 +195,7 @@
           ];
         };
       homeConfigurations = let
-        system = "x86_64-linux";
+        system = "aarch64-darwin";
         pkgs = import nixpkgs {
           inherit system;
           overlays = mk-overlays system nixpkgs;
@@ -211,10 +211,11 @@
             stylix.targets.kde.enable = false;
             stylix.targets.xfce.enable = false;
             imports = [
-              {services.gpg-agent.pinentryPackage = pkgs.pinentry-curses;}
+              # {services.gpg-agent.pinentryPackage = pkgs.pinentry-curses;}
               ./home/shell
               ./home/nixvim
               ./home/stylix.nix
+              ./home/ipython.nix
             ];
           }
         ];
@@ -226,13 +227,12 @@
               ++ [
                 {
                   home.username = name;
-                  home.homeDirectory = "/home/${name}";
+                  home.homeDirectory = "/Users/${name}";
                 }
               ];
           };
       in {
         mac = configuration "mac";
-        mdavezac = configuration "mdavezac";
       };
     };
 }

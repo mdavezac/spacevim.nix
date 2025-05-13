@@ -168,12 +168,12 @@ style = "green bold"
 disabled = true
 detect_extensions = []
 detect_files = [
-  "deno.json",
-  "deno.jsonc",
-  "mod.ts",
-  "deps.ts",
-  "mod.js",
-  "deps.js",
+    "deno.json",
+    "deno.jsonc",
+    "mod.ts",
+    "deps.ts",
+    "mod.js",
+    "deps.js",
 ]
 detect_folders = []
 
@@ -213,11 +213,11 @@ heuristic = true
 disabled = false
 detect_extensions = ["csproj", "fsproj", "xproj"]
 detect_files = [
-  "global.json",
-  "project.json",
-  "Directory.Build.props",
-  "Directory.Build.targets",
-  "Packages.props",
+    "global.json",
+    "project.json",
+    "Directory.Build.props",
+    "Directory.Build.targets",
+    "Packages.props",
 ]
 detect_folders = []
 
@@ -355,13 +355,13 @@ disabled = true
 not_capable_style = "bold red"
 detect_extensions = ["go"]
 detect_files = [
-  "go.mod",
-  "go.sum",
-  "go.work",
-  "glide.yaml",
-  "Gopkg.yml",
-  "Gopkg.lock",
-  ".go-version",
+    "go.mod",
+    "go.sum",
+    "go.work",
+    "glide.yaml",
+    "Gopkg.yml",
+    "Gopkg.lock",
+    ".go-version",
 ]
 detect_folders = ["Godeps"]
 
@@ -421,14 +421,12 @@ truncation_symbol = "…"
 disabled = true
 
 [hostname]
-aliases.ITW115710 = "🤖"
-aliases.sapientmac = "🧰"
 ssh_only = false
 ssh_symbol = "🌐 "
 trim_at = "."
 format = "[$ssh_symbol$hostname]($style) in "
 style = "green dimmed bold"
-disabled = false
+disabled = true
 
 [java]
 disabled = true
@@ -438,14 +436,14 @@ style = "red dimmed"
 symbol = "☕ "
 detect_extensions = ["java", "class", "jar", "gradle", "clj", "cljc"]
 detect_files = [
-  "pom.xml",
-  "build.gradle.kts",
-  "build.sbt",
-  ".java-version",
-  "deps.edn",
-  "project.clj",
-  "build.boot",
-  ".sdkmanrc",
+    "pom.xml",
+    "build.gradle.kts",
+    "build.sbt",
+    ".java-version",
+    "deps.edn",
+    "project.clj",
+    "build.boot",
+    ".sdkmanrc",
 ]
 detect_folders = []
 
@@ -650,13 +648,13 @@ style = "149 bold"
 disabled = true
 detect_extensions = ["pl", "pm", "pod"]
 detect_files = [
-  "Makefile.PL",
-  "Build.PL",
-  "cpanfile",
-  "cpanfile.snapshot",
-  "META.json",
-  "META.yml",
-  ".perl-version",
+    "Makefile.PL",
+    "Build.PL",
+    "cpanfile",
+    "cpanfile.snapshot",
+    "META.json",
+    "META.yml",
+    ".perl-version",
 ]
 detect_folders = []
 
@@ -707,13 +705,13 @@ symbol = "🐍 "
 disabled = true
 detect_extensions = ["py"]
 detect_files = [
-  "requirements.txt",
-  ".python-version",
-  "pyproject.toml",
-  "Pipfile",
-  "tox.ini",
-  "setup.py",
-  "__init__.py",
+    "requirements.txt",
+    ".python-version",
+    "pyproject.toml",
+    "Pipfile",
+    "tox.ini",
+    "setup.py",
+    "__init__.py",
 ]
 detect_folders = []
 

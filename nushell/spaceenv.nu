@@ -22,7 +22,7 @@ export alias roots = nix-store --gc --print-roots
 export alias cat = ^@bat@/bin/bat
 
 def session-names [] {
-  fd "" ~/sapient ~/personal ~/kagenova --max-depth 1 -t d | lines | each { $in | path basename } | uniq
+  fd "" ~/catapult ~/personal ~/kagenova --max-depth 1 -t d | lines | each { $in | path basename } | uniq
 }
 
 export def session [name: string@session-names] {

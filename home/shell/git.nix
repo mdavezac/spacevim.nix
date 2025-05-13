@@ -20,10 +20,10 @@
     in ''! ${git} config user.name "''$(${git} config user.''$1.name)" && ${git} config user.email "''$(${git} config user.''$1.email)" && ${git} config user.signingkey "''$(${git} config user.''$1.signingkey)"'';
     ignores = lib.strings.splitString "\n" (builtins.readFile ../../git/gitignore);
     extraConfig = {
-      "user \"roke\"" = {
+      "user \"catapult\"" = {
         name = "Mayeul d'Avezac";
-        email = "mayeul.davezacdecastera@roke.co.uk";
-        signingKey = "1CEC2DC082392DED";
+        email = "2745737+mdavezac@users.noreply.github.com";
+        signingKey = "10658C2507D3A954";
       };
       "user \"gitlab\"" = {
         name = "Mayeul d'Avezac";
@@ -70,10 +70,12 @@
     enable = true;
     mutableTrust = true;
     mutableKeys = true;
-    settings.pinentry-mode = "loopback";
+    settings = lib.mkIf (pkgs.system != "aarch64-darwin") {
+      pinentry-mode = "loopback";
+    };
   };
   services.gpg-agent = {
-    enable = true;
+    enable = pkgs.system != "aarch64-darwin";
     enableNushellIntegration = true;
     defaultCacheTtl = 1000000;
     maxCacheTtl = 1000000;
