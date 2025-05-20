@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./mini-clue.nix
     ./lualine.nix
@@ -12,6 +8,7 @@
     ./flash.nix
     ./neotree.nix
     ./dashboard.nix
+    ./ai.nix
   ];
   programs.nixvim.plugins = {
     notify.enable = true;

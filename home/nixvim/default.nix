@@ -18,6 +18,7 @@
           "nvim-lspconfig"
           "nui.nvim"
           "neotest-python"
+          "avante.nvim"
         ];
       };
       byteCompileLua.enable = false;

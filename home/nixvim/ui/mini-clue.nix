@@ -110,6 +110,11 @@
         keys = "<Leader>w";
         desc = "+Window";
       }
+      {
+        mode = "n";
+        keys = "<Leader>a";
+        desc = "+AI";
+      }
     ];
   };
 }

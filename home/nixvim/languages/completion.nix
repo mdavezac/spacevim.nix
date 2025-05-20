@@ -1,4 +1,4 @@
-{lib, ...}: {
+{
   programs.nixvim.plugins = {
     cmp-emoji.enable = true;
     cmp-git.enable = true;
@@ -24,6 +24,7 @@
         cmdline.sources = {};
         sources = {
           default = [
+            "avante"
             "buffer"
             "calc"
             "emoji"
@@ -34,6 +35,10 @@
             "spell"
           ];
           providers = {
+            avante = {
+              module = "blink-cmp-avante";
+              name = "Avante";
+            };
             emoji = {
               name = "emoji";
               module = "blink.compat.source";

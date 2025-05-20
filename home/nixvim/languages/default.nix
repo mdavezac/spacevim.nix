@@ -10,11 +10,12 @@
     ./cpp.nix
     ./toml.nix
     ./yaml.nix
+    ./markdown.nix
   ];
   programs.nixvim.plugins = {
     treesitter.enable = true;
     treesitter.settings = {
-      highlights.enable = true;
+      highlight.enable = true;
       indent.enable = true;
       incremental_selection = {
         enable = true;
