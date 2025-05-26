@@ -113,6 +113,7 @@
   ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.cudaSupport = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

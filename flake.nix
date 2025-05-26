@@ -176,6 +176,7 @@
                 trusted-users = root mdavezac
               '';
               programs.nix-ld.enable = true;
+              # programs.nix-ld.libraries = [];
               nixpkgs.overlays = mk-overlays system nixpkgs;
               home-manager.useUserPackages = true;
 
