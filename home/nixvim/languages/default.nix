@@ -11,6 +11,7 @@
     ./toml.nix
     ./yaml.nix
     ./markdown.nix
+    ./julia.nix
   ];
   programs.nixvim.plugins = {
     treesitter.enable = true;
