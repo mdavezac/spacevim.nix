@@ -7,8 +7,9 @@
     lsp.servers.ruff.enable = true;
     lsp.servers.pyright.enable = true;
     conform-nvim.enable = true;
-    conform-nvim.settings.formatters_by_ft.python = ["ruff_format"];
-    conform-nvim.settings.formatters.ruff.command = lib.getExe pkgs.ruff;
+    conform-nvim.settings.formatters_by_ft.python = ["ruff_organize_imports" "ruff_format"];
+    conform-nvim.settings.formatters.ruff_format.command = lib.getExe pkgs.ruff;
+    conform-nvim.settings.formatters.ruff_organize_imports.command = lib.getExe pkgs.ruff;
     neotest = {
       enable = true;
       adapters.python.enable = true;
