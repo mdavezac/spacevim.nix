@@ -17,7 +17,13 @@
     };
     conform-nvim.settings.formatters.runic = {
       command = "julia";
-      args = ["--project=@runic" "-e" "using Runic; exit(Runic.main(ARGS))"];
+      args = [
+        "--project=@runic"
+        "--startup-file=no"
+        "--history-file=no"
+        "-e"
+        "using Runic; exit(Runic.main(ARGS))"
+      ];
     };
     conform-nvim.settings.formatters_by_ft.julia = ["runic"];
     conform-nvim.settings.default_format_opts.timeout_ms = 10000;
