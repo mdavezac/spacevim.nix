@@ -186,7 +186,12 @@
                   inputs.nixvim.homeManagerModules.nixvim
                   inputs.stylix.homeManagerModules.stylix
                   ./home
-                  {home.packages = [pkgs.google-chrome];}
+                  {
+                    home.packages = [
+                      pkgs.google-chrome
+                      pkgs.dwarf-fortress-packages.dwarf-fortress-full
+                    ];
+                  }
                 ];
               };
 
