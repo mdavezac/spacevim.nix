@@ -184,7 +184,7 @@
               home-manager.users.mdavezac = {
                 imports = [
                   inputs.nixvim.homeManagerModules.nixvim
-                  inputs.stylix.homeManagerModules.stylix
+                  inputs.stylix.homeModules.stylix
                   ./home
                   {
                     home.packages = [
@@ -208,7 +208,7 @@
         };
         modules = [
           inputs.nixvim.homeManagerModules.nixvim
-          inputs.stylix.homeManagerModules.stylix
+          inputs.stylix.homeModules.stylix
           {
             home.stateVersion = "24.11";
             programs.home-manager.enable = true;

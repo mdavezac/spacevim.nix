@@ -19,6 +19,7 @@
           "nui.nvim"
           "neotest-python"
           "avante.nvim"
+          "snacks.nvim"
         ];
       };
       byteCompileLua.enable = false;

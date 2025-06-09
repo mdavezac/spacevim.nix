@@ -5,11 +5,20 @@
     plugins.avante.enable = true;
     plugins.avante.package = pkgs.vimPlugins.avante-nvim;
     plugins.avante.settings = {
-      claude = {
+      providers.claude = {
         endpoint = "https://api.anthropic.com";
-        max_tokens = 4096;
         model = "claude-3-5-sonnet-20240620";
-        temperature = 0;
+        extra_request_body.temperature = 0;
+        extra_request_body.max_tokens = 4096;
+      };
+      providers.groq = {
+        __inherited_from = "openai";
+        api_key_name = "GROQ_API_KEY";
+        endpoint = "https://api.groq.com/openai/v1/";
+        model = "llama-3.3-70b-versatile";
+        disable_tools = true;
+        extra_request_body.temperature = 1;
+        extra_request_body.max_tokens = 32768;
       };
       diff = {
         autojump = true;
