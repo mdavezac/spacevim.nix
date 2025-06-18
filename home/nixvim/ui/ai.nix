@@ -7,7 +7,7 @@
     plugins.avante.settings = {
       providers.claude = {
         endpoint = "https://api.anthropic.com";
-        model = "claude-3-5-sonnet-20240620";
+        model = "claude-3-5-haiku-20241022";
         extra_request_body.temperature = 0;
         extra_request_body.max_tokens = 4096;
       };
