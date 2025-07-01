@@ -25,6 +25,7 @@
         ignored.async-recursion = ["async_recursion"];
       };
       files .excludeDirs = [".git" ".local" ".direnv" ".cache" "target"];
+      settings.rust-analyzer.checkOnSave.command = "clippy";
     };
   };
 }
