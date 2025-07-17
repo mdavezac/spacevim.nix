@@ -186,7 +186,7 @@ $env.config = {
 
 
 def session-names [] {
-  fd "" ...([ "~/catapult" "~/personal" "~/kagenova"] | each { path expand } | filter { path exists }) --max-depth 1 -t d | lines | each { $in | path basename } | uniq
+  fd "" ...([ "~/catapult" "~/personal" "~/kagenova"] | each { path expand } | where { path exists }) --max-depth 1 -t d | lines | each { $in | path basename } | uniq
 }
 
 export def session [name: string@session-names] {
