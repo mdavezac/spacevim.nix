@@ -7,7 +7,7 @@
     lsp.servers.terraformls = {
       enable = true;
       package = pkgs.tofu-ls;
-      cmd = ["opentofu-ls" "serve"];
+      cmd = ["${pkgs.tofu-ls}/bin/tofu-ls" "serve"];
     };
     conform-nvim = {
       enable = true;
