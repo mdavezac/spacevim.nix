@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   programs.tmux = {
     enable = true;
     escapeTime = 10;
@@ -12,7 +8,7 @@
     shortcut = "b";
     sensibleOnTop = true;
     mouse = true;
-    terminal = "xterm-256color";
+    terminal = "tmux-256color";
     plugins = [pkgs.tmuxPlugins.vim-tmux-navigator];
     extraConfig =
       ''

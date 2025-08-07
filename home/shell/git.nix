@@ -4,7 +4,10 @@
   ...
 }: {
   home.packages = [pkgs.glab];
-  programs.lazygit.enable = true;
+  programs.lazygit = {
+    enable = true;
+    settings.git.overrideGpg = true;
+  };
   programs.gh = {
     enable = true;
     gitCredentialHelper.enable = true;

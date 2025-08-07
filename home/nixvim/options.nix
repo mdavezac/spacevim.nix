@@ -64,5 +64,8 @@
         event = ["FileType"];
       }
     ];
+    diagnostic.settings.virtual_lines = true;
+    diagnostic.settings.virtual_text = false;
+    diagnostic.settings.signs = true;
   };
 }

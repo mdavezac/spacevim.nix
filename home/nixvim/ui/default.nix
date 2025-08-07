@@ -8,7 +8,7 @@
     ./flash.nix
     ./neotree.nix
     ./dashboard.nix
-    ./ai.nix
+    # ./ai.nix
   ];
   programs.nixvim.plugins = {
     notify.enable = true;

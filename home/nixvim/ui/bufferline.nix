@@ -6,6 +6,7 @@
     settings.notifier.enable = false;
     settings.statuscolumn.enable = false;
     settings.words.enable = false;
+    settings.image.enable = true;
   };
 
   programs.nixvim.plugins.bufferline = {
