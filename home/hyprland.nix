@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [./waybar.nix];
-  wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland.enable = false;
   programs.wofi.enable = true;
   services.hypridle.enable = true;
   services.hyprpaper.enable = true;
