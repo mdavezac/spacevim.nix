@@ -14,6 +14,7 @@
     ./julia.nix
     ./terraform.nix
     ./typescript.nix
+    ./rest.nix
   ];
   programs.nixvim.plugins = {
     treesitter.enable = true;
