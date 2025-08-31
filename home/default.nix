@@ -69,6 +69,14 @@
     };
   };
 
+  programs.ghostty = {
+    enable = true;
+    settings.keybind = [
+      "f11=toggle_fullscreen"
+      "f12=toggle_window_decorations"
+    ];
+  };
+
   services.gpg-agent.pinentryPackage = pkgs.pinentry-gnome3;
 
   # This value determines the home Manager release that your

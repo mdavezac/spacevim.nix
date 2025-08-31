@@ -191,6 +191,7 @@
                       pkgs.google-chrome
                       pkgs.dwarf-fortress-packages.dwarf-fortress-full
                     ];
+                    stylix.targets.ghostty.enable = true;
                   }
                 ];
               };

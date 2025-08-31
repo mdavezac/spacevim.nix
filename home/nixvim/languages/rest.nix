@@ -1,8 +1,9 @@
 {
-  programs.nixvim.plugins.kulala = {
+  programs.nixvim.plugins.rest = {
     enable = true;
     autoLoad = false;
-    settings.global_keymaps = true;
+    settings.request.skip_ssl_verification = true;
+    settings.response.hooks.format = true;
     lazyLoad.settings.ft = ["http" "rest"];
   };
 }
