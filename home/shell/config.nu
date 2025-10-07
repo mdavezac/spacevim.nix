@@ -190,7 +190,7 @@ def session-names [] {
 }
 
 export def session [name: string@session-names] {
-    let locations  = fd $"($name)$" -t d ~/ --maxdepth 2 | lines
+    let locations  = fd $"($name)$" -t d ~/ --maxdepth 2 -E Library | lines
     if ($locations | length) > 0 {
     let location = $locations | first
     let session = $location | path basename

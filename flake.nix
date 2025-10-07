@@ -183,7 +183,7 @@
               # TODO replace ryan with your own username
               home-manager.users.mdavezac = {
                 imports = [
-                  inputs.nixvim.homeManagerModules.nixvim
+                  inputs.nixvim.homeModules.nixvim
                   inputs.stylix.homeModules.stylix
                   ./home
                   {
@@ -208,7 +208,7 @@
           overlays = mk-overlays system nixpkgs;
         };
         modules = [
-          inputs.nixvim.homeManagerModules.nixvim
+          inputs.nixvim.homeModules.nixvim
           inputs.stylix.homeModules.stylix
           {
             home.stateVersion = "24.11";

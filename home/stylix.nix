@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  polarity = "dark";
+  base16Scheme =
+    if polarity == "dark"
+    then "chalk"
+    else "chicago-day";
+in {
   stylix = {
     enable = true;
     autoEnable = true;
@@ -13,13 +19,14 @@
       };
     in
       pkgs.fetchurl winter;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/chalk.yaml";
-    polarity = "dark";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/${base16Scheme}.yaml";
+    polarity = polarity;
     targets.nushell.enable = true;
     targets.nixvim.enable = true;
     targets.nixvim.plugin = "mini.base16";
     targets.zellij.enable = true;
     targets.bat.enable = true;
+    targets.ghostty.enable = true;
     fonts.monospace.name = "Hasklug Nerd Font";
     fonts.monospace.package = pkgs.hasklig;
     fonts.sizes.applications = 11;
