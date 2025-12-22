@@ -194,7 +194,7 @@ export def session [name: string@session-names] {
     if ($locations | length) > 0 {
     let location = $locations | first
     let session = $location | path basename
-      # cd $location; zellij attach -c $session; cd -
+      # zellij attach -c $session options --default-cwd $location
       tmux new-session -As $session -c $location
     } else {
       echo $"Could not find session ($name)"
