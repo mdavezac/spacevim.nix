@@ -16,6 +16,7 @@
     ./typescript.nix
     ./rest.nix
     ./json.nix
+    ./unison.nix
   ];
   programs.nixvim.plugins = {
     treesitter.enable = true;

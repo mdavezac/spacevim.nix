@@ -30,6 +30,12 @@
     lazy-nvim.flake = false;
     lazy-dist.url = "github:LazyVim/LazyVim";
     lazy-dist.flake = false;
+
+    unison-lang = {
+      url = "github:ceedubs/unison-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # iron-nvim.url = "github:hkupty/iron.nvim";
     # iron-nvim.flake = false;
     # nvim-lspconfig.url = "github:neovim/nvim-lspconfig";
@@ -95,6 +101,7 @@
       # (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
       (final: previous: {nuscripts = inputs.nuscripts;})
       (final: previous: {vtsls = (import ./vtsls/default.nix {inherit pkgs;})."@vtsls/language-server";})
+      inputs.unison-lang.overlays.default
       #  rustaceanvim.overlays.default
       # neotest-haskell.overlays.default
       # haskell-tools.overlays.default
@@ -218,7 +225,7 @@
             stylix.targets.kde.enable = false;
             stylix.targets.xfce.enable = false;
             imports = [
-              # {services.gpg-agent.pinentryPackage = pkgs.pinentry-curses;}
+              # {services.gpg-agent.pinentryPackage = s.defaultpkgs.pinentry-curses;}
               ./home/shell
               ./home/nixvim
               ./home/stylix.nix
