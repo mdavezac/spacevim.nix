@@ -17,14 +17,14 @@
         "Neotest Summary"
       ];
       filesystem = {
-        followCurrentFile.enabled = true;
-        bindToCwd = true;
-        useLibuvFileWatcher = true;
+        follow_current_file.enabled = true;
+        bind_to_cwd = true;
+        use_libuv_file_watcher = true;
       };
-      documentSymbols.followCursor = true;
+      document_symbols.follow_cursor = true;
       buffers = {
-        followCurrentFile.enabled = true;
-        bindToCwd = true;
+        follow_current_file.enabled = true;
+        bind_to_cwd = true;
       };
     };
   };
