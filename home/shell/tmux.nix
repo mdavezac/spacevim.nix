@@ -9,6 +9,7 @@
     sensibleOnTop = true;
     mouse = true;
     terminal = "tmux-256color";
+    historyLimit = 10000;
     plugins = [pkgs.tmuxPlugins.vim-tmux-navigator];
     extraConfig =
       ''
