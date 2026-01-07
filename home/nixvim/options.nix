@@ -49,21 +49,21 @@
       cmdheight = 0;
     };
 
-    autoCmd = [
-      {
-        callback.__raw = ''
-          function()
-            if require("nvim-treesitter.parsers").has_parser() then
-              vim.opt.foldmethod = "expr"
-              vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-            else
-              vim.opt.foldmethod = "syntax"
-            end
-          end
-        '';
-        event = ["FileType"];
-      }
-    ];
+    #    autoCmd = [
+    #      {
+    #        callback.__raw = ''
+    #          function()
+    #            if require("nvim-treesitter.parsers").has_parser() then
+    #              virtual_linesim.opt.foldmethod = "expr"
+    #              vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    #            else
+    #              vim.opt.foldmethod = "syntax"
+    #            end
+    #          end
+    #        '';
+    #        event = ["FileType"];
+    #      }
+    #    ];
     diagnostic.settings.virtual_lines = true;
     diagnostic.settings.virtual_text = false;
     diagnostic.settings.signs = true;

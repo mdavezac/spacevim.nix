@@ -18,11 +18,12 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    aliases.identity = let
-      git = "${pkgs.git}/bin/git";
-    in ''! ${git} config user.name "''$(${git} config user.''$1.name)" && ${git} config user.email "''$(${git} config user.''$1.email)" && ${git} config user.signingkey "''$(${git} config user.''$1.signingkey)"'';
     ignores = lib.strings.splitString "\n" (builtins.readFile ../../git/gitignore);
-    extraConfig = {
+    settings = {
+      aliases.identity = let
+        git = "${pkgs.git}/bin/git";
+      in ''! ${git} config user.name "''$(${git} config user.''$1.name)" && ${git} config user.email "''$(${git} config user.''$1.email)" && ${git} config user.signingkey "''$(${git} config user.''$1.signingkey)"'';
+
       "user \"catapult\"" = {
         name = "Mayeul d'Avezac";
         email = "2745737+mdavezac@users.noreply.github.com";
@@ -46,7 +47,7 @@
       commit.gpgsign = true;
       color.ui = true;
       core.autoclrf = true;
-      core.commentChar = "\"";
+      core.commentChar = ";";
       diff.colorMoved = true;
       diff.algorithm = "histogram";
       diff.mnemonicPrefix = true;

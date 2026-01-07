@@ -18,7 +18,7 @@
     blink-compat.flake = false;
 
     nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    # nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     rio-themes.url = "github:mbadolato/iTerm2-Color-Schemes";
     rio-themes.flake = false;
@@ -101,7 +101,7 @@
       # (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
       (final: previous: {nuscripts = inputs.nuscripts;})
       (final: previous: {vtsls = (import ./vtsls/default.nix {inherit pkgs;})."@vtsls/language-server";})
-      inputs.unison-lang.overlays.default
+      # inputs.unison-lang.overlays.default
       #  rustaceanvim.overlays.default
       # neotest-haskell.overlays.default
       # haskell-tools.overlays.default
