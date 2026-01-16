@@ -12,13 +12,8 @@
     stylix.url = "github:danth/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
-    blink-nvim.url = "github:Saghen/blink.nvim";
-    blink-nvim.inputs.nixpkgs.follows = "nixpkgs";
-    blink-compat.url = "github:Saghen/blink.compat";
-    blink-compat.flake = false;
-
     nixvim.url = "github:nix-community/nixvim";
-    # nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     rio-themes.url = "github:mbadolato/iTerm2-Color-Schemes";
     rio-themes.flake = false;
