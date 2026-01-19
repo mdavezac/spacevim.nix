@@ -96,7 +96,7 @@
       # (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
       (final: previous: {nuscripts = inputs.nuscripts;})
       (final: previous: {vtsls = (import ./vtsls/default.nix {inherit pkgs;})."@vtsls/language-server";})
-      # inputs.unison-lang.overlays.default
+      inputs.unison-lang.overlays.default
       #  rustaceanvim.overlays.default
       # neotest-haskell.overlays.default
       # haskell-tools.overlays.default

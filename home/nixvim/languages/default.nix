@@ -16,7 +16,7 @@
     ./typescript.nix
     ./rest.nix
     ./json.nix
-    # ./unison.nix
+    ./unison.nix
   ];
   programs.nixvim.plugins = {
     treesitter.enable = true;
@@ -31,8 +31,8 @@
         node_decremental = "<bs>";
       };
     };
-    treesitter-textobjects.enable = false;
-    treesitter-textobjects.settings.move = {
+    treesitter-textobjects.enable = true;
+    treesitter-textobjects.move = {
       enable = true;
       gotoNextStart = {
         "]f" = "@function.outer";
