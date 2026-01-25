@@ -30,90 +30,19 @@
       url = "github:ceedubs/unison-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # iron-nvim.url = "github:hkupty/iron.nvim";
-    # iron-nvim.flake = false;
-    # nvim-lspconfig.url = "github:neovim/nvim-lspconfig";
-    # nvim-lspconfig.flake = false;
-    # neotest-nvim.url = "github:nvim-neotest/neotest";
-    # neotest-nvim.flake = false;
-    # neotest-python-nvim.url = "github:nvim-neotest/neotest-python";
-    # neotest-python-nvim.flake = false;
-    # flatten-nvim.url = "github:willothy/flatten.nvim";
-    # flatten-nvim.flake = false;
-    # telescope-nvim.url = "github:nvim-telescope/telescope.nvim";
-    # telescope-nvim.flake = false;
-    # telescope-fzf-native.url = "github:nvim-telescope/telescope-fzf-native.nvim";
-    # telescope-fzf-native.flake = false;
-    # bufferline-nvim.url = "github:akinsho/bufferline.nvim";
-    # bufferline-nvim.flake = false;
-    # nvim-cmp.url = "github:hrsh7th/nvim-cmp";
-    # nvim-cmp.flake = false;
-    # cmp-buffer-nvim.url = "github:hrsh7th/cmp-buffer";
-    # cmp-buffer-nvim.flake = false;
-    # cmp-lsp-nvim.url = "github:hrsh7th/cmp-nvim-lsp";
-    # cmp-lsp-nvim.flake = false;
-    # cmp-path-nvim.url = "github:hrsh7th/cmp-path";
-    # cmp-path-nvim.flake = false;
-    # cmp-luasnip-nvim.url = "github:saadparwaiz1/cmp_luasnip";
-    # cmp-luasnip-nvim.flake = false;
-    # nui-nvim.url = "github:MunifTanjim/nui.nvim";
-    # nui-nvim.flake = false;
-    # noice-nvim.url = "github:folke/noice.nvim";
-    # noice-nvim.flake = false;
-    # lualine-nvim.url = "github:nvim-lualine/lualine.nvim";
-    # lualine-nvim.flake = false;
-    # which-key-nvim.url = "github:folke/which-key.nvim";
-    # which-key-nvim.flake = false;
-    # dressing-nvim.url = "github:stevearc/dressing.nvim";
-    # dressing-nvim.flake = false;
-    # conform-nvim.url = "github:stevearc/conform.nvim";
-    # conform-nvim.flake = false;
-    # trouble-nvim.url = "github:folke/trouble.nvim";
-    # trouble-nvim.flake = false;
-    # rustaceanvim.url = "github:mrcjkb/rustaceanvim";
-    # rustaceanvim.flake = true;
-    # rustaceanvim.inputs.nixpkgs.follows = "nixpkgs";
-    # neotest-haskell.url = "github:mrcjkb/neotest-haskell";
-    # neotest-haskell.flake = true;
-    # neotest-haskell.inputs.nixpkgs.follows = "nixpkgs";
-    # haskell-tools.url = "github:mrcjkb/haskell-tools.nvim";
-    # haskell-tools.flake = true;
-    # haskell-tools.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
     nixpkgs,
     flake-utils,
     devshell,
-    # rustaceanvim,
-    #  neotest-haskell,
-    #  haskell-tools,
     ...
   }: let
     mk-overlays = system: pkgs: [
       devshell.overlays.default
-      # (import ./spacevim/overlays/plugins.nix ({pkgs = pkgs;} // inputs))
       (final: previous: {nuscripts = inputs.nuscripts;})
       (final: previous: {vtsls = (import ./vtsls/default.nix {inherit pkgs;})."@vtsls/language-server";})
       inputs.unison-lang.overlays.default
-      #  rustaceanvim.overlays.default
-      # neotest-haskell.overlays.default
-      # haskell-tools.overlays.default
-      # (prev: final: {
-      # (prev: final: {
-      #   heroic = inputs.unstable.legacyPackages.${system}.heroic;
-      #   vimPlugins =
-      #     final.vimPlugins
-      #     // {
-      #       inherit
-      #         (inputs.unstable.legacyPackages.${system}.vimPlugins)
-      #         blink-cmp
-      #         blink-compat
-      #         lsp-config
-      #         ;
-      #     };
-      # })
     ];
     systemized = system: let
       pkgs = import nixpkgs {
