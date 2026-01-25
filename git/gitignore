@@ -1,5 +1,0 @@
-/.devenv/
-/.direnv/
-/.local/
-.DS_Store
-**/__pycache__/
