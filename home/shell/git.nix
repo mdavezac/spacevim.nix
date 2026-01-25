@@ -21,7 +21,7 @@
     aliases.identity = let
       git = "${pkgs.git}/bin/git";
     in ''! ${git} config user.name "''$(${git} config user.''$1.name)" && ${git} config user.email "''$(${git} config user.''$1.email)" && ${git} config user.signingkey "''$(${git} config user.''$1.signingkey)"'';
-    ignores = lib.strings.splitString "\n" (builtins.readFile ../../git/gitignore);
+    ignores = lib.strings.splitString "\n" (builtins.readFile ./gitignore);
     extraConfig = {
       "user \"catapult\"" = {
         name = "Mayeul d'Avezac";

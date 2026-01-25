@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [./zellij.nix ./git.nix ./tmux.nix];
   home.packages = [pkgs.devenv];
   programs.nushell = {
@@ -19,27 +14,16 @@
   programs.bat.enable = true;
   programs.ripgrep.enable = true;
 
-  programs.neovim = {
-    enable = !config.programs.nixvim.enable;
-    defaultEditor = true;
-    extraLuaConfig = ''
-      require('config.lazyentry').setup()
-    '';
-    plugins = [((import ../spacevim/dist.nix) pkgs)];
-    viAlias = true;
-    vimAlias = true;
-  };
-
   programs.atuin = {
     enable = true;
     enableNushellIntegration = true;
-    settings = builtins.fromTOML (builtins.readFile ../../nushell/atuin.toml);
+    settings = builtins.fromTOML (builtins.readFile ./atuin.toml);
   };
 
   programs.starship = {
     enable = true;
     enableNushellIntegration = true;
-    settings = builtins.fromTOML (builtins.readFile ../../nushell/starship.toml);
+    settings = builtins.fromTOML (builtins.readFile ./starship.toml);
   };
 
   programs.direnv = {
