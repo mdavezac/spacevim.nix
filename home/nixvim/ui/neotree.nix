@@ -1,29 +1,31 @@
 {
   programs.nixvim.plugins.neo-tree = {
     enable = true;
-    enableDiagnostics = true;
-    enableGitStatus = true;
-    enableModifiedMarkers = true;
-    autoCleanAfterSessionRestore = true;
-    closeIfLastWindow = true;
-    sources = ["filesystem" "buffers" "git_status" "document_symbols"];
-    extraOptions.open_files_do_not_replace_types = [
-      "terminal"
-      "Trouble"
-      "trouble"
-      "qf"
-      "Outline"
-      "Neotest Summary"
-    ];
-    filesystem = {
-      followCurrentFile.enabled = true;
-      bindToCwd = true;
-      useLibuvFileWatcher = true;
-    };
-    documentSymbols.followCursor = true;
-    buffers = {
-      followCurrentFile.enabled = true;
-      bindToCwd = true;
+    settings = {
+      enableDiagnostics = true;
+      enableGitStatus = true;
+      enableModifiedMarkers = true;
+      autoCleanAfterSessionRestore = true;
+      closeIfLastWindow = true;
+      sources = ["filesystem" "buffers" "git_status" "document_symbols"];
+      open_files_do_not_replace_types = [
+        "terminal"
+        "Trouble"
+        "trouble"
+        "qf"
+        "Outline"
+        "Neotest Summary"
+      ];
+      filesystem = {
+        followCurrentFile.enabled = true;
+        bindToCwd = true;
+        useLibuvFileWatcher = true;
+      };
+      documentSymbols.followCursor = true;
+      buffers = {
+        followCurrentFile.enabled = true;
+        bindToCwd = true;
+      };
     };
   };
   programs.nixvim.keymaps = let

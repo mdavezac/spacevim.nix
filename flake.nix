@@ -41,8 +41,6 @@
     mk-overlays = system: pkgs: [
       devshell.overlays.default
       (final: previous: {nuscripts = inputs.nuscripts;})
-      (final: previous: {vtsls = (import ./vtsls/default.nix {inherit pkgs;})."@vtsls/language-server";})
-      inputs.unison-lang.overlays.default
     ];
     systemized = system: let
       pkgs = import nixpkgs {

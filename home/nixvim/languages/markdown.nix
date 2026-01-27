@@ -22,6 +22,6 @@
     conform-nvim.settings.formatters_by_ft.markdown = ["deno_fmt"];
     conform-nvim.settings.formatters.deno_fmt.command = lib.getExe pkgs.deno;
 
-    lsp.servers.marksman.enable = true;
+    lsp.servers.markdown_oxide.enable = true;
   };
 }
