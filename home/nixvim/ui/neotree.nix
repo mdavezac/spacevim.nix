@@ -2,11 +2,11 @@
   programs.nixvim.plugins.neo-tree = {
     enable = true;
     settings = {
-      enableDiagnostics = true;
-      enableGitStatus = true;
-      enableModifiedMarkers = true;
-      autoCleanAfterSessionRestore = true;
-      closeIfLastWindow = true;
+      enable_diagnostics = true;
+      enable_git_status = true;
+      enable_modified_markers = true;
+      auto_clean_after_session_restore = true;
+      close_if_last_window = true;
       sources = ["filesystem" "buffers" "git_status" "document_symbols"];
       open_files_do_not_replace_types = [
         "terminal"
@@ -17,14 +17,14 @@
         "Neotest Summary"
       ];
       filesystem = {
-        followCurrentFile.enabled = true;
-        bindToCwd = true;
-        useLibuvFileWatcher = true;
+        follow_current_file.enabled = true;
+        bind_to_cwd = true;
+        use_libuv_file_watcher = true;
       };
-      documentSymbols.followCursor = true;
+      document_symbols.follow_cursor = true;
       buffers = {
-        followCurrentFile.enabled = true;
-        bindToCwd = true;
+        follow_current_file.enabled = true;
+        bind_to_cwd = true;
       };
     };
   };
