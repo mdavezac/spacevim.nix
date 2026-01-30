@@ -5,9 +5,9 @@
 }: {
   programs.nixvim.plugins = {
     lsp.servers.ruff.enable = true;
-    lsp.servers.ruff.config.root_markers = [".git"];
+    lsp.servers.ruff.rootMarkers = [".git"];
     lsp.servers.pyright.enable = true;
-    lsp.servers.pyright.config.root_markers = [".git"];
+    lsp.servers.pyright.rootMarkers = [".git"];
     lsp.servers.basedpyright.enable = false;
     conform-nvim.enable = true;
     conform-nvim.settings.formatters_by_ft.python = ["ruff_organize_imports" "ruff_format"];
