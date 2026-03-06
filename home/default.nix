@@ -71,6 +71,7 @@
 
   programs.ghostty = {
     enable = true;
+    settings.macos-option-as-alt = true;
     settings.keybind = [
       "f11=toggle_fullscreen"
       "f12=toggle_window_decorations"

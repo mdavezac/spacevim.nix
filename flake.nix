@@ -102,6 +102,7 @@
           imports = [
             # {services.gpg-agent.pinentryPackage = s.defaultpkgs.pinentry-curses;}
             ./home/shell
+            ./home/helix.nix
             ./home/nixvim
             ./home/stylix.nix
             ./home/ipython.nix

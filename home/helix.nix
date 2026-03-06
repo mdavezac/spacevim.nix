@@ -14,18 +14,11 @@
     };
     languages = {
       language-server = {
-        typescript-language-server = with pkgs.nodePackages; {
-          command = "${typescript-language-server}/bin/typescript-language-server";
-          args = [
-            "--stdio"
-            "--tsserver-path=${typescript}/lib/node_modules/typescript/lib"
-          ];
-        };
         nil-lsp.command = "${pkgs.nil}/bin/nil";
-        based-pyright-lsp = {
-          command = "${pkgs.basedpyright}/bin/basedpyright-langserver";
+        pyright-lsp = {
+          command = "${pkgs.pyright}/bin/basedpyright-langserver";
           args = ["--stdio"];
-          config.basedpyright.analysis = {
+          config.pyright.analysis = {
             autoSearchPaths = true;
             typeCheckingMode = "basic";
             diagnosticMode = "openFilesOnly";
@@ -51,7 +44,7 @@
           formatter.command = "bash";
           formatter.args = ["-c" "ruff check --fix --select I - | ruff format -"];
           language-servers = [
-            "based-pyright-lsp"
+            "pyright-lsp"
             "ruff-lsp"
           ];
         }
