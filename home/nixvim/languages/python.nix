@@ -6,10 +6,9 @@
   programs.nixvim.plugins = {
     lsp.servers.ruff.enable = true;
     lsp.servers.ruff.rootMarkers = [".git"];
-    lsp.servers.pyright.enable = true;
-    lsp.servers.pyright.rootMarkers = [".git"];
-    lsp.servers.pyrefly.enable = false;
-    # lsp.servers.pyrefly.rootMarkers = [".git"];
+    lsp.servers.pyright.enable = false;
+    lsp.servers.pyrefly.enable = true;
+    lsp.servers.pyrefly.rootMarkers = [".git"];
     conform-nvim.enable = true;
     conform-nvim.settings.formatters_by_ft.python = ["ruff_organize_imports" "ruff_format"];
     conform-nvim.settings.formatters.ruff_format.command = lib.getExe pkgs.ruff;
