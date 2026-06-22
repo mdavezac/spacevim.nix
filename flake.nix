@@ -32,10 +32,9 @@
 
   outputs = inputs @ {nixpkgs, ...}: let
     mk-overlays = system: pkgs: [
-      (final: previous: {
-        nuscripts = inputs.nuscripts;
-      })
+      (final: previous: {nuscripts = inputs.nuscripts;})
       (import ./packages/pyrefly.nix)
+      (import ./packages/flowmark.nix)
     ];
   in {
     nixosConfigurations.loubakgou = let

@@ -19,8 +19,14 @@
     render-markdown.lazyLoad.settings.ft = ["markdown" "rmd" "Avante"];
 
     conform-nvim.enable = true;
-    conform-nvim.settings.formatters_by_ft.markdown = ["deno_fmt"];
-    conform-nvim.settings.formatters.deno_fmt.command = lib.getExe pkgs.deno;
+    # conform-nvim.settings.formatters_by_ft.markdown = ["deno_fmt"];
+    # conform-nvim.settings.formatters.deno_fmt.command = lib.getExe pkgs.deno;
+    conform-nvim.settings.formatters_by_ft.markdown = ["flowmark"];
+    conform-nvim.settings.formatters.flowmark = {
+      command = lib.getExe pkgs.flowmark-rs;
+      args = ["--semantic" "--cleanups" "--smartquotes" "--ellipses" "-"];
+      stdin = true;
+    };
 
     lsp.servers.markdown_oxide.enable = true;
   };
