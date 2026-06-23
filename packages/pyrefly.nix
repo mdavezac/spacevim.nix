@@ -1,37 +1,38 @@
 final: previous: {
-  pyrefly = previous.rustPlatform.buildRustPackage {
-    pname = "pyrefly";
-    version = "1.0.0";
-
+  pyrefly = let
     src = previous.fetchFromGitHub {
       owner = "facebook";
       repo = "pyrefly";
-      tag = "1.0.0";
-      hash = "sha256-S3phcTwZlG9VBHdYzcbsLzj0uqBUDy4Xfy/tlp3AQZg=";
+      tag = "1.1.0";
+      hash = "sha256-8bFg8rcUgPsDDflScQWPxDNrEGM5BufjHLPz3Rm0Ur4=";
     };
+  in previous.rustPlatform.buildRustPackage {
+    pname = "pyrefly";
+    version = "1.1.0";
+
+    inherit src;
 
     buildAndTestSubdir = "pyrefly";
-    cargoHash = "sha256-OfbPPANsAhrp2MbzDEHGRLWWmUkbMMGKR5B4R6lXdE4=";
-
-    cargoPatches = [
-      (previous.writeText "pyrefly-1.0.0-fix-cargo-lock.patch" ''
-        diff --git a/Cargo.lock b/Cargo.lock
-        index c8c39e9617888199b86fa7c0273c0edebc85df2f..ea5e7b7e633a2de582a7b013a32a6eb6b166e2db 100644
-        --- a/Cargo.lock
-        +++ b/Cargo.lock
-        @@ -2866,6 +2866,7 @@ dependencies = [
-         name = "rustversion"
-         version = "1.0.22"
-         source = "registry+https://github.com/rust-lang/crates.io-index"
-        +checksum = "b39cdef0fa800fc44525c84ccb54a029961a8215f9619753635a9c0d2538d46d"
-
-         [[package]]
-         name = "ryu"
-      '')
-    ];
+    cargoLock = {
+      lockFile = "${src}/Cargo.lock";
+      outputHashes = {
+        "backtrace-0.3.76" = "sha256-LQ/lvsn9BKVj8Xhi+5mosvSrswJ+wiuA6FEUtU0Kb90=";
+        "lsp-types-0.95.1" = "sha256-2F43Qa6mXhpCF97cWoi1R0PDgutkEypbyDGtHZerpxM=";
+        "ruff_annotate_snippets-0.1.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
+        "ruff_cache-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
+        "ruff_diagnostics-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
+        "ruff_notebook-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
+        "ruff_python_ast-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
+        "ruff_python_parser-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
+        "ruff_python_trivia-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
+        "ruff_source_file-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
+        "ruff_text_size-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
+        "rustversion-1.0.22" = "sha256-v/K6MMOMqar9DD0NdHR+cqhUOIFtasOn9i3lbxa6xII=";
+      };
+    };
 
     patches = [
-      (previous.writeText "pyrefly-1.0.0-fix-shebang.patch" ''
+      (previous.writeText "pyrefly-1.1.0-fix-shebang.patch" ''
         diff --git a/pyrefly/lib/test/lsp/lsp_interaction/configuration.rs b/pyrefly/lib/test/lsp/lsp_interaction/configuration.rs
         index edc2db09f..ce33a2774 100644
         --- a/pyrefly/lib/test/lsp/lsp_interaction/configuration.rs
