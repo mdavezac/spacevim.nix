@@ -1,5 +1,20 @@
 {
+  pkgs,
+  lib,
+  ...
+}: {
   programs.nixvim.plugins.typescript-tools.enable = true;
+  programs.nixvim.plugins.conform-nvim.enable = true;
+  programs.nixvim.plugins.conform-nvim.settings = {
+    formatters_by_ft = {
+      javascript = ["prettierd"];
+      javascriptreact = ["prettierd"];
+      typescript = ["prettierd"];
+      typescriptreact = ["prettierd"];
+      vue = ["prettierd"];
+    };
+    formatters.prettierd.command = lib.getExe pkgs.prettierd;
+  };
   programs.nixvim.plugins.neotest.adapters.vitest.enable = true;
   # lsp.servers.ts_ls = {
   #   enable = false;
