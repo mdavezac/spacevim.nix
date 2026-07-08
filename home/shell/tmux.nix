@@ -16,7 +16,7 @@
         set -g status off
       ''
       + (
-        if pkgs.system == "aarch64-darwin"
+        if pkgs.stdenv.hostPlatform.isDarwin
         then ''
           set-option -g default-command "${pkgs.reattach-to-user-namespace}/bin/reattach-to-user-namespace -l nu"
         ''

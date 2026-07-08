@@ -73,12 +73,12 @@
     enable = true;
     mutableTrust = true;
     mutableKeys = true;
-    settings = lib.mkIf (pkgs.system != "aarch64-darwin") {
+    settings = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) {
       pinentry-mode = "loopback";
     };
   };
   services.gpg-agent = {
-    enable = pkgs.system != "aarch64-darwin";
+    enable = !pkgs.stdenv.hostPlatform.isDarwin;
     enableNushellIntegration = true;
     defaultCacheTtl = 1000000;
     maxCacheTtl = 1000000;
