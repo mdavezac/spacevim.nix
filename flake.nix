@@ -90,6 +90,10 @@
       pkgs = import nixpkgs {
         inherit system;
         overlays = mk-overlays system nixpkgs;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = _: true;
+        };
       };
       modules = [
         inputs.nixvim.homeModules.nixvim

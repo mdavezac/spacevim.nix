@@ -98,6 +98,7 @@
     pkgs.hyprlandPlugins.hyprgrass
     pkgs.hyprlandPlugins.hyprtrails
   ];
+  wayland.windowManager.hyprland.configType = "lua";
   services.hypridle = {
     settings.general = {
       after_sleep_cmd = "hyprctl dispatch dpms on";
