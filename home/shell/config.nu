@@ -186,13 +186,26 @@ $env.config = {
 
 
 def session-names [] {
-  fd "" ...([ "~/catapult" "~/personal" "~/kagenova"] | each { path expand } | where { path exists }) --max-depth 1 -t d | lines | each { $in | path basename } | uniq
+  let directories = fd "" ...([ "~/catapult" "~/personal" "~/kagenova"] | each { path expand } | where { path exists }) --max-depth 1 -t d | lines | each { $in | path basename }
+  let tmux_sessions = do -i { tmux list-sessions -F '#{session_name}' } | complete | get stdout | lines
+  $directories | append $tmux_sessions | uniq
 }
 
 export def session [name: string@session-names] {
+    let tmux_target = $"=($name):"
+    let existing_session = (do -i { tmux has-session -t $tmux_target } | complete | get exit_code) == 0
+    if $existing_session {
+      if ("TMUX" in $env) {
+        tmux switch-client -t $tmux_target
+      } else {
+        tmux attach-session -t $tmux_target
+      }
+      return
+    }
+
     let locations  = fd $"($name)$" -t d ~/ --maxdepth 2 -E Library | lines
     if ($locations | length) > 0 {
-    let location = $locations | first
+    let location = $locations | first | path expand
     let session = $location | path basename
       # zellij attach -c $session options --default-cwd $location
       tmux new-session -As $session -c $location
@@ -200,3 +213,32 @@ export def session [name: string@session-names] {
       echo $"Could not find session ($name)"
     }
 }
+
+export def rename-tmux-session [] {
+    if not ("TMUX" in $env) {
+        return
+    }
+
+    let repository_result = do -i { git rev-parse --show-toplevel } | complete
+    if $repository_result.exit_code != 0 {
+        return
+    }
+
+    let repository = $repository_result.stdout | str trim | path basename
+    let branch = git branch --show-current | str trim | str replace -r '^mayeul/' '' | str replace -r '^(c|C)-(\d+)-' '[C-$2] '
+    let new_session_name = if ($branch | is-empty) or $branch == "main" {
+        $repository
+    } else {
+        $"($branch) -> ($repository)"
+    }
+    let current_session = do -i { tmux display-message -p '#S' } | complete
+    if $current_session.exit_code == 0 {
+        if ($current_session.stdout | str trim) == $new_session_name {
+            return
+        }
+    }
+
+    tmux rename-session $new_session_name
+}
+
+$env.config.hooks.pre_prompt = ($env.config.hooks.pre_prompt | append { || rename-tmux-session })

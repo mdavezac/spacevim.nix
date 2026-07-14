@@ -20,16 +20,11 @@
   ];
   programs.nixvim.plugins = {
     treesitter.enable = true;
-    treesitter.highlight.disable = ["dockerfile"];
     treesitter.settings = {
       highlight.enable = true;
-      indent = {
-        enable = true;
-        disable = ["dockerfile"];
-      };
+      indent.enable = true;
       incremental_selection = {
         enable = true;
-        disable = ["dockerfile"];
         init_selection = "<C-space>";
         node_incremental = "<C-space>";
         scope_incremental = false;
