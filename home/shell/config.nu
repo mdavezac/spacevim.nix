@@ -191,8 +191,9 @@ def session-names [] {
   $directories | append $tmux_sessions | uniq
 }
 
-export def session [name: string@session-names] {
-    let tmux_target = $"=($name):"
+export def session [name: string@session-names, ...name_parts: string] {
+    let session_name = ([$name] | append $name_parts | str join " ")
+    let tmux_target = $"=($session_name):"
     let existing_session = (do -i { tmux has-session -t $tmux_target } | complete | get exit_code) == 0
     if $existing_session {
       if ("TMUX" in $env) {
@@ -203,14 +204,14 @@ export def session [name: string@session-names] {
       return
     }
 
-    let locations  = fd $"($name)$" -t d ~/ --maxdepth 2 -E Library | lines
+    let locations  = fd $"($session_name)$" -t d ~/ --maxdepth 2 -E Library | lines
     if ($locations | length) > 0 {
     let location = $locations | first | path expand
     let session = $location | path basename
       # zellij attach -c $session options --default-cwd $location
       tmux new-session -As $session -c $location
     } else {
-      echo $"Could not find session ($name)"
+      echo $"Could not find session ($session_name)"
     }
 }
 
