@@ -31,6 +31,23 @@
           claude = {};
           codex = {
             cmd = ["codex"];
+            env = {
+              VISUAL = "nvim";
+              EDITOR = "nvim";
+            };
+            keys = {
+              block_external_editor = {
+                __unkeyed-1 = "<c-g>";
+                __unkeyed-2 = {
+                  __raw = ''
+                    function()
+                    end
+                  '';
+                };
+                mode = "t";
+                desc = "Block Codex external editor (Ctrl+G)";
+              };
+            };
           };
         };
       };

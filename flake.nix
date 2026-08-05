@@ -39,18 +39,27 @@
   };
 
   outputs = inputs @ {nixpkgs, ...}: let
+    mkNixvimPkgs = system:
+      import inputs.nixvim.inputs.nixpkgs {
+        inherit system;
+      };
     mk-overlays = system: _: [
       (_: _: {nuscripts = inputs.nuscripts;})
-      (_: _: {
-        codex = inputs.llm-agents.packages.${system}.codex;
-        codex-acp = inputs.llm-agents.packages.${system}.codex-acp;
+      (_: _: let
+        llm-agent-pkgs = inputs.llm-agents.packages.${system};
+      in {
+        codex = llm-agent-pkgs.codex;
+        codex-acp = llm-agent-pkgs.codex-acp;
+        pi = llm-agent-pkgs.pi;
       })
+      (import ./packages/pi-agent-rust.nix)
       (import ./packages/pyrefly.nix)
       (import ./packages/flowmark.nix)
     ];
   in {
     nixosConfigurations.loubakgou = let
       system = "x86_64-linux";
+      nixvimPkgs = mkNixvimPkgs system;
       pkgs = import nixpkgs {
         inherit system;
         config = {
@@ -93,12 +102,16 @@
             };
 
             home-manager.backupFileExtension = "hm-backup";
-            home-manager.extraSpecialArgs.rio-themes = inputs.rio-themes;
+            home-manager.extraSpecialArgs = {
+              rio-themes = inputs.rio-themes;
+              inherit nixvimPkgs;
+            };
           }
         ];
       };
     homeConfigurations = let
       system = "aarch64-darwin";
+      nixvimPkgs = mkNixvimPkgs system;
       pkgs = import nixpkgs {
         inherit system;
         overlays = mk-overlays system nixpkgs;
@@ -130,6 +143,7 @@
       configuration = name:
         inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
+          extraSpecialArgs = {inherit nixvimPkgs;};
           modules =
             modules
             ++ [
