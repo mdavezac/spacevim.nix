@@ -21,6 +21,7 @@
           "neotest-python"
           "avante.nvim"
           "snacks.nvim"
+          "sidekick.nvim"
         ];
       };
       byteCompileLua.enable = false;

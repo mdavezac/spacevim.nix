@@ -9,6 +9,7 @@
     ./neotree.nix
     ./dashboard.nix
     ./ai.nix
+    ./sidekick.nix
   ];
   programs.nixvim.plugins = {
     notify.enable = true;

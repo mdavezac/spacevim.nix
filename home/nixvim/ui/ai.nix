@@ -3,7 +3,7 @@
     # CodeCompanion uses plenary and registers its completion provider with
     # blink.cmp for CodeCompanion chat/input buffers.
     codecompanion = {
-      enable = true;
+      enable = false;
       settings = {
         adapters.acp.codex.__raw = ''
           function()
