@@ -100,6 +100,51 @@
       options.desc = "Focus left";
     }
     {
+      key = "<leader>tt";
+      action.__raw = ''
+        function()
+          require("snacks").terminal.toggle()
+        end
+      '';
+      options.desc = "Toggle Terminal";
+    }
+    {
+      key = "<Esc>";
+      action = "<C-\\><C-n>";
+      mode = "t";
+      options.desc = "Terminal Normal Mode";
+    }
+    {
+      key = "<C-[>";
+      action = "<C-\\><C-n>";
+      mode = "t";
+      options.desc = "Terminal Normal Mode";
+    }
+    {
+      key = "<C-h>";
+      action = "<C-\\><C-n><cmd>silent! TmuxNavigateLeft<CR>";
+      mode = "t";
+      options.desc = "Terminal Focus Left";
+    }
+    {
+      key = "<C-l>";
+      action = "<C-\\><C-n><cmd>silent! TmuxNavigateRight<CR>";
+      mode = "t";
+      options.desc = "Terminal Focus Right";
+    }
+    {
+      key = "<C-k>";
+      action = "<C-\\><C-n><cmd>silent! TmuxNavigateUp<CR>";
+      mode = "t";
+      options.desc = "Terminal Focus Up";
+    }
+    {
+      key = "<C-j>";
+      action = "<C-\\><C-n><cmd>silent! TmuxNavigateDown<CR>";
+      mode = "t";
+      options.desc = "Terminal Focus Down";
+    }
+    {
       key = "<leader>wl";
       action = "<C-w>l";
       options.desc = "Focus right";

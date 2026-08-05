@@ -9,6 +9,16 @@
     settings.image.enable = true;
     settings.picker.enabled = true;
     settings.picker.ui_select = true;
+    settings.terminal = {
+      win.position = "right";
+      win.height = 0.3;
+      win.bo.scrollback = 50000;
+      win.wo.number = false;
+      win.wo.relativenumber = false;
+      keys.term_normal.__raw = ''
+        { "<C-[>", "<C-\\><C-n>", mode = "t", desc = "Terminal Normal Mode" }
+      '';
+    };
   };
 
   programs.nixvim.plugins.bufferline = {

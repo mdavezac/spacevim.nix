@@ -7,15 +7,57 @@
       nes.enabled = false;
       cli = {
         mux = {
-          enabled = true;
+          enabled = false;
           backend = "tmux";
+          create = "window";
+          # Keep more lines when the command output is reloaded from the mux.
+          dump = 10000;
         };
-        tools.codex.cmd = ["codex"];
+        win = {
+          bo = {
+            # Keep large terminal history for scrollback in Sidekick.
+            scrollback = 50000;
+          };
+          keys = {
+            stopinsert = {
+              __unkeyed-1 = "<C-[>";
+              __unkeyed-2 = "stopinsert";
+              mode = "t";
+              desc = "enter terminal normal mode";
+            };
+          };
+        };
+        tools = {
+          claude = {};
+          codex = {
+            cmd = ["codex"];
+          };
+        };
       };
     };
   };
 
   programs.nixvim.keymaps = [
+    {
+      key = "<C-/>";
+      action.__raw = ''
+        function()
+          require("sidekick.cli").toggle()
+        end
+      '';
+      options.desc = "Sidekick Toggle";
+      mode = ["n" "x" "t"];
+    }
+    {
+      key = "<C-_>";
+      action.__raw = ''
+        function()
+          require("sidekick.cli").toggle()
+        end
+      '';
+      options.desc = "Sidekick Toggle";
+      mode = ["n" "x" "t"];
+    }
     {
       key = "<leader>aa";
       action.__raw = ''
@@ -24,6 +66,7 @@
         end
       '';
       options.desc = "Sidekick Toggle Codex";
+      mode = ["n" "x"];
     }
     {
       key = "<leader>as";
@@ -33,6 +76,7 @@
         end
       '';
       options.desc = "Sidekick Select CLI";
+      mode = ["n" "x"];
     }
     {
       key = "<leader>af";
@@ -42,6 +86,7 @@
         end
       '';
       options.desc = "Sidekick Send File";
+      mode = ["n" "x"];
     }
     {
       key = "<leader>at";
@@ -81,7 +126,7 @@
         end
       '';
       options.desc = "Sidekick Focus";
-      mode = ["n" "t" "i" "x"];
+      mode = ["n" "x"];
     }
   ];
 }
