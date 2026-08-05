@@ -1,6 +1,12 @@
 {pkgs, ...}: {
   imports = [./zellij.nix ./git.nix ./tmux.nix];
   home.packages = []; # [pkgs.devenv];
+
+  programs.codex = {
+    enable = true;
+    package = pkgs.codex;
+  };
+
   programs.nushell = {
     enable = true;
     configFile.source = ./config.nu;

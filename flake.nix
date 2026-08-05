@@ -28,11 +28,23 @@
       url = "github:ceedubs/unison-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Keep the Codex CLI and ACP bridge in sync with each other. These are
+    # consumed directly from llm-agents' package set and its nixpkgs input.
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "llm-agents-nixpkgs";
+    };
+    llm-agents-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 
   outputs = inputs @ {nixpkgs, ...}: let
-    mk-overlays = system: pkgs: [
-      (final: previous: {nuscripts = inputs.nuscripts;})
+    mk-overlays = system: _: [
+      (_: _: {nuscripts = inputs.nuscripts;})
+      (_: _: {
+        codex = inputs.llm-agents.packages.${system}.codex;
+        codex-acp = inputs.llm-agents.packages.${system}.codex-acp;
+      })
       (import ./packages/pyrefly.nix)
       (import ./packages/flowmark.nix)
     ];

@@ -15,6 +15,7 @@
         standalonePlugins = [
           "blink.compat"
           "conform.nvim"
+          "codecompanion.nvim"
           "nvim-lspconfig"
           "nui.nvim"
           "neotest-python"

@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [./waybar.nix];
   wayland.windowManager.hyprland.enable = false;
+  wayland.windowManager.hyprland.configType = "hyprlang";
   programs.wofi.enable = true;
   services.hypridle.enable = true;
   services.hyprpaper.enable = true;
@@ -98,7 +99,6 @@
     pkgs.hyprlandPlugins.hyprgrass
     pkgs.hyprlandPlugins.hyprtrails
   ];
-  wayland.windowManager.hyprland.configType = "lua";
   services.hypridle = {
     settings.general = {
       after_sleep_cmd = "hyprctl dispatch dpms on";

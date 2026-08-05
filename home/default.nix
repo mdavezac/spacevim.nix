@@ -35,6 +35,7 @@
     nvitop
     lastpass-cli
   ];
+
   programs.kitty.enable = false;
   programs.nixvim.clipboard.providers.wl-copy.enable = true;
   programs.nixvim.clipboard.providers.xclip.enable = true;

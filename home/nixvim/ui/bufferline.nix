@@ -7,6 +7,8 @@
     settings.statuscolumn.enable = false;
     settings.words.enable = false;
     settings.image.enable = true;
+    settings.picker.enabled = true;
+    settings.picker.ui_select = true;
   };
 
   programs.nixvim.plugins.bufferline = {
