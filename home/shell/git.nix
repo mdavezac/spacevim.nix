@@ -6,7 +6,12 @@
   home.packages = [pkgs.glab];
   programs.lazygit = {
     enable = true;
-    settings.git.overrideGpg = true;
+    settings = {
+      git.overrideGpg = true;
+      keybinding.commits.moveUpCommit = "K";
+      keybinding.commits.moveDownCommit = "J";
+    };
+    enableNushellIntegration = true;
   };
   programs.gh = {
     enable = true;

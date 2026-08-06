@@ -14,9 +14,15 @@
           dump = 10000;
         };
         win = {
+          layout = "float";
           bo = {
             # Keep large terminal history for scrollback in Sidekick.
             scrollback = 50000;
+          };
+          float = {
+            width = 0.85;
+            height = 0.85;
+            border = "rounded";
           };
           keys = {
             stopinsert = {
@@ -25,9 +31,20 @@
               mode = "t";
               desc = "enter terminal normal mode";
             };
+            send-escape = {
+              __unkeyed-1 = "<Esc>";
+              __unkeyed-2.__raw = ''
+                function()
+                  vim.api.nvim_chan_send(vim.b.terminal_job_id, "\27")
+                end
+              '';
+              mode = "t";
+              desc = "send Escape to Sidekick CLI";
+            };
           };
         };
         tools = {
+          pi = {};
           claude = {};
           codex = {
             cmd = ["codex"];

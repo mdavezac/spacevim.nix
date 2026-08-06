@@ -112,6 +112,35 @@
       options.desc = "Toggle Terminal";
     }
     {
+      key = "<C-Space>";
+      action.__raw = ''
+        function()
+          require("snacks").terminal.toggle()
+        end
+      '';
+      options.desc = "Toggle Terminal";
+      mode = ["n" "t"];
+    }
+    {
+      key = "<space>gl";
+      action.__raw = ''
+        function()
+          require("snacks").terminal.toggle("lazygit", {
+            win = {
+              position = "float",
+              width = 0.9,
+              height = 0.9,
+              border = "rounded",
+              title = " Lazygit ",
+              title_pos = "center",
+            },
+          })
+        end
+      '';
+      options.desc = "Open Lazygit";
+      mode = ["n" "x"];
+    }
+    {
       key = "<Esc>";
       action = "<C-\\><C-n>";
       mode = "t";

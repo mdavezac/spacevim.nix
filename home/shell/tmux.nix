@@ -14,6 +14,7 @@
     extraConfig =
       ''
         set -g status off
+        set -g extended-keys on
       ''
       + (
         if pkgs.stdenv.hostPlatform.isDarwin
