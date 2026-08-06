@@ -16,8 +16,11 @@
     persistence.enable = true;
     mini.modules.icons = {};
     tmux-navigator = {
-      settings.disable_when_zoomed = 1;
-      settings.save_on_switch = 1;
+      settings = {
+        disable_when_zoomed = 1;
+        save_on_switch = 1;
+        no_mappings = 1;
+      };
       enable = true;
     };
     grug-far = {
@@ -122,27 +125,67 @@
     }
     {
       key = "<C-h>";
-      action = "<C-\\><C-n><cmd>silent! TmuxNavigateLeft<CR>";
       mode = "t";
       options.desc = "Terminal Focus Left";
+      action.__raw = ''
+        function()
+          vim.cmd("stopinsert")
+          vim.cmd("silent! TmuxNavigateLeft")
+        end
+      '';
     }
     {
       key = "<C-l>";
-      action = "<C-\\><C-n><cmd>silent! TmuxNavigateRight<CR>";
       mode = "t";
       options.desc = "Terminal Focus Right";
+      action.__raw = ''
+        function()
+          vim.cmd("stopinsert")
+          vim.cmd("silent! TmuxNavigateRight")
+        end
+      '';
     }
     {
       key = "<C-k>";
-      action = "<C-\\><C-n><cmd>silent! TmuxNavigateUp<CR>";
       mode = "t";
       options.desc = "Terminal Focus Up";
+      action.__raw = ''
+        function()
+          vim.cmd("stopinsert")
+          vim.cmd("silent! TmuxNavigateUp")
+        end
+      '';
     }
     {
       key = "<C-j>";
-      action = "<C-\\><C-n><cmd>silent! TmuxNavigateDown<CR>";
       mode = "t";
       options.desc = "Terminal Focus Down";
+      action.__raw = ''
+        function()
+          vim.cmd("stopinsert")
+          vim.cmd("silent! TmuxNavigateDown")
+        end
+      '';
+    }
+    {
+      key = "<C-h>";
+      action = "<cmd>silent! TmuxNavigateLeft<CR>";
+      options.desc = "Focus left";
+    }
+    {
+      key = "<C-l>";
+      action = "<cmd>silent! TmuxNavigateRight<CR>";
+      options.desc = "Focus right";
+    }
+    {
+      key = "<C-k>";
+      action = "<cmd>silent! TmuxNavigateUp<CR>";
+      options.desc = "Focus up";
+    }
+    {
+      key = "<C-j>";
+      action = "<cmd>silent! TmuxNavigateDown<CR>";
+      options.desc = "Focus down";
     }
     {
       key = "<leader>wl";
@@ -158,22 +201,6 @@
       key = "<leader>wj";
       action = "<C-w>j";
       options.desc = "Focus down";
-    }
-    {
-      key = "<C-h>";
-      action = "<C-w>h";
-    }
-    {
-      key = "<C-l>";
-      action = "<C-w>l";
-    }
-    {
-      key = "<C-k>";
-      action = "<C-w>k";
-    }
-    {
-      key = "<C-j>";
-      action = "<C-w>j";
     }
     {
       key = "<space>|";
