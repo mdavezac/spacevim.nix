@@ -1,5 +1,8 @@
-{pkgs, nixvimPkgs ? null, ...}:
-let
+{
+  pkgs,
+  nixvimPkgs ? null,
+  ...
+}: let
   flattenPlugin =
     if nixvimPkgs != null && nixvimPkgs.vimPlugins ? "flatten-nvim"
     then nixvimPkgs.vimPlugins.flatten-nvim

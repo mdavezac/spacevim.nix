@@ -1,14 +1,14 @@
 {pkgs, ...}: {
   imports = [
-    ./mini-clue.nix
-    ./lualine.nix
-    ./bufferline.nix
-    ./fzf-lua.nix
-    ./noice.nix
-    ./flash.nix
-    ./neotree.nix
-    ./dashboard.nix
     ./ai.nix
+    ./bufferline.nix
+    ./dashboard.nix
+    ./flash.nix
+    ./fzf-lua.nix
+    ./lualine.nix
+    ./mini-clue.nix
+    ./neotree.nix
+    ./noice.nix
     ./sidekick.nix
   ];
   programs.nixvim.plugins = {

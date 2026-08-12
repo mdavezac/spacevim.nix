@@ -25,6 +25,7 @@
       swapfile = false; # Disable the swap file
       modeline = true; # Tags such as 'vim:ft=sh'
       modelines = 100; # Sets the type of modelines
+      exrc = true; # Enable local project config (.nvim.lua/.nvimrc/.exrc)
       undofile = true; # Automatically save and restore undo history
       incsearch = true; # Incremental search: show match for partly typed search command
       inccommand = "split"; # Search and replace: preview changes in quickfix list
