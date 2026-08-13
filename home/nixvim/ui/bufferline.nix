@@ -11,6 +11,7 @@
     settings.picker.ui_select = true;
     settings.terminal = {
       win.position = "right";
+      win.width.__raw = "math.min(math.floor(vim.o.columns * 0.5), 100)";
       win.height = 0.3;
       win.bo.scrollback = 50000;
       win.wo.number = false;

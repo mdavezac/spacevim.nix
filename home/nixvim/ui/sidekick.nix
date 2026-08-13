@@ -20,7 +20,7 @@
             scrollback = 50000;
           };
           float = {
-            width.__raw = "math.min(200, math.floor(vim.o.columns * 0.85))";
+            width.__raw = "math.min(math.min(200, math.floor(vim.o.columns * 0.85)), vim.o.columns * 0.95)";
             height = 0.85;
             border = "rounded";
           };

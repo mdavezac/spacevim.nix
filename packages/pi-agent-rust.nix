@@ -39,7 +39,7 @@ final: previous: {
 
     installPhase = ''
       runHook preInstall
-      install -Dm755 target/release/pi $out/bin/pi
+      install -Dm755 target/release/pi $out/bin/pi-rust
       runHook postInstall
     '';
 
@@ -48,7 +48,7 @@ final: previous: {
       homepage = "https://github.com/Dicklesworthstone/pi_agent_rust";
       license = previous.lib.licenses.mit;
       platforms = previous.lib.platforms.linux ++ previous.lib.platforms.darwin;
-      mainProgram = "pi";
+      mainProgram = "pi-rust";
     };
   };
 
