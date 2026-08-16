@@ -36,6 +36,11 @@
       inputs.nixpkgs.follows = "llm-agents-nixpkgs";
     };
     llm-agents-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+    maki = {
+      url = "github:tontinton/maki";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {nixpkgs, ...}: let
@@ -52,6 +57,7 @@
         codex-acp = llm-agent-pkgs.codex-acp;
         pi = llm-agent-pkgs.pi;
       })
+      (_: _: {maki = inputs.maki.packages.${system}.default;})
       (import ./packages/pi-agent-rust.nix)
       (import ./packages/pyrefly.nix)
       (import ./packages/flowmark.nix)

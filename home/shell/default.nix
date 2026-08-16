@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  imports = [./zellij.nix ./git.nix ./tmux.nix];
+  imports = [./zellij.nix ./git.nix ./tmux.nix ./maki.nix];
   home.packages = [pkgs.pi];
 
   programs.codex = {

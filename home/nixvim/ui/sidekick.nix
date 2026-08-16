@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   programs.nixvim.plugins.sidekick = {
     enable = true;
     settings = {
@@ -46,6 +46,10 @@
         tools = {
           pi.args = ["-c"];
           claude = {};
+          maki = {
+            cmd = ["maki"];
+            is_proc = "\\<maki\\>";
+          };
           codex = {
             cmd = ["codex"];
             args = ["--resume" "last"];
@@ -58,6 +62,8 @@
       };
     };
   };
+
+  programs.nixvim.extraPackages = [pkgs.maki];
 
   programs.nixvim.keymaps = [
     {
