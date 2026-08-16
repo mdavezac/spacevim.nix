@@ -44,10 +44,11 @@
           };
         };
         tools = {
-          pi = {};
+          pi.args = ["-c"];
           claude = {};
           codex = {
             cmd = ["codex"];
+            args = ["--resume" "last"];
             env = {
               VISUAL = "nvim";
               EDITOR = "nvim";

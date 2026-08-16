@@ -1,5 +1,9 @@
 {
   programs.nixvim = {
+    plugins.octo = {
+      enable = true;
+      settings.picker = "snacks";
+    };
     plugins.neogit = {
       enable = true;
       lazyLoad.settings.cmd = "Neogit";
