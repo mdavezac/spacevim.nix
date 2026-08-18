@@ -11,6 +11,13 @@
     [mcp.catapult]
     url = "https://dev.api.catapultlabs.xyz/mcp"
   '';
+  home.file.".config/maki/init.lua".text = ''
+    maki.setup({
+      agent = {
+        compaction_buffer = 102000,
+      },
+    })
+  '';
   home.file.".config/maki/AGENTS.md".text = ''
     # AGENTS
 

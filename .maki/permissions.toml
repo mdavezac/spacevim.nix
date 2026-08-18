@@ -1,8 +1,9 @@
 [bash]
 allow = [
-    "nix *",
-    "true *",
-    "nvim *",
-    "strings *",
-    "grep *",
+  "nix *",
+  "true *",
+  "nvim *",
+  "strings *",
+  "grep *",
+  "websearch *",
 ]
