@@ -18,9 +18,9 @@
       },
     })
 
-    require("review")
+    require("review-pr")
   '';
-  home.file.".config/maki/lua/review.lua".source = ./maki/review.lua;
+  home.file.".config/maki/lua/review-pr.lua".source = ./maki/review-pr.lua;
   home.file.".config/maki/AGENTS.md".text = ''
     # AGENTS
 
@@ -31,6 +31,7 @@
       `SHELL=bash devenv shell`.
     - When queried about linear issues, use the appropriate mcp
     - Linear issues are often coded as C-XYZ where XYZ are integers
+    - Never mark linear issues as done, unless specifically requested by the user
     - When queried about slack, notion, emails, granola, google drive, or calendars, rely on
       the Catapult MCP.
   '';

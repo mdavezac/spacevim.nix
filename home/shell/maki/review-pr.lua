@@ -153,7 +153,7 @@ List only applicable migrations, dependency or lockfile changes, auth or permiss
 end
 
 maki.api.register_command({
-  name = "/review",
+  name = "/code-review",
   description = "Review the current branch against its pull request base",
   nargs = 0,
   handler = function()
