@@ -17,7 +17,10 @@
         compaction_buffer = 102000,
       },
     })
+
+    require("review")
   '';
+  home.file.".config/maki/lua/review.lua".source = ./maki/review.lua;
   home.file.".config/maki/AGENTS.md".text = ''
     # AGENTS
 
