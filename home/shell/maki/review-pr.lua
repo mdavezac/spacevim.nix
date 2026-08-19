@@ -39,17 +39,10 @@ local function resolve_target()
   end
 
   local base = "main"
-  local pr = nil
   if maki.fn.executable("gh") == 1 then
-    local output = run("gh pr view --json number,title,baseRefName,url", root)
-    if output then
-      local decoded, decode_err = maki.json.decode(output)
-      if decoded and type(decoded.baseRefName) == "string" and decoded.baseRefName ~= "" then
-        base = decoded.baseRefName
-        pr = decoded
-      elseif decode_err then
-        maki.log.warn("review: could not decode gh output: " .. decode_err)
-      end
+    local output = run("gh pr view --json baseRefName --jq .baseRefName", root)
+    if output and output ~= "" then
+      base = output
     end
   end
 
@@ -77,29 +70,22 @@ local function resolve_target()
     return nil, "could not find a merge base with " .. base_ref .. ": " .. merge_err
   end
 
-  local status = run("git status --porcelain", root)
+  local status, status_err = run("git status --porcelain", root)
+  if not status then
+    return nil, "could not inspect the working tree: " .. status_err
+  end
+
   return {
     root = root,
     branch = branch,
     base = base,
     base_ref = base_ref,
     merge_base = merge_base,
-    dirty = status ~= nil and status ~= "",
-    pr = pr,
+    dirty = status ~= "",
   }, nil
 end
 
 local function build_prompt(target)
-  local pr_context = "No associated pull request was found; origin/main was used as the base."
-  if target.pr then
-    pr_context = string.format(
-      "GitHub PR #%s: %s (%s)",
-      tostring(target.pr.number),
-      tostring(target.pr.title),
-      tostring(target.pr.url)
-    )
-  end
-
   local worktree_context = "The working tree is clean."
   if target.dirty then
     worktree_context = "The working tree has uncommitted changes. They are outside this review; review only committed changes in the branch diff."
@@ -114,7 +100,6 @@ local function build_prompt(target)
 - Base branch: `%s`
 - Base ref: `%s`
 - Merge base: `%s`
-- PR context: %s
 - Worktree: %s
 
 Inspect the committed branch changes with `git diff %s...HEAD`. Read surrounding code and project instructions as needed to verify impact. Do not modify files or implement fixes during this review.
@@ -146,7 +131,6 @@ List only applicable migrations, dependency or lockfile changes, auth or permiss
     target.base,
     target.base_ref,
     target.merge_base,
-    pr_context,
     worktree_context,
     target.merge_base
   )

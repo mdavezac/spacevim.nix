@@ -16,11 +16,19 @@
       agent = {
         compaction_buffer = 102000,
       },
+      provider = {
+        default_model = "openai/gpt-5.6-terra",
+      }
     })
 
     require("review-pr")
   '';
   home.file.".config/maki/lua/review-pr.lua".source = ./maki/review-pr.lua;
+  home.file.".config/maki/plugin.toml".text = ''
+    [permissions]
+    env = true
+    run = true
+  '';
   home.file.".config/maki/AGENTS.md".text = ''
     # AGENTS
 
@@ -34,5 +42,11 @@
     - Never mark linear issues as done, unless specifically requested by the user
     - When queried about slack, notion, emails, granola, google drive, or calendars, rely on
       the Catapult MCP.
+    - Never run git reset or otherwise unstage changes unless the user explicitly requests it. The
+      user may stage changes deliberately to inspect the most recent changes introduced by the
+      agent; preserve their index state.
+    - Be clever when adding tests. Prefer testing the functionality and behavior of the app, and the
+      contract boundary of functions and classes. Avoid tests that merely check one implementation
+      tactic over another.
   '';
 }
