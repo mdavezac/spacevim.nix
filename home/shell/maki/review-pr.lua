@@ -1,3 +1,5 @@
+local ListPicker = require("maki.list_picker")
+
 local function shell_quote(value)
   return "'" .. value:gsub("'", "'\\''") .. "'"
 end
@@ -19,6 +21,102 @@ local function run(command, cwd, timeout_ms)
   return result.stdout:gsub("%s+$", ""), nil
 end
 
+local function split_lines(text)
+  local lines = {}
+  for line in (text .. "\n"):gmatch("(.-)\n") do
+    if line ~= "" then
+      lines[#lines + 1] = line
+    end
+  end
+  return lines
+end
+
+local function unmanaged_files(status)
+  local files = {}
+  for _, line in ipairs(split_lines(status)) do
+    if line:sub(1, 3) == "?? " then
+      files[#files + 1] = line:sub(4)
+    end
+  end
+  return files
+end
+
+local function choose_unmanaged_files(files)
+  if #files == 0 then
+    return {}, nil
+  end
+
+  local items = {
+    { label = "Include unmanaged files", detail = table.concat(files, ", ") },
+    { label = "Exclude unmanaged files", detail = table.concat(files, ", ") },
+  }
+  local choice = ListPicker.open(items, {
+    title = "Unmanaged files found",
+    footer = { { "Enter", "select" }, { "Esc", "cancel" } },
+  })
+
+  if choice.type ~= "choice" then
+    return nil, "review cancelled"
+  end
+  if choice.index == 1 then
+    return files, nil
+  end
+  return {}, nil
+end
+
+local function issue_commits(root)
+  local history, history_err = run("git log --format='%H%x09%s'", root)
+  if not history then
+    return nil, "could not inspect Git history: " .. history_err
+  end
+
+  local commits = {}
+  for _, line in ipairs(split_lines(history)) do
+    local sha, subject = line:match("^(%S+)%s+(.+)$")
+    local issue = subject and subject:match("^%[C%-(%d+)%]")
+    commits[#commits + 1] = {
+      sha = sha,
+      subject = subject,
+      issue = issue and "C-" .. issue or nil,
+    }
+  end
+
+  local latest = commits[1]
+  if not latest then
+    return nil, "Git history is empty"
+  end
+  for _, commit in ipairs(commits) do
+    if not commit.issue then
+      return nil, "commit does not start with [C-XYZ]: " .. commit.sha:sub(1, 12) .. " " .. commit.subject
+    end
+  end
+
+  local selected = {}
+  for _, commit in ipairs(commits) do
+    if commit.issue ~= latest.issue then
+      break
+    end
+    selected[#selected + 1] = commit
+  end
+
+  if #selected == 0 then
+    return nil, "no commits found for " .. latest.issue
+  end
+
+  local oldest = selected[#selected]
+  local parent, parent_err = run("git rev-parse " .. shell_quote(oldest.sha .. "^"), root)
+  if not parent then
+    return nil, "could not determine the review range: " .. parent_err
+  end
+
+  return {
+    issue = latest.issue,
+    commits = selected,
+    parent = parent,
+    head = selected[1].sha,
+  }, nil
+end
+
 local function resolve_target()
   local cwd = maki.uv.cwd()
   if not cwd then
@@ -30,115 +128,103 @@ local function resolve_target()
     return nil, "not a Git repository: " .. root_err
   end
 
-  local branch, branch_err = run("git branch --show-current", root)
-  if not branch then
-    return nil, "could not determine the current branch: " .. branch_err
-  end
-  if branch == "" then
-    return nil, "cannot review a detached HEAD"
-  end
-
-  local base = "main"
-  if maki.fn.executable("gh") == 1 then
-    local output = run("gh pr view --json baseRefName --jq .baseRefName", root)
-    if output and output ~= "" then
-      base = output
-    end
-  end
-
-  local valid_base, valid_err = run(
-    "git check-ref-format " .. shell_quote("refs/heads/" .. base),
-    root
-  )
-  if not valid_base then
-    return nil, "invalid base branch reported for review: " .. valid_err
-  end
-
-  maki.ui.flash("Fetching origin/" .. base .. "...")
-  local refspec = "refs/heads/" .. base .. ":refs/remotes/origin/" .. base
-  local _, fetch_err = run("git fetch --quiet origin " .. shell_quote(refspec), root, 120000)
-  if fetch_err then
-    return nil, "could not fetch origin/" .. base .. ": " .. fetch_err
-  end
-
-  local base_ref = "origin/" .. base
-  local merge_base, merge_err = run(
-    "git merge-base HEAD " .. shell_quote(base_ref),
-    root
-  )
-  if not merge_base then
-    return nil, "could not find a merge base with " .. base_ref .. ": " .. merge_err
-  end
-
-  local status, status_err = run("git status --porcelain", root)
+  local status, status_err = run("git status --porcelain=v1 --untracked-files=all", root)
   if not status then
     return nil, "could not inspect the working tree: " .. status_err
   end
 
+  local unmanaged, unmanaged_err = choose_unmanaged_files(unmanaged_files(status))
+  if not unmanaged then
+    return nil, unmanaged_err
+  end
+
+  local history, history_err = issue_commits(root)
+  if not history then
+    return nil, history_err
+  end
+
   return {
     root = root,
-    branch = branch,
-    base = base,
-    base_ref = base_ref,
-    merge_base = merge_base,
-    dirty = status ~= "",
+    issue = history.issue,
+    commits = history.commits,
+    parent = history.parent,
+    head = history.head,
+    unmanaged = unmanaged,
   }, nil
 end
 
 local function build_prompt(target)
-  local worktree_context = "The working tree is clean."
-  if target.dirty then
-    worktree_context = "The working tree has uncommitted changes. They are outside this review; review only committed changes in the branch diff."
+  local commit_lines = {}
+  for _, commit in ipairs(target.commits) do
+    commit_lines[#commit_lines + 1] = string.format("- `%s` %s", commit.sha:sub(1, 12), commit.subject)
   end
 
-  return string.format([[Review the current branch as a pull request.
+  local unmanaged_context = "No unmanaged files are included."
+  if #target.unmanaged > 0 then
+    unmanaged_context = "The following unmanaged files are included in the review. Read them directly; they are not represented in the Git diff:\n"
+      .. table.concat(target.unmanaged, "\n")
+  end
 
-## Review target
+  return string.format([[
+        Review the current checkout as a code review for Linear issue `%s`.
 
-- Repository: `%s`
-- Current branch: `%s`
-- Base branch: `%s`
-- Base ref: `%s`
-- Merge base: `%s`
-- Worktree: %s
+        ## Review scope
 
-Inspect the committed branch changes with `git diff %s...HEAD`. Read surrounding code and project instructions as needed to verify impact. Do not modify files or implement fixes during this review.
+        - Repository: `%s`
+        - Commits included: `%d`
+        - Diff range: `git diff %s..%s`
 
-Flag only discrete, actionable defects introduced by the diff that the author would likely fix. Prioritize correctness and regressions, security and trust boundaries, data loss, concurrency and lifecycle problems, broken API or compatibility contracts, and error handling that masks failures. Report missing tests only when they leave significant changed behavior unverified.
+        %s
 
-Do not report pure style preferences, speculative risks without a concrete affected path, intentional behavior apparent from the change, or pre-existing issues unless the changed code directly exposes them.
+        Commits included, newest first:
+        %s
 
-For each finding:
+        Review only the changes introduced by the listed commits. Read surrounding code and project
+        instructions as needed to verify impact. Do not modify files or implement fixes during this
+        review. Review the local commits only. Do not fetch from the remote.
 
-- Prefix the title with `[P0]`, `[P1]`, `[P2]`, or `[P3]`.
-- Include the shortest useful `path:line` location overlapping the diff.
-- Explain the concrete triggering scenario and impact.
-- Keep the explanation concise and actionable.
+        Flag only discrete, actionable defects introduced by these commits that the author would likely fix.
+        Prioritize correctness and regressions, security and trust boundaries, data loss, concurrency and
+        lifecycle problems, broken API or compatibility contracts, and error handling that masks failures.
+        Report missing tests only when they leave significant changed behavior unverified.
 
-List every qualifying finding. If there are none, explicitly state that the change looks correct.
+        Do not report pure style preferences, speculative risks without a concrete affected path,
+          intentional behavior apparent from the change, or pre-existing issues.
 
-Finish with these sections:
+        For each finding:
 
-## Verdict
+        - Prefix the title with `[P0]`, `[P1]`, `[P2]`, or `[P3]`.
+        - Include the shortest useful `path:line` location overlapping the diff.
+        - Explain the concrete triggering scenario and impact.
+        - Keep the explanation concise and actionable.
 
-Write exactly `correct` when there are no blocking findings, otherwise `needs attention`.
+        List every qualifying finding. If there are none, explicitly state that the change looks correct.
 
-## Human Reviewer Callouts (Non-Blocking)
+        Finish with these sections:
 
-List only applicable migrations, dependency or lockfile changes, auth or permission changes, backwards-incompatible contracts, destructive operations, feature flag changes, or configuration-default changes. Write `- (none)` if none apply.]],
+        ## Verdict
+
+        Write exactly `correct` when there are no blocking findings, otherwise `needs attention`.
+
+        ## Human Reviewer Callouts (Non-Blocking)
+
+        List only applicable migrations, dependency or lockfile changes, auth or permission changes,
+        backwards-incompatible contracts, destructive operations, feature flag changes, or
+        configuration-default changes. Write `- (none)` if none apply.
+    ]],
+    target.issue,
     target.root,
-    target.branch,
-    target.base,
-    target.base_ref,
-    target.merge_base,
-    worktree_context,
-    target.merge_base
+    #target.commits,
+    target.parent,
+    target.head,
+    unmanaged_context,
+    table.concat(commit_lines, "\n")
   )
 end
 
 maki.api.register_command({
   name = "/code-review",
-  description = "Review the current branch against its pull request base",
+  description = "Review the latest Linear issue's commits in the current checkout",
   nargs = 0,
   handler = function()
     local target, err = resolve_target()
@@ -153,6 +239,6 @@ maki.api.register_command({
       return
     end
 
-    maki.ui.flash("Review " .. state .. " against " .. target.base_ref)
+    maki.ui.flash("Review " .. target.issue .. " started")
   end,
 })

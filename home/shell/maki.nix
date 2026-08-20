@@ -39,12 +39,11 @@
       `SHELL=bash devenv shell`.
     - When queried about linear issues, use the appropriate mcp
     - Linear issues are often coded as C-XYZ where XYZ are integers
-    - Never mark linear issues as done, unless specifically requested by the user
+    - Never change the status of a linear issue
     - When queried about slack, notion, emails, granola, google drive, or calendars, rely on
       the Catapult MCP.
-    - Never run git reset or otherwise unstage changes unless the user explicitly requests it. The
-      user may stage changes deliberately to inspect the most recent changes introduced by the
-      agent; preserve their index state.
+    - Never run git reset or otherwise unstage changes. The user may stage changes deliberately to
+      inspect the most recent changes introduced by the agent; preserve their index state.
     - Be clever when adding tests. Prefer testing the functionality and behavior of the app, and the
       contract boundary of functions and classes. Avoid tests that merely check one implementation
       tactic over another.
