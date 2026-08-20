@@ -38,7 +38,7 @@
     llm-agents-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     maki = {
-      url = "github:tontinton/maki";
+      url = "github:tontinton/maki/v0.4.10";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -61,6 +61,7 @@
       (import ./packages/pi-agent-rust.nix)
       (import ./packages/pyrefly.nix)
       (import ./packages/flowmark.nix)
+      (import ./packages/semble.nix)
     ];
   in {
     nixosConfigurations.loubakgou = let

@@ -44,15 +44,14 @@
           };
         };
         tools = {
-          pi.args = ["-c"];
+          pi.cmd = ["pi" "-c"];
           claude = {};
           maki = {
-            cmd = ["maki"];
+            cmd = ["maki" "--continue"];
             is_proc = "\\<maki\\>";
           };
           codex = {
-            cmd = ["codex"];
-            args = ["--resume" "last"];
+            cmd = ["codex" "--resume" "last"];
             env = {
               VISUAL = "nvim";
               EDITOR = "nvim";

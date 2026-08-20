@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [./zellij.nix ./git.nix ./tmux.nix ./maki.nix];
-  home.packages = [pkgs.pi];
+  home.packages = [pkgs.pi pkgs.semble];
 
   programs.codex = {
     enable = true;

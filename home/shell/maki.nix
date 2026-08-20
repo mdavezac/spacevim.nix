@@ -22,8 +22,10 @@
     })
 
     require("review-pr")
+    require("semble")
   '';
   home.file.".config/maki/lua/review-pr.lua".source = ./maki/review-pr.lua;
+  home.file.".config/maki/lua/semble.lua".source = ./maki/semble.lua;
   home.file.".config/maki/plugin.toml".text = ''
     [permissions]
     env = true
