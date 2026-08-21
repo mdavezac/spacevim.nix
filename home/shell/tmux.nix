@@ -16,6 +16,7 @@
         set -g status off
         set -g extended-keys on
         set -g extended-keys-format csi-u
+        set -g allow-passthrough all
       ''
       + (
         if pkgs.stdenv.hostPlatform.isDarwin

@@ -3,12 +3,12 @@ final: previous: {
     src = previous.fetchFromGitHub {
       owner = "facebook";
       repo = "pyrefly";
-      tag = "1.1.0";
-      hash = "sha256-8bFg8rcUgPsDDflScQWPxDNrEGM5BufjHLPz3Rm0Ur4=";
+      tag = "1.2.0";
+      hash = "sha256-36MjpYlw53DvLasBIpiGK0MHY3skVazqYwcmLZwXL9E=";
     };
   in previous.rustPlatform.buildRustPackage {
     pname = "pyrefly";
-    version = "1.1.0";
+    version = "1.2.0";
 
     inherit src;
 
@@ -17,22 +17,12 @@ final: previous: {
       lockFile = "${src}/Cargo.lock";
       outputHashes = {
         "backtrace-0.3.76" = "sha256-LQ/lvsn9BKVj8Xhi+5mosvSrswJ+wiuA6FEUtU0Kb90=";
-        "lsp-types-0.95.1" = "sha256-2F43Qa6mXhpCF97cWoi1R0PDgutkEypbyDGtHZerpxM=";
-        "ruff_annotate_snippets-0.1.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
-        "ruff_cache-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
-        "ruff_diagnostics-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
-        "ruff_notebook-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
-        "ruff_python_ast-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
-        "ruff_python_parser-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
-        "ruff_python_trivia-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
-        "ruff_source_file-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
-        "ruff_text_size-0.0.0" = "sha256-WpjOOCYLZ1d8XPUx3qNHD+fuK6t65u/1/ZezABWpBD0=";
-        "rustversion-1.0.22" = "sha256-v/K6MMOMqar9DD0NdHR+cqhUOIFtasOn9i3lbxa6xII=";
+        "lsp-types-0.95.2" = "sha256-+f3XtEm0fSvgl12LVSeGJGnPElGScAufh9dmMOqKnI8=";
       };
     };
 
     patches = [
-      (previous.writeText "pyrefly-1.1.0-fix-shebang.patch" ''
+      (previous.writeText "pyrefly-1.2.0-fix-shebang.patch" ''
         diff --git a/pyrefly/lib/test/lsp/lsp_interaction/configuration.rs b/pyrefly/lib/test/lsp/lsp_interaction/configuration.rs
         index edc2db09f..ce33a2774 100644
         --- a/pyrefly/lib/test/lsp/lsp_interaction/configuration.rs
