@@ -1,4 +1,27 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: let
+  vespaGrammar = (pkgs.tree-sitter.buildGrammar {
+    language = "vespa";
+    version = "0-unstable-2023-01-28";
+    src = pkgs.fetchFromGitHub {
+      owner = "bartek";
+      repo = "tree-sitter-vespa";
+      rev = "618c5b1c9b92daac0b7dd0b41c65158437dbeec5";
+      hash = "sha256-eaQfvh2JS7hhlyh+13asxMoKlKMsVobuqbhJpDeVBtk=";
+    };
+    meta.homepage = "https://github.com/bartek/tree-sitter-vespa";
+  }).overrideAttrs (old: {
+    postInstall =
+      (old.postInstall or "")
+      + ''
+        mkdir -p $out/queries/vespa
+        mv $out/queries/*.scm $out/queries/vespa/
+      '';
+  });
+in {
   imports = [
     ./nix.nix
     ./lsp-base.nix
@@ -20,6 +43,8 @@
   ];
   programs.nixvim.plugins = {
     treesitter.enable = true;
+    treesitter.grammarPackages = config.programs.nixvim.plugins.treesitter.package.allGrammars ++ [vespaGrammar];
+    treesitter.languageRegister.vespa = "sd";
     treesitter.settings = {
       highlight.enable = true;
       indent.enable = true;
