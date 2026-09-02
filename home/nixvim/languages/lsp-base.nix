@@ -48,15 +48,36 @@
           action = "open_float";
           desc = "Line Diagnostics";
         };
-        "]d" = {
-          action = "goto_next";
-          desc = "Next Diagnostic";
-        };
-        "[d" = {
-          action = "goto_prev";
-          desc = "Previous Diagnostic";
-        };
       };
     };
   };
+
+  programs.nixvim.keymaps = [
+    {
+      key = "]d";
+      mode = "n";
+      action.__raw = ''
+        function()
+          vim.diagnostic.jump({ count = 1, float = true })
+        end
+      '';
+      options = {
+        desc = "Next Diagnostic";
+        silent = true;
+      };
+    }
+    {
+      key = "[d";
+      mode = "n";
+      action.__raw = ''
+        function()
+          vim.diagnostic.jump({ count = -1, float = true })
+        end
+      '';
+      options = {
+        desc = "Previous Diagnostic";
+        silent = true;
+      };
+    }
+  ];
 }

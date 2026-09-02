@@ -73,6 +73,7 @@
   programs.ghostty = {
     enable = true;
     settings.macos-option-as-alt = true;
+    settings.command = "tmux new-session -A -s main";
     settings.keybind = [
       "f11=toggle_fullscreen"
       "f12=toggle_window_decorations"

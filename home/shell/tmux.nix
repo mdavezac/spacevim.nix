@@ -17,6 +17,7 @@
         set -g extended-keys on
         set -g extended-keys-format csi-u
         set -g allow-passthrough all
+        set -as terminal-features ",xterm-ghostty:RGB"
       ''
       + (
         if pkgs.stdenv.hostPlatform.isDarwin

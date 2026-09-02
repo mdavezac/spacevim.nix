@@ -1,13 +1,13 @@
 final: previous: {
   flowmark-rs = previous.rustPlatform.buildRustPackage rec {
     pname = "flowmark-rs";
-    version = "0.3.1";
+    version = "0.3.2";
 
     src = previous.fetchFromGitHub {
       owner = "jlevy";
       repo = "flowmark-rs";
       tag = "v${version}";
-      hash = "sha256-YGNKJS3AzgwIIhrLzm4MvuXA4TAd4SbiDvcT7zb7ZXI=";
+      hash = "sha256-A3OZiGdcLVUNpsDRTt55duPtx1XrwT83qBD2sfn35mc=";
     };
 
     cargoDeps = previous.stdenvNoCC.mkDerivation {
@@ -20,7 +20,7 @@ final: previous: {
       ];
       CARGO_HTTP_CAINFO = "${previous.cacert}/etc/ssl/certs/ca-bundle.crt";
       SSL_CERT_FILE = "${previous.cacert}/etc/ssl/certs/ca-bundle.crt";
-      outputHash = "sha256-PjoETC7ceobCRkZ5ZPWocVyHBBqRHMYCO4Z0G2FclJ8=";
+      outputHash = "sha256-Er++OJJ0B+kKESndEz1gMQj/XlAN5h1sD4F5Bb5oLGQ=";
       outputHashAlgo = "sha256";
       outputHashMode = "recursive";
 
