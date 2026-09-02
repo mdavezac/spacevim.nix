@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [./zellij.nix ./git.nix ./tmux.nix ./maki.nix];
   home.packages = [pkgs.pi pkgs.semble];
 
@@ -22,9 +26,25 @@
 
   programs.atuin = {
     enable = true;
-    enableNushellIntegration = true;
+    enableNushellIntegration = false;
     settings = builtins.fromTOML (builtins.readFile ./atuin.toml);
   };
+
+  programs.nushell.extraConfig = lib.mkOrder 2000 ''
+    source ${
+      pkgs.runCommand "atuin-nushell-config.nu" {
+        nativeBuildInputs = [pkgs.writableTmpDirAsHomeHook];
+      } ''
+        ${lib.getExe pkgs.atuin} init nu | awk '
+          /name: atuin/ {
+            count++
+            sub("name: atuin", "name: atuin-" count)
+          }
+          { print }
+        ' > "$out"
+      ''
+    }
+  '';
 
   programs.starship = {
     enable = true;
