@@ -3,6 +3,17 @@
   pkgs,
   ...
 }: let
+  jinja2Grammar = pkgs.tree-sitter.buildGrammar {
+    language = "jinja2";
+    version = "0.1.0";
+    src = pkgs.fetchFromGitHub {
+      owner = "geigerzaehler";
+      repo = "tree-sitter-jinja2";
+      rev = "7af726f7ac42db3fe798d45ee375078bbef28a41";
+      hash = "sha256-6lw38wvrQP/c3z7m40ygXNij60Gh2owx+Ibvfzwa47s=";
+    };
+    meta.homepage = "https://github.com/geigerzaehler/tree-sitter-jinja2";
+  };
   vespaGrammar = (pkgs.tree-sitter.buildGrammar {
     language = "vespa";
     version = "0-unstable-2023-01-28";
@@ -41,9 +52,25 @@ in {
     ./json.nix
     ./unison.nix
   ];
+  # The upstream grammar does not provide highlight queries.  Place this query
+  # in Neovim's runtime so it is used for standalone Jinja2 files and fenced
+  # Markdown blocks labelled `jinja2`.
+  programs.nixvim.filetype.extension = {
+    j2 = "jinja2";
+    jinja = "jinja2";
+    jinja2 = "jinja2";
+  };
+
+  programs.nixvim.extraFiles."queries/jinja2/highlights.scm".text = ''
+    (comment) @comment
+    (string) @string
+    (output) @variable
+    (custom_tag) @keyword
+  '';
+
   programs.nixvim.plugins = {
     treesitter.enable = true;
-    treesitter.grammarPackages = config.programs.nixvim.plugins.treesitter.package.allGrammars ++ [vespaGrammar];
+    treesitter.grammarPackages = config.programs.nixvim.plugins.treesitter.package.allGrammars ++ [jinja2Grammar vespaGrammar];
     treesitter.languageRegister.vespa = "sd";
     treesitter.settings = {
       highlight.enable = true;
