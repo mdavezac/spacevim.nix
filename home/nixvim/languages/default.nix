@@ -14,6 +14,17 @@
     };
     meta.homepage = "https://github.com/geigerzaehler/tree-sitter-jinja2";
   };
+  bloblangGrammar = pkgs.tree-sitter.buildGrammar {
+    language = "bloblang";
+    version = "0-unstable-2025-05-05";
+    src = pkgs.fetchFromGitHub {
+      owner = "EmilLaursen";
+      repo = "tree-sitter-bloblang";
+      rev = "5b34098ec446caadcec0bf667bade2b8551ecb21";
+      hash = "sha256-0YO9QtJu6cRPz4Winf8Zrkyhf6YAy/4q4g8pAJooQ6Y=";
+    };
+    meta.homepage = "https://github.com/EmilLaursen/tree-sitter-bloblang";
+  };
   vespaGrammar = (pkgs.tree-sitter.buildGrammar {
     language = "vespa";
     version = "0-unstable-2023-01-28";
@@ -56,6 +67,7 @@ in {
   # in Neovim's runtime so it is used for standalone Jinja2 files and fenced
   # Markdown blocks labelled `jinja2`.
   programs.nixvim.filetype.extension = {
+    blobl = "bloblang";
     j2 = "jinja2";
     jinja = "jinja2";
     jinja2 = "jinja2";
@@ -70,7 +82,8 @@ in {
 
   programs.nixvim.plugins = {
     treesitter.enable = true;
-    treesitter.grammarPackages = config.programs.nixvim.plugins.treesitter.package.allGrammars ++ [jinja2Grammar vespaGrammar];
+    treesitter.grammarPackages = config.programs.nixvim.plugins.treesitter.package.allGrammars ++ [bloblangGrammar jinja2Grammar vespaGrammar];
+    treesitter.languageRegister.bloblang = "blobl";
     treesitter.languageRegister.vespa = "sd";
     treesitter.settings = {
       highlight.enable = true;
