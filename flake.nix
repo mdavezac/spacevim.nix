@@ -18,6 +18,10 @@
       url = "github:ChmaraX/herdr-nvim/v1.1.0";
       flake = false;
     };
+    herdr-nvim-nav = {
+      url = "github:aimdevlee/herdr-nvim-nav";
+      flake = false;
+    };
 
     rio-themes.url = "github:mbadolato/iTerm2-Color-Schemes";
     rio-themes.flake = false;
@@ -67,6 +71,7 @@
       (import ./packages/pyrefly.nix)
       (import ./packages/flowmark.nix)
       (import ./packages/semble.nix)
+      (import ./packages/tsk.nix)
     ];
   in {
     nixosConfigurations.loubakgou = let
@@ -117,6 +122,7 @@
             home-manager.extraSpecialArgs = {
               rio-themes = inputs.rio-themes;
               herdrNvim = inputs.herdr-nvim;
+              herdrNvimNav = inputs.herdr-nvim-nav;
               inherit nixvimPkgs;
             };
           }
@@ -151,6 +157,7 @@
             ./home/stylix.nix
             ./home/ipython.nix
           ];
+          home.packages = [pkgs.tsk];
         }
       ];
       configuration = name:
@@ -158,6 +165,7 @@
           inherit pkgs;
           extraSpecialArgs = {
             herdrNvim = inputs.herdr-nvim;
+            herdrNvimNav = inputs.herdr-nvim-nav;
             inherit nixvimPkgs;
           };
           modules =

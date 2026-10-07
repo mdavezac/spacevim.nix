@@ -2,6 +2,7 @@
   pkgs,
   nixvimPkgs ? null,
   herdrNvim,
+  herdrNvimNav,
   ...
 }: let
   flattenPlugin =
@@ -16,6 +17,11 @@
     pname = "herdr-nvim";
     version = "1.1.0";
     src = herdrNvim;
+  };
+  herdrNvimNavPlugin = pkgs.vimUtils.buildVimPlugin {
+    pname = "herdr-nvim-nav";
+    version = "unstable";
+    src = herdrNvimNav;
   };
   herdrNvimWithDirenv = pkgs.writeShellScript "herdr-nvim-with-direnv" ''
     # herdr starts the sidebar daemon directly, bypassing an interactive shell.
@@ -34,8 +40,17 @@ in {
       plenaryPlugin
       flattenPlugin
       herdrNvimPlugin
+      herdrNvimNavPlugin
     ];
     extraConfigLua = ''
+      require("herdr-nvim-nav").setup()
+      -- The plugin owns normal-mode mappings. Leave terminal-job mode first,
+      -- then remap the same chord through its normal-mode navigation.
+      vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-h>]], { remap = true, silent = true, desc = "Navigate left" })
+      vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-j>]], { remap = true, silent = true, desc = "Navigate down" })
+      vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-k>]], { remap = true, silent = true, desc = "Navigate up" })
+      vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-l>]], { remap = true, silent = true, desc = "Navigate right" })
+
       -- Define herdr mappings explicitly: its default guarded mappings warn
       -- when this generated configuration is sourced again.
       local herdr = require("herdr-nvim")
