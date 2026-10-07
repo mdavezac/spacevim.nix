@@ -9,7 +9,7 @@
     ./mini-clue.nix
     ./neotree.nix
     ./noice.nix
-    ./sidekick.nix
+    # ./sidekick.nix
   ];
   programs.nixvim.plugins = {
     notify.enable = true;
@@ -198,22 +198,22 @@
     }
     {
       key = "<C-h>";
-      action = "<cmd>silent! TmuxNavigateLeft<CR>";
+      action = "<cmd>silent! !herdr pane focus --direction left<CR>";
       options.desc = "Focus left";
     }
     {
       key = "<C-l>";
-      action = "<cmd>silent! TmuxNavigateRight<CR>";
+      action = "<cmd>silent! !herdr pane focus --direction right<CR>";
       options.desc = "Focus right";
     }
     {
       key = "<C-k>";
-      action = "<cmd>silent! TmuxNavigateUp<CR>";
+      action = "<cmd>silent! !herdr pane focus --direction up<CR>";
       options.desc = "Focus up";
     }
     {
       key = "<C-j>";
-      action = "<cmd>silent! TmuxNavigateDown<CR>";
+      action = "<cmd>silent! !herdr pane focus --direction down<CR>";
       options.desc = "Focus down";
     }
     {

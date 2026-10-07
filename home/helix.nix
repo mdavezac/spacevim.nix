@@ -15,16 +15,20 @@
     languages = {
       language-server = {
         nil-lsp.command = "${pkgs.nil}/bin/nil";
-        pyright-lsp = {
-          command = "${pkgs.pyright}/bin/basedpyright-langserver";
-          args = ["--stdio"];
-          config.pyright.analysis = {
-            autoSearchPaths = true;
-            typeCheckingMode = "basic";
-            diagnosticMode = "openFilesOnly";
-            autoImportCompletions = true;
-          };
+        pyrefly = {
+          command = "${pkgs.pyrefly}/bin/pyrefly";
+          args = ["lsp"];
         };
+        # pyright-lsp = {
+        #   command = "${pkgs.pyright}/bin/basedpyright-langserver";
+        #   args = ["--stdio"];
+        #   config.pyright.analysis = {
+        #     autoSearchPaths = true;
+        #     typeCheckingMode = "basic";
+        #     diagnosticMode = "openFilesOnly";
+        #     autoImportCompletions = true;
+        #   };
+        # };
         ruff-lsp = {
           command = "${pkgs.ruff}/bin/ruff";
           args = ["server" "-q" "--preview"];
@@ -44,7 +48,7 @@
           formatter.command = "bash";
           formatter.args = ["-c" "ruff check --fix --select I - | ruff format -"];
           language-servers = [
-            "pyright-lsp"
+            "pyrefly"
             "ruff-lsp"
           ];
         }

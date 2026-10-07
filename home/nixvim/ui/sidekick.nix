@@ -1,6 +1,11 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
   programs.nixvim.plugins.sidekick = {
-    enable = true;
+    enable = false;
     settings = {
       # NES requires the Copilot language server; Sidekick's CLI integration
       # is independent of it.
@@ -64,7 +69,7 @@
 
   programs.nixvim.extraPackages = [pkgs.maki];
 
-  programs.nixvim.keymaps = [
+  programs.nixvim.keymaps = lib.mkIf config.programs.nixvim.plugins.sidekick.enable [
     {
       key = "<C-/>";
       action.__raw = ''
@@ -96,7 +101,7 @@
       mode = ["n" "x"];
     }
     {
-      key = "<leader>as";
+      key = "<leader>aC";
       action.__raw = ''
         function()
           require("sidekick.cli").select({ filter = { installed = true } })

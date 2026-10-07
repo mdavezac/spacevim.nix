@@ -14,6 +14,11 @@
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
+    herdr-nvim = {
+      url = "github:ChmaraX/herdr-nvim/v1.1.0";
+      flake = false;
+    };
+
     rio-themes.url = "github:mbadolato/iTerm2-Color-Schemes";
     rio-themes.flake = false;
     nuscripts.url = "github:nushell/nu_scripts";
@@ -111,6 +116,7 @@
             home-manager.backupFileExtension = "hm-backup";
             home-manager.extraSpecialArgs = {
               rio-themes = inputs.rio-themes;
+              herdrNvim = inputs.herdr-nvim;
               inherit nixvimPkgs;
             };
           }
@@ -150,7 +156,10 @@
       configuration = name:
         inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = {inherit nixvimPkgs;};
+          extraSpecialArgs = {
+            herdrNvim = inputs.herdr-nvim;
+            inherit nixvimPkgs;
+          };
           modules =
             modules
             ++ [

@@ -1,6 +1,7 @@
 {
   pkgs,
   nixvimPkgs ? null,
+  herdrNvim,
   ...
 }: let
   flattenPlugin =
@@ -11,13 +12,42 @@
     if nixvimPkgs != null && nixvimPkgs.vimPlugins ? "plenary-nvim"
     then nixvimPkgs.vimPlugins.plenary-nvim
     else pkgs.vimPlugins.plenary-nvim;
+  herdrNvimPlugin = pkgs.vimUtils.buildVimPlugin {
+    pname = "herdr-nvim";
+    version = "1.1.0";
+    src = herdrNvim;
+  };
+  herdrNvimWithDirenv = pkgs.writeShellScript "herdr-nvim-with-direnv" ''
+    # herdr starts the sidebar daemon directly, bypassing an interactive shell.
+    # Only enable direnv when the agent's Git workspace explicitly has an .envrc.
+    repo_root="$(${pkgs.git}/bin/git rev-parse --show-toplevel 2>/dev/null || true)"
+    if [ -n "$repo_root" ] && [ -f "$repo_root/.envrc" ]; then
+      exec ${pkgs.direnv}/bin/direnv exec "$repo_root" nvim "$@"
+    fi
+    # Use the profile's Nixvim wrapper, not pkgs.neovim: the latter lacks the
+    # packaged plugin runtime required by the generated init.lua.
+    exec nvim "$@"
+  '';
 in {
   programs.nixvim = {
     extraPlugins = [
       plenaryPlugin
       flattenPlugin
+      herdrNvimPlugin
     ];
     extraConfigLua = ''
+      -- Define herdr mappings explicitly: its default guarded mappings warn
+      -- when this generated configuration is sourced again.
+      local herdr = require("herdr-nvim")
+      herdr.setup({ keymaps = false })
+      vim.keymap.set("x", "<leader>ac", herdr.comment_selection, { desc = "comment selection" })
+      vim.keymap.set("n", "<leader>ac", herdr.comment_line, { desc = "comment line" })
+      vim.keymap.set("n", "<leader>al", herdr.list_comments, { desc = "list comments" })
+      vim.keymap.set("n", "<leader>as", function() herdr.send_all({ submit = false }) end, { desc = "paste comments to agent" })
+      vim.keymap.set("n", "<leader>aS", function() herdr.send_all({ submit = true }) end, { desc = "send comments to agent" })
+      vim.keymap.set("x", "<leader>ai", herdr.ref_selection, { desc = "reference selection at agent cursor" })
+      vim.keymap.set("n", "<leader>ai", herdr.ref_line, { desc = "reference line at agent cursor" })
+
       require("flatten").setup({
         hooks = {
           -- Keep the nested editor alive until the host-side buffer is closed.
@@ -135,4 +165,11 @@ in {
     };
   };
   programs.nixvim.extraPackages = [pkgs.codex pkgs.codex-acp];
+
+  # herdr-nvim reads this independently of Nixvim.  Its daemon is started in
+  # the target agent pane's cwd, so `direnv exec .` loads that project's .envrc.
+  home.file.".config/herdr-nvim/config.toml".text = ''
+    [sidebar]
+    nvim_bin = "${herdrNvimWithDirenv}"
+  '';
 }
