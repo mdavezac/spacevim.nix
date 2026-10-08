@@ -157,7 +157,7 @@
             ./home/stylix.nix
             ./home/ipython.nix
           ];
-          home.packages = [pkgs.tsk];
+          home.packages = [pkgs.tsk pkgs.btop];
         }
       ];
       configuration = name:

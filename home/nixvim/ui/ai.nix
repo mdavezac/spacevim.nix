@@ -42,26 +42,152 @@ in {
       herdrNvimPlugin
       herdrNvimNavPlugin
     ];
+    keymaps = [
+      {
+        key = "<C-h>";
+        mode = "t";
+        action = "<C-\\><C-n><C-h>";
+        options = {
+          remap = true;
+          silent = true;
+          desc = "Navigate left";
+        };
+      }
+      {
+        key = "<C-j>";
+        mode = "t";
+        action = "<C-\\><C-n><C-j>";
+        options = {
+          remap = true;
+          silent = true;
+          desc = "Navigate down";
+        };
+      }
+      {
+        key = "<C-k>";
+        mode = "t";
+        action = "<C-\\><C-n><C-k>";
+        options = {
+          remap = true;
+          silent = true;
+          desc = "Navigate up";
+        };
+      }
+      {
+        key = "<C-l>";
+        mode = "t";
+        action = "<C-\\><C-n><C-l>";
+        options = {
+          remap = true;
+          silent = true;
+          desc = "Navigate right";
+        };
+      }
+      {
+        key = "<leader>ac";
+        mode = "x";
+        action.__raw = ''require("herdr-nvim").comment_selection'';
+        options.desc = "Comment selection";
+      }
+      {
+        key = "<leader>ac";
+        mode = "n";
+        action.__raw = ''require("herdr-nvim").comment_line'';
+        options.desc = "Comment line";
+      }
+      {
+        key = "<leader>al";
+        mode = "n";
+        action.__raw = ''require("herdr-nvim").list_comments'';
+        options.desc = "List comments";
+      }
+      {
+        key = "<leader>as";
+        mode = "n";
+        action.__raw = ''function() require("herdr-nvim").send_all({ submit = false }) end'';
+        options.desc = "Paste comments to agent";
+      }
+      {
+        key = "<leader>aS";
+        mode = "n";
+        action.__raw = ''function() require("herdr-nvim").send_all({ submit = true }) end'';
+        options.desc = "Send comments to agent";
+      }
+      {
+        key = "<leader>ai";
+        mode = "x";
+        action.__raw = ''require("herdr-nvim").ref_selection'';
+        options.desc = "Reference selection at agent cursor";
+      }
+      {
+        key = "<leader>ai";
+        mode = "n";
+        action.__raw = ''require("herdr-nvim").ref_line'';
+        options.desc = "Reference line at agent cursor";
+      }
+      {
+        key = "<leader>ad";
+        mode = "n";
+        action.__raw = ''function() _G.herdr_nvim_send_diagnostic() end'';
+        options.desc = "Send diagnostic to Herdr agent";
+      }
+    ];
     extraConfigLua = ''
       require("herdr-nvim-nav").setup()
-      -- The plugin owns normal-mode mappings. Leave terminal-job mode first,
-      -- then remap the same chord through its normal-mode navigation.
-      vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-h>]], { remap = true, silent = true, desc = "Navigate left" })
-      vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-j>]], { remap = true, silent = true, desc = "Navigate down" })
-      vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-k>]], { remap = true, silent = true, desc = "Navigate up" })
-      vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-l>]], { remap = true, silent = true, desc = "Navigate right" })
 
       -- Define herdr mappings explicitly: its default guarded mappings warn
       -- when this generated configuration is sourced again.
       local herdr = require("herdr-nvim")
       herdr.setup({ keymaps = false })
-      vim.keymap.set("x", "<leader>ac", herdr.comment_selection, { desc = "comment selection" })
-      vim.keymap.set("n", "<leader>ac", herdr.comment_line, { desc = "comment line" })
-      vim.keymap.set("n", "<leader>al", herdr.list_comments, { desc = "list comments" })
-      vim.keymap.set("n", "<leader>as", function() herdr.send_all({ submit = false }) end, { desc = "paste comments to agent" })
-      vim.keymap.set("n", "<leader>aS", function() herdr.send_all({ submit = true }) end, { desc = "send comments to agent" })
-      vim.keymap.set("x", "<leader>ai", herdr.ref_selection, { desc = "reference selection at agent cursor" })
-      vim.keymap.set("n", "<leader>ai", herdr.ref_line, { desc = "reference line at agent cursor" })
+
+      _G.herdr_nvim_send_diagnostic = function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        local diagnostic = vim.diagnostic.get(bufnr, { lnum = vim.api.nvim_win_get_cursor(0)[1] - 1 })[1]
+        if not diagnostic then
+          vim.notify("No diagnostic at the cursor", vim.log.levels.INFO)
+          return
+        end
+
+        local file = vim.api.nvim_buf_get_name(bufnr)
+        if file == "" then
+          vim.notify("herdr-nvim: buffer has no file to reference", vim.log.levels.WARN)
+          return
+        end
+
+        local agents = require("herdr-nvim.agents")
+        local dispatch = require("herdr-nvim.dispatch")
+        local prompt = require("herdr-nvim.prompt")
+        local ui = require("herdr-nvim.ui")
+        local agent_list, err = agents.list()
+        if not agent_list then
+          vim.notify("herdr-nvim: " .. err, vim.log.levels.ERROR)
+          return
+        end
+
+        local function send(agent)
+          local severity = vim.diagnostic.severity[diagnostic.severity] or "DIAGNOSTIC"
+          local source = diagnostic.source and (" (" .. diagnostic.source .. ")") or ""
+          local location = prompt.format_ref({
+            file = file,
+            start_line = diagnostic.lnum + 1,
+            end_line = (diagnostic.end_lnum or diagnostic.lnum) + 1,
+          }, { cwd = agent.cwd })
+          local payload = string.format("Please fix this diagnostic at %s%s%s: %s", location, severity, source, diagnostic.message)
+          local ok, send_err = dispatch.send(agent.pane_id, payload, { submit = true })
+          if not ok then
+            vim.notify("herdr-nvim: " .. send_err, vim.log.levels.ERROR)
+            return
+          end
+          vim.notify("herdr-nvim: sent diagnostic to " .. agent.title)
+        end
+
+        local agent = agents.resolve(agent_list)
+        if agent then
+          send(agent)
+        else
+          ui.pick_agent(agent_list, send)
+        end
+      end
 
       require("flatten").setup({
         hooks = {
