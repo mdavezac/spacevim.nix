@@ -57,6 +57,11 @@
   };
   programs.nixvim.keymaps = [
     {
+      key = "grr";
+      action.__raw = ''function() Snacks.picker.lsp_references() end'';
+      options.desc = "Find references";
+    }
+    {
       key = "gb";
       action = "<cmd>BufferLinePick<cr>";
       options.desc = "Pick buffer";

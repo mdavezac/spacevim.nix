@@ -242,4 +242,50 @@ export def rename-tmux-session [] {
     tmux rename-session $new_session_name
 }
 
+# Run a custom job while updating Herdr workspace pane metadata
+export def run-tracked [
+    label: string,       # Description of what you're running (e.g., "Compiling", "Database Migration")
+    --external           # Stream output directly instead of returning stdout to the pipeline
+    ...cmd_and_args: any # The actual executable and its arguments
+] {
+    # 1. Fallback to current pane if HERDR_PANE_ID is missing
+    let pane_id = ($env | get -o HERDR_PANE_ID | default "current")
+
+    # 2. Tell Herdr we are actively working
+    # (report-agent forces the semantic state; report-metadata applies your custom sidebar labels)
+    let agent_name = $"cli - ($label)"
+    herdr pane report-agent $pane_id --source "custom:nushell-tracker" --state "working" --agent $agent_name | ignore
+    herdr pane report-metadata $pane_id --source "custom:nushell-tracker" --state-label $"working=($label)" --token $"summary=($label)" | ignore
+
+    # 3. Execute the command and capture errors safely
+    try {
+        # Split the command into the primary executable and trailing arguments
+        let exec = ($cmd_and_args | first)
+        let args = ($cmd_and_args | skip 1)
+
+        if $external {
+            # Keep interactive/streaming commands attached to the terminal.
+            ^$exec ...$args
+            herdr pane report-agent $pane_id --source "custom:nushell-tracker" --state "idle" --agent $agent_name | ignore
+            herdr pane report-metadata $pane_id --source "custom:nushell-tracker" --state-label "idle=Done" --token "summary=Done" | ignore
+        } else {
+            # Capture stdout so callers can assign or pipe the result.
+            let result = (^$exec ...$args | complete)
+            if $result.exit_code != 0 {
+                error make {msg: $"Command failed: ($result.stderr | str trim)"}
+            }
+
+            herdr pane report-agent $pane_id --source "custom:nushell-tracker" --state "idle" --agent $agent_name | ignore
+            herdr pane report-metadata $pane_id --source "custom:nushell-tracker" --state-label "idle=Done" --token "summary=Done" | ignore
+            $result.stdout
+        }
+    } catch { |err|
+        # 4b. A command that could not be launched also blocks the agent.
+        herdr pane report-agent $pane_id --source "custom:nushell-tracker" --state "blocked" --agent $agent_name | ignore
+        herdr pane report-metadata $pane_id --source "custom:nushell-tracker" --state-label "blocked=Failed" --token "summary=Failed" | ignore
+        error make {msg: $"Command failed: ($err.msg)"}
+    }
+}
+
+
 $env.config.hooks.pre_prompt = ($env.config.hooks.pre_prompt | append { || rename-tmux-session })

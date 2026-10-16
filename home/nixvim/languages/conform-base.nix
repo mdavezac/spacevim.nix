@@ -1,4 +1,17 @@
 {
+  programs.nixvim.keymaps = [
+    {
+      key = "<leader>uf";
+      action.__raw = ''
+        function()
+          vim.b.disable_autoformat = not vim.b.disable_autoformat
+          vim.notify("Format on save: " .. (vim.b.disable_autoformat and "off" or "on"))
+        end
+      '';
+      options.desc = "Toggle format on save";
+    }
+  ];
+
   programs.nixvim.plugins.conform-nvim = {
     enable = true;
     luaConfig.pre = ''local slow_format_filetypes = {}'';

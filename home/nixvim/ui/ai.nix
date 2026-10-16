@@ -5,14 +5,9 @@
   herdrNvimNav,
   ...
 }: let
-  flattenPlugin =
-    if nixvimPkgs != null && nixvimPkgs.vimPlugins ? "flatten-nvim"
-    then nixvimPkgs.vimPlugins.flatten-nvim
-    else pkgs.vimPlugins.flatten-nvim;
-  plenaryPlugin =
-    if nixvimPkgs != null && nixvimPkgs.vimPlugins ? "plenary-nvim"
-    then nixvimPkgs.vimPlugins.plenary-nvim
-    else pkgs.vimPlugins.plenary-nvim;
+  vimPlugins = if nixvimPkgs != null then nixvimPkgs.vimPlugins else pkgs.vimPlugins;
+  flattenPlugin = vimPlugins.flatten-nvim;
+  plenaryPlugin = vimPlugins.plenary-nvim;
   herdrNvimPlugin = pkgs.vimUtils.buildVimPlugin {
     pname = "herdr-nvim";
     version = "1.1.0";
