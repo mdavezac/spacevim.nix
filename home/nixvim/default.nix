@@ -1,6 +1,7 @@
 {
   imports = [
     ./options.nix
+    ./folding.nix
     ./ui
     ./languages
     ./git.nix
