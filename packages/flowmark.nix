@@ -20,7 +20,7 @@ final: previous: {
       ];
       CARGO_HTTP_CAINFO = "${previous.cacert}/etc/ssl/certs/ca-bundle.crt";
       SSL_CERT_FILE = "${previous.cacert}/etc/ssl/certs/ca-bundle.crt";
-      outputHash = "sha256-Er++OJJ0B+kKESndEz1gMQj/XlAN5h1sD4F5Bb5oLGQ=";
+      outputHash = "sha256-uTLIWNsxqXUi8JWDPPXcmji+vmDNraOOHU58MVUjOAk=";
       outputHashAlgo = "sha256";
       outputHashMode = "recursive";
 
