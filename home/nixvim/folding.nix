@@ -10,17 +10,17 @@
     plugins.nvim-ufo = {
       enable = true;
       settings.provider_selector.__raw = ''
-        function(bufnr, filetype, buftype)
-          if filetype == "" or buftype == "nofile" then
-            return "indent"
-          end
-
-          local ok, parser = pcall(vim.treesitter.get_parser, bufnr)
-          if not ok or not parser then
-            return "indent"
-          end
-
-          return { "lsp", "treesitter" }
+        function()
+          -- Ufo supports one primary provider and one fallback only.
+          -- Catch Tree-sitter's fallback exception so no folds are applied
+          -- when neither LSP nor Tree-sitter can provide them.
+          return {
+            "lsp",
+            function(bufnr)
+              local ok, ranges = pcall(require("ufo.provider.treesitter").getFolds, bufnr)
+              return ok and ranges or nil
+            end,
+          }
         end
       '';
     };

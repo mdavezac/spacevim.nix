@@ -104,11 +104,11 @@
     },
     "crane": {
       "locked": {
-        "lastModified": 1784407669,
-        "narHash": "sha256-gcFMcRjw0ZSn380Rx2QLlU1goUQeSrKX/DF12omI6+o=",
+        "lastModified": 1792350552,
+        "narHash": "sha256-292lvpvxTGKryKxh3/3tcIVi85CwYGdl4oOi113Sob8=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "1316b7d278ad77a16aec024b71d971366e123bec",
+        "rev": "e675a36b7377bebe41d548388a2501cbb16d380d",
         "type": "github"
       },
       "original": {
@@ -405,16 +405,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1787667873,
-        "narHash": "sha256-JAz4883o6F5OAUX6NgsV8kUeexDtCK0PGWfEtEg7m/I=",
+        "lastModified": 1793445273,
+        "narHash": "sha256-XKF7V4p3He4TR6GGvclLzvhTGvHxxp92OB955VKLVXE=",
         "owner": "tontinton",
         "repo": "maki",
-        "rev": "4296034c0ec1a6cbf0b2474585011006c225df98",
+        "rev": "85a5ae2786f650da7fba641acf6020895c978de9",
         "type": "github"
       },
       "original": {
         "owner": "tontinton",
-        "ref": "v0.4.12",
+        "ref": "v0.7.0",
         "repo": "maki",
         "type": "github"
       }
@@ -631,11 +631,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784438913,
-        "narHash": "sha256-NYF7ZM5ip0u+w1pBFDpIGEbrbgN/wpnLFAmBkWkYMXw=",
+        "lastModified": 1793086596,
+        "narHash": "sha256-ObKS44vw4IIVpQ69YJzUGjZ0IwnpWoUlwjJSY7gefdo=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "afacd6819d3765a05814ee8e3de74c77d42ac799",
+        "rev": "c7e9d512653a35ef4d5879c3df4d44d7b78d0e6d",
         "type": "github"
       },
       "original": {

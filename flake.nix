@@ -47,7 +47,7 @@
     llm-agents-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     maki = {
-      url = "github:tontinton/maki/v0.4.12";
+      url = "github:tontinton/maki/v0.7.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
