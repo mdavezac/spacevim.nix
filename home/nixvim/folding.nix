@@ -7,7 +7,23 @@
       foldenable = true;
     };
 
-    plugins.nvim-ufo.enable = true;
+    plugins.nvim-ufo = {
+      enable = true;
+      settings.provider_selector.__raw = ''
+        function(bufnr, filetype, buftype)
+          if filetype == "" or buftype == "nofile" then
+            return "indent"
+          end
+
+          local ok, parser = pcall(vim.treesitter.get_parser, bufnr)
+          if not ok or not parser then
+            return "indent"
+          end
+
+          return { "lsp", "treesitter" }
+        end
+      '';
+    };
 
     keymaps = [
       {

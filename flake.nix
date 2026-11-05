@@ -71,6 +71,8 @@
       (import ./packages/pyrefly.nix)
       (import ./packages/flowmark.nix)
       (import ./packages/semble.nix)
+      (import ./packages/mdr.nix)
+      (import ./packages/mdx.nix)
       (import ./packages/tsk.nix)
     ];
   in {
@@ -157,7 +159,7 @@
             ./home/stylix.nix
             ./home/ipython.nix
           ];
-          home.packages = [pkgs.tsk pkgs.btop];
+          home.packages = [pkgs.tsk pkgs.mdr pkgs.mdx pkgs.btop];
         }
       ];
       configuration = name:
