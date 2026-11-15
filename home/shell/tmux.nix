@@ -10,7 +10,14 @@
     mouse = true;
     terminal = "tmux-256color";
     historyLimit = 10000;
-    plugins = [pkgs.tmuxPlugins.vim-tmux-navigator];
+    plugins = [
+      {
+        plugin = pkgs.tmuxPlugins.vim-tmux-navigator;
+        extraConfig = ''
+          bind-key -n C-l if-shell "ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+/)?(g?\\.?(view|l?n?vim?x?|fzf)(diff)?(-wrapped)?|maki)$'" "send-keys C-l" "select-pane -R"
+        '';
+      }
+    ];
     extraConfig =
       ''
         set -g status off
