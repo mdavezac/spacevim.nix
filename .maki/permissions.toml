@@ -1,10 +1,10 @@
 [bash]
 allow = [
-    "nix *",
-    "true *",
-    "nvim *",
-    "strings *",
-    "grep *",
-    "websearch *",
-    "tmux *",
+  "nix *",
+  "true *",
+  "nvim *",
+  "strings *",
+  "grep *",
+  "websearch *",
+  "tmux *",
 ]

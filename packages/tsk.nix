@@ -1,16 +1,16 @@
 final: previous: {
   tsk = previous.rustPlatform.buildRustPackage rec {
     pname = "tsk";
-    version = "0.11.6";
+    version = "0.13.0";
 
     src = previous.fetchFromGitHub {
       owner = "smarzban";
       repo = "tsk";
-      rev = "911c942c024ff584fb3a74219eac847672ccd44a";
-      hash = "sha256-ugTKQzDM4aTzgKuQQBfh4RXbX+ajJrMZWr9rPFeFcKk=";
+      rev = "8e7c577dfcfa6f80b9bb9de0365947d7e40d438f";
+      hash = "sha256-mfhISX0Ai9dOk9GZPSRFNqvzwAniU8pkGEE4eb5S5i0=";
     };
 
-    cargoHash = "sha256-FMCxgtHvra3AYwL0M2s8x5XbYaLXRGRk1oZ8ezq51Js=";
+    cargoHash = "sha256-rIdI7MYi4feTv1tHXxkTq7VoU7cX+jb7hKMN1GjbnUI=";
 
     doCheck = false;
 

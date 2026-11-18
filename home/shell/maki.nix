@@ -29,6 +29,22 @@
 
     require("review-pr")
     require("semble")
+
+    maki.defer_fn(function()
+      maki.keymap.set({ "n", "i" }, "<C-p>", function()
+        local ok, err = maki.ui.action("model_picker")
+        if not ok then
+          maki.ui.flash("Could not open models: " .. tostring(err))
+        end
+      end, { desc = "Choose model" })
+    end, 0)
+
+    maki.keymap.set({ "n", "i" }, "<C-i>", function()
+      local ok, err = maki.api.run_command("/sessions")
+      if not ok then
+        maki.ui.flash("Could not open sessions: " .. tostring(err))
+      end
+    end, { desc = "Choose session" })
   '';
   home.file.".config/maki/lua/review-pr.lua".source = ./maki/review-pr.lua;
   home.file.".config/maki/lua/semble.lua".source = ./maki/semble.lua;
